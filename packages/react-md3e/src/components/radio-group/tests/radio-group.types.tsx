@@ -1,4 +1,4 @@
-import { RadioGroup } from '@flaut-org/react-md3e/radio-group';
+import { RadioGroup } from '@flaut-travel/react-md3e/radio-group';
 
 export const group = (
   <RadioGroup

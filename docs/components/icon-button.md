@@ -5,8 +5,8 @@ focus handling, and press ripple; it is also server-rendered and usable inside R
 precompiled and follows ThemeProvider without React context.
 
 ```tsx
-import { IconButton } from '@flaut-org/react-md3e';
-import '@flaut-org/react-md3e/styles.css';
+import { IconButton } from '@flaut-travel/react-md3e';
+import '@flaut-travel/react-md3e/styles.css';
 
 <IconButton aria-label="Save" variant="tonal">
   <svg viewBox="0 0 24 24" focusable="false">
@@ -15,7 +15,7 @@ import '@flaut-org/react-md3e/styles.css';
 </IconButton>;
 ```
 
-The direct entry is `@flaut-org/react-md3e/icon-button`. This component accepts an icon from the
+The direct entry is `@flaut-travel/react-md3e/icon-button`. This component accepts an icon from the
 consumer; it does not install an icon font or depend on an icon package.
 
 ## API

@@ -9,8 +9,8 @@ import {
   DialogContent,
   DialogTitle,
   TextField,
-} from '@flaut-org/react-md3e';
-import type { TextFieldControl } from '@flaut-org/react-md3e';
+} from '@flaut-travel/react-md3e';
+import type { TextFieldControl } from '@flaut-travel/react-md3e';
 
 const cities = [
   { code: 'PAR', name: 'Paris' },

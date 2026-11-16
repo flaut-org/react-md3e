@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { Autocomplete, Button, List, ListItem, Search, SearchBar, TextField } from '@flaut-org/react-md3e';
+import { Autocomplete, Button, List, ListItem, Search, SearchBar, TextField } from '@flaut-travel/react-md3e';
 
 const destinations = ['Paris', 'Porto', 'Prague', 'Rome', 'Tokyo'];
 

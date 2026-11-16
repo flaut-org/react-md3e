@@ -10,7 +10,7 @@ import {
   DialogActions,
   List,
   ListItem,
-} from '@flaut-org/react-md3e';
+} from '@flaut-travel/react-md3e';
 
 const languages = [
   { value: 'en', label: 'English', flag: '🇬🇧' },

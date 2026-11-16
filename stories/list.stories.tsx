@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { Avatar, List, ListItem, Button } from '@flaut-org/react-md3e';
-import type { ReadOnlyListProps } from '@flaut-org/react-md3e';
+import { Avatar, List, ListItem, Button } from '@flaut-travel/react-md3e';
+import type { ReadOnlyListProps } from '@flaut-travel/react-md3e';
 import { starIcon } from './example-icons';
 
 type ListStoryArgs = Pick<ReadOnlyListProps, 'variant' | 'disablePadding'>;

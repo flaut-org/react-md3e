@@ -1,5 +1,5 @@
-import { Button, Popover, PopoverClose, TextField, ThemeProvider } from '@flaut-org/react-md3e';
-import { createTheme } from '@flaut-org/react-md3e/theme';
+import { Button, Popover, PopoverClose, TextField, ThemeProvider } from '@flaut-travel/react-md3e';
+import { createTheme } from '@flaut-travel/react-md3e/theme';
 import { PassengerPickerDemo } from './passenger-picker-demo/passenger-picker-demo.component';
 import { PopoverDemo } from './popover-demo/popover-demo.component';
 

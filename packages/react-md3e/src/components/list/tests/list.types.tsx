@@ -1,6 +1,6 @@
 import { createRef } from 'react';
-import { List, ListItem } from '@flaut-org/react-md3e';
-import type { ListProps } from '@flaut-org/react-md3e';
+import { List, ListItem } from '@flaut-travel/react-md3e';
+import type { ListProps } from '@flaut-travel/react-md3e';
 
 export const staticList = (
   <List ref={createRef<HTMLUListElement>()}>

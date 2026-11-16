@@ -19,7 +19,7 @@ import {
   ThemeProvider,
   Tooltip,
   Typography,
-} from '@flaut-org/react-md3e';
+} from '@flaut-travel/react-md3e';
 
 export function EssentialsDemo() {
   const [theme, setTheme] = useState<string | null>('light');

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@flaut-org/react-md3e';
+import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@flaut-travel/react-md3e';
 
 export function ScopedDialogDemo() {
   const [open, setOpen] = useState(false);

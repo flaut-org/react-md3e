@@ -1,6 +1,6 @@
 import { createRef } from 'react';
-import { Search } from '@flaut-org/react-md3e/search';
-import type { SearchCloseReason } from '@flaut-org/react-md3e/search';
+import { Search } from '@flaut-travel/react-md3e/search';
+import type { SearchCloseReason } from '@flaut-travel/react-md3e/search';
 
 export const search = (
   <Search

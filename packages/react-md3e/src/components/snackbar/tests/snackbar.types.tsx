@@ -1,4 +1,4 @@
-import { Snackbar } from '@flaut-org/react-md3e/snackbar';
+import { Snackbar } from '@flaut-travel/react-md3e/snackbar';
 
 export const notice = (
   <Snackbar

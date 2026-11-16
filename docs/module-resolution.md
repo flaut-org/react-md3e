@@ -9,7 +9,7 @@ export { Button } from './components/button';
 ```
 
 CSS and JSON assets keep their extensions. Package imports such as `react`,
-`@base-ui/react/button`, and `@flaut-org/react-md3e/theme` keep their public entry names.
+`@base-ui/react/button`, and `@flaut-travel/react-md3e/theme` keep their public entry names.
 ESLint's `import-x/extensions` enforces the convention, including type imports.
 
 ## Build and consumers

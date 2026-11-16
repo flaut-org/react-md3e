@@ -69,7 +69,7 @@ assert.equal(
   'The distributed license must match the repository license.',
 );
 
-execFileSync(process.execPath, ['--input-type=module', '--eval', "await import('@flaut-org/react-md3e');"], {
+execFileSync(process.execPath, ['--input-type=module', '--eval', "await import('@flaut-travel/react-md3e');"], {
   cwd: workspaceRoot,
   stdio: 'pipe',
 });
@@ -112,7 +112,7 @@ execFileSync(
     '--conditions=react-server',
     '--input-type=module',
     '--eval',
-    `await import(${JSON.stringify(skeletonUrl)}); await import(${JSON.stringify(dividerUrl)}); await import(${JSON.stringify(typographyUrl)}); await import(${JSON.stringify(surfaceUrl)}); await import(${JSON.stringify(shapeUrl)}); await import(${JSON.stringify(cardUrl)}); await import(${JSON.stringify(staticListUrl)}); await import(${JSON.stringify(selectionIndicatorUrl)}); await import(${JSON.stringify(appBarUrl)}); await import(${JSON.stringify(dialogContentUrl)}); await import(${JSON.stringify(dialogActionsUrl)}); await import(${JSON.stringify(providerUrl)}); await import('@flaut-org/react-md3e/theme');`,
+    `await import(${JSON.stringify(skeletonUrl)}); await import(${JSON.stringify(dividerUrl)}); await import(${JSON.stringify(typographyUrl)}); await import(${JSON.stringify(surfaceUrl)}); await import(${JSON.stringify(shapeUrl)}); await import(${JSON.stringify(cardUrl)}); await import(${JSON.stringify(staticListUrl)}); await import(${JSON.stringify(selectionIndicatorUrl)}); await import(${JSON.stringify(appBarUrl)}); await import(${JSON.stringify(dialogContentUrl)}); await import(${JSON.stringify(dialogActionsUrl)}); await import(${JSON.stringify(providerUrl)}); await import('@flaut-travel/react-md3e/theme');`,
   ],
   { cwd: workspaceRoot, stdio: 'pipe' },
 );

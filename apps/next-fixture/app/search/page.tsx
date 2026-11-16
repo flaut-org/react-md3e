@@ -1,5 +1,5 @@
-import { Search, SearchBar, ThemeProvider } from '@flaut-org/react-md3e';
-import { createTheme } from '@flaut-org/react-md3e/theme';
+import { Search, SearchBar, ThemeProvider } from '@flaut-travel/react-md3e';
+import { createTheme } from '@flaut-travel/react-md3e/theme';
 import { SearchDemo } from './search-demo/search-demo.component';
 
 const forest = createTheme({ sourceColor: '#386a20', typography: { plainFontFamily: 'Arial, sans-serif' } });

@@ -5,8 +5,8 @@ and requires no hooks, context, effects, or hydration when rendered from RSC. In
 can be independent client components such as IconButton.
 
 ```tsx
-import { AppBar, IconButton } from '@flaut-org/react-md3e';
-import '@flaut-org/react-md3e/styles.css';
+import { AppBar, IconButton } from '@flaut-travel/react-md3e';
+import '@flaut-travel/react-md3e/styles.css';
 
 <AppBar
   title="Your collection"
@@ -21,7 +21,7 @@ import '@flaut-org/react-md3e/styles.css';
 />;
 ```
 
-The direct entry is `@flaut-org/react-md3e/app-bar`. A dedicated Base UI primitive is unnecessary for
+The direct entry is `@flaut-travel/react-md3e/app-bar`. A dedicated Base UI primitive is unnecessary for
 this static layout; its interactive children use the relevant primitives.
 
 ## API

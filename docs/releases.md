@@ -1,182 +1,273 @@
-# Releases
+# Releases: where to run each step
 
-The package is published publicly to **npmjs.org** as `@flaut-org/react-md3e`.
-GitHub Releases contain the changelog and a Git tag; they are separate from the npm registry.
-Only `packages/react-md3e` is publishable. The workspace root and Next fixture remain private.
+The npm package is `@flaut-travel/react-md3e`. Its GitHub repository is
+`flaut-org/react-md3e`: the npm organization and GitHub owner deliberately differ.
+Only packages/react-md3e is published; the root and Next fixture remain private.
 
-Changesets **3.0.3** manages release notes and version plans; `changesets/action@v2` creates release
-PRs and GitHub Releases. Use the repository wrappers below to keep prerelease numbering, the
-private consumer dependency, and package-lock.json synchronized. Node comes from `.tool-versions`
-through asdf locally and `actions/setup-node` in both workflows.
+**Publishing from a developer's computer is not required.** The recommended flow below prepares
+versions and publishes every release, including the first alpha, through GitHub Actions. Maintainers
+review/merge PRs in GitHub. The first publication uses a temporary npm token; subsequent releases
+use npm Trusted Publishing (OIDC) after the package exists.
+
+## Execution locations
+
+| Action                                                    | Where                           | Workflow/command                                                         |
+| --------------------------------------------------------- | ------------------------------- | ------------------------------------------------------------------------ |
+| Install dependencies, develop, test changes               | Local terminal, repository root | `asdf install`, `asdf exec npm ci`, `asdf exec npm run check`            |
+| Add a feature release note                                | Local terminal, repository root | `asdf exec npm run changeset`; commit its .md file with the change       |
+| Add a release note without a local checkout               | GitHub UI, feature PR branch    | Create `.changeset/<unique-name>.md`; example below                      |
+| Validate a PR/main commit                                 | CI, automatic                   | **CI**, `.github/workflows/ci.yml`                                       |
+| Rerun validation manually                                 | GitHub UI                       | **Actions → CI → Run workflow → select branch → Run workflow**           |
+| Prepare versions, changelog, lockfile, fixture dependency | CI                              | **Release**, `.github/workflows/release.yml`, `npm run version-packages` |
+| Review/merge the generated version PR                     | GitHub UI                       | PR from `changeset-release/main`                                         |
+| Build, pack, publish, push tag, create GitHub Release     | CI                              | **Release**, `.github/workflows/release.yml`, `npm run release:ci`       |
+| Start/retry release automation manually                   | GitHub UI                       | **Actions → Release → Run workflow → main → Run workflow**               |
+| Request alpha/beta/stable transitions                     | Local terminal, feature branch  | Channel commands below; commit state changes and open a PR               |
+| Configure credentials and enable automation               | npm/GitHub UI                   | Settings described below; no terminal command                            |
+
+Commands marked local are run from the **repository root**, not packages/react-md3e. asdf installs
+Node from .tool-versions locally. On CI, actions/setup-node reads node-version-file: .tool-versions;
+the YAML runs npm directly. Do not copy local `asdf exec` commands into the Actions UI: the UI starts
+a workflow, and its run steps execute the commands on the runner.
+
+The workflows must first be committed/pushed to main to appear in Actions. Their display names are
+**CI** (ci.yml) and **Release** (release.yml), not filenames of additional unpublished workflows.
+The Release workflow accepts only main, the public canonical repository, and RELEASE_ENABLED=true.
+There is no separate alpha.yml, beta.yml, publish.yml, or bootstrap.yml.
 
 ## Channels
 
-| Package version | npm dist-tag | Git tag                               | GitHub Release |
-| --------------- | ------------ | ------------------------------------- | -------------- |
-| `1.0.0-alpha.1` | `alpha`      | `@flaut-org/react-md3e@1.0.0-alpha.1` | Prerelease     |
-| `1.0.0-beta.1`  | `beta`       | `@flaut-org/react-md3e@1.0.0-beta.1`  | Prerelease     |
-| `1.0.0`         | `latest`     | `@flaut-org/react-md3e@1.0.0`         | Stable         |
+| Package version | npm dist-tag | Git tag                                  | GitHub Release |
+| --------------- | ------------ | ---------------------------------------- | -------------- |
+| `1.0.0-alpha.1` | `alpha`      | `@flaut-travel/react-md3e@1.0.0-alpha.1` | Prerelease     |
+| `1.0.0-beta.1`  | `beta`       | `@flaut-travel/react-md3e@1.0.0-beta.1`  | Prerelease     |
+| `1.0.0`         | `latest`     | `@flaut-travel/react-md3e@1.0.0`         | Stable         |
 
-Our version wrapper starts each channel at `.1`, rather than Changesets' usual `.0`, and resets
-its counter when moving alpha → beta. Further releases increment normally: alpha.2, beta.2, etc.
-The publisher forces the planned npm tag to match the version, including before the first stable
-release. Changesets' default plan can otherwise select latest for an existing prerelease-only package.
+Changesets 3.0.3 and changesets/action@v2 manage release PRs and notes. Our version wrapper starts
+new channels at .1 and resets the counter for alpha → beta; later versions increment normally.
+The publisher explicitly selects the matching npm dist-tag in its packed publish plan. A new npm
+package may also receive latest on its first publication; until the stable release exists, install
+an explicit channel or version. Git tags, npm aliases and GitHub's prerelease flag are independent.
 
-For a brand-new npm package, the registry may also assign latest to its first publication. Until
-1.0.0 exists, consumers should explicitly install `@alpha`, `@beta`, or an exact version. Subsequent
-prereleases use their own channel; stable publication sets latest. These aliases are independent
-from Git tags and GitHub's prerelease flag.
+**Consumer terminal**, in the consuming application's directory:
 
 ```sh
-npm install @flaut-org/react-md3e@alpha
-npm install @flaut-org/react-md3e@beta
-npm install @flaut-org/react-md3e@1.0.0-alpha.1
+npm install @flaut-travel/react-md3e@alpha
+npm install @flaut-travel/react-md3e@beta
+npm install @flaut-travel/react-md3e@1.0.0-alpha.1
 # After the first stable release:
-npm install @flaut-org/react-md3e
+npm install @flaut-travel/react-md3e
 ```
 
-## One-time bootstrap
+## First release entirely through CI
 
-Nothing is published just by committing these files. Release automation remains disabled until
-`RELEASE_ENABLED=true`, the canonical repository is public, and the workflow runs on main.
-Changing repository visibility is a maintainer action, separate from this implementation.
+### 1. GitHub UI: make the release tooling available
 
-1. Push the repository and change `flaut-org/react-md3e` to public when ready.
-2. Confirm you control the `flaut-org` scope on **npmjs.org** and can publish a public package there.
-3. Under GitHub Settings → Actions → General, enable **Allow GitHub Actions to create and approve
-   pull requests**. This permits the release PR; the bot does not approve or merge it.
-4. Keep `RELEASE_ENABLED` unset while bootstrapping the first package. The committed alpha state and
-   initial major changeset prepare `1.0.0-alpha.1`. On a release preparation branch, run:
+Commit/push the npm-scope and workflow changes through a normal PR into main. Enable Actions if
+GitHub asks. In **Settings → Actions → General**, enable **Allow GitHub Actions to create and approve
+pull requests**. This allows a release PR to be created; the bot does not approve/merge it.
 
-   ```sh
-   asdf install
-   asdf exec npm ci
-   asdf exec npm run version-packages
-   asdf exec npm run release:check
-   asdf exec npm exec -- playwright install chromium
-   asdf exec npm run check
-   ```
+Keep RELEASE_ENABLED unset until the first-publication credential is ready. Leave the committed
+initial major changeset and alpha pre.json in place: CI will turn version 0.0.0 into 1.0.0-alpha.1.
+**Do not run version-packages locally in this CI-first path.** If a reviewed version PR has already
+prepared alpha.1, do not version again; the workflow can publish that prepared main commit instead.
 
-   Review/commit the version, CHANGELOG.md, .changeset state, fixture dependency and lockfile together.
-   Merge that PR through normal CI. Do not run version-packages again before publishing that candidate.
+### 2. npm UI: create a temporary first-publication token
 
-5. The first npm package must exist before its npm Trusted Publisher can be configured. From the
-   exact reviewed main commit with version `1.0.0-alpha.1`, publish once using your npm login/2FA:
+The first npm package must exist before its package Settings can be used to configure a Trusted
+Publisher. For the initial publication, open **npmjs.org → profile → Access Tokens → Generate New
+Token** and create a granular token:
 
-   ```sh
-   asdf exec npm login --registry=https://registry.npmjs.org
-   asdf exec npm run release:check
-   asdf exec npm publish --workspace=@flaut-org/react-md3e --access public --tag alpha --registry=https://registry.npmjs.org
-   ```
+- Packages and scopes: **Read and write (publish and stage)**, restricted to the `@flaut-travel` scope.
+  The scope permission must cover creating the new react-md3e package, not only existing packages.
+- Enable **Bypass two-factor authentication** for noninteractive publication when required by npm.
+- Choose a short expiration. The account must already have permission to publish in flaut-travel.
+- Organization-administration permission alone does not grant package publication permission.
 
-   prepack builds the package. Verify the package/version and dist-tags in npm. This command performs
-   an actual public publication; do it only when the reviewed candidate is ready.
+If npm/account policy does not permit a CI publishing token, use the local first-publication
+alternative below, then return to the OIDC setup. Do not place a token in source, a changeset, or
+an Actions repository variable. Do not send it in chat.
 
-6. Create/push its tag from that same main commit and create its GitHub Release as a **prerelease**.
-   Use the corresponding CHANGELOG.md entry as release notes:
+### 3. GitHub UI: store the token and enable Release
 
-   ```sh
-   asdf exec npm run changeset -- git-tag
-   git push origin '@flaut-org/react-md3e@1.0.0-alpha.1'
-   ```
+In **Settings → Secrets and variables → Actions → Secrets**, create a **repository secret**:
 
-   In GitHub Releases, choose that exact tag, enter the release notes, and enable **Set as a pre-release**.
+```text
+NPM_BOOTSTRAP_TOKEN = the temporary npm token
+```
 
-7. On npmjs.org → package → Settings → Trusted publishing, add GitHub Actions with:
+The release job's setup-node configures npmjs.org authentication, and this secret is supplied as
+NODE_AUTH_TOKEN only to the Changesets step. It is not given to PR CI or the verification job.
 
-   - Organization/user: `flaut-org`
-   - Repository: `react-md3e`
-   - Workflow filename: `release.yml`
-   - Environment: leave blank (the workflow does not name an environment).
+In the **Variables** tab, create an **Actions repository variable** (not a secret):
 
-   This uses GitHub-hosted runners and OIDC (`id-token: write`). No NPM_TOKEN secret is required.
-   npm generates provenance for public packages published from public repositories through OIDC.
-   Follow npm's current expiry/validation instructions when creating the trusted publisher.
+```text
+RELEASE_ENABLED = true
+```
 
-8. Add the GitHub **Actions repository variable** `RELEASE_ENABLED` with value `true` when ready for
-   subsequent automated releases. This is a variable, not a secret. The release workflow can now
-   run on main pushes or manually through Actions → Release → Run workflow.
+### 4. GitHub UI → CI runner: prepare the first version PR
 
-The setup does not create an npm organization, publish a package, change repository visibility,
-configure npm Trusted Publishers, or change GitHub account/repository settings for you.
+Open **Actions → Release → Run workflow**, select **main**, then click **Run workflow**.
+This starts .github/workflows/release.yml. The runner verifies the exact commit with npm run check,
+then sees the pending initial changeset and opens/updates **changeset-release/main** with
+**1.0.0-alpha.1**, CHANGELOG.md, archived prerelease notes, fixture dependency and package-lock.json.
 
-## Regular changes and release PRs
+Wait for the workflow and inspect its logs/PR. This preparation run does not publish while a version
+PR is still pending. Review and merge the generated PR when ready. No local login, npm publish,
+version-packages, Git tag or GitHub Release command is needed in this path.
 
-For user-facing package changes, add a changeset with an English release note:
+### 5. CI: publish the reviewed alpha
+
+Merging the version PR into main starts **Release** again automatically. It verifies the merged
+commit, builds/packs the UI package, publishes **@flaut-travel/react-md3e@1.0.0-alpha.1** to npm,
+pushes its tag, and creates a GitHub **prerelease** using the matching changelog entry.
+
+Inspect **Actions → Release → the run for the merged main commit**, then check **GitHub → Releases**
+and the package page on npmjs.org. If the automatic run did not start, launch **Release → Run
+workflow → main**. Do not launch it on a feature or release-PR branch; those branches are skipped.
+
+### 6. npm UI: configure token-free publication
+
+On **npmjs.org → @flaut-travel/react-md3e → Settings → Trusted publishing**, add GitHub Actions:
+
+| Field                | Value                                                               |
+| -------------------- | ------------------------------------------------------------------- |
+| Organization or user | **flaut-org** — the GitHub owner, not flaut-travel                  |
+| Repository           | react-md3e                                                          |
+| Workflow filename    | release.yml — filename only, no .github/workflows/ prefix           |
+| Environment          | Leave blank; the workflow has no named environment                  |
+| Allowed actions      | Allow direct **npm publish**; stage-only permission is insufficient |
+
+Then, in **GitHub UI**, delete the NPM_BOOTSTRAP_TOKEN repository secret; in **npm UI**, revoke that
+temporary token. Subsequent runs use the existing id-token: write permission and npm's OIDC
+credential discovery. Keep RELEASE_ENABLED=true. No permanent NPM_TOKEN secret is needed.
+
+A newly configured Trusted Publisher must complete its first successful automated publication
+within two days. Configure it when ready for the next genuine alpha/beta release. A no-op run of
+Release does not validate it. Recreate an expired configuration if needed. After token removal,
+check that the next publication succeeds through OIDC; public OIDC publications get npm provenance.
+
+The repository does not configure external account settings or perform these UI steps for you.
+Do not change the GitHub repository URL/owner just to match the npm organization name.
+
+## Regular releases: local change, GitHub review, CI publication
+
+**Local terminal**, feature branch, repository root:
 
 ```sh
 asdf exec npm run changeset
 ```
 
-Select only `@flaut-org/react-md3e`, and choose patch/minor/major. After 1.0.0, use normal SemVer:
-patch for compatible fixes, minor for compatible additions, major for breaking changes. During the
-initial 1.0.0 prerelease series, additional changes accumulate toward 1.0.0; the first major changeset
-has already selected that target. Tests/docs-only work can omit a changeset.
+Select only @flaut-travel/react-md3e and choose patch/minor/major. Commit the generated .changeset
+file with the feature and open a PR. Tests/docs-only changes can omit a release note. During the
+initial 1.0.0 prerelease series, changes accumulate toward the target selected by the initial major
+changeset. After 1.0.0, use normal SemVer for compatible fixes/additions/breaking changes.
 
-Merge the feature PR. The Release workflow verifies that exact main commit with `npm run check`,
-then opens/updates `changeset-release/main` with versions and notes. Review and merge that release PR
-when ready. The next main run verifies the candidate, builds/packs it, publishes to the matching npm
-channel, and creates its Git tag/GitHub Release. Alpha/beta releases are marked prerelease.
+**GitHub UI alternative**, feature PR branch: create a uniquely named file such as
+.changeset/improve-button-focus.md using **Add file → Create new file**, with:
 
-The workflow serializes releases, preserves pending runs, and grants registry OIDC only in the
-release job after verification. It never runs with write credentials on a fork PR. All Node setup
-steps read `.tool-versions`. Check PR status before merging: GitHub restricts workflows triggered by
-GITHUB_TOKEN-created commits, so a bot-created release PR may need a manually dispatched CI check
-on its branch or an approved repository GitHub App integration. The release workflow also performs
-its own full verification of the merged commit.
+```md
+---
+'@flaut-travel/react-md3e': patch
+---
 
-## Alpha → beta → stable
+Improve keyboard focus behavior for buttons.
+```
 
-On a normal feature/maintenance branch based on the current main:
+Use release notes describing the actual change. Merge the feature PR in GitHub. **CI / release.yml**
+opens/updates the version PR. Review/merge that PR in **GitHub UI**; **CI / release.yml** publishes
+and creates the tag/Release. Do not run the version or publish commands locally as well.
+
+For manual execution/retry, use **GitHub UI → Actions → Release → Run workflow → main**. It is the
+same process as the main push trigger, not a separate unverified publish shortcut. The workflow
+serializes releases and performs its own full checks before the release job. It does not run with
+write credentials on fork PRs.
+
+If a bot-created release PR lacks CI checks, use **GitHub UI → Actions → CI → Run workflow**, select
+**changeset-release/main**, and run it. ci.yml has workflow_dispatch and can verify that branch.
+GitHub's handling of GITHUB_TOKEN-created events can suppress automatic PR checks. Inspect the PR
+checks before merging; repository policy may require a GitHub App integration for required checks.
+
+## Alpha → beta → stable: request locally, version/publish in CI
+
+**Local terminal**, on a normal maintenance branch based on the latest main, repository root:
 
 ```sh
-# Changes alpha to beta and adds a promotion changeset:
+# Change alpha to beta and create a promotion changeset:
 asdf exec npm run release:beta
 ```
 
-Commit the changed .changeset files and merge the PR. Automation prepares `1.0.0-beta.1` as a release
-PR. Additional beta changesets produce beta.2, beta.3, and so on. The base stays 1.0.0.
+Commit the .changeset state/files, push the branch and open a PR. **GitHub UI:** merge the request
+PR. **CI / release.yml:** prepare the version PR for 1.0.0-beta.1. **GitHub UI:** review/merge that
+version PR. **CI / release.yml:** publish beta and create a GitHub prerelease. Later changesets
+produce beta.2, beta.3, etc. Do not run this channel command inside the Actions UI.
 
-When beta is ready:
+To finish the series, **local terminal**, maintenance branch, repository root:
 
 ```sh
 asdf exec npm run release:stable
 ```
 
-Commit the exit state and merge the PR. Automation prepares `1.0.0`, includes the accumulated
-prerelease notes, and removes pre.json. Review .changeset/pre notes before exiting; remove or edit
-notes that are only relevant between prereleases. Never delete them merely to advance a counter.
-The stable release is published with latest and without the GitHub prerelease flag.
+Review the accumulated .changeset/pre notes and commit the exit state. **GitHub UI:** merge that
+PR, then review/merge the generated stable version PR. **CI / release.yml:** publish 1.0.0 to latest
+and create a stable GitHub Release. The version PR removes pre.json and includes accumulated notes.
 
-For a later prerelease series (for example 1.1.0-alpha.1), run `npm run release:alpha`, add a minor
-changeset, and merge those changes together. Use a separate prerelease branch/workflow strategy if
-stable maintenance must continue concurrently; the current automation intentionally targets main.
+For a later prerelease series, **local terminal**, maintenance branch: run npm run release:alpha,
+add the appropriate minor/major changeset, then commit and open a PR. The current workflow targets
+main; use a separate branch/workflow strategy if stable maintenance must continue concurrently.
 
-## Local commands and recovery
+## Optional local bootstrap instead of a temporary CI token
 
-- `npm run version-packages`: prepare versions/notes, start new channels at .1, synchronize the
-  fixture and refresh the lockfile offline. Does not publish, commit or push.
-- `npm run release:check`: validate a prepared version, channel, registry, changelog and lockfile.
-- `npm run test:release`: exercise real Changesets alpha/beta/stable transitions in temporary Git
-  repositories and validate channel plans; no publishing or network registry access.
-- `npm run release`: CI-only publisher; validates the candidate, overrides the publish plan's tag,
-  packs the publishable library and passes the artifact to Changesets. It preserves Changesets'
-  output contract so the Action can create GitHub tags/releases. Local calls are refused.
+This is an alternative to the CI-first bootstrap, not a second publication of the same version.
+Keep RELEASE_ENABLED unset. **Local terminal**, release branch, repository root:
 
-Use the wrappers instead of raw `changeset version` and `changeset publish`. Keep .changeset/pre.json
-and .changeset/pre tracked. Publishing a version is immutable: never reuse it for different bytes.
-On a failed workflow, inspect npm and GitHub before retrying. Rerun **Release on the same reviewed main
-commit** when it remains the tip. Already published versions are skipped, and a missing local Git tag
-can be recreated. Do not create an empty new version merely to repair GitHub metadata.
+```sh
+asdf install
+asdf exec npm ci
+asdf exec npm run version-packages
+asdf exec npm run release:check
+asdf exec npm exec -- playwright install chromium
+asdf exec npm run check
+```
 
-If a tag was already pushed but its GitHub Release was not created, create that Release manually
-from the existing tag and matching changelog, with the correct prerelease flag. The Action does not
-fully reconcile existing tags/releases after every partial failure. If main has advanced, recover
-from the original release commit/tag; do not tag newer source as the older npm version. Dist-tag
-repair, if needed, can be done with an authenticated maintainer npm session after checking versions.
-Disable automation by unsetting RELEASE_ENABLED. This leaves ordinary read-only CI enabled.
+Commit/review/merge the prepared candidate through a PR. **Local terminal**, updated main at the
+exact reviewed release commit:
+
+```sh
+asdf exec npm login --registry=https://registry.npmjs.org
+asdf exec npm run release:check
+asdf exec npm publish --workspace=@flaut-travel/react-md3e --access public --tag alpha --registry=https://registry.npmjs.org
+asdf exec npm run changeset -- git-tag
+# For the prepared first alpha only:
+git push origin '@flaut-travel/react-md3e@1.0.0-alpha.1'
+```
+
+This publishes publicly. **GitHub UI → Releases → Draft a new release:** choose that tag, copy the
+matching CHANGELOG.md notes, and enable Set as a pre-release. Then follow the npm/GitHub UI OIDC
+setup above and set RELEASE_ENABLED=true. Do not also trigger a second publish for the same bytes.
+
+## Diagnostics and recovery: choose the correct location
+
+**GitHub UI:** inspect the failed Release run and npm/GitHub version/tag before retrying. Use
+**Actions → Release → Run workflow → main** only if the reviewed release commit is still main's
+tip. Already published versions are skipped; a missing local Git tag can be recreated. Never reuse
+a published version for different source bytes or create a new version just to repair metadata.
+
+If the tag already exists but its GitHub Release is missing, use **GitHub UI → Releases → Draft a
+new release** with the existing tag, matching changelog and correct prerelease flag. This recovery
+is manual: the Action does not fully reconcile every partial failure. If main has advanced, recover
+from the original release commit/tag; do not tag newer source with the older npm version.
+
+**Local terminal**, repository root: npm run release:check validates a prepared candidate without
+publishing; npm run test:release exercises real version transitions and offline packing in temporary
+repositories. **CI only:** npm run release is the publisher invoked by release:ci, not a local
+maintenance command. Use wrappers instead of raw changeset version/publish so the fixture, lockfile,
+numbering and npm channel stay synchronized. Keep prerelease state/files tracked.
+
+**GitHub UI → Settings → Secrets and variables → Actions → Variables:** unset RELEASE_ENABLED to
+disable release automation. Read-only CI remains enabled.
 
 References: [Changesets prereleases](https://changesets.dev/guide/prereleases),
 [Changesets automation](https://changesets.dev/guide/automating),
 [npm Trusted Publishing](https://docs.npmjs.com/trusted-publishers/),
-[npm distribution tags](https://docs.npmjs.com/cli/v11/commands/npm-dist-tag/).
+[npm granular tokens](https://docs.npmjs.com/creating-and-viewing-access-tokens/).

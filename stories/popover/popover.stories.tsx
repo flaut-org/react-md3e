@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { Button, Popover, PopoverClose, TextField } from '@flaut-org/react-md3e';
+import { Button, Popover, PopoverClose, TextField } from '@flaut-travel/react-md3e';
 import { PassengerPickerDemo } from './passenger-picker-demo/passenger-picker-demo.component';
 
 const meta = {

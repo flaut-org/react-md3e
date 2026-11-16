@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, IconButton, Popover, PopoverClose, Radio, RadioGroup } from '@flaut-org/react-md3e';
+import { Button, IconButton, Popover, PopoverClose, Radio, RadioGroup } from '@flaut-travel/react-md3e';
 
 export function PassengerPickerDemo() {
   const [adults, setAdults] = useState(1);

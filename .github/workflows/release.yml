@@ -54,6 +54,7 @@ jobs:
         with:
           node-version-file: .tool-versions
           package-manager-cache: false
+          registry-url: https://registry.npmjs.org
       - run: npm ci
       - uses: changesets/action@v2
         with:
@@ -64,3 +65,6 @@ jobs:
           commit-message: 'chore: release react-md3e'
           create-github-releases: true
           push-git-tags: true
+        env:
+          # Optional first-publication credential. Remove the secret after configuring npm OIDC.
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_BOOTSTRAP_TOKEN }}

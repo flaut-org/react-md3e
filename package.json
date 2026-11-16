@@ -13,10 +13,10 @@
     "apps/*"
   ],
   "scripts": {
-    "build": "npm run build --workspace=@flaut-org/react-md3e",
+    "build": "npm run build --workspace=@flaut-travel/react-md3e",
     "build:fixture": "npm run build --workspace=@react-md3e/next-fixture",
     "dev": "npm run build && npm run dev --workspace=@react-md3e/next-fixture",
-    "dev:library": "npm run dev --workspace=@flaut-org/react-md3e",
+    "dev:library": "npm run dev --workspace=@flaut-travel/react-md3e",
     "lint": "eslint . --max-warnings=0",
     "lint:fix": "eslint . --fix",
     "format": "prettier . --write",
@@ -25,7 +25,7 @@
     "check:package": "node scripts/check-package.mjs",
     "test": "node --test packages/react-md3e/src/theme/tests/theme.test.mjs apps/next-fixture/tests/fixture.test.mjs",
     "check": "npm run format:check && npm run build && npm run lint && npm run typecheck && npm run check:package && npm run build:fixture && npm run build:storybook && npm test && npm run test:release && npm run test:browser",
-    "pack": "npm pack --workspace=@flaut-org/react-md3e",
+    "pack": "npm pack --workspace=@flaut-travel/react-md3e",
     "postbuild": "node scripts/generate-example-themes.mjs",
     "storybook": "npm run build && storybook dev --port 6006 --disable-telemetry",
     "build:storybook": "storybook build --disable-telemetry",

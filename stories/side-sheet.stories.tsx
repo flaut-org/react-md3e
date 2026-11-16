@@ -1,5 +1,5 @@
 import type { Decorator, Meta, StoryObj } from '@storybook/react-vite';
-import { Button, SideSheet, TextField, Typography } from '@flaut-org/react-md3e';
+import { Button, SideSheet, TextField, Typography } from '@flaut-travel/react-md3e';
 
 const frame: Decorator = (Story) => (
   <main>

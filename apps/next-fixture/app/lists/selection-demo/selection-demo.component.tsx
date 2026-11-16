@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { Button, List, ListItem } from '@flaut-org/react-md3e';
+import { Button, List, ListItem } from '@flaut-travel/react-md3e';
 
 export function SelectionDemo() {
   const [currency, setCurrency] = useState('EUR');

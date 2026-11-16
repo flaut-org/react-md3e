@@ -9,8 +9,8 @@ import {
   DialogContentText,
   DialogActions,
   IconButton,
-} from '@flaut-org/react-md3e';
-import type { DialogProps } from '@flaut-org/react-md3e';
+} from '@flaut-travel/react-md3e';
+import type { DialogProps } from '@flaut-travel/react-md3e';
 import { starIcon } from './example-icons';
 
 interface ExampleOptions {

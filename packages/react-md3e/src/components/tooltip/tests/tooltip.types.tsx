@@ -1,4 +1,4 @@
-import { Tooltip } from '@flaut-org/react-md3e/tooltip';
+import { Tooltip } from '@flaut-travel/react-md3e/tooltip';
 
 export const hint = (
   <Tooltip title="Help" placement="bottom-start" onOpenChange={(_open, event) => event.preventDefault()}>

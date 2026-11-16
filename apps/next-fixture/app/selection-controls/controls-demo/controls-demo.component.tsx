@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { Avatar, Button, Checkbox, Radio, RadioGroup } from '@flaut-org/react-md3e';
+import { Avatar, Button, Checkbox, Radio, RadioGroup } from '@flaut-travel/react-md3e';
 
 export function ControlsDemo() {
   const [checked, setChecked] = useState(false);

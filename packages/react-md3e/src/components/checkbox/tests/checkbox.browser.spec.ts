@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-import { createTheme } from '@flaut-org/react-md3e/theme';
+import { createTheme } from '@flaut-travel/react-md3e/theme';
 
 test('checkbox supports labels, Space, mixed state, controlled changes, event veto and both refs', async ({ page }) => {
   await page.goto('/selection-controls');

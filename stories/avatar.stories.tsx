@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Avatar, List, ListItem } from '@flaut-org/react-md3e';
+import { Avatar, List, ListItem } from '@flaut-travel/react-md3e';
 
 const portrait =
   'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="80" height="80"%3E%3Crect width="80" height="80" fill="%23d7e8cd"/%3E%3Ccircle cx="40" cy="28" r="15" fill="%23386a20"/%3E%3Cpath d="M10 80v-8a30 30 0 0 1 60 0v8" fill="%23386a20"/%3E%3C/svg%3E';

@@ -6,7 +6,7 @@ component hydration; a consumer client component can use normal native events an
 Base UI is unnecessary for text presentation without interaction behavior.
 
 ```tsx
-import { Typography } from '@flaut-org/react-md3e/typography';
+import { Typography } from '@flaut-travel/react-md3e/typography';
 
 export function TripHeading() {
   return (
@@ -74,7 +74,7 @@ TypographyTokenRole includes all 30 theme keys. TypographyOptions is also export
 and /theme.
 
 ```tsx
-import { createTheme, themeToCss } from '@flaut-org/react-md3e/theme';
+import { createTheme, themeToCss } from '@flaut-travel/react-md3e/theme';
 
 const theme = createTheme({
   typography: {

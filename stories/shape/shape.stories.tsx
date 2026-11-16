@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Shape, shapeVariants } from '@flaut-org/react-md3e';
+import { Shape, shapeVariants } from '@flaut-travel/react-md3e';
 import { starIcon } from '../example-icons';
 import landscape from '../card/assets/card-landscape.svg';
 import { ShapeMorphDemo } from './shape-morph-demo/shape-morph-demo.component';

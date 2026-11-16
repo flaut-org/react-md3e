@@ -1,5 +1,5 @@
 import { createRef } from 'react';
-import { Checkbox } from '@flaut-org/react-md3e/checkbox';
+import { Checkbox } from '@flaut-travel/react-md3e/checkbox';
 
 export const checkbox = (
   <Checkbox

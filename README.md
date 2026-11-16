@@ -45,9 +45,9 @@ implementation/style changes. After changing theme generation or public types, r
 ## Use the package
 
 ```tsx
-import { Button, ThemeProvider } from '@flaut-org/react-md3e';
-import { createTheme } from '@flaut-org/react-md3e/theme';
-import '@flaut-org/react-md3e/styles.css';
+import { Button, ThemeProvider } from '@flaut-travel/react-md3e';
+import { createTheme } from '@flaut-travel/react-md3e/theme';
+import '@flaut-travel/react-md3e/styles.css';
 
 const theme = createTheme({ sourceColor: '#386a20' });
 
@@ -151,5 +151,5 @@ Autocomplete adds selectOnFocus/clearOnEscape. The Flaut homepage migration rema
 
 Changesets prepares release PRs and changelogs for the public npm package. Alpha and beta use their
 own npm channels and GitHub prereleases; stable versions use latest. Read [release instructions](docs/releases.md)
-for the initial 1.0.0-alpha.1 bootstrap, npm Trusted Publishing, and enabling the guarded workflow.
+for CI-first 1.0.0-alpha.1 publishing, npm Trusted Publishing, and the exact GitHub/npm UI steps.
 No package has been published by this setup.

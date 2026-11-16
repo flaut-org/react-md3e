@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { Button, Typography } from '@flaut-org/react-md3e';
+import { Button, Typography } from '@flaut-travel/react-md3e';
 
 export function TypographyDemo() {
   const [emphasized, setEmphasized] = useState(false);

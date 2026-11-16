@@ -5,7 +5,7 @@ changing the package. Treat the user's current instructions as the source of tas
 
 ## Product contract
 
-- Build an independent Material 3 Expressive React library named `@flaut-org/react-md3e`.
+- Build an independent Material 3 Expressive React library named `@flaut-travel/react-md3e`.
 - Use Base UI (`@base-ui/react`) for applicable interaction and accessibility primitives. Keep its
   implementation details inside our components.
 - Use familiar MUI prop conventions where they fit MD3. Use native MD3 names and values where the

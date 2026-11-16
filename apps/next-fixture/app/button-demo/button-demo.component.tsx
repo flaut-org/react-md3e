@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, ThemeProvider } from '@flaut-org/react-md3e';
+import { Button, ThemeProvider } from '@flaut-travel/react-md3e';
 
 export function ButtonDemo() {
   const [selected, setSelected] = useState(false);

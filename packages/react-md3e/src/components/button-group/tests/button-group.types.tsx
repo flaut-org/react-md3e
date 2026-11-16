@@ -1,5 +1,5 @@
-import { ButtonGroup, ButtonGroupButton } from '@flaut-org/react-md3e/button-group';
-import type { ButtonGroupProps } from '@flaut-org/react-md3e/button-group';
+import { ButtonGroup, ButtonGroupButton } from '@flaut-travel/react-md3e/button-group';
+import type { ButtonGroupProps } from '@flaut-travel/react-md3e/button-group';
 
 export const single = (
   <ButtonGroup aria-label="Theme" defaultValue="light" onChange={(_event, value) => value?.toUpperCase() === null}>

@@ -1,6 +1,6 @@
 import { createRef } from 'react';
-import { TextField } from '@flaut-org/react-md3e/text-field';
-import type { TextFieldControl } from '@flaut-org/react-md3e/text-field';
+import { TextField } from '@flaut-travel/react-md3e/text-field';
+import type { TextFieldControl } from '@flaut-travel/react-md3e/text-field';
 
 export const field = (
   <TextField

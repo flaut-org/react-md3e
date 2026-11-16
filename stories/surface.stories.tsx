@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Surface } from '@flaut-org/react-md3e';
+import { Surface } from '@flaut-travel/react-md3e';
 
 const corners = [
   'none',

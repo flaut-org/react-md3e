@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { List, ListItem } from '@flaut-org/react-md3e';
-import type { StaticListItemProps } from '@flaut-org/react-md3e/list';
+import { List, ListItem } from '@flaut-travel/react-md3e';
+import type { StaticListItemProps } from '@flaut-travel/react-md3e/list';
 import { starIcon } from './example-icons';
 
 const meta = {

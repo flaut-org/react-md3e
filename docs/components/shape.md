@@ -11,7 +11,7 @@ precompiled data state; no geometry library, path construction, CSS insertion, D
 animation effect or client directive runs in Shape.
 
 ```tsx
-import { Shape } from '@flaut-org/react-md3e/shape';
+import { Shape } from '@flaut-travel/react-md3e/shape';
 
 export function Decorations() {
   return (
@@ -83,7 +83,7 @@ itself stays server-compatible:
 'use client';
 
 import { useState } from 'react';
-import { Button, Shape } from '@flaut-org/react-md3e';
+import { Button, Shape } from '@flaut-travel/react-md3e';
 
 export function FavoriteIllustration() {
   const [favorite, setFavorite] = useState(false);

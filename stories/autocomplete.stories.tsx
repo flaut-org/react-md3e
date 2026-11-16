@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useEffect, useRef, useState } from 'react';
-import { Autocomplete, TextField } from '@flaut-org/react-md3e';
-import type { AutocompleteProps } from '@flaut-org/react-md3e';
+import { Autocomplete, TextField } from '@flaut-travel/react-md3e';
+import type { AutocompleteProps } from '@flaut-travel/react-md3e';
 
 const cities = ['Paris', 'Rome', 'Kyiv', 'São Paulo', 'Helsinki'];
 const meta = {

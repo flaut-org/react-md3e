@@ -1,4 +1,4 @@
-import { Skeleton } from '@flaut-org/react-md3e/skeleton';
+import { Skeleton } from '@flaut-travel/react-md3e/skeleton';
 
 export const sized = <Skeleton variant="rounded" width="100%" height={120} animation="wave" />;
 // @ts-expect-error Finite animation contract.

@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { Avatar, List, ListItem, ThemeProvider } from '@flaut-org/react-md3e';
-import { createTheme } from '@flaut-org/react-md3e/theme';
+import { Avatar, List, ListItem, ThemeProvider } from '@flaut-travel/react-md3e';
+import { createTheme } from '@flaut-travel/react-md3e/theme';
 import { SelectionDemo } from './selection-demo/selection-demo.component';
 import { LanguageCurrencyDemo } from './language-currency-demo/language-currency-demo.component';
 

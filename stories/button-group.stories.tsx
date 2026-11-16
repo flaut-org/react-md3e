@@ -1,5 +1,5 @@
 import type { Decorator, Meta, StoryObj } from '@storybook/react-vite';
-import { ButtonGroup, ButtonGroupButton } from '@flaut-org/react-md3e';
+import { ButtonGroup, ButtonGroupButton } from '@flaut-travel/react-md3e';
 
 const frame: Decorator = (Story) => (
   <main>

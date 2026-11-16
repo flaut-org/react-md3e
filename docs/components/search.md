@@ -11,7 +11,7 @@ A consumer client component owns filtering, fetching, result selection and routi
 'use client';
 
 import { useState } from 'react';
-import { Button, List, ListItem, Search } from '@flaut-org/react-md3e';
+import { Button, List, ListItem, Search } from '@flaut-travel/react-md3e';
 
 export function DestinationSearch() {
   const [query, setQuery] = useState('');

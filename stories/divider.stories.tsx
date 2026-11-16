@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Divider } from '@flaut-org/react-md3e';
+import { Divider } from '@flaut-travel/react-md3e';
 
 const meta = {
   title: 'Components/Divider',

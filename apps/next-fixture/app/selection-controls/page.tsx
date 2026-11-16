@@ -1,5 +1,5 @@
-import { Avatar, Checkbox, Radio, RadioGroup, ThemeProvider } from '@flaut-org/react-md3e';
-import { createTheme } from '@flaut-org/react-md3e/theme';
+import { Avatar, Checkbox, Radio, RadioGroup, ThemeProvider } from '@flaut-travel/react-md3e';
+import { createTheme } from '@flaut-travel/react-md3e/theme';
 import { ControlsDemo } from './controls-demo/controls-demo.component';
 
 const forest = createTheme({

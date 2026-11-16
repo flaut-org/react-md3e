@@ -8,7 +8,7 @@ checkbox input or extra tab stop.
 'use client';
 
 import { useState } from 'react';
-import { Checkbox } from '@flaut-org/react-md3e/checkbox';
+import { Checkbox } from '@flaut-travel/react-md3e/checkbox';
 
 export function TravelUpdates() {
   const [checked, setChecked] = useState(false);

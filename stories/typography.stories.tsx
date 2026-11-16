@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Typography } from '@flaut-org/react-md3e';
+import { Typography } from '@flaut-travel/react-md3e';
 
 const variants = [
   'displayLarge',

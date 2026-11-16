@@ -1,5 +1,5 @@
 import { createRef } from 'react';
-import { BottomSheet } from '@flaut-org/react-md3e/bottom-sheet';
+import { BottomSheet } from '@flaut-travel/react-md3e/bottom-sheet';
 
 export const panel = (
   <BottomSheet

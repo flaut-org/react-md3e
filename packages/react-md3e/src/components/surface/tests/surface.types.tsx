@@ -1,5 +1,5 @@
 import { createRef } from 'react';
-import { Surface } from '@flaut-org/react-md3e/surface';
+import { Surface } from '@flaut-travel/react-md3e/surface';
 
 export const surface = (
   <Surface

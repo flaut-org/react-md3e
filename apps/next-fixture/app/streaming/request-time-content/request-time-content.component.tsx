@@ -29,7 +29,7 @@ import {
   ListItem,
   Button,
   IconButton,
-} from '@flaut-org/react-md3e';
+} from '@flaut-travel/react-md3e';
 import { ScopedDialogDemo } from '../../../components/scoped-dialog-demo/scoped-dialog-demo.component';
 
 export async function RequestTimeContent() {

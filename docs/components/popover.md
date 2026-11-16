@@ -15,7 +15,7 @@ Import the stylesheet once at the application root. The package root and `/popov
 parts and their own public types; Base UI stays an implementation detail.
 
 ```tsx
-import { Button, Popover, PopoverClose, TextField } from '@flaut-org/react-md3e';
+import { Button, Popover, PopoverClose, TextField } from '@flaut-travel/react-md3e';
 
 export default function Page() {
   return (
@@ -75,7 +75,7 @@ use both focusOut and clickAway when vetoing all outside interaction.
 'use client';
 
 import { useState } from 'react';
-import { Button, Popover, PopoverClose } from '@flaut-org/react-md3e';
+import { Button, Popover, PopoverClose } from '@flaut-travel/react-md3e';
 
 export function Preferences() {
   const [open, setOpen] = useState(false);

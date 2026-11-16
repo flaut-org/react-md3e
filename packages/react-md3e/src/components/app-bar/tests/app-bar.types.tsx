@@ -1,5 +1,5 @@
 import { createRef } from 'react';
-import { AppBar, IconButton } from '@flaut-org/react-md3e';
+import { AppBar, IconButton } from '@flaut-travel/react-md3e';
 
 const named = (
   <IconButton

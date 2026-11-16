@@ -6,15 +6,15 @@ logic. Server Components may import it; HTML is server-rendered and the button t
 compiled styles and ThemeProvider do not introduce a client boundary.
 
 ```tsx
-import { Button } from '@flaut-org/react-md3e';
-import '@flaut-org/react-md3e/styles.css';
+import { Button } from '@flaut-travel/react-md3e';
+import '@flaut-travel/react-md3e/styles.css';
 
 <Button variant="filled" size="medium" shape="round">
   Continue
 </Button>;
 ```
 
-Alternatively import Button from `@flaut-org/react-md3e/button`. The stylesheet is required once at
+Alternatively import Button from `@flaut-travel/react-md3e/button`. The stylesheet is required once at
 the application root. CSS-variable fallbacks provide the default appearance even without a
 ThemeProvider; use a provider for scoped or system-mode themes.
 
@@ -40,7 +40,7 @@ Toggle state is owned by the consumer:
 ```tsx
 'use client';
 import { useState } from 'react';
-import { Button } from '@flaut-org/react-md3e';
+import { Button } from '@flaut-travel/react-md3e';
 
 export function FavoriteButton() {
   const [selected, setSelected] = useState(false);

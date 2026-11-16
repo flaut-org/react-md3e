@@ -1,6 +1,6 @@
 import { createRef } from 'react';
-import { IconButton } from '@flaut-org/react-md3e';
-import type { IconButtonProps } from '@flaut-org/react-md3e';
+import { IconButton } from '@flaut-travel/react-md3e';
+import type { IconButtonProps } from '@flaut-travel/react-md3e';
 
 export const named = (
   <IconButton

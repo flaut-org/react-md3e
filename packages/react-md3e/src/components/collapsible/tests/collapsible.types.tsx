@@ -1,4 +1,4 @@
-import { Collapsible } from '@flaut-org/react-md3e/collapsible';
+import { Collapsible } from '@flaut-travel/react-md3e/collapsible';
 
 export const disclosure = (
   <Collapsible

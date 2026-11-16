@@ -4,7 +4,7 @@ Status: Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Radio/Radio
 
 ## Ownership and boundaries
 
-`@flaut-org/react-md3e` owns its MD3 Expressive appearance and public API. Base UI is the intended
+`@flaut-travel/react-md3e` owns its MD3 Expressive appearance and public API. Base UI is the intended
 behavior foundation for interactive primitives. Button composes the Base UI Button and is a client
 component for semantics and press ripple behavior. IconButton shares those primitives and the
 private ripple controller. AppBar is a native header layout and stays server-compatible; its

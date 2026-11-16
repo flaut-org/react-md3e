@@ -6,8 +6,8 @@ server-compatible ul/li; selection alone introduces a client implementation. The
 typography, shapes, states, and motion are precompiled CSS.
 
 ```tsx
-import { List, ListItem } from '@flaut-org/react-md3e';
-import '@flaut-org/react-md3e/styles.css';
+import { List, ListItem } from '@flaut-travel/react-md3e';
+import '@flaut-travel/react-md3e/styles.css';
 
 <List>
   <ListItem primary="Lisbon" secondary="Portugal" leading="L" leadingKind="avatar" />
@@ -47,7 +47,7 @@ and neither reads styles nor uses private Base UI attributes/imports.
 'use client';
 
 import { useState } from 'react';
-import { List, ListItem } from '@flaut-org/react-md3e';
+import { List, ListItem } from '@flaut-travel/react-md3e';
 
 export function Currencies() {
   const [currency, setCurrency] = useState('EUR');

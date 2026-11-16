@@ -1,6 +1,6 @@
 import { createRef } from 'react';
-import { Popover, PopoverClose } from '@flaut-org/react-md3e/popover';
-import { Button } from '@flaut-org/react-md3e/button';
+import { Popover, PopoverClose } from '@flaut-travel/react-md3e/popover';
+import { Button } from '@flaut-travel/react-md3e/button';
 
 export const popover = (
   <Popover

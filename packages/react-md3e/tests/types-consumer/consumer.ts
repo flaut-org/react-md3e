@@ -1,11 +1,11 @@
-import { Skeleton } from '@flaut-org/react-md3e/skeleton';
-import { Divider } from '@flaut-org/react-md3e/divider';
-import { Tooltip } from '@flaut-org/react-md3e/tooltip';
-import { Collapsible } from '@flaut-org/react-md3e/collapsible';
-import { ButtonGroup, ButtonGroupButton } from '@flaut-org/react-md3e/button-group';
-import { BottomSheet } from '@flaut-org/react-md3e/bottom-sheet';
-import { SideSheet } from '@flaut-org/react-md3e/side-sheet';
-import { Snackbar } from '@flaut-org/react-md3e/snackbar';
+import { Skeleton } from '@flaut-travel/react-md3e/skeleton';
+import { Divider } from '@flaut-travel/react-md3e/divider';
+import { Tooltip } from '@flaut-travel/react-md3e/tooltip';
+import { Collapsible } from '@flaut-travel/react-md3e/collapsible';
+import { ButtonGroup, ButtonGroupButton } from '@flaut-travel/react-md3e/button-group';
+import { BottomSheet } from '@flaut-travel/react-md3e/bottom-sheet';
+import { SideSheet } from '@flaut-travel/react-md3e/side-sheet';
+import { Snackbar } from '@flaut-travel/react-md3e/snackbar';
 import type {
   SkeletonProps,
   DividerProps,
@@ -37,28 +37,28 @@ import type {
   IconButtonProps,
   Theme,
   ThemeProviderProps,
-} from '@flaut-org/react-md3e';
-import { Typography } from '@flaut-org/react-md3e/typography';
-import { Search, SearchBar } from '@flaut-org/react-md3e/search';
-import { Surface } from '@flaut-org/react-md3e/surface';
-import { Shape, shapeVariants } from '@flaut-org/react-md3e/shape';
-import { Card, CardActionArea, CardContent, CardActions, CardMedia } from '@flaut-org/react-md3e/card';
-import { Popover, PopoverClose } from '@flaut-org/react-md3e/popover';
-import { TextField } from '@flaut-org/react-md3e/text-field';
-import { Autocomplete } from '@flaut-org/react-md3e/autocomplete';
-import { Checkbox } from '@flaut-org/react-md3e/checkbox';
-import { Radio } from '@flaut-org/react-md3e/radio';
-import { RadioGroup } from '@flaut-org/react-md3e/radio-group';
-import { Avatar } from '@flaut-org/react-md3e/avatar';
-import { List, ListItem } from '@flaut-org/react-md3e/list';
-import type { ListProps, ListItemProps } from '@flaut-org/react-md3e/list';
-import { Dialog, DialogContent, DialogActions } from '@flaut-org/react-md3e/dialog';
-import type { DialogProps } from '@flaut-org/react-md3e/dialog';
-import { AppBar, Button, IconButton, ThemeProvider } from '@flaut-org/react-md3e';
-import { Button as StandaloneButton } from '@flaut-org/react-md3e/button';
-import { AppBar as StandaloneAppBar } from '@flaut-org/react-md3e/app-bar';
-import { IconButton as StandaloneIconButton } from '@flaut-org/react-md3e/icon-button';
-import { createTheme, themeToCss } from '@flaut-org/react-md3e/theme';
+} from '@flaut-travel/react-md3e';
+import { Typography } from '@flaut-travel/react-md3e/typography';
+import { Search, SearchBar } from '@flaut-travel/react-md3e/search';
+import { Surface } from '@flaut-travel/react-md3e/surface';
+import { Shape, shapeVariants } from '@flaut-travel/react-md3e/shape';
+import { Card, CardActionArea, CardContent, CardActions, CardMedia } from '@flaut-travel/react-md3e/card';
+import { Popover, PopoverClose } from '@flaut-travel/react-md3e/popover';
+import { TextField } from '@flaut-travel/react-md3e/text-field';
+import { Autocomplete } from '@flaut-travel/react-md3e/autocomplete';
+import { Checkbox } from '@flaut-travel/react-md3e/checkbox';
+import { Radio } from '@flaut-travel/react-md3e/radio';
+import { RadioGroup } from '@flaut-travel/react-md3e/radio-group';
+import { Avatar } from '@flaut-travel/react-md3e/avatar';
+import { List, ListItem } from '@flaut-travel/react-md3e/list';
+import type { ListProps, ListItemProps } from '@flaut-travel/react-md3e/list';
+import { Dialog, DialogContent, DialogActions } from '@flaut-travel/react-md3e/dialog';
+import type { DialogProps } from '@flaut-travel/react-md3e/dialog';
+import { AppBar, Button, IconButton, ThemeProvider } from '@flaut-travel/react-md3e';
+import { Button as StandaloneButton } from '@flaut-travel/react-md3e/button';
+import { AppBar as StandaloneAppBar } from '@flaut-travel/react-md3e/app-bar';
+import { IconButton as StandaloneIconButton } from '@flaut-travel/react-md3e/icon-button';
+import { createTheme, themeToCss } from '@flaut-travel/react-md3e/theme';
 
 const theme: Theme = createTheme({ sourceColor: '#386a20' });
 const buttonProps: ButtonProps = { variant: 'tonal', endIcon: '→', selected: true };

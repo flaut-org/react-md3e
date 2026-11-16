@@ -1,6 +1,6 @@
 import { createRef } from 'react';
-import { Shape, shapeVariants } from '@flaut-org/react-md3e/shape';
-import type { ShapeVariant } from '@flaut-org/react-md3e';
+import { Shape, shapeVariants } from '@flaut-travel/react-md3e/shape';
+import type { ShapeVariant } from '@flaut-travel/react-md3e';
 
 export const shape = (
   <Shape

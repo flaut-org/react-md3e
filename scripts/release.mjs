@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 
 const workspace = fileURLToPath(new URL('../', import.meta.url));
 const packagePath = 'packages/react-md3e/package.json';
-const packageName = '@flaut-org/react-md3e';
+const packageName = '@flaut-travel/react-md3e';
 
 async function readJson(root, file) {
   return JSON.parse(await readFile(path.join(root, file), 'utf8'));

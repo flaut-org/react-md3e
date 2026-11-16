@@ -8,8 +8,8 @@ compiled at build time and inherits ThemeProvider tokens without client theme co
 'use client';
 
 import { useState } from 'react';
-import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@flaut-org/react-md3e';
-import '@flaut-org/react-md3e/styles.css';
+import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@flaut-travel/react-md3e';
+import '@flaut-travel/react-md3e/styles.css';
 
 export function SaveCollection() {
   const [open, setOpen] = useState(false);
@@ -36,7 +36,7 @@ export function SaveCollection() {
 }
 ```
 
-All five components and their types are also available from `@flaut-org/react-md3e/dialog`. Import
+All five components and their types are also available from `@flaut-travel/react-md3e/dialog`. Import
 the stylesheet once at the application root. Dialog uses consumer-provided action buttons rather
 than adding English text or an implicit close control.
 

@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { Button, ThemeProvider } from '@flaut-org/react-md3e';
-import { createTheme } from '@flaut-org/react-md3e/theme';
+import { Button, ThemeProvider } from '@flaut-travel/react-md3e';
+import { createTheme } from '@flaut-travel/react-md3e/theme';
 import { ButtonDemo } from './button-demo/button-demo.component';
 
 const forest = createTheme({

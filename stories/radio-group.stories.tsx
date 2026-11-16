@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { Radio, RadioGroup } from '@flaut-org/react-md3e';
+import { Radio, RadioGroup } from '@flaut-travel/react-md3e';
 
 const meta = {
   title: 'Components/RadioGroup',

@@ -1,4 +1,4 @@
-import { Button } from '@flaut-org/react-md3e';
+import { Button } from '@flaut-travel/react-md3e';
 
 export const valid = <Button variant="tonal" size="extraLarge" shape="square" selected />;
 // @ts-expect-error MD2 aliases are not part of the public API.

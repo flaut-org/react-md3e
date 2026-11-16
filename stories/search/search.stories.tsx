@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Button, Search, TextField } from '@flaut-org/react-md3e';
+import { Button, Search, TextField } from '@flaut-travel/react-md3e';
 import { DestinationSearchDemo } from './destination-search-demo/destination-search-demo.component';
 
 const meta = {

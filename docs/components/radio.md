@@ -8,8 +8,8 @@ listbox/option semantics and keyboard behavior.
 'use client';
 
 import { useState } from 'react';
-import { Radio } from '@flaut-org/react-md3e/radio';
-import { RadioGroup } from '@flaut-org/react-md3e/radio-group';
+import { Radio } from '@flaut-travel/react-md3e/radio';
+import { RadioGroup } from '@flaut-travel/react-md3e/radio-group';
 
 export function Cabin() {
   const [value, setValue] = useState('economy');

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { IconButton } from '@flaut-org/react-md3e';
+import { IconButton } from '@flaut-travel/react-md3e';
 import { starIcon } from './example-icons';
 
 const meta = {

@@ -1,12 +1,12 @@
-# @flaut-org/react-md3e
+# @flaut-travel/react-md3e
 
 Material 3 Expressive React components with precompiled CSS and a token-based theme API.
 Implemented: Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Radio/RadioGroup, Avatar, TextField, Autocomplete, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, BottomSheet, SideSheet, Snackbar, ThemeProvider, createTheme, and themeToCss. React 19 is required.
 
 ```tsx
-import { Button, ThemeProvider } from '@flaut-org/react-md3e';
-import { createTheme } from '@flaut-org/react-md3e/theme';
-import '@flaut-org/react-md3e/styles.css';
+import { Button, ThemeProvider } from '@flaut-travel/react-md3e';
+import { createTheme } from '@flaut-travel/react-md3e/theme';
+import '@flaut-travel/react-md3e/styles.css';
 
 const theme = createTheme({ sourceColor: '#386a20' });
 

@@ -28,7 +28,7 @@ async function fixture() {
   await cp(path.join(workspace, '.changeset/config.json'), path.join(root, '.changeset/config.json'));
   await writeFile(
     path.join(root, '.changeset/initial.md'),
-    "---\n'@flaut-org/react-md3e': major\n---\n\nInitial library release.\n",
+    "---\n'@flaut-travel/react-md3e': major\n---\n\nInitial library release.\n",
   );
   await symlink(path.join(workspace, 'node_modules'), path.join(root, 'node_modules'), 'dir');
   execFileSync('git', ['init', '--initial-branch=main', root], { stdio: 'pipe' });
@@ -48,7 +48,7 @@ async function fixture() {
 async function addPatch(root) {
   await writeFile(
     path.join(root, '.changeset/patch.md'),
-    "---\n'@flaut-org/react-md3e': patch\n---\n\nFix a component.\n",
+    "---\n'@flaut-travel/react-md3e': patch\n---\n\nFix a component.\n",
   );
 }
 
@@ -57,7 +57,7 @@ test('release channels map to explicit npm tags and monorepo Git tags', () => {
     version: '1.0.0-alpha.1',
     distTag: 'alpha',
     prerelease: true,
-    gitTag: '@flaut-org/react-md3e@1.0.0-alpha.1',
+    gitTag: '@flaut-travel/react-md3e@1.0.0-alpha.1',
   });
   assert.equal(releaseMetadata('1.0.0-beta.1').distTag, 'beta');
   assert.equal(releaseMetadata('1.0.0').distTag, 'latest');
@@ -96,7 +96,7 @@ test('real Changesets transitions alpha.1 → alpha.2 → beta.1 → beta.2 → 
     await changeChannel('alpha', root);
     await writeFile(
       path.join(root, '.changeset/next-minor.md'),
-      "---\n'@flaut-org/react-md3e': minor\n---\n\nNext feature release.\n",
+      "---\n'@flaut-travel/react-md3e': minor\n---\n\nNext feature release.\n",
     );
     await versionPackages(root);
     assert.equal((await checkRelease(root)).version, '1.1.0-alpha.1');
@@ -114,7 +114,7 @@ test('real Changesets transitions alpha.1 → alpha.2 → beta.1 → beta.2 → 
 test('publish plans explicitly use alpha/beta/latest and reject other packages or versions', () => {
   for (const version of ['1.0.0-alpha.1', '1.0.0-beta.1', '1.0.0']) {
     const metadata = releaseMetadata(version);
-    const plan = { plan: [[{ kind: 'publish', name: '@flaut-org/react-md3e', version, tag: 'latest' }]] };
+    const plan = { plan: [[{ kind: 'publish', name: '@flaut-travel/react-md3e', version, tag: 'latest' }]] };
 
     assert.equal(applyDistTag(plan, metadata).plan[0][0].tag, metadata.distTag);
   }
@@ -127,7 +127,7 @@ test('publish plans explicitly use alpha/beta/latest and reject other packages o
   );
   assert.throws(() =>
     applyDistTag(
-      { plan: [[{ kind: 'publish', name: '@flaut-org/react-md3e', version: '2.0.0' }]] },
+      { plan: [[{ kind: 'publish', name: '@flaut-travel/react-md3e', version: '2.0.0' }]] },
       releaseMetadata('1.0.0'),
     ),
   );

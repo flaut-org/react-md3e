@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Card, CardActions, CardActionArea, CardContent, CardMedia } from '@flaut-org/react-md3e';
+import { Button, Card, CardActions, CardActionArea, CardContent, CardMedia } from '@flaut-travel/react-md3e';
 import landscape from '../assets/card-landscape.svg';
 
 export function CardActionDemo() {

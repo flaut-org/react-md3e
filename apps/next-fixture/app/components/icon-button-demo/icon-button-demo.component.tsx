@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { IconButton } from '@flaut-org/react-md3e';
+import { IconButton } from '@flaut-travel/react-md3e';
 
 const icon = (
   <svg viewBox="0 0 24 24" focusable="false">

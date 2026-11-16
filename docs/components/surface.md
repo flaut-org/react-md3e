@@ -9,7 +9,7 @@ calls its base container Surface; this React API uses our own theme token contra
 abstract Expressive silhouettes, and [Card](card.md) for content about one subject.
 
 ```tsx
-import { Surface } from '@flaut-org/react-md3e/surface';
+import { Surface } from '@flaut-travel/react-md3e/surface';
 
 export function TripSummary() {
   return (

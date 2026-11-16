@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { AppBar, Button, ThemeProvider } from '@flaut-org/react-md3e';
+import { AppBar, Button, ThemeProvider } from '@flaut-travel/react-md3e';
 import { RequestTimeContent } from './request-time-content/request-time-content.component';
 
 export default function StreamingPage() {

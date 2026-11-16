@@ -1,5 +1,5 @@
 import { createRef } from 'react';
-import { SideSheet } from '@flaut-org/react-md3e/side-sheet';
+import { SideSheet } from '@flaut-travel/react-md3e/side-sheet';
 
 export const panel = (
   <SideSheet

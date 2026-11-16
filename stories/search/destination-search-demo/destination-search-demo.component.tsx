@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Avatar, Button, IconButton, List, ListItem, Search } from '@flaut-org/react-md3e';
-import type { SearchProps } from '@flaut-org/react-md3e';
+import { Avatar, Button, IconButton, List, ListItem, Search } from '@flaut-travel/react-md3e';
+import type { SearchProps } from '@flaut-travel/react-md3e';
 
 const cities = ['Paris', 'Porto', 'Prague', 'Rome', 'Tokyo'];
 

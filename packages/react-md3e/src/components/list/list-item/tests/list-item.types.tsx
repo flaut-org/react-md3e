@@ -1,4 +1,4 @@
-import type { ListItemProps } from '@flaut-org/react-md3e';
+import type { ListItemProps } from '@flaut-travel/react-md3e';
 
 // @ts-expect-error Individual disabled state requires an interactive value.
 export const disabledStatic: ListItemProps = { primary: 'Static', disabled: true };

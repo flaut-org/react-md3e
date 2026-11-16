@@ -1,7 +1,7 @@
 # Changesets
 
 Run `asdf exec npm run changeset` for user-facing package changes. Select only
-`@flaut-org/react-md3e`. Documentation/tooling-only changes do not require a release.
+`@flaut-travel/react-md3e`. Documentation/tooling-only changes do not require a release.
 
 Use `npm run version-packages`, not the raw version command: our wrapper starts each
 prerelease channel at `.1` and refreshes the npm lockfile. The initial major changeset

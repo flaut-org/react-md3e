@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-import { createTheme } from '@flaut-org/react-md3e/theme';
+import { createTheme } from '@flaut-travel/react-md3e/theme';
 
 test('avatar sizes, shapes, accessible initials and real img markup render before JavaScript and in streams', async ({
   browser,

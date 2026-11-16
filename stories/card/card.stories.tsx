@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Button, Card, CardContent, CardActions, CardMedia, CardActionArea } from '@flaut-org/react-md3e';
+import { Button, Card, CardContent, CardActions, CardMedia, CardActionArea } from '@flaut-travel/react-md3e';
 import { CardActionDemo } from './card-action-demo/card-action-demo.component';
 import landscape from './assets/card-landscape.svg';
 

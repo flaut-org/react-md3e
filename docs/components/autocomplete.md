@@ -9,7 +9,7 @@ contract from the selection component exposed here.
 'use client';
 
 import { useState } from 'react';
-import { Autocomplete, TextField } from '@flaut-org/react-md3e';
+import { Autocomplete, TextField } from '@flaut-travel/react-md3e';
 
 const cities = [
   { code: 'PAR', name: 'Paris' },

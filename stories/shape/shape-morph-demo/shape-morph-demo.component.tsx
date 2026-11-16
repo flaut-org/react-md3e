@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Button, Shape, shapeVariants } from '@flaut-org/react-md3e';
-import type { ShapeSize, ShapeVariant } from '@flaut-org/react-md3e';
+import { Button, Shape, shapeVariants } from '@flaut-travel/react-md3e';
+import type { ShapeSize, ShapeVariant } from '@flaut-travel/react-md3e';
 import landscape from '../../card/assets/card-landscape.svg';
 
 export function ShapeMorphDemo() {

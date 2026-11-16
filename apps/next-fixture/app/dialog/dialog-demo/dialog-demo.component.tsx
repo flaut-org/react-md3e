@@ -10,8 +10,8 @@ import {
   DialogContentText,
   DialogActions,
   IconButton,
-} from '@flaut-org/react-md3e';
-import type { DialogCloseReason } from '@flaut-org/react-md3e';
+} from '@flaut-travel/react-md3e';
+import type { DialogCloseReason } from '@flaut-travel/react-md3e';
 
 type Mode = 'basic' | 'long' | 'body' | 'fullScreen' | 'protected' | 'form' | 'kept' | 'rtl' | 'custom';
 

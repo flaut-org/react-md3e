@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { AppBar, IconButton, ThemeProvider } from '@flaut-org/react-md3e';
-import { createTheme } from '@flaut-org/react-md3e/theme';
+import { AppBar, IconButton, ThemeProvider } from '@flaut-travel/react-md3e';
+import { createTheme } from '@flaut-travel/react-md3e/theme';
 import { IconButtonDemo } from './icon-button-demo/icon-button-demo.component';
 
 const icon = (

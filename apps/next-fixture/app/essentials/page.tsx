@@ -1,5 +1,5 @@
-import { Skeleton, Divider, Typography, ThemeProvider } from '@flaut-org/react-md3e';
-import { createTheme } from '@flaut-org/react-md3e/theme';
+import { Skeleton, Divider, Typography, ThemeProvider } from '@flaut-travel/react-md3e';
+import { createTheme } from '@flaut-travel/react-md3e/theme';
 import { EssentialsDemo } from './essentials-demo/essentials-demo.component';
 
 const forest = createTheme({ sourceColor: '#386a20', typography: { plainFontFamily: 'Arial, sans-serif' } });

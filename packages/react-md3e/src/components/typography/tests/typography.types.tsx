@@ -1,8 +1,8 @@
 import { createRef } from 'react';
 import type { ComponentPropsWithRef } from 'react';
-import { Typography } from '@flaut-org/react-md3e/typography';
-import type { TypographyProps } from '@flaut-org/react-md3e/typography';
-import { createTheme } from '@flaut-org/react-md3e/theme';
+import { Typography } from '@flaut-travel/react-md3e/typography';
+import type { TypographyProps } from '@flaut-travel/react-md3e/typography';
+import { createTheme } from '@flaut-travel/react-md3e/theme';
 
 function CustomLink({ to, children, ...props }: Omit<ComponentPropsWithRef<'a'>, 'href'> & { to: string }) {
   return (

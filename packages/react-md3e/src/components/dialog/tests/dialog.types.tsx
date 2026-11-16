@@ -1,6 +1,6 @@
 import { createRef } from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from '@flaut-org/react-md3e';
-import type { DialogProps, DialogCloseReason } from '@flaut-org/react-md3e';
+import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from '@flaut-travel/react-md3e';
+import type { DialogProps, DialogCloseReason } from '@flaut-travel/react-md3e';
 
 const popup = createRef<HTMLDivElement>();
 

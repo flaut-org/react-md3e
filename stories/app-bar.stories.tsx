@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { AppBar, IconButton } from '@flaut-org/react-md3e';
+import { AppBar, IconButton } from '@flaut-travel/react-md3e';
 import { menuIcon, moreIcon, starIcon } from './example-icons';
 
 const navigation = (

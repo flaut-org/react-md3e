@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { createTheme } from '@flaut-org/react-md3e/theme';
+import { createTheme } from '@flaut-travel/react-md3e/theme';
 
 test('plain Tooltip describes a focused control, keeps focus, and dismisses on Escape', async ({ page }) => {
   await page.goto('/essentials');

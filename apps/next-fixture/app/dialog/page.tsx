@@ -6,8 +6,8 @@ import {
   DialogContentText,
   DialogActions,
   ThemeProvider,
-} from '@flaut-org/react-md3e';
-import { createTheme } from '@flaut-org/react-md3e/theme';
+} from '@flaut-travel/react-md3e';
+import { createTheme } from '@flaut-travel/react-md3e/theme';
 import { DialogDemo } from './dialog-demo/dialog-demo.component';
 import { ScopedDialogDemo } from '../../components/scoped-dialog-demo/scoped-dialog-demo.component';
 

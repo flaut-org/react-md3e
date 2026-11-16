@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { createTheme, themeToCss } from '@flaut-org/react-md3e/theme';
+import { createTheme, themeToCss } from '@flaut-travel/react-md3e/theme';
 
 function luminance(hex) {
   const channels = hex

@@ -6,7 +6,7 @@ CardContent, CardActions and CardMedia also remain server components; only CardA
 client boundary for primary actions and ripple.
 
 ```tsx
-import { Button, Card, CardContent, CardActions, CardMedia } from '@flaut-org/react-md3e';
+import { Button, Card, CardContent, CardActions, CardMedia } from '@flaut-travel/react-md3e';
 
 export function TripCard() {
   return (
@@ -66,7 +66,7 @@ buttons.
 ```tsx
 'use client';
 
-import { Button, Card, CardActionArea, CardContent, CardActions } from '@flaut-org/react-md3e';
+import { Button, Card, CardActionArea, CardContent, CardActions } from '@flaut-travel/react-md3e';
 
 export function InteractiveTrip({ onOpen, onSave }: { onOpen: () => void; onSave: () => void }) {
   return (

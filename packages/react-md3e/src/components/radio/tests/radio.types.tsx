@@ -1,4 +1,4 @@
-import { Radio } from '@flaut-org/react-md3e/radio';
+import { Radio } from '@flaut-travel/react-md3e/radio';
 
 export const radio = <Radio value="economy" aria-label="Economy" />;
 // @ts-expect-error RadioGroup owns checked state.

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Button, Collapsible, TextField } from '@flaut-org/react-md3e';
+import { Button, Collapsible, TextField } from '@flaut-travel/react-md3e';
 
 const meta = {
   title: 'Components/Collapsible',

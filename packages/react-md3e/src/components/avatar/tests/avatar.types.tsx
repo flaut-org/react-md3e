@@ -1,4 +1,4 @@
-import { Avatar } from '@flaut-org/react-md3e/avatar';
+import { Avatar } from '@flaut-travel/react-md3e/avatar';
 
 export const image = (
   <Avatar src="/avatar.svg" alt="Alex" size="small" imgProps={{ loading: 'lazy', decoding: 'async' }}>

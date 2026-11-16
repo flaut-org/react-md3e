@@ -1,5 +1,5 @@
-import { Autocomplete } from '@flaut-org/react-md3e/autocomplete';
-import { TextField } from '@flaut-org/react-md3e/text-field';
+import { Autocomplete } from '@flaut-travel/react-md3e/autocomplete';
+import { TextField } from '@flaut-travel/react-md3e/text-field';
 
 const options = [{ code: 'PAR', name: 'Paris' }];
 

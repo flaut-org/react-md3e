@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { Theme } from '@flaut-org/react-md3e';
-import { Button, ThemeProvider } from '@flaut-org/react-md3e';
+import type { Theme } from '@flaut-travel/react-md3e';
+import { Button, ThemeProvider } from '@flaut-travel/react-md3e';
 import themes from './themes.generated.json';
 
 const meta = {

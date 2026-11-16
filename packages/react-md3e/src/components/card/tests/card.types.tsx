@@ -1,5 +1,5 @@
 import { createRef } from 'react';
-import { Card, CardContent, CardMedia, CardActionArea, CardActions } from '@flaut-org/react-md3e/card';
+import { Card, CardContent, CardMedia, CardActionArea, CardActions } from '@flaut-travel/react-md3e/card';
 
 export const card = (
   <Card component="article" ref={createRef<HTMLElement>()} variant="elevated">

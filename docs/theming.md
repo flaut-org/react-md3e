@@ -11,9 +11,9 @@ light and dark schemes, tonal palettes, typography, and shape tokens.
 Call the generator in server code or a build script:
 
 ```tsx
-import { Button, ThemeProvider } from '@flaut-org/react-md3e';
-import { createTheme } from '@flaut-org/react-md3e/theme';
-import '@flaut-org/react-md3e/styles.css';
+import { Button, ThemeProvider } from '@flaut-travel/react-md3e';
+import { createTheme } from '@flaut-travel/react-md3e/theme';
+import '@flaut-travel/react-md3e/styles.css';
 
 const theme = createTheme({
   sourceColor: '#386a20',
@@ -134,7 +134,7 @@ custom token values entirely as CSS, generate a stylesheet in the consumer's bui
 
 ```js
 import { writeFile } from 'node:fs/promises';
-import { createTheme, themeToCss } from '@flaut-org/react-md3e/theme';
+import { createTheme, themeToCss } from '@flaut-travel/react-md3e/theme';
 
 const theme = createTheme({ sourceColor: '#386a20' });
 await writeFile('app/brand.css', themeToCss(theme, { selector: '.brand' }));

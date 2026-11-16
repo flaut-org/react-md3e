@@ -1,5 +1,5 @@
 import { mkdir, writeFile } from 'node:fs/promises';
-import { createTheme, themeToCss } from '@flaut-org/react-md3e/theme';
+import { createTheme, themeToCss } from '@flaut-travel/react-md3e/theme';
 
 const themes = {
   material: createTheme(),

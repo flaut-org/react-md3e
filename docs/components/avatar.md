@@ -5,7 +5,7 @@ available from the package root and /avatar. List can allocate its avatar slot w
 avatar's colors, shape, typography or image loading.
 
 ```tsx
-import { Avatar, List, ListItem } from '@flaut-org/react-md3e';
+import { Avatar, List, ListItem } from '@flaut-travel/react-md3e';
 
 export function Travelers() {
   return (

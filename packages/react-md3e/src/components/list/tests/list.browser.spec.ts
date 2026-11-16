@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-import { createTheme } from '@flaut-org/react-md3e/theme';
+import { createTheme } from '@flaut-travel/react-md3e/theme';
 
 const forest = createTheme({ sourceColor: '#386a20' });
 

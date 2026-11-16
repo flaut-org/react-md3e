@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import { Surface, ThemeProvider, Typography } from '@flaut-org/react-md3e';
-import { createTheme } from '@flaut-org/react-md3e/theme';
-import type { TypeScaleRole } from '@flaut-org/react-md3e';
+import { Surface, ThemeProvider, Typography } from '@flaut-travel/react-md3e';
+import { createTheme } from '@flaut-travel/react-md3e/theme';
+import type { TypeScaleRole } from '@flaut-travel/react-md3e';
 import { TypographyDemo } from './typography-demo/typography-demo.component';
 
 const forest = createTheme({

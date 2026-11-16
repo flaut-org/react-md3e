@@ -1,5 +1,5 @@
 import { createRef } from 'react';
-import { SearchBar } from '@flaut-org/react-md3e/search';
+import { SearchBar } from '@flaut-travel/react-md3e/search';
 
 export const bar = (
   <SearchBar

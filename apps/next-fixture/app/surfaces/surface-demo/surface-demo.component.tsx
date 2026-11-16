@@ -11,7 +11,7 @@ import {
   CardMedia,
   CardActionArea,
   Checkbox,
-} from '@flaut-org/react-md3e';
+} from '@flaut-travel/react-md3e';
 
 export function SurfaceDemo() {
   const [opened, setOpened] = useState(0);

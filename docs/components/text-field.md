@@ -7,7 +7,7 @@ its input/container slots; labels, helper text, colors, adornments and outlines 
 'use client';
 
 import { useState } from 'react';
-import { TextField } from '@flaut-org/react-md3e/text-field';
+import { TextField } from '@flaut-travel/react-md3e/text-field';
 
 export function Traveler() {
   const [name, setName] = useState('');
