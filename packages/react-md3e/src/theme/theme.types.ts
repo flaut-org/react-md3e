@@ -1,5 +1,8 @@
 import type { colorRoles } from '../tokens/material-tokens';
 
+export type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type BreakpointValues = Readonly<Record<Breakpoint, number>>;
+
 export type HexColor = `#${string}`;
 export type ColorRole = (typeof colorRoles)[number];
 export type ColorScheme = Readonly<Record<ColorRole, HexColor>>;
@@ -60,6 +63,8 @@ export interface CustomColorGroup {
 }
 
 export interface ThemeOptions {
+  /** Application layout thresholds in CSS px, merged with the default xs/sm/md/lg/xl scale. */
+  readonly breakpoints?: Partial<BreakpointValues>;
   readonly sourceColor?: HexColor;
   readonly variant?: 'tonalSpot' | 'expressive';
   readonly contrastLevel?: number;
@@ -75,6 +80,7 @@ export interface ThemeOptions {
 }
 
 export interface Theme {
+  readonly breakpoints: BreakpointValues;
   readonly sourceColor: HexColor;
   readonly variant: 'tonalSpot' | 'expressive';
   readonly contrastLevel: number;

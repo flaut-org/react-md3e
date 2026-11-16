@@ -1,7 +1,9 @@
 import defaultTheme from '../theme/default-theme.generated.json';
 import { kebabCase } from '../tokens/material-tokens';
-import type { ColorRole, TypeScaleRole, TypographyTokenRole } from '../theme/theme.types';
+import type { Breakpoint, ColorRole, TypeScaleRole, TypographyTokenRole } from '../theme/theme.types';
 import type { StyleObject } from './style-object.types';
+
+export const breakpoint = (name: Breakpoint) => `var(--md-breakpoint-${name}, ${defaultTheme.breakpoints[name]}px)`;
 
 /** Build-time token references with defaults for components outside ThemeProvider. */
 export const color = (role: ColorRole) =>

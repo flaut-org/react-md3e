@@ -10,6 +10,7 @@ export function Dialog({
   onClose,
   fullScreen = false,
   fullWidth = false,
+  maxWidth,
   scroll = 'paper',
   keepMounted = false,
   disableEscapeKeyDown = false,
@@ -63,6 +64,7 @@ export function Dialog({
             data-md3-dialog=""
             data-full-screen={fullScreen}
             data-full-width={fullWidth}
+            data-max-width={maxWidth}
             data-scroll={scrollMode}
           >
             {children}

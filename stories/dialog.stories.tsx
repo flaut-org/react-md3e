@@ -120,6 +120,7 @@ const meta = {
     disableEscapeKeyDown: false,
   },
   argTypes: {
+    maxWidth: { control: 'select', options: [undefined, 'xs', 'sm', 'md', 'lg', 'xl', false] },
     scroll: { control: 'inline-radio', options: ['paper', 'body'] },
     role: { control: 'select', options: ['alertdialog', 'dialog'] },
     children: { control: false },
@@ -169,3 +170,6 @@ export const Form: Story = { args: { role: 'dialog' }, parameters: { dialogExamp
 export const StackedActions: Story = { parameters: { dialogExample: { stacked: true } } };
 export const KeepMounted: Story = { args: { keepMounted: true }, parameters: { dialogExample: { form: true } } };
 export const RightToLeft: Story = { args: { dir: 'rtl' } };
+
+export const MediumWidth: Story = { args: { fullWidth: true, maxWidth: 'md' } };
+export const UnrestrictedWidth: Story = { args: { fullWidth: true, maxWidth: false } };

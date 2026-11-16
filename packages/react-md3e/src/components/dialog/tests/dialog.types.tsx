@@ -9,6 +9,7 @@ export const valid = (
     open
     fullScreen
     fullWidth
+    maxWidth="md"
     scroll="body"
     keepMounted
     initialFocus={popup}
@@ -42,3 +43,9 @@ export const invalidScroll: DialogProps = { open: true, scroll: 'viewport' };
 export const invalidRole: DialogProps = { open: true, role: 'menu' };
 // @ts-expect-error Base UI event details do not leak into our close callback.
 export const invalidReason: DialogCloseReason = 'outside-press';
+
+export const unbounded: DialogProps = { open: true, maxWidth: false };
+// @ts-expect-error Width caps use the shared breakpoint names, not arbitrary CSS values.
+export const invalidMaxWidth: DialogProps = { open: true, maxWidth: '640px' };
+// @ts-expect-error true is not a width cap.
+export const invalidBooleanMaxWidth: DialogProps = { open: true, maxWidth: true };
