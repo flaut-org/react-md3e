@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.tooling.json",
+  "include": [
+    "packages/react-md3e/src/**/*.ts",
+    "packages/react-md3e/src/**/*.tsx",
+    "apps/next-fixture/app/**/*.ts",
+    "apps/next-fixture/app/**/*.tsx",
+    "apps/next-fixture/next.config.ts",
+    ".storybook/**/*.ts",
+    ".storybook/**/*.tsx",
+    "stories/**/*.tsx",
+    "vite.*.config.ts",
+    "playwright.config.ts",
+    "packages/react-md3e/src/**/tests/**/*.ts",
+    "packages/react-md3e/src/**/tests/**/*.tsx",
+    "packages/react-md3e/tests/types-consumer/**/*.ts",
+    "apps/next-fixture/**/tests/**/*.ts"
+  ],
+  "exclude": ["node_modules", "**/dist/**", "**/.next/**"]
+}

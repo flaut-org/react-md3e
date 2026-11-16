@@ -1,0 +1,164 @@
+{
+  "name": "@flaut-org/react-md3e",
+  "version": "0.0.0",
+  "description": "Independent Material 3 Expressive React components with build-time CSS.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flaut-org/react-md3e.git",
+    "directory": "packages/react-md3e"
+  },
+  "homepage": "https://github.com/flaut-org/react-md3e#readme",
+  "bugs": {
+    "url": "https://github.com/flaut-org/react-md3e/issues"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "licenses"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json",
+    "./button": {
+      "types": "./dist/components/button/index.d.ts",
+      "import": "./dist/button.js"
+    },
+    "./theme": {
+      "types": "./dist/theme/index.d.ts",
+      "import": "./dist/theme.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./icon-button": {
+      "types": "./dist/components/icon-button/index.d.ts",
+      "import": "./dist/icon-button.js"
+    },
+    "./app-bar": {
+      "types": "./dist/components/app-bar/index.d.ts",
+      "import": "./dist/app-bar.js"
+    },
+    "./dialog": {
+      "types": "./dist/components/dialog/index.d.ts",
+      "import": "./dist/dialog.js"
+    },
+    "./list": {
+      "types": "./dist/components/list/index.d.ts",
+      "import": "./dist/list.js"
+    },
+    "./checkbox": {
+      "types": "./dist/components/checkbox/index.d.ts",
+      "import": "./dist/checkbox.js"
+    },
+    "./radio": {
+      "types": "./dist/components/radio/index.d.ts",
+      "import": "./dist/radio.js"
+    },
+    "./radio-group": {
+      "types": "./dist/components/radio-group/index.d.ts",
+      "import": "./dist/radio-group.js"
+    },
+    "./avatar": {
+      "types": "./dist/components/avatar/index.d.ts",
+      "import": "./dist/avatar.js"
+    },
+    "./text-field": {
+      "types": "./dist/components/text-field/index.d.ts",
+      "import": "./dist/text-field.js"
+    },
+    "./autocomplete": {
+      "types": "./dist/components/autocomplete/index.d.ts",
+      "import": "./dist/autocomplete.js"
+    },
+    "./popover": {
+      "types": "./dist/components/popover/index.d.ts",
+      "import": "./dist/popover.js"
+    },
+    "./surface": {
+      "types": "./dist/components/surface/index.d.ts",
+      "import": "./dist/surface.js"
+    },
+    "./card": {
+      "types": "./dist/components/card/index.d.ts",
+      "import": "./dist/card.js"
+    },
+    "./shape": {
+      "types": "./dist/components/shape/index.d.ts",
+      "import": "./dist/shape.js"
+    },
+    "./search": {
+      "types": "./dist/components/search/index.d.ts",
+      "import": "./dist/search.js"
+    },
+    "./typography": {
+      "types": "./dist/components/typography/index.d.ts",
+      "import": "./dist/typography.js"
+    },
+    "./skeleton": {
+      "types": "./dist/components/skeleton/index.d.ts",
+      "import": "./dist/skeleton.js"
+    },
+    "./divider": {
+      "types": "./dist/components/divider/index.d.ts",
+      "import": "./dist/divider.js"
+    },
+    "./tooltip": {
+      "types": "./dist/components/tooltip/index.d.ts",
+      "import": "./dist/tooltip.js"
+    },
+    "./collapsible": {
+      "types": "./dist/components/collapsible/index.d.ts",
+      "import": "./dist/collapsible.js"
+    },
+    "./button-group": {
+      "types": "./dist/components/button-group/index.d.ts",
+      "import": "./dist/button-group.js"
+    },
+    "./bottom-sheet": {
+      "types": "./dist/components/bottom-sheet/index.d.ts",
+      "import": "./dist/bottom-sheet.js"
+    },
+    "./side-sheet": {
+      "types": "./dist/components/side-sheet/index.d.ts",
+      "import": "./dist/side-sheet.js"
+    },
+    "./snackbar": {
+      "types": "./dist/components/snackbar/index.d.ts",
+      "import": "./dist/snackbar.js"
+    }
+  },
+  "scripts": {
+    "clean": "node ../../scripts/clean-package.mjs",
+    "prebuild": "npm run clean",
+    "build": "vite build --config ../../vite.theme.config.ts && node ../../scripts/generate-default-theme.mjs && vite build --config ../../vite.library.config.ts && tsc --project tsconfig.build.json --emitDeclarationOnly && node ../../scripts/finalize-declarations.mjs",
+    "dev": "vite build --config ../../vite.library.config.ts --watch",
+    "typecheck": "tsc --project tsconfig.json",
+    "prepack": "npm run build"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "dependencies": {
+    "@base-ui/react": "1.9.0"
+  },
+  "devDependencies": {
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  }
+}

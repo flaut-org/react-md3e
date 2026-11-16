@@ -1,0 +1,159 @@
+import { Skeleton } from '@flaut-org/react-md3e/skeleton';
+import { Divider } from '@flaut-org/react-md3e/divider';
+import { Tooltip } from '@flaut-org/react-md3e/tooltip';
+import { Collapsible } from '@flaut-org/react-md3e/collapsible';
+import { ButtonGroup, ButtonGroupButton } from '@flaut-org/react-md3e/button-group';
+import { BottomSheet } from '@flaut-org/react-md3e/bottom-sheet';
+import { SideSheet } from '@flaut-org/react-md3e/side-sheet';
+import { Snackbar } from '@flaut-org/react-md3e/snackbar';
+import type {
+  SkeletonProps,
+  DividerProps,
+  TooltipProps,
+  CollapsibleProps,
+  ButtonGroupProps,
+  BottomSheetProps,
+  SideSheetProps,
+  SnackbarProps,
+  ButtonLinkProps,
+  TypographyProps,
+  TypographyTokenRole,
+  SearchProps,
+  SearchBarProps,
+  SearchCloseReason,
+  SurfaceProps,
+  ShapeProps,
+  CardProps,
+  PopoverPlacement,
+  PopoverCloseReason,
+  TextFieldProps,
+  AutocompleteProps,
+  CheckboxProps,
+  RadioProps,
+  RadioGroupProps,
+  AvatarProps,
+  AppBarProps,
+  ButtonProps,
+  IconButtonProps,
+  Theme,
+  ThemeProviderProps,
+} from '@flaut-org/react-md3e';
+import { Typography } from '@flaut-org/react-md3e/typography';
+import { Search, SearchBar } from '@flaut-org/react-md3e/search';
+import { Surface } from '@flaut-org/react-md3e/surface';
+import { Shape, shapeVariants } from '@flaut-org/react-md3e/shape';
+import { Card, CardActionArea, CardContent, CardActions, CardMedia } from '@flaut-org/react-md3e/card';
+import { Popover, PopoverClose } from '@flaut-org/react-md3e/popover';
+import { TextField } from '@flaut-org/react-md3e/text-field';
+import { Autocomplete } from '@flaut-org/react-md3e/autocomplete';
+import { Checkbox } from '@flaut-org/react-md3e/checkbox';
+import { Radio } from '@flaut-org/react-md3e/radio';
+import { RadioGroup } from '@flaut-org/react-md3e/radio-group';
+import { Avatar } from '@flaut-org/react-md3e/avatar';
+import { List, ListItem } from '@flaut-org/react-md3e/list';
+import type { ListProps, ListItemProps } from '@flaut-org/react-md3e/list';
+import { Dialog, DialogContent, DialogActions } from '@flaut-org/react-md3e/dialog';
+import type { DialogProps } from '@flaut-org/react-md3e/dialog';
+import { AppBar, Button, IconButton, ThemeProvider } from '@flaut-org/react-md3e';
+import { Button as StandaloneButton } from '@flaut-org/react-md3e/button';
+import { AppBar as StandaloneAppBar } from '@flaut-org/react-md3e/app-bar';
+import { IconButton as StandaloneIconButton } from '@flaut-org/react-md3e/icon-button';
+import { createTheme, themeToCss } from '@flaut-org/react-md3e/theme';
+
+const theme: Theme = createTheme({ sourceColor: '#386a20' });
+const buttonProps: ButtonProps = { variant: 'tonal', endIcon: '→', selected: true };
+const providerProps: ThemeProviderProps = { theme, colorScheme: 'dark' };
+
+export const consumer = {
+  Skeleton,
+  Divider,
+  Tooltip,
+  Collapsible,
+  ButtonGroup,
+  ButtonGroupButton,
+  BottomSheet,
+  SideSheet,
+  Snackbar,
+  skeletonProps: { variant: 'rounded', animation: 'wave', height: 120 } satisfies SkeletonProps,
+  dividerProps: { orientation: 'vertical', flexItem: true } satisfies DividerProps,
+  tooltipProps: {
+    title: 'Help',
+    children: null as unknown as TooltipProps['children'],
+    placement: 'bottom-start',
+  } satisfies TooltipProps,
+  collapsibleProps: { defaultOpen: true, keepMounted: true } satisfies CollapsibleProps,
+  groupProps: { 'selectionMode': 'multiple', 'value': ['one'], 'aria-label': 'Options' } satisfies ButtonGroupProps,
+  bottomProps: { 'aria-label': 'Options', 'showDragHandle': true, 'variant': 'modal' } satisfies BottomSheetProps,
+  sideProps: { 'aria-label': 'Options', 'anchor': 'start', 'variant': 'standard' } satisfies SideSheetProps,
+  snackbarProps: { message: 'Saved', autoHideDuration: 6000 } satisfies SnackbarProps,
+  linkProps: { href: '/articles', loading: true } satisfies ButtonLinkProps,
+  Typography,
+  typographyProps: { variant: 'bodyLarge', emphasized: true, component: 'a', href: '/' } satisfies TypographyProps<'a'>,
+  typographyTokenRole: 'bodyLargeEmphasized' satisfies TypographyTokenRole,
+  Search,
+  SearchBar,
+  searchProps: { label: 'Search', layout: 'auto', defaultValue: 'Paris' } satisfies SearchProps,
+  searchBarProps: { label: 'Search', name: 'q' } satisfies SearchBarProps,
+  searchCloseReason: 'backButtonClick' satisfies SearchCloseReason,
+  Surface,
+  Shape,
+  shapeVariants,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardActions,
+  CardMedia,
+  surfaceProps: { shape: 'largeIncreased', elevation: 2, color: 'primaryContainer' } satisfies SurfaceProps,
+  shapeProps: { variant: 'flower', color: 'tertiaryContainer' } satisfies ShapeProps,
+  cardProps: { variant: 'elevated' } satisfies CardProps,
+
+  Popover,
+  PopoverClose,
+  popoverPlacement: 'bottom-start' satisfies PopoverPlacement,
+  popoverCloseReason: 'clickAway' satisfies PopoverCloseReason,
+  TextField,
+  Autocomplete,
+  textFieldProps: { label: 'Name', variant: 'filled', inputProps: { maxLength: 30 } } satisfies TextFieldProps,
+  autocompleteProps: {
+    label: 'City',
+    options: ['Paris', 'Rome'],
+    defaultValue: 'Paris',
+    clearOnEscape: true,
+    selectOnFocus: true,
+  } satisfies AutocompleteProps<string>,
+  Checkbox,
+  Radio,
+  RadioGroup,
+  Avatar,
+  checkboxProps: {
+    name: 'updates',
+    indeterminate: true,
+    onChange: (_event, checked) => checked,
+  } satisfies CheckboxProps,
+  radioProps: { value: 'economy' } satisfies RadioProps,
+  radioGroupProps: { defaultValue: 'economy', name: 'cabin' } satisfies RadioGroupProps,
+  avatarProps: { src: '/avatar.svg', alt: 'Alex', size: 'medium', variant: 'circular' } satisfies AvatarProps,
+  List,
+  ListItem,
+  listProps: { 'selectionMode': 'single', 'aria-label': 'Language', 'defaultValue': 'en' } satisfies ListProps,
+  listItemProps: { value: 'en', primary: 'English', leadingKind: 'icon' } satisfies ListItemProps,
+  Dialog,
+  DialogContent,
+  DialogActions,
+  dialogProps: { open: false, scroll: 'paper', role: 'alertdialog' } satisfies DialogProps,
+  AppBar,
+  IconButton,
+  StandaloneAppBar,
+  StandaloneIconButton,
+  appBarProps: { variant: 'largeFlexible', position: 'sticky' } satisfies AppBarProps,
+  iconButtonProps: { 'aria-label': 'Save', 'children': '★', 'width': 'wide' } satisfies IconButtonProps,
+  Button,
+  StandaloneButton,
+  ThemeProvider,
+  buttonProps,
+  providerProps,
+  css: themeToCss(theme, { selector: '.brand' }),
+};
+
+// @ts-expect-error Public types must remain precise through package declarations.
+export const invalidVariant: ButtonProps = { variant: 'contained' };

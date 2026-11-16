@@ -1,0 +1,77 @@
+# Design and implementation sources
+
+Reference inventory recorded on 2026-11-14. Component-specific references and implementation status
+are recorded in `components/button.md`, `components/icon-button.md`, `components/app-bar.md`,
+`components/dialog.md`, `components/list.md`, `components/checkbox.md`, `components/radio.md`,
+`components/avatar.md`, `components/text-field.md`, `components/autocomplete.md`, `components/popover.md`, `components/search.md`, `components/surface.md`, `components/shape.md`, `components/card.md`, `components/typography.md`, and `theming.md`.
+
+## Primary references
+
+| Reference                                                                                                                                                                | Purpose                                                         |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------- |
+| [Material 3 components](https://m3.material.io/components)                                                                                                               | Overview, specs, guidelines, and accessibility per component    |
+| [Buttons specification](https://m3.material.io/components/buttons/specs)                                                                                                 | Example of concrete component appearance and state requirements |
+| [Material 3 design tokens](https://m3.material.io/foundations/design-tokens/overview)                                                                                    | Reference/system/component token model                          |
+| [Material motion](https://m3.material.io/styles/motion)                                                                                                                  | Expressive motion and token guidance                            |
+| [Google Material 3 Figma kit](https://www.figma.com/community/file/1035203688168086460/material-3-design-kit)                                                            | Visual variants, dimensions, and variables                      |
+| [Material 3 in Compose](https://developer.android.com/develop/ui/compose/designsystems/material3)                                                                        | Official Material 3 Expressive implementation context           |
+| [AndroidX Material3 tokens](https://github.com/androidx/androidx/tree/androidx-main/compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/tokens) | Implementation values to pin by commit when adopted             |
+| [Material Color Utilities](https://github.com/material-foundation/material-color-utilities)                                                                              | Build-time color generation candidate                           |
+| [WAI-ARIA APG](https://www.w3.org/WAI/ARIA/apg/patterns/)                                                                                                                | Browser keyboard and accessibility patterns                     |
+| [Base UI](https://base-ui.com/react/overview/quick-start)                                                                                                                | Applicable interaction primitives and integration requirements  |
+| [MUI source](https://github.com/mui/material-ui)                                                                                                                         | Familiar API conventions and adaptable implementation patterns  |
+| [Google Material Symbols](https://github.com/google/material-design-icons)                                                                                               | Official SVG/icon source for later icon work                    |
+
+The Figma kit has not been read in this foundation. Direct Figma access must be confirmed before
+attributing dimensions or implementation decisions to a specific node.
+
+## Google Design MCP
+
+The official endpoint is `https://design.googleapis.com/mcp`.
+[Its published reference](https://developers.google.com/design-mcp/reference/mcp) lists
+`generate_color_scheme`, `search_icons`, `icons_instructions`, `search_fonts`, and `describe_font`.
+
+These tools assist with colors, fonts, and icons. They do not replace complete component
+specifications, Figma inspection, or browser interaction tests. An expressive color scheme does not
+by itself implement Material 3 Expressive components.
+
+No MCP server, credentials, or external design connection is required for the repository's local
+checks. Integrations can be added when they are actually used.
+
+## Provenance when implementing
+
+For each adopted component or token family, record the official page, source revision or Figma
+file/node version when available, and any web-specific adaptation. Branch links above are discovery
+links, not pinned specifications.
+
+For copied code, record the upstream path and commit and retain its copyright/license notice. Add
+third-party notices to the distributed package when such source is adopted. No MUI or icon source has been copied. Shape now includes derived Apache-2.0 AndroidX geometry,
+with pinned provenance, a reproducible offline exporter and a bundled license; see components/shape.md.
+
+Google's icon repository contains official assets. Its README distinguishes those from the
+third-party npm distributions it lists. The icon distribution strategy is not selected yet.
+
+Search uses official MD3 Expressive contained-search specifications and the requested M3E motion
+reference pinned at ea07174df53e40e723431fa7df2fa5d0e3a37ab1. See components/search.md for exact URLs
+and web/CSS adaptations. No code was copied from that reference.
+
+Typography's 15 emphasized metric sets use pinned AndroidX TypeScaleTokens v0_103 at
+160825094a81825468a95b115bfb1b541e549856; components/typography.md records the original sources and
+the independent HTML/CSS adaptation. Numerical token data is transcribed without implementation code.
+
+## Homepage primitives (2026-11-16)
+
+Official rendered specifications consulted for [Divider](https://m3.material.io/components/divider/specs),
+[Tooltip](https://m3.material.io/components/tooltips/specs),
+[Button groups](https://m3.material.io/components/button-groups/specs),
+[Bottom sheets](https://m3.material.io/components/bottom-sheets/specs),
+[Side sheets](https://m3.material.io/components/side-sheets/specs) and
+[Snackbar](https://m3.material.io/components/snackbar/specs). These are living web references with no
+pinned revision. Interaction contracts were checked against installed Base UI 1.9.0 source/types
+(Drawer, Tooltip, ToggleGroup/Toggle, Collapsible and Toast); no implementation was copied.
+
+Skeleton and Collapsible are web utilities rather than claims of separate MD3 visual specifications.
+Button loading uses a circular web progress visual; the separate Expressive LoadingIndicator catalog
+is not included. See each component document for exact adaptations and intentionally bounded APIs.
+No Google Figma access or pixel-perfect conformance is claimed. Motion uses the library's existing
+precomputed CSS spring curve; native gesture geometry comes from Base UI.

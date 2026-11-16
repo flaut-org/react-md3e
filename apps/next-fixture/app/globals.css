@@ -1,0 +1,253 @@
+/* Fixture-only CSS. This is not an implementation of the library's design tokens or reset. */
+:root {
+  color-scheme: light dark;
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  max-width: 48rem;
+  margin-inline: auto;
+  padding: 2rem;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+}
+
+.fixture-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding-block: 16px;
+}
+.fixture-card {
+  padding: 24px;
+  margin-block: 24px;
+  border-radius: 28px;
+}
+
+.fixture-title {
+  margin: 0;
+  font: inherit;
+}
+.fixture-bars {
+  display: grid;
+  gap: 24px;
+}
+
+.fixture-dialog-field {
+  display: grid;
+  gap: 8px;
+  margin-block: 24px;
+}
+.fixture-dialog-field input {
+  font: inherit;
+  padding: 8px;
+}
+
+.locale-picker-dialog {
+  max-inline-size: min(800px, 100%);
+}
+.locale-picker-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-block-start: 24px;
+}
+.locale-picker-columns h3 {
+  margin-block: 0 16px;
+}
+@media (max-width: 600px) {
+  .locale-picker-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+.passenger-picker-content h2 {
+  margin: 0 0 16px;
+  font-family: var(--md-sys-typescale-title-large-font);
+  font-size: var(--md-sys-typescale-title-large-size);
+  font-weight: var(--md-sys-typescale-title-large-weight);
+}
+.passenger-picker-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-block: 16px;
+}
+.passenger-picker-row > div:first-child {
+  min-inline-size: 0;
+}
+.passenger-picker-row p {
+  margin: 4px 0 0;
+  font-size: var(--md-sys-typescale-body-small-size);
+  line-height: var(--md-sys-typescale-body-small-line-height);
+  color: var(--md-sys-color-on-surface-variant);
+}
+.passenger-picker-counter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.passenger-picker-counter output {
+  min-inline-size: 16px;
+  text-align: center;
+}
+.passenger-picker-content hr {
+  margin: 16px -16px;
+  border: 0;
+  border-block-start: 1px solid var(--md-sys-color-outline-variant);
+}
+.passenger-picker-cabin {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.passenger-picker-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-block-start: 8px;
+}
+.popover-match-trigger {
+  inline-size: 280px;
+}
+.popover-custom-anchor {
+  inline-size: 160px;
+  padding: 16px;
+  margin-block: 24px;
+  border: 1px dashed currentColor;
+}
+
+.popover-flip-fixture {
+  position: fixed;
+  inset-block-end: 8px;
+  inset-inline-end: 8px;
+  z-index: 1;
+}
+
+.surface-example-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+  gap: 24px;
+  margin-block: 24px;
+}
+.surface-example-pad {
+  padding: 24px;
+}
+.surface-example-card {
+  inline-size: min(100%, 360px);
+}
+.surface-example-title {
+  margin: 0 0 8px;
+  font-family: var(--md-sys-typescale-title-large-font);
+  font-size: var(--md-sys-typescale-title-large-size);
+  font-weight: var(--md-sys-typescale-title-large-weight);
+  line-height: var(--md-sys-typescale-title-large-line-height);
+}
+.surface-example-description {
+  margin: 0;
+  font-size: var(--md-sys-typescale-body-medium-size);
+  line-height: var(--md-sys-typescale-body-medium-line-height);
+}
+.shape-example-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
+  gap: 24px;
+  margin-block: 24px;
+}
+.shape-example-gallery figure {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  margin: 0;
+  min-inline-size: 0;
+}
+.shape-example-gallery figcaption {
+  overflow-wrap: anywhere;
+  font-size: 14px;
+}
+
+.surface-card-grid {
+  gap: 8px;
+}
+
+.shape-morph-examples {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+  margin-block: 24px;
+}
+.shape-morph-field {
+  display: grid;
+  gap: 8px;
+  margin-block: 16px;
+  max-inline-size: 280px;
+}
+.shape-morph-field select {
+  font: inherit;
+  padding: 8px;
+}
+.shape-morph-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.search-examples section {
+  margin-block: 24px;
+}
+.search-examples [data-md3-search],
+.search-examples [data-md3-search-bar] {
+  margin-block: 12px;
+}
+.search-examples [data-md3-search] [data-md3-search-bar] {
+  margin-block: 0;
+}
+.search-example-message {
+  padding: 16px;
+}
+
+.typography-gallery {
+  display: grid;
+  gap: 24px;
+  margin-block: 32px;
+}
+.typography-example-row {
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+.typography-example-row > :first-child {
+  margin-block-end: 8px;
+}
+.typography-truncated {
+  inline-size: 220px;
+  max-inline-size: 100%;
+}
+.typography-example-pad {
+  padding: 16px;
+  margin-block: 16px;
+}
+
+.essentials-divider-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  block-size: 48px;
+  margin-block: 24px;
+}
+main:has([data-testid='skeletons']) > section {
+  margin-block: 24px;
+}
+main:has([data-testid='skeletons']) section > button,
+main:has([data-testid='skeletons']) section > a {
+  margin: 8px;
+}

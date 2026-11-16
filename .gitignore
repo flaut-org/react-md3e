@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.next/
+next-env.d.ts
+coverage/
+test-results/
+playwright-report/
+*.tsbuildinfo
+*.tgz
+.env*
+!.env.example
+.DS_Store
+*.log
+
+*.generated.json
+storybook-static/
+*.generated.css

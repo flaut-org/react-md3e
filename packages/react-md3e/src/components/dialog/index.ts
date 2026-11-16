@@ -1,0 +1,10 @@
+export { Dialog } from './dialog.component';
+export { DialogTitle } from './dialog-title/dialog-title.component';
+export { DialogContent } from './dialog-content/dialog-content.component';
+export { DialogContentText } from './dialog-content/dialog-content-text/dialog-content-text.component';
+export { DialogActions } from './dialog-actions/dialog-actions.component';
+export type { DialogProps, DialogCloseReason, DialogScroll, DialogContainer, DialogFocusTarget } from './dialog.types';
+export type { DialogTitleProps } from './dialog-title/dialog-title.types';
+export type { DialogContentProps } from './dialog-content/dialog-content.types';
+export type { DialogContentTextProps } from './dialog-content/dialog-content-text/dialog-content-text.types';
+export type { DialogActionsProps } from './dialog-actions/dialog-actions.types';

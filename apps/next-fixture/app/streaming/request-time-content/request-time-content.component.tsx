@@ -1,0 +1,109 @@
+import { connection } from 'next/server';
+import {
+  Search,
+  SearchBar,
+  Skeleton,
+  Divider,
+  Tooltip,
+  ButtonGroup,
+  ButtonGroupButton,
+  Collapsible,
+  BottomSheet,
+  SideSheet,
+  Snackbar,
+  Typography,
+  Surface,
+  Shape,
+  Card,
+  CardContent,
+  Popover,
+  PopoverClose,
+  TextField,
+  Autocomplete,
+  Avatar,
+  Checkbox,
+  Radio,
+  RadioGroup,
+  AppBar,
+  List,
+  ListItem,
+  Button,
+  IconButton,
+} from '@flaut-org/react-md3e';
+import { ScopedDialogDemo } from '../../../components/scoped-dialog-demo/scoped-dialog-demo.component';
+
+export async function RequestTimeContent() {
+  await connection();
+  await new Promise<void>((resolve) => {
+    setTimeout(resolve, 750);
+  });
+
+  return (
+    <div data-fixture="streaming-ready">
+      <Skeleton width={160} data-testid="streamed-skeleton" />
+      <Divider data-testid="streamed-divider" />
+      <Tooltip title="Streamed tooltip">
+        <Button>Streamed tooltip action</Button>
+      </Tooltip>
+      <Collapsible trigger={<Button>Streamed disclosure</Button>}>
+        <p>Streamed details</p>
+      </Collapsible>
+      <ButtonGroup aria-label="Streamed choices">
+        <ButtonGroupButton value="one">Choice one</ButtonGroupButton>
+      </ButtonGroup>
+      <BottomSheet aria-label="Streamed bottom sheet" trigger={<Button>Streamed bottom sheet</Button>}>
+        <p>Streamed sheet content</p>
+      </BottomSheet>
+      <SideSheet aria-label="Streamed side sheet" trigger={<Button>Streamed side sheet</Button>}>
+        <p>Streamed side content</p>
+      </SideSheet>
+      <Snackbar message="Streamed notification" />
+      <Typography component="h2" variant="headlineSmall" emphasized data-testid="streamed-typography">
+        Streamed typography
+      </Typography>
+      <SearchBar label="Streamed search bar" defaultValue="Streamed query" />
+      <Search label="Streamed search">
+        <p>Streamed search results</p>
+      </Search>
+      <AppBar
+        title="Streamed collection"
+        position="static"
+        actions={
+          <IconButton aria-label="Streamed icon" variant="standard">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M11 5h2v14h-2zM5 11h14v2H5z" />
+            </svg>
+          </IconButton>
+        }
+      />
+      <List data-testid="streamed-list">
+        <ListItem primary="Streamed list row" secondary="Server-created content" />
+      </List>
+      <Avatar alt="Streamed avatar" data-testid="streamed-avatar">
+        SA
+      </Avatar>
+      <label>
+        <Checkbox defaultChecked /> Streamed checkbox
+      </label>
+      <RadioGroup aria-label="Streamed radios" defaultValue="one">
+        <label>
+          <Radio value="one" /> Streamed radio
+        </label>
+      </RadioGroup>
+      <TextField label="Streamed name" defaultValue="Alex" />
+      <Autocomplete label="Streamed destination" options={['Paris', 'Rome']} defaultValue="Rome" />
+      <Popover aria-label="Streamed options" trigger={<Button>Streamed popover</Button>}>
+        <TextField label="Streamed popover note" />
+        <PopoverClose variant="text">Done</PopoverClose>
+      </Popover>
+      <Surface data-testid="streamed-surface" color="secondaryContainer">
+        <Card variant="outlined" data-testid="streamed-card">
+          <CardContent>Streamed card content</CardContent>
+        </Card>
+        <Shape variant="flower" aria-label="Streamed illustration" />
+      </Surface>
+      <Button>Streamed action</Button>
+      <ScopedDialogDemo />
+    </div>
+  );
+}

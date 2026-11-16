@@ -1,0 +1,543 @@
+{
+  "recordedAt": "2026-11-14",
+  "repository": "https://github.com/flaut-org/flaut-nextjs",
+  "commit": "b99a09ff403d9f1f499377f4e86bc2fa553cf44c",
+  "method": "Conservative relative value-import graph after TypeScript type-import removal; includes unused exports before tree shaking; excludes tests and generated files.",
+  "roots": [
+    {
+      "root": "src/app/[locale]/page.tsx",
+      "reachableSourceFiles": 225,
+      "muiSourceFiles": 120,
+      "styledSourceFiles": 43,
+      "uniqueIconImports": 45,
+      "componentImports": {
+        "Alert": ["src/web/app/components/form-error-snackbar/form-error-snackbar.component.tsx"],
+        "AppBar": [
+          "src/web/app/components/currency-selector/mobile/mobile-currency-selector.component.tsx",
+          "src/web/app/components/mobile-language-selector/mobile-language-selector.component.tsx",
+          "src/web/app/components/app-bar/styles.ts",
+          "src/web/app/components/form-autocomplete-dialog-input/styles.ts"
+        ],
+        "Autocomplete": [
+          "src/web/app/components/form-autocomplete/styles.ts",
+          "src/web/app/pages/home/city-autocomplete/homepage-city-autocomplete.component.tsx"
+        ],
+        "Avatar": [
+          "src/web/app/components/advantages/styles.ts",
+          "src/web/app/components/popular-direction-card/popular-direction-card.wrapped.component.tsx",
+          "src/web/app/components/special-offer-card-v2/special-offer-card-v2.component.tsx"
+        ],
+        "Box": [
+          "src/app/[locale]/page.tsx",
+          "src/web/app/components/app-bar/app-bar.component.tsx",
+          "src/web/app/components/settings-menu/settings-menu.component.tsx",
+          "src/web/app/components/language-and-currency-picker/components/currency-list/currency-list.component.tsx",
+          "src/web/app/components/currency-selector/mobile/styles.ts",
+          "src/web/app/components/region/region-selector.component.tsx",
+          "src/web/app/components/settings-menu/styles.ts",
+          "src/web/app/components/app-bar-menu/styles.ts",
+          "src/web/app/components/desktop-language-and-currency-selector/desktop-language-and-currency-selector.component.tsx",
+          "src/web/app/components/desktop-language-and-currency-selector/styles.ts",
+          "src/web/app/components/app-bar/styles.ts",
+          "src/web/app/components/footer/contacts/styles.ts",
+          "src/web/app/components/footer/copyrights/copyrights.component.tsx",
+          "src/web/app/components/footer/copyrights/styles.ts",
+          "src/web/app/components/footer/entity-links/styles.ts",
+          "src/web/app/components/footer/entity-links/entity-links.layout.tsx",
+          "src/web/app/components/form-container/styles.ts",
+          "src/web/app/components/form-datepicker-v2/components/calendar-grid/calendar-grid.component.tsx",
+          "src/web/app/components/form-datepicker-v2/components/calendar-cell/calendar-cell.component.tsx",
+          "src/web/app/components/form-datepicker-v2/components/calendar-cell/styles.ts",
+          "src/web/app/components/form-datepicker-v2/components/calendar-grid/styles.ts",
+          "src/web/app/components/form-datepicker-v2/components/calendar-header/calendar-header.component.tsx",
+          "src/web/app/components/form-passengers-selector/styles.ts",
+          "src/web/app/components/swipeable-drawer-puller/styles.ts",
+          "src/web/app/components/search-form/styles.ts",
+          "src/web/app/components/full-form/styles.ts",
+          "src/web/app/pages/home/blog-posts/blog-posts.component.tsx",
+          "src/web/app/components/blog-post-card/styles.ts",
+          "src/web/app/components/popular-direction-card/popular-direction-card.wrapped.component.tsx",
+          "src/web/app/components/popular-direction-card/popular-direction-card.loading.tsx",
+          "src/web/app/components/section-no-data/section-no-data.component.tsx",
+          "src/web/app/components/tweemoji/styles.ts",
+          "src/web/app/components/special-offer-card-v2/special-offer-card-v2.component.tsx",
+          "src/web/app/components/special-offer-card-v2/styles.ts",
+          "src/web/app/components/special-offer-card-v2/special-offer-card-v2.loading.tsx"
+        ],
+        "Button": [
+          "src/web/app/components/settings-menu/settings-menu.component.tsx",
+          "src/web/app/components/currency-selector/currency-selector.styles.ts",
+          "src/web/app/components/mobile-language-selector/mobile-language-selector.component.tsx",
+          "src/web/app/components/region/region-selector.component.tsx",
+          "src/web/app/components/region/region-modal.component.tsx",
+          "src/web/app/components/region/styles.ts",
+          "src/web/app/components/desktop-language-and-currency-selector/styles.ts",
+          "src/web/app/components/theme-switcher/styles.ts",
+          "src/web/app/components/form-datepicker-v2/components/datepicker/components/desktop-datepicker/desktop-datepicker.component.tsx",
+          "src/web/app/components/form-datepicker-v2/components/calendar-cell/styles.ts",
+          "src/web/app/components/form-datepicker-v2/components/datepicker/components/mobile-datepicker/mobile-datepicker.component.tsx",
+          "src/web/app/components/form-passengers-selector/styles.ts",
+          "src/web/app/components/passengers-selector/styles.ts",
+          "src/web/app/components/full-form-search-button/styles.ts",
+          "src/web/app/components/search-form/styles.ts",
+          "src/web/app/pages/home/blog-posts/blog-posts.component.tsx",
+          "src/web/app/components/special-offer-card-v2/special-offer-card-v2.component.tsx"
+        ],
+        "ButtonBase": ["src/web/app/components/footer/entity-links/styles.ts"],
+        "ButtonGroup": ["src/web/app/components/settings-menu/settings-menu.component.tsx"],
+        "Card": [
+          "src/web/app/components/blog-post-card/styles.ts",
+          "src/web/app/pages/home/discover/styles.ts",
+          "src/web/app/components/popular-direction-card/styles.ts",
+          "src/web/app/components/popular-direction-card/popular-direction-card.loading.tsx",
+          "src/web/app/components/special-offer-card-v2/styles.ts",
+          "src/web/app/components/special-offer-card-v2/special-offer-card-v2.loading.tsx"
+        ],
+        "CardContent": [
+          "src/web/app/components/blog-post-card/styles.ts",
+          "src/web/app/components/popular-direction-card/styles.ts",
+          "src/web/app/components/popular-direction-card/popular-direction-card.loading.tsx",
+          "src/web/app/components/special-offer-card-v2/styles.ts",
+          "src/web/app/components/special-offer-card-v2/special-offer-card-v2.loading.tsx"
+        ],
+        "CardMedia": [
+          "src/web/app/components/popular-direction-card/styles.ts",
+          "src/web/app/components/special-offer-card-v2/styles.ts"
+        ],
+        "Collapse": [
+          "src/web/app/components/full-form/full-form.component.tsx",
+          "src/web/app/components/search-form/search-form.component.tsx",
+          "src/web/app/components/form-datepicker-v2/components/datepicker/components/mobile-datepicker/mobile-datepicker.component.tsx"
+        ],
+        "Container": [
+          "src/web/app/components/app-bar/app-bar.component.tsx",
+          "src/web/app/components/footer/styles.ts",
+          "src/web/app/components/page-face/page-face.component.tsx",
+          "src/web/app/components/page-face/styles.ts",
+          "src/web/app/pages/home/advantages/advantages.component.tsx",
+          "src/web/app/pages/home/blog-posts/blog-posts.component.tsx",
+          "src/web/app/pages/home/blog-posts/blog-posts.loading.tsx",
+          "src/web/app/pages/home/discover/discover.component.tsx",
+          "src/web/app/pages/home/popular-directions/popular-directions.layout.tsx",
+          "src/web/app/pages/home/special-offers/special-offers.layout.tsx"
+        ],
+        "Dialog": [
+          "src/web/app/components/currency-selector/mobile/mobile-currency-selector.component.tsx",
+          "src/web/app/components/mobile-language-selector/mobile-language-selector.component.tsx",
+          "src/web/app/components/region/region-modal.component.tsx",
+          "src/web/app/components/desktop-language-and-currency-selector/desktop-language-and-currency-selector.component.tsx",
+          "src/web/app/components/form-autocomplete-modal/form-autocomplete-modal.component.tsx",
+          "src/web/app/components/form-datepicker-v2/components/datepicker/components/mobile-datepicker/mobile-datepicker.component.tsx"
+        ],
+        "DialogActions": [
+          "src/web/app/components/region/region-modal.component.tsx",
+          "src/web/app/components/form-datepicker-v2/components/datepicker/components/mobile-datepicker/styles.ts"
+        ],
+        "DialogContent": [
+          "src/web/app/components/region/region-modal.component.tsx",
+          "src/web/app/components/desktop-language-and-currency-selector/styles.ts",
+          "src/web/app/components/form-datepicker-v2/components/datepicker/components/mobile-datepicker/mobile-datepicker.component.tsx"
+        ],
+        "DialogContentText": ["src/web/app/components/region/region-modal.component.tsx"],
+        "Divider": [
+          "src/web/app/components/desktop-language-and-currency-selector/desktop-language-and-currency-selector.component.tsx",
+          "src/web/app/components/footer/footer.component.tsx",
+          "src/web/app/components/footer/styles.ts",
+          "src/web/app/components/form-passengers-selector/form-passengers-selector.component.tsx",
+          "src/web/app/components/mobile-passengers-and-trip-class-selector/mobile-passengers-and-trip-class-selector.component.tsx"
+        ],
+        "Drawer": ["src/web/app/components/settings-menu/settings-menu.component.tsx"],
+        "FormControl": ["src/web/app/components/trip-class-selector/trip-class-selector.component.tsx"],
+        "FormControlLabel": ["src/web/app/components/trip-class-selector/styles.ts"],
+        "Grid": [
+          "src/web/app/components/footer/copyrights/copyrights.component.tsx",
+          "src/web/app/components/footer/entity-links/entity/desktop-airlines.component.tsx",
+          "src/web/app/components/footer/entity-links/entity/desktop-airports.component.tsx",
+          "src/web/app/components/footer/entity-links/entity/desktop-cities.component.tsx",
+          "src/web/app/components/footer/entity-links/entity/desktop-countries.component.tsx",
+          "src/web/app/components/footer/entity-links/entity/desktop-routes.component.tsx",
+          "src/web/app/components/footer/entity-links/entity-links.loading.tsx",
+          "src/web/app/components/form-container/styles.ts",
+          "src/web/app/components/form-autocomplete-option/form-autocomplete-option.component.tsx",
+          "src/web/app/components/form-autocomplete-option/styles.ts",
+          "src/web/app/components/search-form/styles.ts",
+          "src/web/app/components/page-face/styles.ts",
+          "src/web/app/components/advantages/advantages.component.tsx",
+          "src/web/app/components/advantages/styles.ts",
+          "src/web/app/pages/home/blog-posts/blog-posts.component.tsx",
+          "src/web/app/pages/home/blog-posts/blog-posts.loading.tsx",
+          "src/web/app/pages/home/discover/discover.component.tsx",
+          "src/web/app/pages/home/popular-directions/popular-directions.component.tsx",
+          "src/web/app/pages/home/popular-directions/popular-directions.loading.tsx",
+          "src/web/app/pages/home/special-offers/special-offers.component.tsx",
+          "src/web/app/pages/home/special-offers/special-offers.loading.tsx"
+        ],
+        "Grow": [
+          "src/web/app/components/region/region-modal.component.tsx",
+          "src/web/app/components/desktop-language-and-currency-selector/desktop-language-and-currency-selector.component.tsx"
+        ],
+        "IconButton": [
+          "src/web/app/components/settings-menu/settings-menu.component.tsx",
+          "src/web/app/components/currency-selector/mobile/mobile-currency-selector.component.tsx",
+          "src/web/app/components/language-and-currency-picker/components/currency-list/currency-list.component.tsx",
+          "src/web/app/components/mobile-language-selector/mobile-language-selector.component.tsx",
+          "src/web/app/components/desktop-dialog-title/styles.ts",
+          "src/web/app/components/app-bar-menu/styles.ts",
+          "src/web/app/components/desktop-language-and-currency-selector/desktop-language-and-currency-selector.component.tsx",
+          "src/web/app/components/app-bar/styles.ts",
+          "src/web/app/components/form-autocomplete-dialog-input/form-autocomplete-dialog-input.component.tsx",
+          "src/web/app/components/form-datepicker-v2/form-datepicker-v2.component.tsx",
+          "src/web/app/components/form-datepicker-v2/components/button/button.component.tsx",
+          "src/web/app/components/search-form/styles.ts"
+        ],
+        "Input": ["src/web/app/components/form-autocomplete-dialog-input/styles.ts"],
+        "InputAdornment": [
+          "src/web/app/components/language-and-currency-picker/components/currency-list/currency-list.component.tsx",
+          "src/web/app/pages/home/city-autocomplete/homepage-city-autocomplete.component.tsx"
+        ],
+        "Link": [
+          "src/app/[locale]/page.tsx",
+          "src/web/app/components/app-bar/app-bar.component.tsx",
+          "src/web/app/components/language-and-currency-picker/components/language-list/language-list-item.component.tsx",
+          "src/web/app/components/footer/contacts/contacts.component.tsx",
+          "src/web/app/components/footer/entity-links/entity/desktop-airlines.component.tsx",
+          "src/web/app/components/footer/entity-links/entity/desktop-airports.component.tsx",
+          "src/web/app/components/footer/entity-links/entity/desktop-cities.component.tsx",
+          "src/web/app/components/footer/entity-links/entity/desktop-countries.component.tsx",
+          "src/web/app/components/footer/entity-links/entity/desktop-routes.component.tsx",
+          "src/web/app/components/footer/entity-links/entity-links.loading.tsx",
+          "src/web/app/components/footer/useful-links/useful-links.component.tsx",
+          "src/web/app/components/footer/useful-links/useful-blog-link.component.tsx",
+          "src/web/app/components/blog-post-card/blog-post-card.component.tsx",
+          "src/web/app/pages/home/discover/discover.component.tsx",
+          "src/web/app/components/special-offer-card-v2/special-offer-card-v2.component.tsx"
+        ],
+        "List": [
+          "src/web/app/components/language-and-currency-picker/components/currency-list/currency-list.component.tsx",
+          "src/web/app/components/language-and-currency-picker/components/language-list/language-list.component.tsx",
+          "src/web/app/components/form-autocomplete-modal/form-autocomplete-modal.component.tsx"
+        ],
+        "ListItemButton": [
+          "src/web/app/components/language-and-currency-picker/components/currency-list/currency-list-item.component.tsx",
+          "src/web/app/components/language-and-currency-picker/components/language-list/language-list-item.component.tsx",
+          "src/web/app/components/form-autocomplete-modal/form-autocomplete-modal.component.tsx"
+        ],
+        "ListItemIcon": [
+          "src/web/app/components/language-and-currency-picker/components/currency-list/currency-list-item.component.tsx",
+          "src/web/app/components/language-and-currency-picker/components/language-list/language-list-item.component.tsx"
+        ],
+        "ListItemText": [
+          "src/web/app/components/language-and-currency-picker/components/currency-list/currency-list-item.component.tsx",
+          "src/web/app/components/currency-selector/currency-selector.styles.ts",
+          "src/web/app/components/language-and-currency-picker/components/language-list/language-list-item.component.tsx"
+        ],
+        "Surface": ["src/web/app/components/form-autocomplete-dialog-input/styles.ts"],
+        "Popover": [
+          "src/web/app/components/form-datepicker-v2/components/datepicker/components/desktop-datepicker/desktop-datepicker.component.tsx",
+          "src/web/app/components/form-passengers-selector/form-passengers-selector.component.tsx"
+        ],
+        "Radio": ["src/web/app/components/trip-class-selector/trip-class-selector.component.tsx"],
+        "RadioGroup": ["src/web/app/components/trip-class-selector/trip-class-selector.component.tsx"],
+        "Skeleton": [
+          "src/web/app/components/currency-selector/mobile/mobile-currency-selector.component.tsx",
+          "src/web/app/components/region/region-selector.component.tsx",
+          "src/web/app/components/desktop-language-and-currency-selector/desktop-language-and-currency-selector.component.tsx",
+          "src/web/app/components/footer/entity-links/entity-links.layout.tsx",
+          "src/web/app/components/footer/entity-links/entity-links.loading.tsx",
+          "src/web/app/components/footer/useful-links/useful-links.component.tsx",
+          "src/web/app/components/form-autocomplete-option/form-autocomplete-option.component.tsx",
+          "src/web/app/components/form-datepicker-v2/components/calendar-cell/calendar-cell.component.tsx",
+          "src/web/app/components/blog-post-card/blog-post-card.loading.tsx",
+          "src/web/app/components/popular-direction-card/popular-direction-card.loading.tsx",
+          "src/web/app/components/tweemoji/tweemoji.component.tsx",
+          "src/web/app/components/special-offer-card-v2/special-offer-card-v2.loading.tsx"
+        ],
+        "Slide": ["src/web/app/components/mui-transitions/mui-transitions.component.tsx"],
+        "Snackbar": ["src/web/app/components/form-error-snackbar/form-error-snackbar.component.tsx"],
+        "Stack": [
+          "src/web/app/components/app-bar-logo/app-bar-logo.component.tsx",
+          "src/web/app/components/settings-menu/settings-menu.component.tsx",
+          "src/web/app/components/language-and-currency-picker/components/currency-list/currency-list.component.tsx",
+          "src/web/app/components/region/region-modal.component.tsx",
+          "src/web/app/components/desktop-dialog-title/desktop-dialog-title.component.tsx",
+          "src/web/app/components/desktop-language-and-currency-selector/desktop-language-and-currency-selector.component.tsx",
+          "src/web/app/components/desktop-language-and-currency-selector/styles.ts",
+          "src/web/app/components/app-bar/styles.ts",
+          "src/web/app/components/footer/contacts/contacts.component.tsx",
+          "src/web/app/components/footer/payment-methods/payment-methods.component.tsx",
+          "src/web/app/components/footer/useful-links/useful-links.component.tsx",
+          "src/web/app/components/search-form/search-form.component.tsx",
+          "src/web/app/components/form-autocomplete/form-autocomplete.component.tsx",
+          "src/web/app/components/form-autocomplete-modal/form-autocomplete-modal.component.tsx",
+          "src/web/app/components/form-autocomplete-option/form-autocomplete-option.component.tsx",
+          "src/web/app/components/form-datepicker-v2/components/datepicker/components/desktop-datepicker/desktop-datepicker.component.tsx",
+          "src/web/app/components/form-datepicker-v2/components/calendar/calendar.component.tsx",
+          "src/web/app/components/form-datepicker-v2/components/calendar-header/calendar-header.component.tsx",
+          "src/web/app/components/form-datepicker-v2/components/mobile-calendar/mobile-calendar.component.tsx",
+          "src/web/app/components/form-datepicker-v2/components/mobile-range-calendar/mobile-range-calendar.component.tsx",
+          "src/web/app/components/form-datepicker-v2/components/range-calendar/range-calendar.component.tsx",
+          "src/web/app/components/form-datepicker-v2/components/datepicker/components/mobile-datepicker/mobile-datepicker.component.tsx",
+          "src/web/app/components/form-passengers-selector/form-passengers-selector.component.tsx",
+          "src/web/app/components/mobile-passengers-and-trip-class-selector/mobile-passengers-and-trip-class-selector.component.tsx",
+          "src/web/app/components/passengers-selector/passengers-selector.component.tsx",
+          "src/web/app/components/search-form/styles.ts",
+          "src/web/app/components/blog-post-card/blog-post-card.component.tsx",
+          "src/web/app/components/blog-post-card/blog-post-card.loading.tsx",
+          "src/web/app/pages/home/discover/discover.component.tsx",
+          "src/web/app/pages/home/popular-directions/popular-directions.component.tsx",
+          "src/web/app/components/popular-direction-card/popular-direction-card.wrapped.component.tsx",
+          "src/web/app/components/popular-direction-card/popular-direction-card.loading.tsx",
+          "src/web/app/pages/home/special-offers/special-offers.component.tsx",
+          "src/web/app/components/section-no-data/section-no-data.component.tsx",
+          "src/web/app/components/special-offer-card-v2/special-offer-card-v2.component.tsx",
+          "src/web/app/components/special-offer-card-v2/styles.ts",
+          "src/web/app/components/special-offer-card-v2/special-offer-card-v2.loading.tsx"
+        ],
+        "SwipeableDrawer": ["src/web/app/components/mobile-passengers-and-trip-class-selector/styles.ts"],
+        "TextField": [
+          "src/web/app/components/language-and-currency-picker/components/currency-list/currency-list.component.tsx",
+          "src/web/app/components/form-autocomplete/styles.ts",
+          "src/web/app/pages/home/city-autocomplete/styles.ts"
+        ],
+        "Toolbar": [
+          "src/web/app/components/currency-selector/mobile/mobile-currency-selector.component.tsx",
+          "src/web/app/components/mobile-language-selector/mobile-language-selector.component.tsx",
+          "src/web/app/components/app-bar/styles.ts",
+          "src/web/app/components/form-autocomplete-dialog-input/form-autocomplete-dialog-input.component.tsx"
+        ],
+        "Tooltip": [
+          "src/web/app/components/theme-switcher/theme-switcher.component.tsx",
+          "src/web/app/components/passengers-selector/passengers-selector.component.tsx",
+          "src/web/app/components/popular-direction-card/popular-direction-card.wrapped.component.tsx",
+          "src/web/app/components/special-offer-card-v2/special-offer-card-v2.component.tsx"
+        ],
+        "Typography": [
+          "src/app/[locale]/page.tsx",
+          "src/web/app/components/settings-menu/settings-menu.component.tsx",
+          "src/web/app/components/currency-selector/mobile/mobile-currency-selector.component.tsx",
+          "src/web/app/components/currency-selector/currency-selector.styles.ts",
+          "src/web/app/components/mobile-language-selector/mobile-language-selector.component.tsx",
+          "src/web/app/components/region/region-modal.component.tsx",
+          "src/web/app/components/desktop-language-and-currency-selector/desktop-language-and-currency-selector.component.tsx",
+          "src/web/app/components/footer/contacts/contacts.component.tsx",
+          "src/web/app/components/footer/copyrights/copyrights.component.tsx",
+          "src/web/app/components/footer/copyrights/styles.ts",
+          "src/web/app/components/footer/styles.ts",
+          "src/web/app/components/footer/entity-links/styles.ts",
+          "src/web/app/components/footer/entity-links/entity-links.layout.tsx",
+          "src/web/app/components/footer/useful-links/style.ts",
+          "src/web/app/components/form-autocomplete/form-autocomplete.component.tsx",
+          "src/web/app/components/form-autocomplete-modal/form-autocomplete-modal.component.tsx",
+          "src/web/app/components/form-autocomplete-option/form-autocomplete-option.component.tsx",
+          "src/web/app/components/form-autocomplete-option/styles.ts",
+          "src/web/app/components/form-datepicker-v2/components/datepicker/components/desktop-datepicker/desktop-datepicker.component.tsx",
+          "src/web/app/components/form-datepicker-v2/components/calendar-cell/calendar-cell.component.tsx",
+          "src/web/app/components/form-datepicker-v2/components/calendar-cell/styles.ts",
+          "src/web/app/components/form-datepicker-v2/components/calendar-grid/styles.ts",
+          "src/web/app/components/form-datepicker-v2/components/calendar-header/calendar-header.component.tsx",
+          "src/web/app/components/form-datepicker-v2/components/mobile-calendar/mobile-calendar.component.tsx",
+          "src/web/app/components/form-datepicker-v2/components/mobile-range-calendar/mobile-range-calendar.component.tsx",
+          "src/web/app/components/form-datepicker-v2/components/datepicker/components/mobile-datepicker/mobile-datepicker.component.tsx",
+          "src/web/app/components/form-passengers-selector/form-passengers-selector.component.tsx",
+          "src/web/app/components/mobile-passengers-and-trip-class-selector/mobile-passengers-and-trip-class-selector.component.tsx",
+          "src/web/app/components/passengers-selector/passengers-selector.component.tsx",
+          "src/web/app/components/passengers-selector/styles.ts",
+          "src/web/app/components/page-face/styles.ts",
+          "src/web/app/pages/home/advantages/advantages.component.tsx",
+          "src/web/app/components/advantages/advantages.component.tsx",
+          "src/web/app/components/section-header/section-header.component.tsx",
+          "src/web/app/pages/home/blog-posts/blog-posts.component.tsx",
+          "src/web/app/components/blog-post-card/blog-post-card.component.tsx",
+          "src/web/app/components/blog-post-card/styles.ts",
+          "src/web/app/pages/home/blog-posts/blog-posts.loading.tsx",
+          "src/web/app/pages/home/discover/discover.component.tsx",
+          "src/web/app/pages/home/popular-directions/popular-directions.layout.tsx",
+          "src/web/app/components/popular-direction-card/popular-direction-card.wrapped.component.tsx",
+          "src/web/app/components/popular-direction-card/popular-direction-card-price.component.tsx",
+          "src/web/app/pages/home/city-autocomplete/homepage-city-autocomplete.component.tsx",
+          "src/web/app/components/popular-direction-card/popular-direction-card.loading.tsx",
+          "src/web/app/pages/home/special-offers/special-offers.layout.tsx",
+          "src/web/app/components/section-no-data/section-no-data.component.tsx",
+          "src/web/app/components/special-offer-card-v2/special-offer-card-v2.component.tsx",
+          "src/web/app/components/special-offer-card-v2/special-offer-card-v2.loading.tsx"
+        ]
+      }
+    },
+    {
+      "root": "src/app/[locale]/layout.tsx",
+      "reachableSourceFiles": 35,
+      "muiSourceFiles": 5,
+      "styledSourceFiles": 1,
+      "uniqueIconImports": 1,
+      "componentImports": {
+        "Button": ["src/web/app/components/language-suggester-v2/components/language-suggester-toast.component.tsx"],
+        "CssBaseline": ["src/web/app/components/theme-registry/theme-registry.component.tsx"],
+        "Grow": ["src/web/app/components/language-suggester-v2/components/language-suggester-toast.component.tsx"],
+        "IconButton": [
+          "src/web/app/components/language-suggester-v2/components/language-suggester-toast.component.tsx"
+        ],
+        "InitColorSchemeScript": ["src/app/[locale]/layout.tsx"],
+        "Link": ["src/web/app/components/language-suggester-v2/components/language-suggester-toast.component.tsx"],
+        "Surface": ["src/web/app/components/language-suggester-v2/styles.ts"],
+        "Stack": ["src/web/app/components/language-suggester-v2/components/language-suggester-toast.component.tsx"],
+        "Typography": [
+          "src/web/app/components/language-suggester-v2/components/language-suggester-toast.component.tsx"
+        ],
+        "Unstable_TrapFocus": [
+          "src/web/app/components/language-suggester-v2/components/language-suggester-toast.component.tsx"
+        ]
+      }
+    }
+  ],
+  "sections": [
+    {
+      "root": "src/web/app/components/app-bar/app-bar.component.tsx",
+      "muiSourceFiles": 25,
+      "styledSourceFiles": 9,
+      "componentNames": [
+        "AppBar",
+        "Box",
+        "Button",
+        "ButtonGroup",
+        "Container",
+        "Dialog",
+        "DialogActions",
+        "DialogContent",
+        "DialogContentText",
+        "Divider",
+        "Drawer",
+        "Grow",
+        "IconButton",
+        "InputAdornment",
+        "Link",
+        "List",
+        "ListItemButton",
+        "ListItemIcon",
+        "ListItemText",
+        "Skeleton",
+        "Slide",
+        "Stack",
+        "TextField",
+        "Toolbar",
+        "Tooltip",
+        "Typography"
+      ]
+    },
+    {
+      "root": "src/web/app/components/footer/footer.component.tsx",
+      "muiSourceFiles": 22,
+      "styledSourceFiles": 9,
+      "componentNames": ["Box", "ButtonBase", "Container", "Divider", "Grid", "Link", "Skeleton", "Stack", "Typography"]
+    },
+    {
+      "root": "src/web/app/components/full-form/full-form.component.tsx",
+      "muiSourceFiles": 41,
+      "styledSourceFiles": 16,
+      "componentNames": [
+        "Alert",
+        "AppBar",
+        "Autocomplete",
+        "Box",
+        "Button",
+        "Collapse",
+        "Dialog",
+        "DialogActions",
+        "DialogContent",
+        "Divider",
+        "FormControl",
+        "FormControlLabel",
+        "Grid",
+        "IconButton",
+        "Input",
+        "List",
+        "ListItemButton",
+        "Surface",
+        "Popover",
+        "Radio",
+        "RadioGroup",
+        "Skeleton",
+        "Slide",
+        "Snackbar",
+        "Stack",
+        "SwipeableDrawer",
+        "TextField",
+        "Toolbar",
+        "Tooltip",
+        "Typography"
+      ]
+    },
+    {
+      "root": "src/web/app/pages/home/discover/discover.component.tsx",
+      "muiSourceFiles": 2,
+      "styledSourceFiles": 1,
+      "componentNames": ["Card", "Container", "Grid", "Link", "Stack", "Typography"]
+    },
+    {
+      "root": "src/web/app/pages/home/advantages/advantages.component.tsx",
+      "muiSourceFiles": 4,
+      "styledSourceFiles": 2,
+      "componentNames": ["Avatar", "Container", "Grid", "Typography"]
+    },
+    {
+      "root": "src/web/app/pages/home/special-offers/special-offers.layout.tsx",
+      "muiSourceFiles": 16,
+      "styledSourceFiles": 5,
+      "componentNames": [
+        "Autocomplete",
+        "Avatar",
+        "Box",
+        "Button",
+        "Card",
+        "CardContent",
+        "CardMedia",
+        "Container",
+        "Grid",
+        "InputAdornment",
+        "Link",
+        "Skeleton",
+        "Stack",
+        "TextField",
+        "Tooltip",
+        "Typography"
+      ]
+    },
+    {
+      "root": "src/web/app/pages/home/popular-directions/popular-directions.layout.tsx",
+      "muiSourceFiles": 13,
+      "styledSourceFiles": 4,
+      "componentNames": [
+        "Autocomplete",
+        "Avatar",
+        "Box",
+        "Card",
+        "CardContent",
+        "CardMedia",
+        "Container",
+        "Grid",
+        "InputAdornment",
+        "Skeleton",
+        "Stack",
+        "TextField",
+        "Tooltip",
+        "Typography"
+      ]
+    },
+    {
+      "root": "src/web/app/pages/home/blog-posts/blog-posts.layout.tsx",
+      "muiSourceFiles": 6,
+      "styledSourceFiles": 2,
+      "componentNames": [
+        "Box",
+        "Button",
+        "Card",
+        "CardContent",
+        "Container",
+        "Grid",
+        "Link",
+        "Skeleton",
+        "Stack",
+        "Typography"
+      ]
+    }
+  ]
+}
