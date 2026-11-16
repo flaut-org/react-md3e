@@ -10,7 +10,7 @@
     "typecheck": "next typegen && tsc --noEmit"
   },
   "dependencies": {
-    "@flaut-travel/react-md3e": "0.0.0",
+    "@flaut-travel/react-md3e": "1.0.0-alpha.1",
     "next": "16.4.6",
     "react": "19.3.1",
     "react-dom": "19.3.1"
