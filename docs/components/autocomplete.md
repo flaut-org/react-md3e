@@ -166,3 +166,6 @@ through the pointer's mouse-up. `clearOnEscape` (default false) clears selection
 the listbox is closed; the first Escape closes an open listbox. disableClearable also prevents
 Escape clearing. Input/selection callbacks report the clear reason. With clearing disabled a closed
 Autocomplete preserves its value and lets Escape reach a parent Dialog, Popover or Sheet.
+
+Controlled inputValue updates during the closing animation remain authoritative after the popup
+unmounts. Deferred primitive cleanup does not emit an obsolete reset that overwrites that query.

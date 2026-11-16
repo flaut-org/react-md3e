@@ -271,3 +271,15 @@ References: [Changesets prereleases](https://changesets.dev/guide/prereleases),
 [Changesets automation](https://changesets.dev/guide/automating),
 [npm Trusted Publishing](https://docs.npmjs.com/trusted-publishers/),
 [npm granular tokens](https://docs.npmjs.com/creating-and-viewing-access-tokens/).
+
+## Failing checks block releases
+
+A failed test in CI is a release blocker. release.yml runs the same npm run check in its verify
+job, and its release job has needs: verify. A failed verify skips version PR creation/publication
+for that run; do not bypass it with continue-on-error. Fix the cause, merge the fix, and run Release
+on the corrected main commit. Rerunning an old failed commit does not include a local fix.
+
+In GitHub UI, open the failed CI or Release run, then its check/verify job and the npm run check
+step. Failed browser runs upload test-results/ (including retained Playwright traces) and any
+playwright-report/ as a playwright-check-<attempt> or playwright-verify-<attempt> artifact on the run's summary page.
+Download the artifact for diagnostics; run-attempt suffixes distinguish it.

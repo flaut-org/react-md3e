@@ -30,3 +30,13 @@ jobs:
       - run: npm ci
       - run: npm exec -- playwright install --with-deps chromium
       - run: npm run check
+      - name: Upload failed browser diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-${{ github.job }}-${{ github.run_attempt }}
+          path: |
+            test-results/
+            playwright-report/
+          if-no-files-found: ignore
+          retention-days: 7

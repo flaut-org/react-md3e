@@ -66,17 +66,24 @@ test('pointer selection, custom renderInput, equality, programmatic values and c
 test('controlled input text and selected values remain independent', async ({ page }) => {
   await page.goto('/fields');
 
+  // Exercise updates while the closing animation still owns a mounted popup.
+  await page.addStyleTag({ content: '[data-md3-autocomplete-popup] { transition-duration: 1s !important; }' });
+
   const input = page.getByRole('combobox', { name: 'City query' });
 
   await input.fill('Ro');
   await expect(page.getByTestId('query-value')).toHaveText('Ro');
   await expect(page.getByRole('option', { name: 'Rome', exact: true })).toBeVisible();
+  await expect(page.locator('[data-md3-autocomplete-popup]')).toHaveCSS('opacity', '1');
   await page.keyboard.press('ArrowDown');
   await expect(input).toHaveAttribute('aria-activedescendant', /.+/);
   await page.keyboard.press('Enter');
   await expect(input).toHaveValue('Rome');
   await page.getByRole('button', { name: 'Set query from code' }).click();
   await expect(input).toHaveValue('Ky');
+  await expect(page.locator('[data-md3-autocomplete-popup]')).toHaveCount(0);
+  await expect(input).toHaveValue('Ky');
+  await expect(page.getByTestId('query-value')).toHaveText('Ky');
   await input.click();
   await expect(page.getByRole('option', { name: 'Kyiv', exact: true })).toBeVisible();
 });

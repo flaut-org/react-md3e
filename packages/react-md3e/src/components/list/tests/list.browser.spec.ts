@@ -211,7 +211,11 @@ test('lists and dialog selection pass accessibility checks at a narrow viewport 
   const result = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
 
   expect(result.violations).toEqual([]);
+  // Accessibility is evaluated at the visual endpoint, including on slower CI runners.
+  await page.addStyleTag({ content: '[data-md3-dialog] { transition-duration: 1s !important; }' });
   await page.getByRole('button', { name: 'Choose language and currency' }).click();
+  await expect(page.getByRole('dialog')).toHaveCSS('opacity', '1');
+  await expect(page.locator('[data-md3-dialog-backdrop]')).toHaveCSS('opacity', '1');
 
   const modalResult = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
 

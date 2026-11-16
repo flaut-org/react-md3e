@@ -4,6 +4,7 @@ import { useId, useRef, useState } from 'react';
 import { Combobox } from '@base-ui/react/combobox';
 import { DirectionProvider } from '@base-ui/react/direction-provider';
 import { useMergedRefs } from '../../internal/hooks/use-merged-refs.hook';
+import { useControlledInputGuard } from '../../internal/hooks/use-controlled-input-guard.hook';
 import { useSelectOnFocus } from '../../internal/hooks/use-select-on-focus.hook';
 import { usePortalContainer } from '../../internal/hooks/use-portal-container.hook';
 import { TextField } from '../text-field/text-field.component';
@@ -111,6 +112,7 @@ export function Autocomplete<T, Multiple extends boolean = false>({
   const currentQuery = inputValue ?? query;
   const [internalOpen, setInternalOpen] = useState(defaultOpen ?? false);
   const currentOpen = open ?? internalOpen;
+  const inputGuard = useControlledInputGuard(inputValue, currentOpen);
   const availableOptions = filterSelectedOptions
     ? options.filter((option) => !selectedOptions.some((entry) => isOptionEqualToValue(option, entry)))
     : options;
@@ -149,6 +151,12 @@ export function Autocomplete<T, Multiple extends boolean = false>({
     if (details.reason === 'escape-key' && (!clearOnEscape || disableClearable)) {
       details.cancel();
       details.allowPropagation();
+    } else if (
+      inputGuard.isStaleReset(
+        (details.reason === 'none' || details.reason === 'input-clear') && details.event.type === 'base-ui',
+      )
+    ) {
+      details.cancel();
     } else {
       let reason: AutocompleteInputChangeReason = 'reset';
 
@@ -173,6 +181,7 @@ export function Autocomplete<T, Multiple extends boolean = false>({
       if (!wasPrevented && details.event.defaultPrevented) {
         details.cancel();
       } else {
+        inputGuard.accept(next);
         setQuery(next);
       }
     }
