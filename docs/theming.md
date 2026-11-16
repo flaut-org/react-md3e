@@ -13,7 +13,8 @@ Call the generator in server code or a build script:
 ```tsx
 import { Button, ThemeProvider } from '@flaut-travel/react-md3e';
 import { createTheme } from '@flaut-travel/react-md3e/theme';
-import '@flaut-travel/react-md3e/styles.css';
+import '@flaut-travel/react-md3e/theme/styles.css';
+import '@flaut-travel/react-md3e/button/styles.css';
 
 const theme = createTheme({
   sourceColor: '#386a20',

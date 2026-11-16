@@ -1,3 +1,5 @@
+import '@flaut-travel/react-md3e/divider/styles.css';
+
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Divider } from '@flaut-travel/react-md3e';
 

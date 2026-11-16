@@ -1,3 +1,18 @@
+import '@flaut-travel/react-md3e/autocomplete/styles.css';
+import '@flaut-travel/react-md3e/dialog/styles.css';
+import '@flaut-travel/react-md3e/bottom-sheet/styles.css';
+import '@flaut-travel/react-md3e/button/styles.css';
+import '@flaut-travel/react-md3e/button-group/styles.css';
+import '@flaut-travel/react-md3e/collapsible/styles.css';
+import '@flaut-travel/react-md3e/divider/styles.css';
+import '@flaut-travel/react-md3e/icon-button/styles.css';
+import '@flaut-travel/react-md3e/side-sheet/styles.css';
+import '@flaut-travel/react-md3e/skeleton/styles.css';
+import '@flaut-travel/react-md3e/snackbar/styles.css';
+import '@flaut-travel/react-md3e/text-field/styles.css';
+import '@flaut-travel/react-md3e/tooltip/styles.css';
+import '@flaut-travel/react-md3e/typography/styles.css';
+
 import { Skeleton, Divider, Typography, ThemeProvider } from '@flaut-travel/react-md3e';
 import { createTheme } from '@flaut-travel/react-md3e/theme';
 import { EssentialsDemo } from './essentials-demo/essentials-demo.component';

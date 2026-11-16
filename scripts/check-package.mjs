@@ -253,6 +253,8 @@ async function inspectUi(relative) {
     `Styling or generation runtime leaked into ${relative}`,
   );
 
+  assert.doesNotMatch(code, /import\s+['"][^'"]+\.css['"]/, 'UI JS must leave CSS loading to explicit style entries.');
+
   for (const match of code.matchAll(/(?:from\s*|import\s*)['"](\.[^'"]+\.js)['"]/g)) {
     await inspectUi(path.relative(packageRoot, path.resolve(path.dirname(absolute), match[1])));
   }
@@ -260,7 +262,50 @@ async function inspectUi(relative) {
 
 await inspectUi(manifest.exports['.'].import);
 
-const css = await readFile(path.join(packageRoot, 'dist/styles.css'), 'utf8');
+async function readCssTree(relative, seenCss = new Set()) {
+  const absolute = path.resolve(packageRoot, relative);
+
+  assert.ok(absolute.startsWith(`${packageRoot}${path.sep}dist${path.sep}`), 'CSS imports must stay inside dist.');
+  assert.ok(files.has(path.relative(packageRoot, absolute)), `CSS dependency is missing from the tarball: ${relative}`);
+
+  if (seenCss.has(absolute)) {
+    return '';
+  }
+
+  seenCss.add(absolute);
+
+  const css = await readFile(absolute, 'utf8');
+  let result = css;
+
+  for (const match of css.matchAll(/@import\s+['"]([^'"]+)['"]/g)) {
+    result += await readCssTree(path.relative(packageRoot, path.resolve(path.dirname(absolute), match[1])), seenCss);
+  }
+
+  return result;
+}
+
+const buttonStyles = new Set();
+const buttonCss = await readCssTree(manifest.exports['./button/styles.css'], buttonStyles);
+const autocompleteStyles = new Set();
+
+await readCssTree(manifest.exports['./autocomplete/styles.css'], autocompleteStyles);
+assert.ok(
+  [...buttonStyles].some((file) => file.includes('/internal/ripple/')),
+  'Button CSS must include its ripple.',
+);
+assert.ok([...buttonStyles].some((file) => file.includes('/button-loading-indicator/')));
+assert.ok([...autocompleteStyles].some((file) => file.includes('/text-field/')));
+assert.ok([...autocompleteStyles].some((file) => file.includes('/list-item-content/')));
+assert.ok(![...buttonStyles, ...autocompleteStyles].some((file) => file.includes('/shape/')));
+assert.ok(!buttonCss.includes('--md-sys-color-primary:'), 'Component CSS must not duplicate the theme defaults.');
+
+for (const [name, target] of Object.entries(manifest.exports)) {
+  if (name.endsWith('/styles.css')) {
+    await readCssTree(target);
+  }
+}
+
+const css = await readCssTree(manifest.exports['./styles.css']);
 
 assert.ok(
   css.includes('light-dark(') &&

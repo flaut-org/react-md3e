@@ -151,3 +151,24 @@ test('homepage essentials provide static server markup before portal interaction
   assert.match(html, /href="\/typography"/);
   assert.doesNotMatch(html, /data-md3-sheet=""|data-md3-snackbar=""/);
 });
+
+async function routeCss(route) {
+  const response = await fetch(`${baseUrl}${route}`, { signal: AbortSignal.timeout(10_000) });
+  const html = await response.text();
+  const files = [...new Set([...html.matchAll(/href="([^"?]+\.css(?:\?[^"]*)?)"/g)].map((match) => match[1]))];
+  const styles = await Promise.all(files.map(async (file) => (await fetch(new URL(file, baseUrl))).text()));
+
+  assert.ok(files.length > 0, 'The server shell must reference compiled CSS before hydration.');
+
+  return styles.join('\n');
+}
+
+test('route CSS includes Button dependencies without loading unused Shape styles', async () => {
+  const buttons = await routeCss('/');
+  const shapes = await routeCss('/surfaces');
+
+  assert.match(buttons, /ripple-enter/);
+  assert.match(buttons, /--md-sys-color-primary/);
+  assert.doesNotMatch(buttons, /data-morph/);
+  assert.match(shapes, /data-morph/);
+});

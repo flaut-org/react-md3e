@@ -6,7 +6,8 @@ Status: accepted for the Button/theme slice, 2026-11-15; authoring amended by
 ## Decision
 
 Use Linaria 8 `css` tags in `*.styles.ts`, extracted by WyW 2 through Vite 7. CSS rules, variants,
-theme defaults, and motion curves become `dist/styles.css`. The distributed style modules export
+theme defaults, and motion curves become per-module CSS assets with dependency-aware public component
+entries; see [CSS loading](../css-loading.md). `dist/styles.css` is a compatibility opt-in. The distributed style modules export
 class-name strings; they do not import a styling engine.
 
 Vite preserves UI modules. The preserve-directives plugin retains future client directives without

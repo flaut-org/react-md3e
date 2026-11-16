@@ -1,3 +1,7 @@
+import '@flaut-travel/react-md3e/app-bar/styles.css';
+import '@flaut-travel/react-md3e/button/styles.css';
+import '@flaut-travel/react-md3e/icon-button/styles.css';
+
 import Link from 'next/link';
 import { AppBar, IconButton, ThemeProvider } from '@flaut-travel/react-md3e';
 import { createTheme } from '@flaut-travel/react-md3e/theme';

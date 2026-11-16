@@ -1,3 +1,6 @@
+import '@flaut-travel/react-md3e/button/styles.css';
+import '@flaut-travel/react-md3e/card/styles.css';
+
 import { useState } from 'react';
 import { Button, Card, CardActions, CardActionArea, CardContent, CardMedia } from '@flaut-travel/react-md3e';
 import landscape from '../assets/card-landscape.svg';

@@ -1,3 +1,5 @@
+import '@flaut-travel/react-md3e/checkbox/styles.css';
+
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { Checkbox } from '@flaut-travel/react-md3e';

@@ -1,3 +1,7 @@
+import '@flaut-travel/react-md3e/button/styles.css';
+import '@flaut-travel/react-md3e/search/styles.css';
+import '@flaut-travel/react-md3e/text-field/styles.css';
+
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button, Search, TextField } from '@flaut-travel/react-md3e';
 import { DestinationSearchDemo } from './destination-search-demo/destination-search-demo.component';

@@ -83,6 +83,8 @@ test('all new component stories render from the built package', async ({ page })
   await page.getByRole('button', { name: 'Show notification', exact: true }).click();
   await expect(page.locator('[data-md3-snackbar]')).toBeVisible();
   await expect(page.locator('[data-md3-snackbar]')).toHaveCSS('color-scheme', 'dark');
+  // Contrast is meaningful after the entry fade reaches its fully opaque surface.
+  await expect(page.locator('[data-md3-snackbar]')).toHaveCSS('opacity', '1');
   expect(
     (
       await new AxeBuilder({ page })

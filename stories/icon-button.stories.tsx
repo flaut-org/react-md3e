@@ -1,3 +1,5 @@
+import '@flaut-travel/react-md3e/icon-button/styles.css';
+
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { IconButton } from '@flaut-travel/react-md3e';

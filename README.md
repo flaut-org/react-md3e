@@ -47,7 +47,8 @@ implementation/style changes. After changing theme generation or public types, r
 ```tsx
 import { Button, ThemeProvider } from '@flaut-travel/react-md3e';
 import { createTheme } from '@flaut-travel/react-md3e/theme';
-import '@flaut-travel/react-md3e/styles.css';
+import '@flaut-travel/react-md3e/theme/styles.css';
+import '@flaut-travel/react-md3e/button/styles.css';
 
 const theme = createTheme({ sourceColor: '#386a20' });
 
@@ -66,7 +67,9 @@ export default function Page() {
 The example is usable from a Server Component. Button composes Base UI and is a client component for
 button behavior and the pointer/keyboard ripple; it is server-rendered and then hydrated.
 ThemeProvider is a CSS scope without hooks or React context and stays server-compatible. Import the
-stylesheet once at the application root. Event handlers belong in consumer client components.
+theme stylesheet once and component styles at their route or composition boundary. Composite CSS entries
+include their internal dependencies. Event handlers belong in consumer client components. See
+[CSS loading](docs/css-loading.md) for route-level imports and migration from the full stylesheet.
 
 `createTheme` runs in server/build code and returns serializable light/dark color roles, tonal
 palettes, harmonized custom colors, typography, shape, and CSS variables. Its separate entry keeps
