@@ -1,3 +1,5 @@
+import '@flaut-travel/react-md3e/shape/styles.css';
+
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Shape, shapeVariants } from '@flaut-travel/react-md3e';
 import { starIcon } from '../example-icons';

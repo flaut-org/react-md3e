@@ -1,7 +1,7 @@
 import type { Preview } from '@storybook/react-vite';
 import { ThemeProvider } from '@flaut-travel/react-md3e';
 import type { ColorSchemePreference, Theme } from '@flaut-travel/react-md3e';
-import '@flaut-travel/react-md3e/styles.css';
+import '@flaut-travel/react-md3e/theme/styles.css';
 
 import themes from '../stories/themes.generated.json';
 import './preview.css';

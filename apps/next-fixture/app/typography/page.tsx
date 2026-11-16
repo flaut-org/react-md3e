@@ -1,3 +1,7 @@
+import '@flaut-travel/react-md3e/button/styles.css';
+import '@flaut-travel/react-md3e/surface/styles.css';
+import '@flaut-travel/react-md3e/typography/styles.css';
+
 import Link from 'next/link';
 import { Surface, ThemeProvider, Typography } from '@flaut-travel/react-md3e';
 import { createTheme } from '@flaut-travel/react-md3e/theme';

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 
-import '@flaut-travel/react-md3e/styles.css';
+import '@flaut-travel/react-md3e/theme/styles.css';
 import './globals.css';
 import './forest.generated.css';
 

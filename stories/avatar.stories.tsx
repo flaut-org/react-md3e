@@ -1,3 +1,6 @@
+import '@flaut-travel/react-md3e/avatar/styles.css';
+import '@flaut-travel/react-md3e/list/styles.css';
+
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Avatar, List, ListItem } from '@flaut-travel/react-md3e';
 

@@ -107,7 +107,7 @@ Public exports:
 | `/side-sheet`   | SideSheet and own panel/state types                                                                                                                                                                                                                                                                           |
 | `/snackbar`     | Snackbar and notification types                                                                                                                                                                                                                                                                               |
 | `/theme`        | createTheme, themeToCss, and generation/token types                                                                                                                                                                                                                                                           |
-| `/styles.css`   | Precompiled component and theme-scope CSS                                                                                                                                                                                                                                                                     |
+| `/styles.css`   | Optional compatibility stylesheet for the entire catalog; prefer `/theme/styles.css` and `/<component>/styles.css`                                                                                                                                                                                            |
 
 Keep generation in `/theme`. A UI import must never pull that entry or a CSS compiler into the
 browser. `scripts/check-package.mjs` follows the actual emitted UI import graph.
@@ -119,7 +119,7 @@ browser. `scripts/check-package.mjs` follows the actual emitted UI import graph.
    Node despite upstream extensionless ESM imports.
 3. Generate default theme data for static CSS interpolation.
 4. Compile UI with Vite 7, Linaria 8, and WyW 2. Preserve ESM modules and client directives; extract
-   CSS to `dist/styles.css`.
+   CSS into private module assets; dependency-aware public `dist/<component>.css` entries and `dist/theme.css` reference them. `dist/styles.css` remains an explicit compatibility opt-in.
 5. Emit declarations with TypeScript, then normalize relative module paths with the declaration
    finalizer. TypeScript resolution supplies the actual file or directory index; published imports
    use explicit `.js` paths.

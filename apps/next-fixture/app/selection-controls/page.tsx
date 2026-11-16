@@ -1,3 +1,9 @@
+import '@flaut-travel/react-md3e/avatar/styles.css';
+import '@flaut-travel/react-md3e/button/styles.css';
+import '@flaut-travel/react-md3e/checkbox/styles.css';
+import '@flaut-travel/react-md3e/radio/styles.css';
+import '@flaut-travel/react-md3e/radio-group/styles.css';
+
 import { Avatar, Checkbox, Radio, RadioGroup, ThemeProvider } from '@flaut-travel/react-md3e';
 import { createTheme } from '@flaut-travel/react-md3e/theme';
 import { ControlsDemo } from './controls-demo/controls-demo.component';

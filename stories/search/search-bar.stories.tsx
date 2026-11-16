@@ -1,3 +1,6 @@
+import '@flaut-travel/react-md3e/icon-button/styles.css';
+import '@flaut-travel/react-md3e/search/styles.css';
+
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { IconButton, SearchBar } from '@flaut-travel/react-md3e';
 

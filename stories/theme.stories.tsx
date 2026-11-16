@@ -1,3 +1,5 @@
+import '@flaut-travel/react-md3e/button/styles.css';
+
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { Theme } from '@flaut-travel/react-md3e';
 import { Button, ThemeProvider } from '@flaut-travel/react-md3e';
