@@ -1,0 +1,4 @@
+.overrides[data-md3-theme] {
+  --md-breakpoint-sm: 720px;
+  --md-breakpoint-md: 1080px;
+}

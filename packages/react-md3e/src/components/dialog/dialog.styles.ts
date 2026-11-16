@@ -1,5 +1,5 @@
 import { css } from '@linaria/core';
-import { color, typography } from '../../styles/theme-tokens';
+import { breakpoint, color, typography } from '../../styles/theme-tokens';
 import type { StyleObject } from '../../styles/style-object.types';
 
 const portalStyles = { position: 'relative', zIndex: 1300, isolation: 'isolate' } satisfies StyleObject;
@@ -30,13 +30,12 @@ const viewportStyles = {
   'alignItems': 'center',
   'justifyContent': 'center',
   'boxSizing': 'border-box',
-  'padding': 24,
+  'padding': `clamp(24px, calc(24px + 100vi - ${breakpoint('sm')}), 56px)`,
   'minBlockSize': 0,
   'overflow': 'hidden',
   'overscrollBehavior': 'contain',
   "&[data-scroll='body']": { alignItems: 'flex-start', overflowY: 'auto' },
   "&[data-full-screen='true']": { padding: 0, alignItems: 'stretch' },
-  '@media (min-width: 600px)': { "&:not([data-full-screen='true'])": { padding: 56 } },
 } satisfies StyleObject;
 
 export const dialogViewport = css`
@@ -51,8 +50,9 @@ const popupStyles = {
   '&[hidden]': { display: 'none' },
   'boxSizing': 'border-box',
   'flexShrink': 0,
-  'minInlineSize': 'min(280px, 100%)',
-  'maxInlineSize': 'min(560px, 100%)',
+  '--md-dialog-max-width': '560px',
+  'minInlineSize': 'min(280px, var(--md-dialog-max-width), 100%)',
+  'maxInlineSize': 'min(var(--md-dialog-max-width), 100%)',
   'inlineSize': 'fit-content',
   'maxBlockSize': '100%',
   'overflow': 'hidden',
@@ -67,6 +67,13 @@ const popupStyles = {
   'overflowWrap': 'anywhere',
   '&[data-starting-style], &[data-ending-style]': { opacity: 0, transform: 'translateY(8px) scale(0.96)' },
   '&[data-ending-style]': { transitionDuration: '150ms' },
+  // xs is the zero-width range; use MUI's 444px dialog floor for that named cap.
+  "&[data-max-width='xs']": { '--md-dialog-max-width': `max(444px, ${breakpoint('xs')})` },
+  "&[data-max-width='sm']": { '--md-dialog-max-width': breakpoint('sm') },
+  "&[data-max-width='md']": { '--md-dialog-max-width': breakpoint('md') },
+  "&[data-max-width='lg']": { '--md-dialog-max-width': breakpoint('lg') },
+  "&[data-max-width='xl']": { '--md-dialog-max-width': breakpoint('xl') },
+  "&[data-max-width='false']": { '--md-dialog-max-width': '100%' },
   "&[data-full-width='true']": { inlineSize: '100%' },
   "&[data-scroll='body']": { maxBlockSize: 'none', marginBlock: 'auto' },
   "&[data-scroll='body'] > [data-md3-dialog-content]": { overflowY: 'visible', flexShrink: 0 },

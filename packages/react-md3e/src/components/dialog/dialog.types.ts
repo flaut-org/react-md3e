@@ -1,5 +1,7 @@
 import type { ComponentPropsWithRef, RefObject } from 'react';
 
+import type { Breakpoint } from '../../theme/theme.types';
+
 export type DialogCloseReason = 'backdropClick' | 'escapeKeyDown';
 
 export type DialogScroll = 'paper' | 'body';
@@ -13,6 +15,8 @@ export interface DialogProps extends Omit<ComponentPropsWithRef<'div'>, 'role' |
   readonly onClose?: (event: Event, reason: DialogCloseReason) => void;
   readonly fullScreen?: boolean;
   readonly fullWidth?: boolean;
+  /** Omit for the MD3 560px cap; false removes the cap while keeping viewport gutters. */
+  readonly maxWidth?: Breakpoint | false;
   readonly scroll?: DialogScroll;
   readonly keepMounted?: boolean;
   readonly disableEscapeKeyDown?: boolean;

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { createTheme, themeToCss } from '@flaut-travel/react-md3e/theme';
+import { createTheme, themeToCss, createBreakpointQueries, defaultBreakpoints } from '@flaut-travel/react-md3e/theme';
 
 function luminance(hex) {
   const channels = hex
@@ -110,4 +110,50 @@ test('typography rejects invalid roles, metrics and font-family overrides', () =
   assert.throws(() => createTheme({ typography: { bodyLarge: { letterSpacing: Infinity } } }), /letterSpacing/);
   assert.throws(() => createTheme({ typography: { bodyLarge: { fontFamily: '' } } }), /fontFamily/);
   assert.throws(() => createTheme({ typography: { bodyLarge: { tracking: 1 } } }), /Unknown typography property/);
+});
+
+test('breakpoints have immutable defaults, scoped CSS tokens, and build-time range queries', () => {
+  const defaults = createTheme();
+  const theme = createTheme({ breakpoints: { sm: 640, md: 1024 } });
+
+  assert.deepEqual(defaults.breakpoints, { xs: 0, sm: 600, md: 900, lg: 1200, xl: 1536 });
+  assert.deepEqual(defaultBreakpoints, defaults.breakpoints);
+  assert.ok(Object.isFrozen(theme.breakpoints));
+  assert.equal(theme.breakpoints.md, 1024);
+  assert.equal(theme.breakpoints.lg, 1200);
+  assert.equal(defaults.breakpoints.md, 900);
+
+  for (const [name, width] of Object.entries(theme.breakpoints)) {
+    assert.equal(theme.cssVariables[`--md-breakpoint-${name}`], `${width}px`);
+    assert.ok(themeToCss(theme, { selector: '.brand' }).includes(`--md-breakpoint-${name}: ${width}px;`));
+  }
+
+  const queries = createBreakpointQueries(theme.breakpoints);
+
+  assert.equal(queries.up.sm, '(width >= 640px)');
+  assert.equal(queries.down.sm, '(width < 640px)');
+  assert.equal(queries.up.md, '(width >= 1024px)');
+  assert.ok(Object.isFrozen(queries.up));
+  assert.equal(createBreakpointQueries().up.sm, '(width >= 600px)');
+  assert.deepEqual(JSON.parse(JSON.stringify(theme)), theme);
+});
+
+test('breakpoints reject unknown names, malformed widths, and unordered scales', () => {
+  for (const breakpoints of [
+    null,
+    [],
+    600,
+    { tablet: 800 },
+    { sm: undefined },
+    { md: NaN },
+    { sm: Infinity },
+    { xs: -1 },
+    { sm: '600px' },
+  ]) {
+    assert.throws(() => createTheme({ breakpoints }), /breakpoint/);
+  }
+
+  assert.throws(() => createTheme({ breakpoints: { md: 600 } }), /increase strictly/);
+  assert.throws(() => createTheme({ breakpoints: { sm: 1000 } }), /increase strictly/);
+  assert.throws(() => createBreakpointQueries({ ...defaultBreakpoints, lg: 800 }), /increase strictly/);
 });

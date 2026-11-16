@@ -4,7 +4,7 @@
 [Material Theme Builder article](https://m3.material.io/blog/material-theme-builder) and the
 [official builder repository](https://github.com/material-foundation/material-theme-builder).
 Components reference semantic roles instead of hard-coded palette values. One configuration produces
-light and dark schemes, tonal palettes, typography, and shape tokens.
+light and dark schemes, tonal palettes, typography, shape tokens, and application breakpoints.
 
 ## Create and apply
 
@@ -95,10 +95,18 @@ The generator uses Google's Material Color Utilities 0.4.0 and the 2025 color sp
 includes current tone-based surface containers and fixed accents. It does not recreate the older
 Surface 1–5 elevation overlay export from the 2021 article.
 
+## Layout breakpoints
+
+`createTheme({ breakpoints: { sm: 640, md: 1024 } })` configures the shared xs/sm/md/lg/xl scale.
+Apply it with `<ThemeProvider theme={theme}>` or export it using `themeToCss`. Every width has an
+inheritable `--md-breakpoint-<name>` CSS variable. Dialog reads these variables for named maxWidth
+values, including inside its portal. See [Breakpoints](breakpoints.md) for defaults, validation,
+CSS overrides, and build-time media queries. These are library layout conventions rather than Google MD3 tokens.
+
 ## Returned tokens
 
 The result is an immutable, JSON-serializable object containing `schemes.light`, `schemes.dark`,
-`palettes`, `customColors`, `typography`, `shape`, and `cssVariables`. Palettes expose standard tone
+`palettes`, `customColors`, `typography`, `shape`, `breakpoints`, and `cssVariables`. Palettes expose standard tone
 samples; scheme roles are resolved independently for light and dark mode by Google's algorithm.
 
 Typography includes 15 baseline MD3 roles and 15 paired emphasized roles, such as bodyLarge and
@@ -125,7 +133,7 @@ Example CSS references:
 }
 ```
 
-There are no MUI palette aliases, spacing/breakpoint system, component style overrides, runtime `sx`
+There are no MUI palette aliases, spacing system, component style overrides, runtime `sx`
 resolver, or context-based `useTheme` API.
 
 ## Export a custom theme as build-time CSS

@@ -112,7 +112,7 @@ Closing the child restores focus to its opener while the parent remains modal.
 Basic layout has 280–560px width bounds, clamped to the available viewport, 28px themed extraLarge
 corners, surfaceContainerHigh, headlineSmall/onSurface, bodyMedium/onSurfaceVariant, and level-3
 shadow. The scrim uses the scrim role at 32%. Inner insets are 24px, headline/body and icon/headline
-gaps are 16px. Compact viewport margins are 24px; at 600px and above the outer margins are 56px.
+gaps are 16px. Compact viewport margins are 24px; margins grow from 24px to 56px over the 32px interval starting at the themed sm breakpoint.
 
 Full-screen layout has no corners or shadow, occupies the viewport, and uses a 56px title row and
 bottom action row. Supply a leading close IconButton in DialogTitle, as shown in Storybook. The
@@ -142,3 +142,25 @@ Measurements and web motion are independently adapted. No MUI or AndroidX implem
 copied. Figma parity and testing outside Chromium are not claimed. Automated checks cover keyboard,
 theme inheritance, native form submission, nested focus, dismissal veto, keepMounted, scrolling,
 streamed server composition, Storybook, and accessibility.
+
+## Width caps
+
+`maxWidth` accepts `'xs' | 'sm' | 'md' | 'lg' | 'xl' | false`. Omit it to retain the MD3 560px cap.
+Named values read `--md-breakpoint-*` from the nearest theme through the portal. `fullWidth` stretches
+content up to the selected cap; without it the dialog fits its content. `false` removes the named cap
+while keeping the viewport gutters; `fullScreen` overrides every cap and gutter. All sizes remain
+bounded by the available viewport, even if custom breakpoint values are smaller than 280px.
+
+```tsx
+<ThemeProvider theme={createTheme({ breakpoints: { md: 1040 } })}>
+  <Dialog open={open} onClose={close} maxWidth="md" fullWidth>
+    <DialogTitle>Choose language and currency</DialogTitle>
+    <DialogContent>{children}</DialogContent>
+  </Dialog>
+</ThemeProvider>
+```
+
+Defaults are xs=0, sm=600, md=900, lg=1200, xl=1536 CSS px. As in MUI, xs denotes the zero-width
+range, so Dialog uses `max(444px, var(--md-breakpoint-xs))` for that cap. Larger custom xs values are
+honored. This documented floor is a compatibility convention, not an MD3 breakpoint.
+See [Breakpoints](../breakpoints.md) for CSS overrides, nested scopes, and media query limitations.

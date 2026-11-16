@@ -11,3 +11,8 @@ light-dark() select light/dark/system modes without JavaScript listeners. See `d
 Typography includes 15 baseline and 15 emphasized styles with separate canonical CSS tokens.
 createTypography resolves/validates shared font stacks and per-role overrides only in server/build
 code; TypeScaleRole stays the 15-role catalog and TypographyTokenRole covers all 30 theme keys.
+
+The application breakpoint scale lives in create-breakpoints.ts. createTheme serializes it into
+--md-breakpoint-xs/sm/md/lg/xl tokens. createBreakpointQueries exports native up/down conditions
+only from /theme for build-time CSS authoring. Never put var() in media query conditions or install
+client-side style observers to imitate them. See docs/breakpoints.md.

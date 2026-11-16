@@ -5,6 +5,8 @@ export type { ThemeProviderProps } from './theme/theme-provider/theme-provider.t
 export type {
   Theme,
   ThemeOptions,
+  Breakpoint,
+  BreakpointValues,
   ColorSchemePreference,
   TypeStyle,
   TypeScaleRole,
