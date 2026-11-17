@@ -79,6 +79,8 @@ test('long content scrolls internally with pinned title/actions while the page i
   await expect(dialog).toBeVisible();
   await expect(dialog).toHaveCSS('opacity', '1');
 
+  await dialog.evaluate((node) => Promise.all(node.getAnimations().map((animation) => animation.finished)));
+
   const titleBefore = (await title.boundingBox())!.y;
   const actionsBefore = (await actions.boundingBox())!.y;
 
@@ -203,7 +205,12 @@ test('Storybook themes and request-time streamed server composition support Dial
   await expect(story).toHaveCount(0);
   await page.goto('/dialog');
   await page.getByRole('link', { name: 'Check request-time streaming' }).click();
-  await page.getByRole('button', { name: 'Open dark scoped dialog' }).click();
+  await expect(page).toHaveURL(/\/streaming$/);
+  // The departing /dialog route has the same trigger; target only the streamed destination.
+  await page
+    .locator('[data-fixture="streaming-ready"]')
+    .getByRole('button', { name: 'Open dark scoped dialog' })
+    .click();
   await expect(page.getByRole('alertdialog', { name: 'Dark collection' })).toBeVisible();
   expect(errors).toEqual([]);
 });
@@ -231,4 +238,18 @@ test('custom container resolves refs after mounting, ignores pointer drags, and 
   await page.keyboard.press('Escape');
   await expect(dialog).toHaveCount(0);
   await expect(page.getByRole('button', { name: 'Custom return focus', exact: true })).toBeFocused();
+});
+
+test('a direct streamed Dialog load receives its own CSS and inherits the destination theme', async ({ page }) => {
+  await page.goto('/streaming');
+  await page
+    .locator('[data-fixture="streaming-ready"]')
+    .getByRole('button', { name: 'Open dark scoped dialog' })
+    .click();
+
+  const dialog = page.getByRole('alertdialog', { name: 'Dark collection' });
+
+  await expect(dialog).toHaveCSS('background-color', rgb(createTheme().schemes.dark.surfaceContainerHigh));
+  await expect(dialog).toHaveCSS('border-radius', '28px');
+  await expect(page.locator('[data-md3-dialog-viewport]')).toHaveCSS('position', 'fixed');
 });

@@ -1,3 +1,4 @@
+import { createTheme } from '@flaut-travel/react-md3e/theme';
 import { expect, test } from '@playwright/test';
 
 const inkSelector = '[data-md3-ripple-ink]';
@@ -18,7 +19,7 @@ test('pointer ripple grows from the press position, survives a hold, and fades a
   await page.mouse.move(box.x + 12, box.y + box.height / 2);
   await page.mouse.down();
   await expect(ink).toHaveCount(1);
-  await expect(ink).toHaveCSS('animation-duration', '0.45s');
+  await expect(ink).toHaveCSS('animation-duration', `${createTheme().motion.slow.effects.duration / 1000}s`);
 
   const origin = await ink.evaluate((element) => ({
     x: parseFloat((element as HTMLElement).style.getPropertyValue('--_ripple-start-x')),

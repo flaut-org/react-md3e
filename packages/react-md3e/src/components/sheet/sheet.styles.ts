@@ -1,5 +1,5 @@
 import { css } from '@linaria/core';
-import { color, typography, springCurve } from '../../styles/theme-tokens';
+import { color, typography, motion, motionDuration, motionEasing } from '../../styles/theme-tokens';
 import type { StyleObject } from '../../styles/style-object.types';
 
 const portal = { position: 'relative', zIndex: 1400, isolation: 'isolate' } satisfies StyleObject;
@@ -8,7 +8,7 @@ const backdrop = {
   'inset': 0,
   'backgroundColor': `color-mix(in srgb, ${color('scrim')} 32%, transparent)`,
   'opacity': 1,
-  'transition': 'opacity 200ms ease',
+  'transition': `opacity ${motion('effects', 'default')}`,
   '&[data-starting-style], &[data-ending-style]': { opacity: 0 },
   '@media (prefers-reduced-motion: reduce)': { transition: 'none' },
 } satisfies StyleObject;
@@ -40,7 +40,7 @@ const popup = {
   'backgroundColor': color('surfaceContainerLow'),
   'overflow': 'hidden',
   'maxBlockSize': '100dvh',
-  'transition': `transform calc(400ms * var(--drawer-swipe-strength, 1)) ${springCurve}`,
+  'transition': `transform calc(${motionDuration('spatial', 'default')} * var(--drawer-swipe-strength, 1)) ${motionEasing('spatial', 'default')}`,
   '&[hidden]': { display: 'none' },
   '&[data-swiping]': { transition: 'none', userSelect: 'none' },
   "&[data-edge='bottom']": {

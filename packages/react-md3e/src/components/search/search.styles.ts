@@ -1,5 +1,5 @@
 import { css } from '@linaria/core';
-import { color, springCurve } from '../../styles/theme-tokens';
+import { color, motion } from '../../styles/theme-tokens';
 import type { StyleObject } from '../../styles/style-object.types';
 
 const rootStyles = {
@@ -15,7 +15,7 @@ export const searchRoot = css`
 
 const anchorStyles = {
   'marginInline': 24,
-  'transition': `margin 400ms ${springCurve}`,
+  'transition': `margin ${motion('spatial', 'default')}`,
   "&[data-expanded='true']": { visibility: 'hidden' },
   '@media (prefers-reduced-motion: reduce)': { transition: 'none' },
 } satisfies StyleObject;
@@ -35,7 +35,7 @@ const backdropStyles = {
   'inset': 0,
   'backgroundColor': `color-mix(in srgb, ${color('scrim')} 32%, transparent)`,
   'opacity': 1,
-  'transition': 'opacity 150ms ease',
+  'transition': `opacity ${motion('effects')}`,
   '&[data-starting-style], &[data-ending-style]': { opacity: 0 },
   '@media (prefers-reduced-motion: reduce)': { transition: 'none' },
 } satisfies StyleObject;

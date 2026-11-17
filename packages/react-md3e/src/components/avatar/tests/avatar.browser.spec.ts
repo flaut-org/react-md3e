@@ -79,8 +79,9 @@ test('image loading keeps a stable box and fallback without style insertion', as
   }
 });
 test('avatar themes, Storybook image/list composition and forced colors retain accessible output', async ({ page }) => {
+  // Playwright owns this axe scan; keep Storybook's automatic scan from using the same axe instance.
   await page.goto(
-    'http://127.0.0.1:6106/iframe.html?id=components-avatar--playground&viewMode=story&globals=brand:forest;colorScheme:dark',
+    'http://127.0.0.1:6106/iframe.html?id=components-avatar--playground&viewMode=story&globals=brand:forest;colorScheme:dark;a11y.manual:!true',
   );
 
   const avatar = page.getByRole('img', { name: 'Alex Morgan' });

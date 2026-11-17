@@ -3,6 +3,11 @@ export { createTheme, themeToCss } from './create-theme';
 export type {
   Theme,
   ThemeOptions,
+  MotionScheme,
+  MotionSpeed,
+  MotionKind,
+  MotionSpring,
+  MotionTokens,
   Breakpoint,
   BreakpointValues,
   HexColor,

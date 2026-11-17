@@ -1,5 +1,5 @@
 import { css } from '@linaria/core';
-import { color, typography } from '../../styles/theme-tokens';
+import { motion, color, typography } from '../../styles/theme-tokens';
 import type { StyleObject } from '../../styles/style-object.types';
 
 const rootStyles = {
@@ -40,7 +40,7 @@ const popupStyles = {
   'boxShadow': '0 2px 6px rgb(0 0 0 / 20%), 0 1px 2px rgb(0 0 0 / 12%)',
   'overflow': 'hidden',
   'transformOrigin': 'var(--transform-origin)',
-  'transition': 'opacity 120ms ease, transform 120ms ease',
+  'transition': `opacity ${motion('effects')}, transform ${motion('spatial')}`,
   '&[data-starting-style], &[data-ending-style]': { opacity: 0, transform: 'translateY(-4px)' },
   '@media (prefers-reduced-motion: reduce)': { transition: 'none' },
   '@media (forced-colors: active)': { border: '1px solid CanvasText', backgroundColor: 'Canvas', color: 'CanvasText' },

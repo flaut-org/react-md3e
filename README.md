@@ -31,7 +31,7 @@ asdf exec npm run storybook
 ```
 
 Use the toolbar to switch between precomputed Material, forest, and expressive themes and
-light/dark/system modes. Stories cover all Button appearances, sizes, shapes, disabled state,
+light/dark/system modes, plus independent standard/expressive motion. Stories cover all Button appearances, sizes, shapes, disabled state,
 leading/trailing icons, controlled selection, ripple opt-out, and nested theme comparisons.
 AppBar and IconButton have dedicated stories covering flexible layouts, subtitles, RTL, scrolling
 composition, icon widths, accessible names, and minimum interaction targets. Dialog stories cover
@@ -74,7 +74,7 @@ include their internal dependencies. Event handlers belong in consumer client co
 `createTheme` runs in server/build code and returns serializable light/dark color roles, tonal
 palettes, harmonized custom colors, typography, shape, and CSS variables. Its separate entry keeps
 color generation out of component imports. `themeToCss` can export custom themes as build-time CSS.
-See [theming](docs/theming.md), [Button](docs/components/button.md),
+See [theming](docs/theming.md), [motion schemes](docs/motion.md), [Button](docs/components/button.md),
 [IconButton](docs/components/icon-button.md), [AppBar](docs/components/app-bar.md), and
 [Dialog](docs/components/dialog.md), [List/ListItem](docs/components/list.md),
 [Checkbox](docs/components/checkbox.md), [Radio/RadioGroup](docs/components/radio.md), and [Avatar](docs/components/avatar.md), [TextField](docs/components/text-field.md), and

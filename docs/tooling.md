@@ -89,3 +89,18 @@ SearchBar has a local accessibility-lint exception for pointer-focus delegation 
 its native input/actions provide keyboard interaction. SearchView's named results region locally
 allows a bubbling keyboard handler to navigate native child actions without changing their semantics.
 These exceptions do not disable rules for other components.
+
+## Browser test synchronization
+
+For client navigation, scope actions to DOM belonging to the destination route. A click on a Next
+Link does not guarantee that a streamed destination has replaced the old page; identical trigger
+names can otherwise match the departing page. The Dialog integration test waits for /streaming and
+uses its streaming-ready region. Each route must also import the CSS families used by its streamed
+content; a prior page's stylesheet must not be required for correct presentation.
+
+When a Playwright test runs AxeBuilder against a Storybook iframe, use the Storybook global
+`a11y.manual:!true` in that iframe's URL globals. The addon and AxeBuilder share an axe instance;
+concurrent automatic/manual scans can throw "Axe is already running". This setting is scoped to the
+explicitly scanned iframe; the awaited AxeBuilder scan and its violation assertions still run, and
+automatic Storybook accessibility checks remain enabled elsewhere. `!true` is Storybook's boolean
+URL encoding, not the string "true".

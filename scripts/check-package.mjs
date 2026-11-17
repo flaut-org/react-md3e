@@ -247,7 +247,7 @@ async function inspectUi(relative) {
 
   assert.ok(!absolute.endsWith('/dist/theme.js'), 'The color generator leaked into the UI graph.');
   assert.ok(
-    !/@linaria|@wyw-in-js|@emotion|@material|insertRule|createTheme|TonalPalette|HctSolver|shapePaths|encodeURIComponent|RoundedPolygon|elevationShadow|surfaceColorStyles|createShapePolygon|createTypography|emphasizedTypeScale|typeScaleTokenName/.test(
+    !/@linaria|@wyw-in-js|@emotion|@material|insertRule|createTheme|TonalPalette|HctSolver|shapePaths|encodeURIComponent|RoundedPolygon|elevationShadow|surfaceColorStyles|createShapePolygon|createTypography|createMotion|createSpring|emphasizedTypeScale|typeScaleTokenName/.test(
       code,
     ),
     `Styling or generation runtime leaked into ${relative}`,

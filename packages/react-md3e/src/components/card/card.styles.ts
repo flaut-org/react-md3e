@@ -1,5 +1,5 @@
 import { css } from '@linaria/core';
-import { color } from '../../styles/theme-tokens';
+import { motion, color } from '../../styles/theme-tokens';
 import { elevationShadow } from '../../styles/elevation';
 import type { StyleObject } from '../../styles/style-object.types';
 
@@ -8,7 +8,7 @@ const rootStyles = {
   '--_card-disabled-background': color('surfaceContainerHighest'),
   'position': 'relative',
   'textAlign': 'start',
-  'transition': 'box-shadow 150ms ease',
+  'transition': `box-shadow ${motion('effects')}`,
   "&[data-variant='elevated']": { '--_card-disabled-background': color('surface') },
   "&[data-variant='outlined']": { '--_card-disabled-background': color('surface') },
   [`&:has(${action}:focus-visible)`]: { boxShadow: 'none' },

@@ -18,3 +18,26 @@ await writeFile(
   new URL('../apps/next-fixture/app/forest.generated.css', import.meta.url),
   themeToCss(themes.forest, { selector: '.forest-static' }),
 );
+
+const motionSchemes = Object.fromEntries(
+  ['standard', 'expressive'].map((motionScheme) => {
+    const theme = createTheme({ motionScheme });
+
+    return [
+      motionScheme,
+      {
+        motionScheme: theme.motionScheme,
+        motion: theme.motion,
+        cssVariables: Object.fromEntries(
+          Object.entries(theme.cssVariables).filter(([name]) => name.startsWith('--md-sys-motion-')),
+        ),
+      },
+    ];
+  }),
+);
+
+await writeFile(new URL('../stories/motion-schemes.generated.json', import.meta.url), JSON.stringify(motionSchemes));
+await writeFile(
+  new URL('../apps/next-fixture/app/motion/standard.generated.css', import.meta.url),
+  themeToCss(createTheme({ motionScheme: 'standard' }), { selector: '.standard-motion-static[data-md3-theme]' }),
+);

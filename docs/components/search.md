@@ -138,8 +138,9 @@ Docked mode expands the bar horizontally (24px outer margins become 12px), then 
 through opacity and scaleY/translation from their top edge. It caps width at 720px and results height
 so the combined view uses at most two-thirds of the viewport, or available space near an edge.
 Results scroll internally. Compact/fullScreen mode morphs the measured bar rectangle to the viewport,
-with a 72px header and contained round bar/results. Both opening and closing use the same sampled
-400ms Expressive spatial spring as the existing library; opacity uses short easing transitions.
+with a 72px header and contained round bar/results. Opening and closing use themed MD3 spring tokens
+like the other components: slow spatial for full-screen geometry, default spatial for docked geometry,
+and effects tokens for opacity.
 CSS handles breakpoint changes without replacing the input or losing its query/focus.
 
 A private hook measures only anchor coordinates and dimensions into CSS custom properties, and

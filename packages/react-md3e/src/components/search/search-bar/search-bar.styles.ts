@@ -1,5 +1,5 @@
 import { css } from '@linaria/core';
-import { color, typography } from '../../../styles/theme-tokens';
+import { motion, color, typography } from '../../../styles/theme-tokens';
 import type { StyleObject } from '../../../styles/style-object.types';
 
 const barStyles = {
@@ -18,7 +18,7 @@ const barStyles = {
   'backgroundColor': color('surfaceContainerHigh'),
   'color': color('onSurface'),
   'cursor': 'text',
-  'transition': 'box-shadow 150ms ease, background-color 150ms ease',
+  'transition': `box-shadow ${motion('effects')}, background-color ${motion('effects')}`,
   '@media (hover: hover)': {
     "&:hover:not([data-disabled='true']):not(:focus-within)": {
       backgroundColor: `color-mix(in srgb, ${color('onSurface')} 8%, ${color('surfaceContainerHigh')})`,

@@ -103,7 +103,7 @@ corners. CSS can therefore interpolate every catalog pair without generating geo
 browser. Endpoint polygons approximate the original curves; browser tests compare all 35 endpoints
 with their original SVG masks at 120px. Use morph=false when exact static cubic rendering is wanted.
 
-The default transition is 400ms with the library's precompiled fast-spatial spring curve. Native
+The default transition follows the theme's precompiled default-spatial spring curve and duration. Native
 CSS transitions retarget from the current visible contour when variant changes again. This provides
 position continuity; it does not claim AndroidX Morph feature matching or velocity-preserving
 spring retargeting. Replacing/remounting the element starts at its new shape rather than morphing.

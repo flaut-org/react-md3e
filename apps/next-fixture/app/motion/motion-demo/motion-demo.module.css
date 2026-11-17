@@ -1,0 +1,32 @@
+.scope {
+  padding: 24px;
+  border-radius: 16px;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+.track {
+  width: 260px;
+  max-width: 100%;
+  padding-block: 24px;
+}
+.sample {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--md-sys-color-primary);
+  transform: translateX(0);
+  transition: transform var(--md-sys-motion-spring-fast-spatial-duration)
+    var(--md-sys-motion-spring-fast-spatial-easing);
+}
+.sample[data-active='true'] {
+  transform: translateX(180px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .sample {
+    transition: none;
+  }
+}

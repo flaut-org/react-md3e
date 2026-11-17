@@ -16,3 +16,7 @@ The application breakpoint scale lives in create-breakpoints.ts. createTheme ser
 --md-breakpoint-xs/sm/md/lg/xl tokens. createBreakpointQueries exports native up/down conditions
 only from /theme for build-time CSS authoring. Never put var() in media query conditions or install
 client-side style observers to imitate them. See docs/breakpoints.md.
+
+MotionScheme selects standard/expressive independently of the color variant. create-motion.ts
+converts the six official springs to CSS linear() data only in server/build code. ThemeProvider
+inherits/resets the resulting CSS tokens without runtime physics or context. See docs/motion.md.

@@ -1,5 +1,5 @@
 import { css } from '@linaria/core';
-import { color, typography } from '../../styles/theme-tokens';
+import { motion, color, typography } from '../../styles/theme-tokens';
 import type { StyleObject } from '../../styles/style-object.types';
 
 const rootStyles = {
@@ -13,7 +13,7 @@ const rootStyles = {
   'borderRadius': 0,
   'backgroundColor': color('surface'),
   'color': color('onSurface'),
-  'transition': 'background-color 150ms ease, box-shadow 150ms ease',
+  'transition': `background-color ${motion('effects')}, box-shadow ${motion('effects')}`,
   "&[data-position='static']": { position: 'static' },
   "&[data-position='relative']": { position: 'relative' },
   "&[data-position='sticky']": { position: 'sticky', insetBlockStart: 0, zIndex: 1100 },
