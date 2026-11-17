@@ -79,6 +79,8 @@ test('long content scrolls internally with pinned title/actions while the page i
   await expect(dialog).toBeVisible();
   await expect(dialog).toHaveCSS('opacity', '1');
 
+  await dialog.evaluate((node) => Promise.all(node.getAnimations().map((animation) => animation.finished)));
+
   const titleBefore = (await title.boundingBox())!.y;
   const actionsBefore = (await actions.boundingBox())!.y;
 

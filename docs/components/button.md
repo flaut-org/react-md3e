@@ -75,8 +75,8 @@ surfaceContainerLow/primary; outlined uses outlineVariant/onSurfaceVariant; text
 Toggle selections use the role pairs in the current specification. Disabled, hovered, focused, and
 pressed states have static CSS state layers. Focus has a visible ring.
 
-Shape motion uses a 400ms CSS `linear()` approximation sampled from the Expressive fast spatial
-spring (stiffness 800, damping 0.6). It has no animation JavaScript and does not model
+Shape motion uses the themed fast spatial CSS `linear()` approximation, sampled from the selected MD3
+scheme (expressive defaults: stiffness 800, damping 0.6). It has no animation JavaScript and does not model
 velocity-preserving spring retargeting. Reduced motion disables transitions; forced colors retain
 visible boundaries and focus.
 
@@ -106,7 +106,7 @@ Read on 2026-11-15:
 - [Base UI Button](https://base-ui.com/react/components/button) and installed 1.9.0 source: client
   boundary, native button semantics, disabled behavior, and ref/event composition.
 - [Google Material Web ripple reference](https://github.com/material-components/material-web/blob/main/ripple/internal/ripple.ts):
-  pointer-origin/centered activation, 450ms growth, 225ms minimum press, and 150ms touch delay. Our
+  pointer-origin/centered activation, ink growth, 225ms minimum press, and 150ms touch delay. Our
   React controller and static CSS are independently implemented; no Lit runtime is used.
 - [Official Android button guide](https://github.com/material-components/material-components-android/blob/master/docs/components/CommonButton.md).
 - AndroidX revision `89d9aa6a5b9fc6e4847002be42f3c6891b091c9e`:
@@ -129,3 +129,5 @@ routing links such as `component={Link}` with href. Custom components must forwa
 events and refs. Native button/link props and refs follow the selected component's TypeScript type.
 Disabled/loading links remove href, expose aria-disabled and leave the tab order. Import
 ButtonLinkProps for the native href shorthand, or ButtonProps<typeof Link> for a routing component.
+
+Current motion token mapping and web adaptation are documented in [Motion](../motion.md).

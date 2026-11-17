@@ -4,6 +4,7 @@ import type { ColorSchemePreference, Theme } from '@flaut-travel/react-md3e';
 import '@flaut-travel/react-md3e/theme/styles.css';
 
 import themes from '../stories/themes.generated.json';
+import motionSchemes from '../stories/motion-schemes.generated.json';
 import './preview.css';
 
 const preview: Preview = {
@@ -11,6 +12,10 @@ const preview: Preview = {
     colorScheme: {
       description: 'CSS color scheme',
       toolbar: { icon: 'circlehollow', items: ['light', 'dark', 'system'], dynamicTitle: true },
+    },
+    motionScheme: {
+      description: 'MD3 spring motion scheme, independent of the color palette',
+      toolbar: { icon: 'play', items: ['expressive', 'standard'], dynamicTitle: true },
     },
     brand: {
       description: 'Precompiled createTheme configuration',
@@ -21,7 +26,7 @@ const preview: Preview = {
       },
     },
   },
-  initialGlobals: { colorScheme: 'light', brand: 'material' },
+  initialGlobals: { colorScheme: 'light', brand: 'material', motionScheme: 'expressive' },
   parameters: {
     layout: 'fullscreen',
     controls: { expanded: true },
@@ -30,10 +35,18 @@ const preview: Preview = {
   decorators: [
     (Story, context) => {
       const brand = context.globals.brand as keyof typeof themes;
+      const selectedMotion = context.globals.motionScheme as keyof typeof motionSchemes;
+      const brandTheme = themes[brand] ?? themes.material;
+      const motion = motionSchemes[selectedMotion] ?? motionSchemes.expressive;
+      const theme = {
+        ...brandTheme,
+        ...motion,
+        cssVariables: { ...brandTheme.cssVariables, ...motion.cssVariables },
+      } as Theme;
 
       return (
         <ThemeProvider
-          theme={(themes[brand] ?? themes.material) as Theme}
+          theme={theme}
           colorScheme={context.globals.colorScheme as ColorSchemePreference}
           className="story-surface"
         >

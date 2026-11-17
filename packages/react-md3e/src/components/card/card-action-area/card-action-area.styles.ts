@@ -1,5 +1,5 @@
 import { css } from '@linaria/core';
-import { color } from '../../../styles/theme-tokens';
+import { motion, color } from '../../../styles/theme-tokens';
 import type { StyleObject } from '../../../styles/style-object.types';
 
 const areaStyles = {
@@ -30,7 +30,7 @@ const areaStyles = {
     pointerEvents: 'none',
     backgroundColor: color('onSurface'),
     opacity: 0,
-    transition: 'opacity 150ms ease',
+    transition: `opacity ${motion('effects')}`,
   },
   '&:focus-visible': { outline: `3px solid ${color('secondary')}`, outlineOffset: -3 },
   '&:focus-visible::before, &:active::before': { opacity: 0.1 },

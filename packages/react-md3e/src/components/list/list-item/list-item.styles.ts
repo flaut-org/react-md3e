@@ -1,5 +1,5 @@
 import { css } from '@linaria/core';
-import { color, springCurve } from '../../../styles/theme-tokens';
+import { color, motion } from '../../../styles/theme-tokens';
 import type { StyleObject } from '../../../styles/style-object.types';
 
 const itemStyles = {
@@ -21,7 +21,7 @@ const itemStyles = {
   'borderEndEndRadius': 'var(--_list-bottom, 4px)',
   'color': 'var(--_list-label)',
   'backgroundColor': color('surface'),
-  'transition': `border-radius 400ms ${springCurve}, background-color 150ms ease`,
+  'transition': `border-radius ${motion('spatial')}, background-color ${motion('effects')}`,
   'overflowWrap': 'anywhere',
   "&[data-divider='true']::after": {
     content: "''",

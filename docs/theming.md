@@ -95,6 +95,14 @@ The generator uses Google's Material Color Utilities 0.4.0 and the 2025 color sp
 includes current tone-based surface containers and fixed accents. It does not recreate the older
 Surface 1–5 elevation overlay export from the 2021 article.
 
+## Motion schemes
+
+`motionScheme: 'expressive' | 'standard'` selects the independent MD3 spring scheme; expressive is
+used by default. It does not follow the color `variant`. The theme includes `motion.fast/default/slow`
+spatial/effects springs and their precompiled CSS variables. Components inherit these through the
+normal CSS scope, including portals and nested themes. See [Motion](motion.md) for parameters,
+component mapping, reduced motion, and the limits of CSS spring approximations.
+
 ## Layout breakpoints
 
 `createTheme({ breakpoints: { sm: 640, md: 1024 } })` configures the shared xs/sm/md/lg/xl scale.
@@ -106,7 +114,7 @@ CSS overrides, and build-time media queries. These are library layout convention
 ## Returned tokens
 
 The result is an immutable, JSON-serializable object containing `schemes.light`, `schemes.dark`,
-`palettes`, `customColors`, `typography`, `shape`, `breakpoints`, and `cssVariables`. Palettes expose standard tone
+`palettes`, `customColors`, `typography`, `shape`, `breakpoints`, `motionScheme`, `motion`, and `cssVariables`. Palettes expose standard tone
 samples; scheme roles are resolved independently for light and dark mode by Google's algorithm.
 
 Typography includes 15 baseline MD3 roles and 15 paired emphasized roles, such as bodyLarge and

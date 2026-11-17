@@ -1,5 +1,5 @@
 import { css } from '@linaria/core';
-import { color } from '../../styles/theme-tokens';
+import { motion, color } from '../../styles/theme-tokens';
 import type { StyleObject } from '../../styles/style-object.types';
 
 const styles = {
@@ -18,7 +18,7 @@ const styles = {
   'border': '2px solid var(--_indicator-outline)',
   'color': 'var(--_indicator-mark)',
   'borderRadius': 2,
-  'transition': 'background-color 150ms ease, border-color 150ms ease',
+  'transition': `background-color ${motion('effects')}, border-color ${motion('effects')}`,
   '& > svg': {
     inlineSize: '100%',
     blockSize: '100%',
@@ -35,7 +35,7 @@ const styles = {
     borderRadius: '50%',
     backgroundColor: 'var(--_indicator-active)',
     opacity: 0,
-    transition: 'opacity 150ms ease',
+    transition: `opacity ${motion('effects')}`,
   },
   "&[data-selected='true']": { borderColor: 'var(--_indicator-active)' },
   "&[data-indicator='radio'][data-selected='true']::after": { opacity: 1 },

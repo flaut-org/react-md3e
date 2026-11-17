@@ -1,5 +1,5 @@
 import { css } from '@linaria/core';
-import { color, springCurve } from '../../styles/theme-tokens';
+import { color, motion } from '../../styles/theme-tokens';
 import type { StyleObject } from '../../styles/style-object.types';
 
 const rootStyles = {
@@ -140,7 +140,7 @@ const containerStyles = {
   'border': 'var(--_outline-width) solid var(--_border)',
   'borderRadius': 'var(--_radius)',
   'backgroundColor': 'var(--_bg)',
-  'transition': `border-radius 400ms ${springCurve}`,
+  'transition': `border-radius ${motion('spatial')}`,
   '&::before': {
     content: "''",
     position: 'absolute',
@@ -148,7 +148,7 @@ const containerStyles = {
     borderRadius: 'inherit',
     background: 'currentColor',
     opacity: 0,
-    transition: 'opacity 150ms ease',
+    transition: `opacity ${motion('effects')}`,
     pointerEvents: 'none',
   },
   '@media (prefers-reduced-motion: reduce)': { '&, &::before': { transition: 'none' } },

@@ -1,5 +1,5 @@
 import { css } from '@linaria/core';
-import { color } from '../../styles/theme-tokens';
+import { motion, color } from '../../styles/theme-tokens';
 import type { StyleObject } from '../../styles/style-object.types';
 
 const styles = {
@@ -31,7 +31,7 @@ const styles = {
     backgroundColor: 'currentColor',
     opacity: 0,
     pointerEvents: 'none',
-    transition: 'opacity 150ms ease',
+    transition: `opacity ${motion('effects')}`,
   },
   '&[data-checked], &[data-indeterminate]': { '--_control-state': color('primary') },
   "&[data-error='true']": { '--_control-state': color('error') },

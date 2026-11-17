@@ -1,5 +1,5 @@
 import { css } from '@linaria/core';
-import { color } from '../../../../styles/theme-tokens';
+import { motion, color } from '../../../../styles/theme-tokens';
 import type { StyleObject } from '../../../../styles/style-object.types';
 
 const controlStyles = {
@@ -30,7 +30,7 @@ const controlStyles = {
     backgroundColor: color('onSurface'),
     opacity: 0,
     pointerEvents: 'none',
-    transition: 'opacity 150ms ease',
+    transition: `opacity ${motion('effects')}`,
   },
   '&:focus-visible::before, &:active:not(:disabled)::before': { opacity: 0.1 },
   '&:disabled': { cursor: 'default' },

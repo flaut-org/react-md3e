@@ -5,6 +5,11 @@ export type { ThemeProviderProps } from './theme/theme-provider/theme-provider.t
 export type {
   Theme,
   ThemeOptions,
+  MotionScheme,
+  MotionSpeed,
+  MotionKind,
+  MotionSpring,
+  MotionTokens,
   Breakpoint,
   BreakpointValues,
   ColorSchemePreference,

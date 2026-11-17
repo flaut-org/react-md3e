@@ -1,5 +1,5 @@
 import { css } from '@linaria/core';
-import { color, typography, springCurve } from '../../styles/theme-tokens';
+import { color, typography, motion } from '../../styles/theme-tokens';
 import type { StyleObject } from '../../styles/style-object.types';
 
 const portal = { position: 'relative', zIndex: 1600, isolation: 'isolate' } satisfies StyleObject;
@@ -33,7 +33,7 @@ const root = {
   'boxShadow': `0 1px 3px color-mix(in srgb, ${color('shadow')} 30%, transparent), 0 2px 6px 2px color-mix(in srgb, ${color('shadow')} 15%, transparent)`,
   'opacity': 1,
   'transform': 'translateY(0)',
-  'transition': `transform 240ms ${springCurve}, opacity 150ms ease`,
+  'transition': `transform ${motion('spatial')}, opacity ${motion('effects')}`,
   '&[data-starting-style], &[data-ending-style]': { opacity: 0, transform: 'translateY(8px)' },
   '&:focus-visible': { outline: `2px solid ${color('inversePrimary')}`, outlineOffset: 2 },
   '@media (prefers-reduced-motion: reduce)': { transition: 'none' },

@@ -3,6 +3,21 @@ import type { colorRoles } from '../tokens/material-tokens';
 export type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export type BreakpointValues = Readonly<Record<Breakpoint, number>>;
 
+export type MotionScheme = 'standard' | 'expressive';
+export type MotionSpeed = 'fast' | 'default' | 'slow';
+export type MotionKind = 'spatial' | 'effects';
+
+export interface MotionSpring {
+  readonly damping: number;
+  readonly stiffness: number;
+  /** Web adaptation: settling time in milliseconds at normalized displacement tolerance 0.001. */
+  readonly duration: number;
+  /** Precomputed zero-velocity, unit-mass spring approximation for CSS linear(). */
+  readonly easing: string;
+}
+
+export type MotionTokens = Readonly<Record<MotionSpeed, Readonly<Record<MotionKind, MotionSpring>>>>;
+
 export type HexColor = `#${string}`;
 export type ColorRole = (typeof colorRoles)[number];
 export type ColorScheme = Readonly<Record<ColorRole, HexColor>>;
@@ -63,6 +78,8 @@ export interface CustomColorGroup {
 }
 
 export interface ThemeOptions {
+  /** Independent of the color variant. Defaults to expressive. */
+  readonly motionScheme?: MotionScheme;
   /** Application layout thresholds in CSS px, merged with the default xs/sm/md/lg/xl scale. */
   readonly breakpoints?: Partial<BreakpointValues>;
   readonly sourceColor?: HexColor;
@@ -80,6 +97,8 @@ export interface ThemeOptions {
 }
 
 export interface Theme {
+  readonly motionScheme: MotionScheme;
+  readonly motion: MotionTokens;
   readonly breakpoints: BreakpointValues;
   readonly sourceColor: HexColor;
   readonly variant: 'tonalSpot' | 'expressive';

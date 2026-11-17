@@ -1,5 +1,5 @@
 import { css } from '@linaria/core';
-import { color, springCurve } from '../../styles/theme-tokens';
+import { color, motionDuration, motionEasing } from '../../styles/theme-tokens';
 import { surfaceColorStyles } from '../../styles/surface-colors';
 import { shapePaths } from './shape-paths.generated';
 import { createShapePolygon } from './shape-morph.helpers';
@@ -43,8 +43,8 @@ const rootStyles = {
     "&[data-morph='true']": {
       maskImage: 'none',
       transitionProperty: 'clip-path',
-      transitionDuration: 'var(--md3e-shape-morph-duration, 400ms)',
-      transitionTimingFunction: `var(--md3e-shape-morph-easing, ${springCurve})`,
+      transitionDuration: `var(--md3e-shape-morph-duration, ${motionDuration('spatial', 'default')})`,
+      transitionTimingFunction: `var(--md3e-shape-morph-easing, ${motionEasing('spatial', 'default')})`,
     },
   },
   '@media (prefers-reduced-motion: reduce)': { '&[data-morph]': { transition: 'none' } },

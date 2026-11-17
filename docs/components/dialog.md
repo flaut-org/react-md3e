@@ -119,8 +119,8 @@ bottom action row. Supply a leading close IconButton in DialogTitle, as shown in
 consumer selects the variant at its breakpoint; no JavaScript media observer is installed.
 Full-screen layout always scrolls its body internally and keeps title/actions available.
 
-Opacity and a small scale/translation transition are compiled CSS: 200ms entry transform, 150ms
-opacity/exit. These are web adaptations of the documented enter/exit pattern, not container-transform
+Opacity and a small scale/translation transition use compiled theme motion: fast effects for
+opacity and default spatial for transforms. These are web adaptations of the documented enter/exit pattern, not container-transform
 or velocity-preserving spring implementations. Reduced motion disables transitions. Forced colors
 keep a visible surface boundary. No animation loop or styling runtime is included.
 

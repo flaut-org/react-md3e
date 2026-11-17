@@ -1,0 +1,118 @@
+# Motion schemes
+
+`createTheme({ motionScheme: 'expressive' | 'standard' })` selects the official MD3 motion scheme.
+The default is expressive. This setting is independent of `variant`, which selects the color palette
+algorithm. Standard is a restrained spring scheme, not the legacy duration/easing motion system.
+
+```tsx
+import { Button, ThemeProvider } from '@flaut-travel/react-md3e';
+import { createTheme } from '@flaut-travel/react-md3e/theme';
+import '@flaut-travel/react-md3e/theme/styles.css';
+import '@flaut-travel/react-md3e/button/styles.css';
+
+const theme = createTheme({ sourceColor: '#9a91e0', motionScheme: 'standard' });
+
+export default function Layout({ children }) {
+  return (
+    <ThemeProvider theme={theme}>
+      <Button>Continue</Button>
+      {children}
+    </ThemeProvider>
+  );
+}
+```
+
+Call createTheme on the server or in build scripts. ThemeProvider stays a plain CSS scope without
+hooks, React context, observers, or an animation runtime. `themeToCss` exports motion alongside the
+other theme tokens, so custom motion schemes can be delivered entirely as static CSS. Importing a
+component never imports the spring sampler or color generator.
+
+## Six springs per scheme
+
+Each scheme has fast, default, and slow spatial/effects springs. Spatial springs animate position,
+size, scale, corner radii, and shape morphing. Effects springs animate color, opacity, and elevation
+without overshoot. Effects parameters are identical in both official schemes.
+
+| Spring          | Expressive damping / stiffness | Standard damping / stiffness |
+| --------------- | ------------------------------ | ---------------------------- |
+| fast spatial    | 0.6 / 800                      | 0.9 / 1400                   |
+| default spatial | 0.8 / 380                      | 0.9 / 700                    |
+| slow spatial    | 0.8 / 200                      | 0.9 / 300                    |
+| fast effects    | 1 / 3800                       | 1 / 3800                     |
+| default effects | 1 / 1600                       | 1 / 1600                     |
+| slow effects    | 1 / 800                        | 1 / 800                      |
+
+`theme.motion.fast.spatial`, for example, exposes damping, stiffness, duration in milliseconds, and a
+precomputed CSS easing string. The entire motion object is immutable and JSON-serializable.
+Expressive fast spatial has a visible bounce; standard spatial can have a very small overshoot.
+
+## CSS tokens and overrides
+
+Every spring exports four CSS variables. For fast spatial:
+
+```css
+.component {
+  transition:
+    transform var(--md-sys-motion-spring-fast-spatial-duration) var(--md-sys-motion-spring-fast-spatial-easing),
+    opacity var(--md-sys-motion-spring-fast-effects-duration) var(--md-sys-motion-spring-fast-effects-easing);
+}
+```
+
+The corresponding `-damping` and `-stiffness` variables record the physical parameters. CSS does not
+solve springs from these numbers: the browser uses `-duration` and `-easing`. Overriding metadata
+alone does not recalculate a curve. Change the preset through createTheme, or override the actual
+CSS duration/easing together for a deliberate custom transition.
+
+Nested ThemeProviders reset all motion tokens to the default expressive scheme unless supplied a
+different theme. Portals mounted inside their theme scope inherit motion, just like colors and
+breakpoint widths. A custom portal container outside that scope uses the container's theme.
+An inline `theme` takes precedence over stylesheet declarations; use generated theme CSS when you
+want the normal stylesheet cascade to control overrides. Updating a client-rendered ThemeProvider
+selects already-computed CSS values without generating rules or solving springs in the browser.
+
+## Component mapping
+
+- Buttons, IconButton, ButtonGroup, list item shapes, snackbar movement and small popups use fast spatial.
+- Dialog transforms, Collapsible height, Shape morphing, sheet movement and docked Search use default spatial.
+- Full-screen Search geometry uses slow spatial.
+- State-layer opacity, color, elevation and most fades use fast effects. Sheet scrims and Search fades
+  use default effects. Ripple growth uses slow effects and its fade uses fast effects; pointer delay
+  and minimum press lifetime remain interaction timing rather than motion scheme settings.
+- Shape's existing `--md3e-shape-morph-duration` and `--md3e-shape-morph-easing` overrides take precedence
+  over the inherited motion scheme.
+
+Continuous loading indicators, Skeleton pulse/wave cycles, tooltip opening delays and snackbar
+reading time are component/interaction timing, not spring transitions. They retain their timing.
+`prefers-reduced-motion: reduce` disables finite transitions and the existing loading motion regardless
+of the selected scheme. Standard is not a substitute for reduced-motion support.
+
+## Web adaptation and limits
+
+The numerical spring parameters are official MD3/AndroidX values. The conversion is independently
+implemented: unit mass, zero initial velocity, a unit step, and normalized displacement tolerance
+0.001. Underdamped duration uses an exponential envelope so the first target crossing cannot end the
+animation prematurely. Critically damped springs use a monotonic settling check at millisecond
+resolution. Each curve contains 81 equally spaced samples and exact zero/one endpoints.
+
+These durations and sampled curves are a documented web adaptation, not fixed durations mandated by
+Google or an exact implementation of Compose's distance-dependent settling algorithm. CSS linear()
+provides native interpolation. This implementation does not preserve physical velocity when a
+transition is interrupted or retargeted, and does not simulate gesture springs at runtime. Base UI
+continues to own interaction and transition lifecycle behavior.
+
+## Sources and verification
+
+Read on 2026-11-17:
+
+- [Google: motion physics system](https://m3.material.io/styles/motion/overview/how-it-works) and
+  [specifications](https://m3.material.io/styles/motion/overview/specs): two schemes, spatial/effects
+  roles, three speeds, and web adaptation guidance.
+- [AndroidX ExpressiveMotionTokens.kt](https://github.com/androidx/androidx/blob/009564af4f3f92df06e213711cb5327ceabc4e47/compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/tokens/ExpressiveMotionTokens.kt)
+  and [StandardMotionTokens.kt](https://github.com/androidx/androidx/blob/009564af4f3f92df06e213711cb5327ceabc4e47/compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/tokens/StandardMotionTokens.kt),
+  token version v0_14_0. Only numerical parameter data was transcribed; no AndroidX animation implementation is bundled.
+
+The Next fixture `/motion` and Storybook Foundations/Motion demonstrate both schemes. The Storybook
+motion toolbar also applies to existing component stories independently of brand and color scheme.
+Tests cover parameter values, curve endpoints, monotonic effects, numerical reference points,
+actual browser overshoot, static CSS before JavaScript, switching, nested scopes, portals, overrides,
+reduced motion, and absence of runtime rule generation. Browser coverage is currently Chromium.

@@ -1,5 +1,5 @@
 import { css } from '@linaria/core';
-import { color, typography } from '../../styles/theme-tokens';
+import { motion, color, typography } from '../../styles/theme-tokens';
 import type { StyleObject } from '../../styles/style-object.types';
 
 const floating =
@@ -178,8 +178,7 @@ const labelStyles = {
   whiteSpace: 'nowrap',
   textOverflow: 'ellipsis',
   pointerEvents: 'none',
-  transition:
-    'inset-block-start 150ms ease, inset-inline-start 150ms ease, transform 150ms ease, font-size 150ms ease, line-height 150ms ease, letter-spacing 150ms ease, color 150ms ease',
+  transition: `inset-block-start ${motion('spatial')}, inset-inline-start ${motion('spatial')}, transform ${motion('spatial')}, font-size ${motion('spatial')}, line-height ${motion('spatial')}, letter-spacing ${motion('spatial')}, color ${motion('effects')}`,
 } satisfies StyleObject;
 
 export const textFieldLabel = css`

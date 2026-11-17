@@ -1,5 +1,5 @@
 import { css } from '@linaria/core';
-import { color, typography, springCurve } from '../../../styles/theme-tokens';
+import { color, typography, motion } from '../../../styles/theme-tokens';
 import type { StyleObject } from '../../../styles/style-object.types';
 
 const fullScreen = {
@@ -11,7 +11,7 @@ const fullScreen = {
   'padding': 0,
   'borderRadius': 0,
   'backgroundColor': color('surfaceContainerLow'),
-  'transition': `left 400ms ${springCurve}, top 400ms ${springCurve}, inline-size 400ms ${springCurve}, block-size 400ms ${springCurve}, border-radius 400ms ${springCurve}, opacity 150ms ease`,
+  'transition': `left ${motion('spatial', 'slow')}, top ${motion('spatial', 'slow')}, inline-size ${motion('spatial', 'slow')}, block-size ${motion('spatial', 'slow')}, border-radius ${motion('spatial', 'slow')}, opacity ${motion('effects')}`,
   '&[data-starting-style], &[data-ending-style]': {
     left: 'var(--_search-anchor-left, 24px)',
     top: 'var(--_search-anchor-top, 24px)',
@@ -50,7 +50,7 @@ const popupStyles = {
   'color': color('onSurface'),
   'overflow': 'hidden',
   'opacity': 1,
-  'transition': 'opacity 400ms ease',
+  'transition': `opacity ${motion('effects', 'default')}`,
   '&[hidden]': { display: 'none' },
   '&[data-starting-style], &[data-ending-style]': { opacity: 0 },
   '&[data-starting-style] > [data-md3-search-results], &[data-ending-style] > [data-md3-search-results]': {
@@ -76,7 +76,7 @@ const headerStyles = {
   'minBlockSize': 56,
   'boxSizing': 'border-box',
   'transformOrigin': 'center',
-  'transition': `transform 400ms ${springCurve}, padding 400ms ${springCurve}, min-block-size 400ms ${springCurve}`,
+  'transition': `transform ${motion('spatial', 'default')}, padding ${motion('spatial', 'default')}, min-block-size ${motion('spatial', 'default')}`,
   '@media (prefers-reduced-motion: reduce)': { transition: 'none' },
 } satisfies StyleObject;
 
@@ -100,7 +100,7 @@ const resultStyles = {
   'transformOrigin': 'top',
   'transform': 'translateY(0) scaleY(1)',
   'opacity': 1,
-  'transition': `transform 400ms ${springCurve}, opacity 150ms ease`,
+  'transition': `transform ${motion('spatial', 'default')}, opacity ${motion('effects')}`,
   '@media (prefers-reduced-motion: reduce)': { transition: 'none' },
   '@media (forced-colors: active)': { border: '1px solid CanvasText', backgroundColor: 'Canvas', color: 'CanvasText' },
 } satisfies StyleObject;

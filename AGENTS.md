@@ -69,6 +69,9 @@ changing the package. Treat the user's current instructions as the source of tas
 - Generate themes through the separate `/theme` entry in server/build code. Color utilities are
   build dependencies bundled only into that entry. Keep them out of the UI module graph.
 - ThemeProvider is a CSS scope without hooks or React context. Preserve its RSC compatibility.
+- Finite transitions use the shared --md-sys-motion-spring-* tokens. Generate standard/expressive
+  curves in create-motion.ts at build/server time, never in UI code. Honor prefers-reduced-motion;
+  continuous loading/interaction timers are separate from spring motion. See docs/motion.md.
 - Shared layout widths use theme.breakpoints and --md-breakpoint-* CSS variables. Generate native
   media conditions from the same scale at build time with createBreakpointQueries; var() is invalid
   in native @media conditions. Do not add client style observers. See docs/breakpoints.md.

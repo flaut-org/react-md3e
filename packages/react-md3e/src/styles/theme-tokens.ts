@@ -1,6 +1,13 @@
 import defaultTheme from '../theme/default-theme.generated.json';
 import { kebabCase } from '../tokens/material-tokens';
-import type { Breakpoint, ColorRole, TypeScaleRole, TypographyTokenRole } from '../theme/theme.types';
+import type {
+  Breakpoint,
+  ColorRole,
+  MotionKind,
+  MotionSpeed,
+  TypeScaleRole,
+  TypographyTokenRole,
+} from '../theme/theme.types';
 import type { StyleObject } from './style-object.types';
 
 export const breakpoint = (name: Breakpoint) => `var(--md-breakpoint-${name}, ${defaultTheme.breakpoints[name]}px)`;
@@ -23,23 +30,15 @@ export function typography(role: TypeScaleRole, emphasized = false) {
   } satisfies StyleObject;
 }
 
-// Static sampling of the MD3 Expressive fast-spatial spring (stiffness 800, damping 0.6).
-// The browser interpolates a precompiled CSS curve; no JavaScript animation loop is used.
-export const springCurve = `linear(${Array.from({ length: 41 }, (_, index) => {
-  if (index === 0) {
-    return '0';
-  }
+/** Token references and fallback values are resolved by the CSS compiler, never an animation loop. */
+export function motionDuration(kind: MotionKind, speed: MotionSpeed = 'fast') {
+  return `var(--md-sys-motion-spring-${speed}-${kind}-duration, ${defaultTheme.motion[speed][kind].duration}ms)`;
+}
 
-  if (index === 40) {
-    return '1';
-  }
+export function motionEasing(kind: MotionKind, speed: MotionSpeed = 'fast') {
+  return `var(--md-sys-motion-spring-${speed}-${kind}-easing, ${defaultTheme.motion[speed][kind].easing})`;
+}
 
-  const t = (index / 40) * 0.4;
-  const omega = Math.sqrt(800);
-  const damped = omega * Math.sqrt(1 - 0.6 ** 2);
-
-  return (
-    1 -
-    Math.exp(-0.6 * omega * t) * (Math.cos(damped * t) + (0.6 / Math.sqrt(1 - 0.6 ** 2)) * Math.sin(damped * t))
-  ).toFixed(5);
-}).join(', ')})`;
+export function motion(kind: MotionKind, speed: MotionSpeed = 'fast') {
+  return `${motionDuration(kind, speed)} ${motionEasing(kind, speed)}`;
+}

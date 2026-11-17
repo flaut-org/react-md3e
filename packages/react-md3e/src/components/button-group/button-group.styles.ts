@@ -1,5 +1,5 @@
 import { css } from '@linaria/core';
-import { springCurve } from '../../styles/theme-tokens';
+import { motion } from '../../styles/theme-tokens';
 import type { StyleObject } from '../../styles/style-object.types';
 
 const styles = {
@@ -12,7 +12,7 @@ const styles = {
   '& > [data-md3-button]': {
     flex: '1 1 0',
     minInlineSize: 48,
-    transition: `border-radius 400ms ${springCurve}, flex-grow 400ms ${springCurve}`,
+    transition: `border-radius ${motion('spatial')}, flex-grow ${motion('spatial')}`,
   },
   "&[data-group-variant='connected'] > [data-md3-button]": { borderRadius: 'var(--md-sys-shape-corner-small, 8px)' },
   "&[data-group-variant='connected'][data-orientation='horizontal'] > [data-md3-button]:first-child": {

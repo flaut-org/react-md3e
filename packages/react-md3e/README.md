@@ -26,6 +26,14 @@ server-rendered, and hydrates for interaction and the pointer/keyboard ripple. I
 precompiled classes and CSS keyframes. Event handlers use normal React client components. Modern CSS
 light-dark(), color-mix(), and linear() support is required.
 
+`createTheme({ motionScheme: 'standard' })` selects restrained MD3 motion; the default is
+`expressive`. Motion is independent of the color `variant`. All six spatial/effects springs are
+precomputed as CSS tokens; components inherit them through ThemeProvider, including portals and
+nested scopes. Reduced-motion preferences override either scheme. The browser performs CSS
+interpolation without a JavaScript spring engine. See the
+[motion documentation](https://github.com/flaut-org/react-md3e/blob/main/docs/motion.md) for parameters
+and approximation limits.
+
 Button supports filled, tonal, outlined, text, and elevated appearances; five Expressive sizes;
 round/square shapes; disabled state; leading/trailing icons; controlled toggle selection; and press
 ripples with a disableRipple opt-out.

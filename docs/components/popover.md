@@ -137,7 +137,7 @@ AppBar and Dialog.
 The surface uses surfaceContainerHigh/onSurface, bodyLarge typography, large themed corners
 (default 16px), a level-2-style shadow and a 16px inset. These choices are this library's MD3-token
 adaptation for a general anchored form panel; they do not claim an official Google Popover spec.
-Opacity/scale/translation run through compiled 150ms CSS transitions. Reduced motion removes
+Opacity uses the themed fast effects spring; scale/translation use fast spatial, compiled to CSS transitions. Reduced motion removes
 transitions; forced colors adds a system-color surface boundary.
 
 Popover and PopoverClose are client components for Base UI interaction and context. The trigger

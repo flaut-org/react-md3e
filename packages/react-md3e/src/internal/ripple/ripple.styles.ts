@@ -1,4 +1,5 @@
 import { css } from '@linaria/core';
+import { motion } from '../../styles/theme-tokens';
 import type { StyleObject } from '../../styles/style-object.types';
 
 const rippleSurfaceStyles = {
@@ -24,8 +25,8 @@ const rippleInkStyles = {
   'background': 'currentColor',
   'opacity': 0.1,
   'pointerEvents': 'none',
-  'animation': 'ripple-enter 450ms cubic-bezier(0.2, 0, 0, 1) both',
-  'transition': 'opacity 150ms linear',
+  'animation': `ripple-enter ${motion('effects', 'slow')} both`,
+  'transition': `opacity ${motion('effects')}`,
   "&[data-leaving='true']": { opacity: 0 },
   '@keyframes ripple-enter': {
     from: { transform: 'translate(var(--_ripple-start-x), var(--_ripple-start-y)) scale(1)' },

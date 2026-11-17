@@ -1,7 +1,7 @@
 import { css } from '@linaria/core';
 import type { StyleObject } from '../../styles/style-object.types';
 
-import { color, springCurve } from '../../styles/theme-tokens';
+import { color, motion } from '../../styles/theme-tokens';
 
 const buttonRootStyles = {
   '--_height': '40px',
@@ -50,7 +50,7 @@ const buttonRootStyles = {
   'cursor': 'pointer',
   'touchAction': 'manipulation',
   'WebkitTapHighlightColor': 'transparent',
-  'transition': `border-radius 400ms ${springCurve}, box-shadow 150ms ease`,
+  'transition': `border-radius ${motion('spatial')}, box-shadow ${motion('effects')}`,
   "&[data-full-width='true']": { inlineSize: '100%' },
   "&[data-loading='true'] > [data-md3-icon], &[data-loading='true'] > span:not([data-md3-button-loading]):not([aria-hidden])":
     { opacity: 0 },
@@ -62,7 +62,7 @@ const buttonRootStyles = {
     background: 'currentColor',
     opacity: 0,
     pointerEvents: 'none',
-    transition: 'opacity 150ms ease',
+    transition: `opacity ${motion('effects')}`,
   },
   // Expand the hit area to 48px without changing the specified visual height.
   '&::after': {

@@ -37,6 +37,9 @@ import type {
   IconButtonProps,
   Theme,
   ThemeProviderProps,
+  MotionScheme,
+  MotionSpring,
+  MotionTokens,
 } from '@flaut-travel/react-md3e';
 import { Typography } from '@flaut-travel/react-md3e/typography';
 import { Search, SearchBar } from '@flaut-travel/react-md3e/search';
@@ -157,3 +160,13 @@ export const consumer = {
 
 // @ts-expect-error Public types must remain precise through package declarations.
 export const invalidVariant: ButtonProps = { variant: 'contained' };
+
+export const motionScheme: MotionScheme = 'standard';
+export const motionTheme = createTheme({ motionScheme });
+export const spring: MotionSpring = motionTheme.motion.fast.spatial;
+export const motionTokens: MotionTokens = motionTheme.motion;
+export const motionProvider: ThemeProviderProps = { theme: motionTheme };
+// @ts-expect-error Motion and color schemes have distinct names.
+export const invalidMotionScheme: MotionScheme = 'tonalSpot';
+// @ts-expect-error Motion schemes accept the two MD3 presets.
+export const invalidMotionTheme = createTheme({ motionScheme: 'legacy' });

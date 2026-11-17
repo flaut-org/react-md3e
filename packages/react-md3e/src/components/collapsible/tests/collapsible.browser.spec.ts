@@ -1,3 +1,4 @@
+import { createTheme } from '@flaut-travel/react-md3e/theme';
 import { expect, test } from '@playwright/test';
 
 test('Collapsible exposes disclosure semantics and retains mounted state without closed focus targets', async ({
@@ -30,7 +31,10 @@ test('Collapsible measures its content, animates height and reduces motion', asy
 
   await page.getByRole('button', { name: 'Travel details', exact: true }).click();
   await expect(panel).toBeVisible();
-  await expect(panel).toHaveCSS('transition-duration', '0.4s, 0.15s');
+  await expect(panel).toHaveCSS(
+    'transition-duration',
+    `${createTheme().motion.default.spatial.duration / 1000}s, ${createTheme().motion.fast.effects.duration / 1000}s`,
+  );
   await expect.poll(() => panel.evaluate((node) => node.getBoundingClientRect().height)).toBeGreaterThan(80);
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await expect(panel).toHaveCSS('transition-duration', '0s');

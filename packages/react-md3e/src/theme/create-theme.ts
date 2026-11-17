@@ -10,6 +10,7 @@ import {
 
 import { colorRoles, kebabCase, paletteRoles, paletteTones, typeScaleTokenName } from '../tokens/material-tokens';
 import { createBreakpoints } from './create-breakpoints';
+import { createMotion } from './create-motion';
 import { createTypography } from './create-typography';
 import type { ColorRole, ColorScheme, HexColor, PaletteRole, Theme, ThemeOptions } from './theme.types';
 
@@ -33,6 +34,8 @@ function freeze<T>(value: T): T {
 /** Generate serializable MD3 tokens in build scripts or server code, never during client rendering. */
 export function createTheme(options: ThemeOptions = {}): Theme {
   const breakpoints = createBreakpoints(options.breakpoints);
+  const motionScheme = options.motionScheme ?? 'expressive';
+  const { motion, cssVariables: motionVariables } = createMotion(motionScheme);
   const sourceColor = hex(options.sourceColor ?? '#6750a4', 'sourceColor');
   const source = Hct.fromInt(argbFromHex(sourceColor));
   const variant = options.variant ?? 'tonalSpot';
@@ -143,7 +146,7 @@ export function createTheme(options: ThemeOptions = {}): Theme {
     }
   }
 
-  const cssVariables: Record<`--${string}`, string> = {};
+  const cssVariables: Record<`--${string}`, string> = { ...motionVariables };
 
   for (const [name, width] of Object.entries(breakpoints)) {
     cssVariables[`--md-breakpoint-${name}`] = `${width}px`;
@@ -175,6 +178,8 @@ export function createTheme(options: ThemeOptions = {}): Theme {
   }
 
   return freeze({
+    motionScheme,
+    motion,
     breakpoints,
     sourceColor,
     variant,

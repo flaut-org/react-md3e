@@ -1,3 +1,4 @@
+import { createTheme } from '@flaut-travel/react-md3e/theme';
 import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
@@ -200,7 +201,10 @@ test('morph styles arrive without JavaScript and the Storybook demo morphs with 
 
     await server.goto('http://127.0.0.1:3100/surfaces');
     await expect(server.getByTestId('morphing-shape')).toHaveCSS('clip-path', /^polygon\(/);
-    await expect(server.getByTestId('morphing-shape')).toHaveCSS('transition-duration', '0.4s');
+    await expect(server.getByTestId('morphing-shape')).toHaveCSS(
+      'transition-duration',
+      `${createTheme().motion.default.spatial.duration / 1000}s`,
+    );
     await expect(server.getByTestId('server-card-filled')).toHaveAttribute('data-md3-surface', '');
   } finally {
     await context.close();

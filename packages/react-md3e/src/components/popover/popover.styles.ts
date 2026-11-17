@@ -1,5 +1,5 @@
 import { css } from '@linaria/core';
-import { color, typography } from '../../styles/theme-tokens';
+import { motion, color, typography } from '../../styles/theme-tokens';
 import type { StyleObject } from '../../styles/style-object.types';
 
 const portalStyles = { position: 'relative', zIndex: 1400, isolation: 'isolate' } satisfies StyleObject;
@@ -39,7 +39,7 @@ const popupStyles = {
   'opacity': 1,
   'transform': 'translateY(0) scale(1)',
   'transformOrigin': 'var(--transform-origin)',
-  'transition': 'opacity 150ms ease, transform 150ms cubic-bezier(0.2, 0, 0, 1)',
+  'transition': `opacity ${motion('effects')}, transform ${motion('spatial')}`,
   '&[hidden]': { display: 'none' },
   "&[data-match-anchor-width='true']": { inlineSize: 'var(--anchor-width)' },
   "&[data-disable-padding='true']": { padding: 0 },

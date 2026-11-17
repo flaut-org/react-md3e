@@ -66,7 +66,10 @@ test('filled label moves continuously on focus, blur and reversal during an acti
     input.focus();
 
     const entering = pause();
-    const focusFrames = [0, 25, 75, 150].map((time) => seek(entering, time));
+    const enteringDuration = Math.max(
+      ...entering.map((animation) => Number(animation.effect!.getComputedTiming().duration)),
+    );
+    const focusFrames = [0, 0.05, 0.15, 1].map((progress) => seek(entering, enteringDuration * progress));
 
     entering.forEach((animation) => animation.finish());
 
@@ -75,7 +78,10 @@ test('filled label moves continuously on focus, blur and reversal during an acti
     input.blur();
 
     const leaving = pause();
-    const blurFrames = [0, 25, 75, 150].map((time) => seek(leaving, time));
+    const leavingDuration = Math.max(
+      ...leaving.map((animation) => Number(animation.effect!.getComputedTiming().duration)),
+    );
+    const blurFrames = [0, 0.05, 0.15, 1].map((progress) => seek(leaving, leavingDuration * progress));
 
     leaving.forEach((animation) => animation.finish());
     input.focus();

@@ -1,5 +1,5 @@
 import { css } from '@linaria/core';
-import { breakpoint, color, typography } from '../../styles/theme-tokens';
+import { motion, breakpoint, color, typography } from '../../styles/theme-tokens';
 import type { StyleObject } from '../../styles/style-object.types';
 
 const portalStyles = { position: 'relative', zIndex: 1300, isolation: 'isolate' } satisfies StyleObject;
@@ -13,7 +13,7 @@ const backdropStyles = {
   'inset': 0,
   'backgroundColor': `color-mix(in srgb, ${color('scrim')} 32%, transparent)`,
   'opacity': 1,
-  'transition': 'opacity 150ms ease',
+  'transition': `opacity ${motion('effects')}`,
   '&[data-starting-style], &[data-ending-style]': { opacity: 0 },
   '@media (prefers-reduced-motion: reduce)': { transition: 'none' },
 } satisfies StyleObject;
@@ -63,10 +63,9 @@ const popupStyles = {
   'outline': 'none',
   'opacity': 1,
   'transform': 'translateY(0) scale(1)',
-  'transition': 'opacity 150ms ease, transform 200ms cubic-bezier(0.2, 0, 0, 1)',
+  'transition': `opacity ${motion('effects')}, transform ${motion('spatial', 'default')}`,
   'overflowWrap': 'anywhere',
   '&[data-starting-style], &[data-ending-style]': { opacity: 0, transform: 'translateY(8px) scale(0.96)' },
-  '&[data-ending-style]': { transitionDuration: '150ms' },
   // xs is the zero-width range; use MUI's 444px dialog floor for that named cap.
   "&[data-max-width='xs']": { '--md-dialog-max-width': `max(444px, ${breakpoint('xs')})` },
   "&[data-max-width='sm']": { '--md-dialog-max-width': breakpoint('sm') },
