@@ -6,6 +6,7 @@ import '@flaut-travel/react-md3e/card/styles.css';
 import '@flaut-travel/react-md3e/checkbox/styles.css';
 import '@flaut-travel/react-md3e/collapsible/styles.css';
 import '@flaut-travel/react-md3e/divider/styles.css';
+import '@flaut-travel/react-md3e/dialog/styles.css';
 import '@flaut-travel/react-md3e/list/styles.css';
 import '@flaut-travel/react-md3e/popover/styles.css';
 import '@flaut-travel/react-md3e/radio/styles.css';
