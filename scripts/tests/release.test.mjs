@@ -7,9 +7,8 @@ import { test } from 'node:test';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const workspace = fileURLToPath(new URL('../../', import.meta.url));
-const { releaseMetadata, versionPackages, changeChannel, checkRelease, applyDistTag } = await import(
-  pathToFileURL(path.join(workspace, 'scripts/release.mjs')).href
-);
+const { releaseMetadata, versionPackages, changeChannel, checkRelease, applyDistTag, assertTrustedPublisher } =
+  await import(pathToFileURL(path.join(workspace, 'scripts/release.mjs')).href);
 const lib = 'packages/react-md3e/package.json';
 
 async function fixture() {
@@ -207,4 +206,21 @@ test('Changesets packs the explicit plan and emits the Git tag output required b
   } finally {
     await rm(root, { recursive: true, force: true });
   }
+});
+
+test('npm publication requires the canonical OIDC environment and rejects token fallback', () => {
+  const environment = {
+    GITHUB_ACTIONS: 'true',
+    GITHUB_REPOSITORY: 'flaut-org/react-md3e',
+    GITHUB_REF: 'refs/heads/main',
+    ACTIONS_ID_TOKEN_REQUEST_URL: 'https://example.invalid/oidc',
+    ACTIONS_ID_TOKEN_REQUEST_TOKEN: 'ephemeral-fixture-token',
+  };
+
+  assert.doesNotThrow(() => assertTrustedPublisher(environment));
+  assert.throws(() => assertTrustedPublisher({ ...environment, NODE_AUTH_TOKEN: 'bootstrap' }), /OIDC/);
+  assert.throws(() => assertTrustedPublisher({ ...environment, NPM_TOKEN: 'bootstrap' }), /OIDC/);
+  assert.throws(() => assertTrustedPublisher({ ...environment, ACTIONS_ID_TOKEN_REQUEST_TOKEN: '' }), /id-token/);
+  assert.throws(() => assertTrustedPublisher({ ...environment, GITHUB_REF: 'refs/heads/feature' }));
+  assert.throws(() => assertTrustedPublisher({ ...environment, GITHUB_REPOSITORY: 'another/repo' }));
 });

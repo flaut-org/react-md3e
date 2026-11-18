@@ -4,10 +4,11 @@ The npm package is `@flaut-travel/react-md3e`. Its GitHub repository is
 `flaut-org/react-md3e`: the npm organization and GitHub owner deliberately differ.
 Only packages/react-md3e is published; the root and Next fixture remain private.
 
-**Publishing from a developer's computer is not required.** The recommended flow below prepares
-versions and publishes every release, including the first alpha, through GitHub Actions. Maintainers
-review/merge PRs in GitHub. The first publication uses a temporary npm token; subsequent releases
-use npm Trusted Publishing (OIDC) after the package exists.
+**Publishing from a developer's computer is not required.** The recommended flow prepares versions
+and publishes releases through GitHub Actions. Maintainers review/merge PRs in GitHub. The package
+already exists following the initial alpha.1 bootstrap; subsequent publications use npm Trusted
+Publishing (OIDC) exclusively. The only package registry is npmjs.org. GitHub Releases and canonical
+Git tags remain part of release bookkeeping.
 
 ## Execution locations
 
@@ -59,96 +60,37 @@ npm install @flaut-travel/react-md3e@1.0.0-alpha.1
 npm install @flaut-travel/react-md3e
 ```
 
-## First release entirely through CI
+## Trusted Publishing setup: npm/GitHub UI
 
-### 1. GitHub UI: make the release tooling available
+On **npmjs.org → @flaut-travel/react-md3e → Settings → Trusted publishing**, configure:
 
-Commit/push the npm-scope and workflow changes through a normal PR into main. Enable Actions if
-GitHub asks. In **Settings → Actions → General**, enable **Allow GitHub Actions to create and approve
-pull requests**. This allows a release PR to be created; the bot does not approve/merge it.
+| Field                | Value                                                                        |
+| -------------------- | ---------------------------------------------------------------------------- |
+| Organization or user | flaut-org — the GitHub owner                                                 |
+| Repository           | react-md3e                                                                   |
+| Workflow filename    | release.yml — no .github/workflows/ prefix                                   |
+| Environment          | Leave blank; the workflow has no named environment                           |
+| Allowed actions      | Allow npm publish; stage-only permission cannot perform a direct publication |
 
-Keep RELEASE_ENABLED unset until the first-publication credential is ready. Leave the committed
-initial major changeset and alpha pre.json in place: CI will turn version 0.0.0 into 1.0.0-alpha.1.
-**Do not run version-packages locally in this CI-first path.** If a reviewed version PR has already
-prepared alpha.1, do not version again; the workflow can publish that prepared main commit instead.
+**GitHub UI → Settings → Secrets and variables → Actions → Variables:** set RELEASE_ENABLED=true.
+In **Settings → Actions → General**, enable **Allow GitHub Actions to create and approve pull
+requests** so Changesets can create the version PR. The bot does not approve or merge it.
 
-### 2. npm UI: create a temporary first-publication token
+The release job has id-token: write and uses the Node/npm versions pinned by .tool-versions and
+packageManager. It does not load NPM_BOOTSTRAP_TOKEN, NODE_AUTH_TOKEN or NPM_TOKEN. setup-node does
+not create a token-based registry configuration for this job. The publisher requires the GitHub
+OIDC environment and rejects token fallback, so a successful publication validates Trusted Publishing.
+Do not introduce a named GitHub environment without updating the matching npm configuration.
 
-The first npm package must exist before its package Settings can be used to configure a Trusted
-Publisher. For the initial publication, open **npmjs.org → profile → Access Tokens → Generate New
-Token** and create a granular token:
+Keep the existing bootstrap token while validating OIDC if desired; this workflow never reads it.
+After a successful token-free release, delete NPM_BOOTSTRAP_TOKEN from GitHub's Actions secrets,
+and revoke the actual token in **npm UI → Access Tokens**. These are two separate actions.
+First-ever package creation needs a separate bootstrap because the Trusted Publisher configuration
+belongs to an existing npm package; this OIDC-only workflow does not bootstrap new packages.
 
-- Packages and scopes: **Read and write (publish and stage)**, restricted to the `@flaut-travel` scope.
-  The scope permission must cover creating the new react-md3e package, not only existing packages.
-- Enable **Bypass two-factor authentication** for noninteractive publication when required by npm.
-- Choose a short expiration. The account must already have permission to publish in flaut-travel.
-- Organization-administration permission alone does not grant package publication permission.
-
-If npm/account policy does not permit a CI publishing token, use the local first-publication
-alternative below, then return to the OIDC setup. Do not place a token in source, a changeset, or
-an Actions repository variable. Do not send it in chat.
-
-### 3. GitHub UI: store the token and enable Release
-
-In **Settings → Secrets and variables → Actions → Secrets**, create a **repository secret**:
-
-```text
-NPM_BOOTSTRAP_TOKEN = the temporary npm token
-```
-
-The release job's setup-node configures npmjs.org authentication, and this secret is supplied as
-NODE_AUTH_TOKEN only to the Changesets step. It is not given to PR CI or the verification job.
-
-In the **Variables** tab, create an **Actions repository variable** (not a secret):
-
-```text
-RELEASE_ENABLED = true
-```
-
-### 4. GitHub UI → CI runner: prepare the first version PR
-
-Open **Actions → Release → Run workflow**, select **main**, then click **Run workflow**.
-This starts .github/workflows/release.yml. The runner verifies the exact commit with npm run check,
-then sees the pending initial changeset and opens/updates **changeset-release/main** with
-**1.0.0-alpha.1**, CHANGELOG.md, archived prerelease notes, fixture dependency and package-lock.json.
-
-Wait for the workflow and inspect its logs/PR. This preparation run does not publish while a version
-PR is still pending. Review and merge the generated PR when ready. No local login, npm publish,
-version-packages, Git tag or GitHub Release command is needed in this path.
-
-### 5. CI: publish the reviewed alpha
-
-Merging the version PR into main starts **Release** again automatically. It verifies the merged
-commit, builds/packs the UI package, publishes **@flaut-travel/react-md3e@1.0.0-alpha.1** to npm,
-pushes its tag, and creates a GitHub **prerelease** using the matching changelog entry.
-
-Inspect **Actions → Release → the run for the merged main commit**, then check **GitHub → Releases**
-and the package page on npmjs.org. If the automatic run did not start, launch **Release → Run
-workflow → main**. Do not launch it on a feature or release-PR branch; those branches are skipped.
-
-### 6. npm UI: configure token-free publication
-
-On **npmjs.org → @flaut-travel/react-md3e → Settings → Trusted publishing**, add GitHub Actions:
-
-| Field                | Value                                                               |
-| -------------------- | ------------------------------------------------------------------- |
-| Organization or user | **flaut-org** — the GitHub owner, not flaut-travel                  |
-| Repository           | react-md3e                                                          |
-| Workflow filename    | release.yml — filename only, no .github/workflows/ prefix           |
-| Environment          | Leave blank; the workflow has no named environment                  |
-| Allowed actions      | Allow direct **npm publish**; stage-only permission is insufficient |
-
-Then, in **GitHub UI**, delete the NPM_BOOTSTRAP_TOKEN repository secret; in **npm UI**, revoke that
-temporary token. Subsequent runs use the existing id-token: write permission and npm's OIDC
-credential discovery. Keep RELEASE_ENABLED=true. No permanent NPM_TOKEN secret is needed.
-
-A newly configured Trusted Publisher must complete its first successful automated publication
-within two days. Configure it when ready for the next genuine alpha/beta release. A no-op run of
-Release does not validate it. Recreate an expired configuration if needed. After token removal,
-check that the next publication succeeds through OIDC; public OIDC publications get npm provenance.
-
-The repository does not configure external account settings or perform these UI steps for you.
-Do not change the GitHub repository URL/owner just to match the npm organization name.
+**GitHub UI → Actions → Release → Run workflow → main:** leaving the current channel state intact
+runs the normal verified Changesets flow. If a version PR is pending, review/check/merge it first;
+the resulting main run performs the actual OIDC publication. Do not version a second time locally.
 
 ## Regular releases: local change, GitHub review, CI publication
 
@@ -215,36 +157,6 @@ and create a stable GitHub Release. The version PR removes pre.json and includes
 For a later prerelease series, **local terminal**, maintenance branch: run npm run release:alpha,
 add the appropriate minor/major changeset, then commit and open a PR. The current workflow targets
 main; use a separate branch/workflow strategy if stable maintenance must continue concurrently.
-
-## Optional local bootstrap instead of a temporary CI token
-
-This is an alternative to the CI-first bootstrap, not a second publication of the same version.
-Keep RELEASE_ENABLED unset. **Local terminal**, release branch, repository root:
-
-```sh
-asdf install
-asdf exec npm ci
-asdf exec npm run version-packages
-asdf exec npm run release:check
-asdf exec npm exec -- playwright install chromium
-asdf exec npm run check
-```
-
-Commit/review/merge the prepared candidate through a PR. **Local terminal**, updated main at the
-exact reviewed release commit:
-
-```sh
-asdf exec npm login --registry=https://registry.npmjs.org
-asdf exec npm run release:check
-asdf exec npm publish --workspace=@flaut-travel/react-md3e --access public --tag alpha --registry=https://registry.npmjs.org
-asdf exec npm run changeset -- git-tag
-# For the prepared first alpha only:
-git push origin '@flaut-travel/react-md3e@1.0.0-alpha.1'
-```
-
-This publishes publicly. **GitHub UI → Releases → Draft a new release:** choose that tag, copy the
-matching CHANGELOG.md notes, and enable Set as a pre-release. Then follow the npm/GitHub UI OIDC
-setup above and set RELEASE_ENABLED=true. Do not also trigger a second publish for the same bytes.
 
 ## Diagnostics and recovery: choose the correct location
 
