@@ -147,6 +147,20 @@ export function applyDistTag(plan, metadata) {
   return plan;
 }
 
+export function assertTrustedPublisher(environment) {
+  assert.equal(environment.GITHUB_ACTIONS, 'true', 'Automated publishing runs only in GitHub Actions.');
+  assert.equal(environment.GITHUB_REPOSITORY, 'flaut-org/react-md3e');
+  assert.equal(environment.GITHUB_REF, 'refs/heads/main');
+  assert.ok(
+    environment.ACTIONS_ID_TOKEN_REQUEST_URL && environment.ACTIONS_ID_TOKEN_REQUEST_TOKEN,
+    'The npm publish job requires id-token: write for Trusted Publishing.',
+  );
+  assert.ok(
+    !environment.NODE_AUTH_TOKEN && !environment.NPM_TOKEN,
+    'npm publication must use OIDC without a long-lived token fallback.',
+  );
+}
+
 async function publish(metadata) {
   const directory = await mkdtemp(path.join(os.tmpdir(), 'react-md3e-publish-'));
   const planPath = path.join(directory, 'plan.json');
@@ -183,9 +197,7 @@ async function main() {
     process.stdout.write(`${JSON.stringify(metadata)}\n`);
 
     if (command === 'publish') {
-      assert.equal(process.env.GITHUB_ACTIONS, 'true', 'Automated publishing runs only in GitHub Actions.');
-      assert.equal(process.env.GITHUB_REPOSITORY, 'flaut-org/react-md3e');
-      assert.equal(process.env.GITHUB_REF, 'refs/heads/main');
+      assertTrustedPublisher(process.env);
       await publish(metadata);
     }
   } else {
