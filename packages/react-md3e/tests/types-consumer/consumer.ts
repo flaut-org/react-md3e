@@ -1,12 +1,8 @@
-import { Skeleton } from '@flaut-travel/react-md3e/skeleton';
-import { Divider } from '@flaut-travel/react-md3e/divider';
-import { Tooltip } from '@flaut-travel/react-md3e/tooltip';
-import { Collapsible } from '@flaut-travel/react-md3e/collapsible';
-import { ButtonGroup, ButtonGroupButton } from '@flaut-travel/react-md3e/button-group';
-import { BottomSheet } from '@flaut-travel/react-md3e/bottom-sheet';
-import { SideSheet } from '@flaut-travel/react-md3e/side-sheet';
-import { Snackbar } from '@flaut-travel/react-md3e/snackbar';
+import { Calendar, CalendarDay } from '@flaut-travel/react-md3e/calendar';
+import { RangeCalendar } from '@flaut-travel/react-md3e/range-calendar';
 import type {
+  CalendarProps,
+  RangeCalendarProps,
   SkeletonProps,
   DividerProps,
   TooltipProps,
@@ -41,6 +37,14 @@ import type {
   MotionSpring,
   MotionTokens,
 } from '@flaut-travel/react-md3e';
+import { Skeleton } from '@flaut-travel/react-md3e/skeleton';
+import { Divider } from '@flaut-travel/react-md3e/divider';
+import { Tooltip } from '@flaut-travel/react-md3e/tooltip';
+import { Collapsible } from '@flaut-travel/react-md3e/collapsible';
+import { ButtonGroup, ButtonGroupButton } from '@flaut-travel/react-md3e/button-group';
+import { BottomSheet } from '@flaut-travel/react-md3e/bottom-sheet';
+import { SideSheet } from '@flaut-travel/react-md3e/side-sheet';
+import { Snackbar } from '@flaut-travel/react-md3e/snackbar';
 import { Typography } from '@flaut-travel/react-md3e/typography';
 import { Search, SearchBar } from '@flaut-travel/react-md3e/search';
 import { Surface } from '@flaut-travel/react-md3e/surface';
@@ -68,6 +72,11 @@ const buttonProps: ButtonProps = { variant: 'tonal', endIcon: '→', selected: t
 const providerProps: ThemeProviderProps = { theme, colorScheme: 'dark' };
 
 export const consumer = {
+  Calendar,
+  CalendarDay,
+  RangeCalendar,
+  calendarProps: { defaultValue: '2024-02-29', onChange: (day) => day.day } satisfies CalendarProps,
+  rangeCalendarProps: { defaultValue: ['2024-02-29', null], calendars: 2 } satisfies RangeCalendarProps,
   Skeleton,
   Divider,
   Tooltip,

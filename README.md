@@ -3,7 +3,13 @@
 An independent React library for Material 3 Expressive, with server-compatible components,
 build-time CSS, and a token-based theme API inspired by Google's Material Theme Builder.
 
-Implemented: Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Radio/RadioGroup, Avatar, TextField, Autocomplete, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, BottomSheet, SideSheet, Snackbar, ThemeProvider, createTheme, static theme export, and Storybook. The first
+Calendar and RangeCalendar provide inline Temporal-based date selection with animated month changes,
+keyboard navigation, Intl localization and one-to-three-panel ranges. Import `/calendar/styles.css`
+or `/range-calendar/styles.css` at the composition boundary. See [Calendar](docs/components/calendar.md)
+for the MUI-style API, ISO/Temporal values and native-runtime requirements. Working examples are at
+`/calendars` in the Next fixture and Components/Calendar and Components/RangeCalendar in Storybook.
+
+Implemented: Calendar, RangeCalendar, Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Radio/RadioGroup, Avatar, TextField, Autocomplete, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, BottomSheet, SideSheet, Snackbar, ThemeProvider, createTheme, static theme export, and Storybook. The first
 consumer milestone remains Flaut's complete homepage; it has not been migrated yet.
 
 ## Local development

@@ -172,7 +172,17 @@
       "types": "./dist/components/progress-indicator/index.d.ts",
       "import": "./dist/progress-indicator.js"
     },
-    "./progress-indicator/styles.css": "./dist/progress-indicator.css"
+    "./progress-indicator/styles.css": "./dist/progress-indicator.css",
+    "./calendar": {
+      "types": "./dist/components/calendar/index.d.ts",
+      "import": "./dist/calendar.js"
+    },
+    "./calendar/styles.css": "./dist/calendar.css",
+    "./range-calendar": {
+      "types": "./dist/components/range-calendar/index.d.ts",
+      "import": "./dist/range-calendar.js"
+    },
+    "./range-calendar/styles.css": "./dist/range-calendar.css"
   },
   "scripts": {
     "clean": "node ../../scripts/clean-package.mjs",

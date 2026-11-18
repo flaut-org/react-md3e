@@ -23,6 +23,7 @@ export default function Page() {
 ```
 
 Every UI subpath has a CSS export: `/button/styles.css`, `/icon-button/styles.css`,
+`/calendar/styles.css`, `/range-calendar/styles.css`,
 `/app-bar/styles.css`, `/dialog/styles.css`, `/list/styles.css`, `/checkbox/styles.css`,
 `/radio/styles.css`, `/radio-group/styles.css`, `/avatar/styles.css`, `/text-field/styles.css`,
 `/autocomplete/styles.css`, `/popover/styles.css`, `/surface/styles.css`, `/card/styles.css`,

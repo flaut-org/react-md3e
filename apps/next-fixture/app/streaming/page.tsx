@@ -25,6 +25,7 @@ import '@flaut-travel/react-md3e/button/styles.css';
 import '@flaut-travel/react-md3e/loading-indicator/styles.css';
 import '@flaut-travel/react-md3e/progress-indicator/styles.css';
 import '@flaut-travel/react-md3e/icon-button/styles.css';
+import '@flaut-travel/react-md3e/range-calendar/styles.css';
 
 import { Suspense } from 'react';
 import { AppBar, Button, ThemeProvider, LoadingIndicator, ProgressIndicator } from '@flaut-travel/react-md3e';

@@ -121,6 +121,19 @@ execFileSync(
 
 const button = await readFile(path.join(packageRoot, 'dist/components/button/button.component.js'), 'utf8');
 
+for (const name of ['calendar', 'range-calendar']) {
+  const calendar = await readFile(path.join(packageRoot, `dist/components/${name}/${name}.component.js`), 'utf8');
+
+  assert.match(calendar, /^['"]use client['"]/m, `${name} must preserve its interactive client boundary.`);
+}
+
+const rangeCalendar = await readFile(
+  path.join(packageRoot, 'dist/components/range-calendar/range-calendar.component.js'),
+  'utf8',
+);
+
+assert.match(rangeCalendar, /calendar\/calendar\.component/, 'RangeCalendar must compose Calendar.');
+
 assert.match(button, /^['"]use client['"]/m, 'Interactive Button must preserve its client boundary.');
 assert.match(button, /@base-ui\/react\/button/, 'Button must compose the Base UI primitive.');
 
@@ -332,6 +345,16 @@ assert.ok(
     progressCss.includes('md3-circular-wave'),
 );
 assert.ok(progressCss.includes('@property --md3e-progress-linear-first-tail') && progressCss.includes('intersect'));
+
+const calendarStyles = new Set();
+const calendarCss = await readCssTree(manifest.exports['./range-calendar/styles.css'], calendarStyles);
+
+assert.ok([...calendarStyles].some((file) => file.includes('/calendar/')));
+assert.ok([...calendarStyles].some((file) => file.includes('/icon-button/')));
+assert.ok([...calendarStyles].some((file) => file.includes('/internal/ripple/')));
+assert.ok(![...calendarStyles].some((file) => file.includes('/shape/')));
+assert.ok(![...calendarStyles].some((file) => file.includes('/surface/')));
+assert.ok(calendarCss.includes('md3-calendar-enter') && calendarCss.includes('prefers-reduced-motion'));
 
 const css = await readCssTree(manifest.exports['./styles.css']);
 
