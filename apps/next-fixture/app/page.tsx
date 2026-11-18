@@ -52,6 +52,9 @@ export default function Page() {
         <Link href="/essentials">Homepage essentials</Link>
       </p>
       <p>
+        <Link href="/indicators">Loading and progress indicators</Link>
+      </p>
+      <p>
         <Link href="/typography">Typography examples</Link>
       </p>
       <p>

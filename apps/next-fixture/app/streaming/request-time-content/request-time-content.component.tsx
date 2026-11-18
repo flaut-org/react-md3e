@@ -1,5 +1,7 @@
 import { connection } from 'next/server';
 import {
+  LoadingIndicator,
+  ProgressIndicator,
   Search,
   SearchBar,
   Skeleton,
@@ -40,6 +42,13 @@ export async function RequestTimeContent() {
 
   return (
     <div data-fixture="streaming-ready">
+      <LoadingIndicator variant="contained" aria-label="Streamed loading" data-testid="streamed-loading-indicator" />
+      <ProgressIndicator
+        value={65}
+        appearance="wavy"
+        aria-label="Streamed progress"
+        data-testid="streamed-progress-indicator"
+      />
       <Skeleton width={160} data-testid="streamed-skeleton" />
       <Divider data-testid="streamed-divider" />
       <Tooltip title="Streamed tooltip">

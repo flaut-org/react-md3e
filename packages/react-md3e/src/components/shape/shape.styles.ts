@@ -1,8 +1,8 @@
 import { css } from '@linaria/core';
 import { color, motionDuration, motionEasing } from '../../styles/theme-tokens';
 import { surfaceColorStyles } from '../../styles/surface-colors';
-import { shapePaths } from './shape-paths.generated';
-import { createShapePolygon } from './shape-morph.helpers';
+import { shapePaths } from '../../tokens/shape-paths.generated';
+import { createShapePolygon } from '../../styles/shape-morph';
 import type { ShapeVariant } from './shape.types';
 import type { StyleObject } from '../../styles/style-object.types';
 

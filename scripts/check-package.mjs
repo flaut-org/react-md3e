@@ -100,6 +100,8 @@ const dividerUrl = new URL('../packages/react-md3e/dist/divider.js', import.meta
 const typographyUrl = new URL('../packages/react-md3e/dist/typography.js', import.meta.url).href;
 const surfaceUrl = new URL('../packages/react-md3e/dist/surface.js', import.meta.url).href;
 const shapeUrl = new URL('../packages/react-md3e/dist/shape.js', import.meta.url).href;
+const loadingIndicatorUrl = new URL('../packages/react-md3e/dist/loading-indicator.js', import.meta.url).href;
+const progressIndicatorUrl = new URL('../packages/react-md3e/dist/progress-indicator.js', import.meta.url).href;
 const cardUrl = new URL('../packages/react-md3e/dist/components/card/card.component.js', import.meta.url).href;
 const providerUrl = new URL(
   '../packages/react-md3e/dist/theme/theme-provider/theme-provider.component.js',
@@ -112,7 +114,7 @@ execFileSync(
     '--conditions=react-server',
     '--input-type=module',
     '--eval',
-    `await import(${JSON.stringify(skeletonUrl)}); await import(${JSON.stringify(dividerUrl)}); await import(${JSON.stringify(typographyUrl)}); await import(${JSON.stringify(surfaceUrl)}); await import(${JSON.stringify(shapeUrl)}); await import(${JSON.stringify(cardUrl)}); await import(${JSON.stringify(staticListUrl)}); await import(${JSON.stringify(selectionIndicatorUrl)}); await import(${JSON.stringify(appBarUrl)}); await import(${JSON.stringify(dialogContentUrl)}); await import(${JSON.stringify(dialogActionsUrl)}); await import(${JSON.stringify(providerUrl)}); await import('@flaut-travel/react-md3e/theme');`,
+    `await import(${JSON.stringify(loadingIndicatorUrl)}); await import(${JSON.stringify(progressIndicatorUrl)}); await import(${JSON.stringify(skeletonUrl)}); await import(${JSON.stringify(dividerUrl)}); await import(${JSON.stringify(typographyUrl)}); await import(${JSON.stringify(surfaceUrl)}); await import(${JSON.stringify(shapeUrl)}); await import(${JSON.stringify(cardUrl)}); await import(${JSON.stringify(staticListUrl)}); await import(${JSON.stringify(selectionIndicatorUrl)}); await import(${JSON.stringify(appBarUrl)}); await import(${JSON.stringify(dialogContentUrl)}); await import(${JSON.stringify(dialogActionsUrl)}); await import(${JSON.stringify(providerUrl)}); await import('@flaut-travel/react-md3e/theme');`,
   ],
   { cwd: workspaceRoot, stdio: 'pipe' },
 );
@@ -132,7 +134,16 @@ assert.match(iconButton, /^['"]use client['"]/m, 'Interactive IconButton must pr
 assert.match(iconButton, /@base-ui\/react\/button/, 'IconButton must compose the Base UI primitive.');
 assert.doesNotMatch(appBar, /use client|useEffect|useState|@base-ui/, 'AppBar must remain a server component.');
 
-for (const name of ['surface', 'shape', 'card', 'typography', 'skeleton', 'divider']) {
+for (const name of [
+  'surface',
+  'shape',
+  'card',
+  'typography',
+  'skeleton',
+  'divider',
+  'loading-indicator',
+  'progress-indicator',
+]) {
   const code = await readFile(path.join(packageRoot, `dist/components/${name}/${name}.component.js`), 'utf8');
 
   assert.doesNotMatch(
@@ -247,7 +258,7 @@ async function inspectUi(relative) {
 
   assert.ok(!absolute.endsWith('/dist/theme.js'), 'The color generator leaked into the UI graph.');
   assert.ok(
-    !/@linaria|@wyw-in-js|@emotion|@material|insertRule|createTheme|TonalPalette|HctSolver|shapePaths|encodeURIComponent|RoundedPolygon|elevationShadow|surfaceColorStyles|createShapePolygon|createTypography|createMotion|createSpring|emphasizedTypeScale|typeScaleTokenName/.test(
+    !/@linaria|@wyw-in-js|@emotion|@material|insertRule|createTheme|TonalPalette|HctSolver|shapePaths|encodeURIComponent|RoundedPolygon|elevationShadow|surfaceColorStyles|createShapePolygon|createLoadingPolygons|createTypography|createMotion|createSpring|linearWaveMask|circularWave|waveFrames|emphasizedTypeScale|typeScaleTokenName/.test(
       code,
     ),
     `Styling or generation runtime leaked into ${relative}`,
@@ -304,6 +315,23 @@ for (const [name, target] of Object.entries(manifest.exports)) {
     await readCssTree(target);
   }
 }
+
+const loadingStyles = new Set();
+const loadingCss = await readCssTree(manifest.exports['./loading-indicator/styles.css'], loadingStyles);
+const progressCss = await readCssTree(manifest.exports['./progress-indicator/styles.css']);
+
+assert.ok(loadingCss.includes('md3-loading-morph') && loadingCss.includes('polygon('));
+assert.ok(
+  ![...loadingStyles].some((file) => file.includes('/shape/')),
+  'A loader must not pull in the complete Shape stylesheet.',
+);
+assert.ok(!loadingCss.includes('data-variant=flower'), 'LoadingIndicator only ships its required silhouettes.');
+assert.ok(
+  progressCss.includes('md3-linear-first') &&
+    progressCss.includes('md3-linear-second') &&
+    progressCss.includes('md3-circular-wave'),
+);
+assert.ok(progressCss.includes('@property --md3e-progress-linear-first-tail') && progressCss.includes('intersect'));
 
 const css = await readCssTree(manifest.exports['./styles.css']);
 

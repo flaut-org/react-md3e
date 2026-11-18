@@ -17,7 +17,7 @@ changing the package. Treat the user's current instructions as the source of tas
 - Styling must never force `'use client'`. Only actual state, event handling, browser APIs, or
   interactive primitives justify a client entry point. A styled client component remains a client
   component; a server component must stay importable from RSC.
-- The foundation milestone is complete. Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Radio/RadioGroup, Avatar, TextField, Autocomplete, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, BottomSheet, SideSheet, Snackbar, and ThemeProvider are implemented. Keep changes
+- The foundation milestone is complete. Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Radio/RadioGroup, Avatar, TextField, Autocomplete, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, BottomSheet, SideSheet, Snackbar, LoadingIndicator, ProgressIndicator, and ThemeProvider are implemented. Keep changes
   scoped to the user's requested components; do not expand the full MUI catalog.
 
 ## Structure and public API
@@ -71,7 +71,12 @@ changing the package. Treat the user's current instructions as the source of tas
 - ThemeProvider is a CSS scope without hooks or React context. Preserve its RSC compatibility.
 - Finite transitions use the shared --md-sys-motion-spring-* tokens. Generate standard/expressive
   curves in create-motion.ts at build/server time, never in UI code. Honor prefers-reduced-motion;
-  continuous loading/interaction timers are separate from spring motion. See docs/motion.md.
+  circular progress indicator windup and sweeps also use these curves. Linear indeterminate
+  progress owns two monotonic staggered passes; do not apply overshooting springs to their edges.
+  LoadingIndicator owns a fixed,
+  video-calibrated monotonic choreography; do not apply overshooting theme springs to its rotation.
+  Continuous carrier rotations, texture phases, and interaction timers keep their own cycle timing.
+  See docs/motion.md.
 - Shared layout widths use theme.breakpoints and --md-breakpoint-* CSS variables. Generate native
   media conditions from the same scale at build time with createBreakpointQueries; var() is invalid
   in native @media conditions. Do not add client style observers. See docs/breakpoints.md.

@@ -14,7 +14,8 @@ no hydration when used from RSC. ThemeProvider and style modules remain server-c
 client context.
 
 MUI conventions may be reused where appropriate, but there is no runtime/type dependency or promise
-of MD2 compatibility. Current implementation contains no copied MUI source.
+of MD2 compatibility. Linear indeterminate progress adapts MUI's numerical animation parameters under MIT, recorded
+in the package's THIRD_PARTY_NOTICES.md; it has no runtime coupling to MUI.
 
 Flaut search, fetching, analytics, routing, currency, and calendar-price logic remain in the
 application. The first migration target is the complete homepage.
@@ -47,6 +48,7 @@ exports without aliases to source.
 - `src/components/dialog`: Base UI modal, accessible title/description, server-compatible content
   and actions, and extracted appearance.
 - `src/components/surface`: server-compatible themed surfaces, corners and elevation.
+- `src/components/loading-indicator`, `src/components/progress-indicator`: passive RSC progress semantics, build-time geometry and CSS-only timelines; shared range logic in `src/internal/indicators`.
 - `src/components/shape`: build-time Expressive masks and compatible morph contours, independent
   of ordinary surface corners.
 - `src/components/card`: Surface-based static composition with an isolated client action area.

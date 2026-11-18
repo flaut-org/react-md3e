@@ -1,7 +1,7 @@
 # Offline Material shape export
 
 Normal package builds need only the pinned Node.js/asdf toolchain. The 35 paths are checked into
-`src/components/shape/shape-paths.generated.ts`; Linaria encodes them into CSS at build time. No
+`src/tokens/shape-paths.generated.ts`; Linaria encodes them into CSS at build time. No
 geometry library or path generation is used by a component at runtime.
 
 `ExportShapes.kt` adapts the original Apache-2.0 AndroidX MaterialShapes definitions at
@@ -15,7 +15,7 @@ Rounding and normalization use Google's unmodified graphics-shapes JVM artifact.
 approximated with a hand-drawn star or polygon. This exporter supplies exact static cubic contours.
 
 The normal Node/Linaria build derives compatible 256-point polygons from those checked-in paths in
-shape-morph.helpers.ts, with consistent winding/phase and sharp-corner samples. These approximations
+src/styles/shape-morph.ts, with consistent winding/phase and sharp-corner samples. These approximations
 support CSS-only morphing; they do not require rerunning the Java exporter. Exact SVG masks remain
 available through morph=false. No sampler or animation geometry enters the UI JavaScript graph.
 

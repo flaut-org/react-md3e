@@ -148,3 +148,18 @@ export type { SideSheetProps, SideSheetCloseReason } from './components/side-she
 
 export { Snackbar } from './components/snackbar';
 export type { SnackbarProps, SnackbarCloseReason } from './components/snackbar';
+
+export { LoadingIndicator } from './components/loading-indicator';
+export type {
+  LoadingIndicatorProps,
+  LoadingIndicatorVariant,
+  LoadingIndicatorColor,
+} from './components/loading-indicator';
+export { ProgressIndicator } from './components/progress-indicator';
+export type {
+  ProgressIndicatorProps,
+  ProgressIndicatorType,
+  ProgressIndicatorVariant,
+  ProgressIndicatorAppearance,
+  ProgressIndicatorColor,
+} from './components/progress-indicator';

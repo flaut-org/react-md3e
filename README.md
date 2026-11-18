@@ -156,3 +156,11 @@ Changesets prepares release PRs and changelogs for the public npm package. Alpha
 own npm channels and GitHub prereleases; stable versions use latest. Read [release instructions](docs/releases.md)
 for CI-first 1.0.0-alpha.1 publishing, npm Trusted Publishing, and the exact GitHub/npm UI steps.
 No package has been published by this setup.
+
+LoadingIndicator and ProgressIndicator are exported from the root and `/loading-indicator` /
+`/progress-indicator`. They remain RSC-compatible and use precompiled CSS: import the corresponding
+`/<component>/styles.css` entries. LoadingIndicator morphs seven MD3 shapes (contained/uncontained)
+and accepts controlled progress; ProgressIndicator provides linear/circular flat/wavy displays,
+known/unknown progress, 4/8 thicknesses and accessible finite ranges. Both support themes,
+reduced motion and forced colors. See the repository's docs/components/loading-indicator.md and
+docs/components/progress-indicator.md; the fixture `/indicators` and Storybook have working examples.

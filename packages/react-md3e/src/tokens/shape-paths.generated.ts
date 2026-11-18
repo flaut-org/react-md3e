@@ -5,7 +5,9 @@
  * using androidx.graphics:graphics-shapes-desktop:1.0.1. Do not edit paths by hand.
  * See scripts/shapes/README.md and licenses/androidx-material-shapes.txt.
  */
-import type { ShapeVariant } from './shape.types';
+import type { shapeVariants } from './shape-variants';
+
+type ShapeVariant = (typeof shapeVariants)[number];
 
 export const shapePaths: Readonly<Record<ShapeVariant, string>> = {
   circle:

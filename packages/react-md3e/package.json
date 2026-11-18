@@ -162,7 +162,17 @@
     "./button-group/styles.css": "./dist/button-group.css",
     "./bottom-sheet/styles.css": "./dist/bottom-sheet.css",
     "./side-sheet/styles.css": "./dist/side-sheet.css",
-    "./snackbar/styles.css": "./dist/snackbar.css"
+    "./snackbar/styles.css": "./dist/snackbar.css",
+    "./loading-indicator": {
+      "types": "./dist/components/loading-indicator/index.d.ts",
+      "import": "./dist/loading-indicator.js"
+    },
+    "./loading-indicator/styles.css": "./dist/loading-indicator.css",
+    "./progress-indicator": {
+      "types": "./dist/components/progress-indicator/index.d.ts",
+      "import": "./dist/progress-indicator.js"
+    },
+    "./progress-indicator/styles.css": "./dist/progress-indicator.css"
   },
   "scripts": {
     "clean": "node ../../scripts/clean-package.mjs",
