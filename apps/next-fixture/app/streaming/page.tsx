@@ -22,10 +22,12 @@ import '@flaut-travel/react-md3e/tooltip/styles.css';
 import '@flaut-travel/react-md3e/typography/styles.css';
 import '@flaut-travel/react-md3e/app-bar/styles.css';
 import '@flaut-travel/react-md3e/button/styles.css';
+import '@flaut-travel/react-md3e/loading-indicator/styles.css';
+import '@flaut-travel/react-md3e/progress-indicator/styles.css';
 import '@flaut-travel/react-md3e/icon-button/styles.css';
 
 import { Suspense } from 'react';
-import { AppBar, Button, ThemeProvider } from '@flaut-travel/react-md3e';
+import { AppBar, Button, ThemeProvider, LoadingIndicator, ProgressIndicator } from '@flaut-travel/react-md3e';
 import { RequestTimeContent } from './request-time-content/request-time-content.component';
 
 export default function StreamingPage() {
@@ -38,6 +40,8 @@ export default function StreamingPage() {
           fallback={
             <div data-fixture="streaming-loading">
               <Button disabled>Waiting for request-time content</Button>
+              <LoadingIndicator aria-label="Loading streamed content" data-testid="streaming-loading-indicator" />
+              <ProgressIndicator aria-label="Preparing streamed content" />
             </div>
           }
         >

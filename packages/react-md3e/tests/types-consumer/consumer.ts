@@ -170,3 +170,6 @@ export const motionProvider: ThemeProviderProps = { theme: motionTheme };
 export const invalidMotionScheme: MotionScheme = 'tonalSpot';
 // @ts-expect-error Motion schemes accept the two MD3 presets.
 export const invalidMotionTheme = createTheme({ motionScheme: 'legacy' });
+
+export const loadingModule = import('@flaut-travel/react-md3e/loading-indicator');
+export const progressModule = import('@flaut-travel/react-md3e/progress-indicator');

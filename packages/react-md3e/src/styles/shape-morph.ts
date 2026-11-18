@@ -153,14 +153,15 @@ function sampleDistances(contour: Contour, start: number): number[] {
   return distances;
 }
 
-export function createShapePolygon(path: string): string {
+export function createShapePolygon(path: string, fitCircle = false): string {
   const contour = measureContour(samplePath(path));
   const distances = sampleDistances(contour, findStart(contour));
-  const points = distances.map((distance) => {
-    const point = pointAt(contour, distance);
-
-    return `${Number((point[0] * 100).toFixed(4))}% ${Number((point[1] * 100).toFixed(4))}%`;
-  });
+  const samples = distances.map((distance) => pointAt(contour, distance));
+  const scale = fitCircle ? 0.5 / Math.max(...samples.map(([x, y]) => Math.hypot(x - 0.5, y - 0.5))) : 1;
+  const points = samples.map(
+    ([x, y]) =>
+      `${Number(((0.5 + (x - 0.5) * scale) * 100).toFixed(4))}% ${Number(((0.5 + (y - 0.5) * scale) * 100).toFixed(4))}%`,
+  );
 
   return `polygon(${points.join(', ')})`;
 }

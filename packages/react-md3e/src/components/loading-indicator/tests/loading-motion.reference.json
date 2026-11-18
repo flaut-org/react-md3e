@@ -1,0 +1,142 @@
+{
+  "source": "User-supplied recording, 2026-11-17: numerical contour/rotation measurements only.",
+  "cycleMs": 4666,
+  "phaseMs": 2652.7,
+  "outerPhaseMs": 2646.2,
+  "frameSize": 250,
+  "groups": [
+    {
+      "name": "cookie4Sided",
+      "frames": [
+        {
+          "timeMs": 300,
+          "angle": 0
+        },
+        {
+          "timeMs": 391.6667,
+          "angle": 17.6138
+        },
+        {
+          "timeMs": 491.6667,
+          "angle": 29.7118
+        },
+        {
+          "timeMs": 600,
+          "angle": 39.4671
+        }
+      ]
+    },
+    {
+      "name": "oval",
+      "frames": [
+        {
+          "timeMs": 891.6667,
+          "angle": 0
+        },
+        {
+          "timeMs": 991.6667,
+          "angle": 22.8277
+        },
+        {
+          "timeMs": 1091.6667,
+          "angle": 35.2178
+        },
+        {
+          "timeMs": 1200,
+          "angle": 44.8147
+        }
+      ]
+    },
+    {
+      "name": "pill",
+      "frames": [
+        {
+          "timeMs": 3600,
+          "angle": 0
+        },
+        {
+          "timeMs": 3700,
+          "angle": 27.2363
+        },
+        {
+          "timeMs": 3783.3333,
+          "angle": 40.2499
+        },
+        {
+          "timeMs": 3900,
+          "angle": 52.9239
+        },
+        {
+          "timeMs": 3991.6667,
+          "angle": 60.6566
+        }
+      ]
+    }
+  ],
+  "frames": [
+    {
+      "timeMs": 0,
+      "radii": "mZugpKWmpaSinZqYlpKPjI2NjZCSlZaan6Skpqamo5+cmJWRkI6NjI2OkpOXmZugpKWmpaShnZqYlJCPjI2MjY6PlZaZnKCkpaSjo52amJWRkI6LjIuOkJGVl5ugoqOmpaShnZqWlJCPjIuMjY6Pk5aZnJ+kpaSlo5+cmJWRkI6NjIuMkJGVl5ugoqWmpaShnZqYlpKPjI2MjY6PlZaZnaCkpqamo5+cmpWTko6NjI2OkpOX"
+    },
+    {
+      "timeMs": 83.3333,
+      "radii": "m52goqWoqayvsLGwrquopqShnZubmZmZmZqam52eoKGhoaCenJubmpmYmJeZmZ2goqWmqayvsLCurqqopaKgnZuZmZaXmZiZm5ydnp+fnp6enJuamJeYmJeZmZueoKOmqauvrq6urKqopaKgnZuZl5aXmJiZmZydnp+foJ6enJuamJeWmJeZmZueoqOmqayvsLCwrquopaShnZubmZmZmZqam5yenqGhoZ6enp2bmpmYmJeZ"
+    },
+    {
+      "timeMs": 300,
+      "radii": "l5ueoKWoq6+ytLe5vL3BwcLExMTCwsK/vry5t7Oxrqqoo56cmJeVlJWUlJWXl5ueoKWoq6+ytLe5vL3AwcLCw8PCwsC+vLy4trOwrKmlo56amJeVlJOUlJOVl5mcnqOoqa+xtLe5vL2+wMLCw8PCwsC/vLy4trOxrqqlo56cmJeVlJOUlJWVl5mcoKOoq6+xtLe5vL2+wsLExMPEwsK/vr25t7Wxrqqoo6CcmpmXlpWUlJWX"
+    },
+    {
+      "timeMs": 600,
+      "radii": "wb28uLWyraikn5uZlpWTkpKTlZWYmp6jp6yxs7e6vb/CxMXGxsTFxcbFxMPBv726trOwq6ihnZqYlpSSkpKTlZWYmpyjp6yvs7a5vL/AwcTFxMTFxcTFxMHBv726trOwq6iinZqYlpSSkpKRkpSVmpyhpqqusra5u77Aw8TFxMTFxcXFxMPBv726uLOyraiknZuYlpSTkpKTlZWYmpyjpqqvs7e6vb/Cw8XGxsbGxcbFxMPB"
+    },
+    {
+      "timeMs": 891.6667,
+      "radii": "lZWYmJmcnZ6fpKaoqq2wsra4u72/wcPDxcbFxsbExMPAv7y6t7Swr6uppqOjn52cmpmXl5aTk5KQkZCOjI2Mi4mKiYiIh4iJiIiJiYiIiYuLjIyNjo+OkJGTk5OWlpmam5yfoaOlqauusbO3ury+wMLCxMTFxcTEw8HAv7y6trSyr6uppqOhn52cmpmXl5aTk5KSkZCPjI2Ni4mLi4iJiYiJiImKiYqKiouLjIyNjo+QkpGT"
+    },
+    {
+      "timeMs": 1200,
+      "radii": "gX9/gH5/gH+AgIGBg4OFhYeHiImLjo2Qk5WWmZqdoKOlp6utr7K2t7q9vr/Bw8PExMXFxMPDwb+9vLm3tLGurKmmo6GenJqWlZOQjo2KiYmHhYSDgYGAgH9/f31/fn5/fn9+gH+BgICDg4SGiImLjI2QkpKWmJqcnqGjpqmtr7G0t7m8vr/Bw8PExMXFxMPDwb++vLm3tLKurKmnpqOgnZuZl5OQkI+NiomJh4aFhIOCgoGB"
+    },
+    {
+      "timeMs": 1400,
+      "radii": "m52ipqmwsbOysqyqpqGgn6Gkpqmtrq+uqqihnJaVkpGRk5WWmpydnp2cmpWRjYuHhoKDgoOEhoqOkZKVlpeWlZOPjouJh4aGiImNkJSZnKCjpKWkoJ2cmpmZmZugpKmusbGxsKuno6Cfn6Gipqisrq6tqqWhnJaTkpGRk5WWmpudnp2amJWRjYuHhIKBgoOEiIqLkZKVlpeWlZSSj42MiYiHiImNkJSZnqCkpaWmop+enJmZ"
+    },
+    {
+      "timeMs": 1800,
+      "radii": "p6WimpSPioeEhIaKjpWZoqWnpqWfmZOMh4aCg4WJjZOZoKSmpqOimpOOioWDg4WHjpGan6SmqKWhmpSOioWEg4SIjJOZn6anqKShmZSNiYaFhYaJjpOaoqWnp6WgmpONiIWChISIjpKYn6KmpaSfmZCMh4OCg4OEi5GWnKSkpaOimpWOioWDg4OFjI+VnaKmqKainZmRjIeGhYaIjJCZn6aoqaejnpaRioaFhYaJjpOaoqen"
+    },
+    {
+      "timeMs": 2191.6667,
+      "radii": "oaGgnp2enZ6fn6CfoKCgn6Cgn5+dnZ6en6ChoqOho6GfnpycnJubnJucnp+ho6OkpKOgnZqZl5eXl5mZnJ6ho6SlpKOhnZuWlZOTkpOVmJqeoKOkpKOioJuZlZGPkI+Qk5aZnaCio6SjoqCdm5eUkI2PkZKUl5qgoqOjpaOgn5ualpOSkpOVl5meoqOkpaSioaGdm5mYlpeYmZqdoKGkpqWkoqCenp2cnJycnJ2doJ+ipKOj"
+    },
+    {
+      "timeMs": 2491.6667,
+      "radii": "p6empKWin56cm5ubnZ6ipKeoqamqqainpKShn52dm52foaSmp6mqqqmpqKelo5+enp2cnaCipKaoqamqqqmopqSin5ycnJydnqKlpqaop6iop6Wkop+cmpmZmZueoKGkpaSmpqako6KgnJmYl5eYl5mcn6Cjo6OlpKOioZ6cmJeVlpWWmJudn6GipKOko6Khn52bmZeVlpeYmZ6goaOkpKWlo6OhoJ2ampeYmJuboKGkpqen"
+    },
+    {
+      "timeMs": 3200,
+      "radii": "paOioJ+enZqbm5qbm5ubnJ6eoKKjpKeoqamoqaempKShnpyamJeVkpGQkI+Pj42Njo+QkJCRk5WXmZmcnZ6goKGgoJ6enZuZmJaTkpGPj42Njo6Njo2OkI+Rk5OWmJucn6CkpKanqKeopqeko6Kgn5ycmpuamZmZmZqam5ycn5+jpKeqrK2vsbO0tLOysbCurKqopqSjoqKhoaGgoaGjo6Slpqmqra+xsrO0tLS0s6+vrKmn"
+    },
+    {
+      "timeMs": 3600,
+      "radii": "q6mpqKempaSioaGfn56cnJuam5qZl5aWlpWUlZOVlpaWlZeYmpubnJ2cnp2fn5+goKGio6KkpKalpqeoqamrrKytrq6usLCvsLCwr6+ura2rq6yqqampqKenpaWkpKWko6KioaGhoKCfnZyam5qYlpaVkpGQj4+Ojo+Pj4+QkJKTlJWWmJeZm5uenqGgo6KkpKalpqenpqinp6inqaioqamqqaqqq6qqq6urq6ysrKutrKur"
+    },
+    {
+      "timeMs": 3900,
+      "radii": "ra2urq+ur6+xsLGwr7Cwr6+wr6+vrq6trayrqamop6alpaSjo6Gfnp2cnJmZl5WWlJOSkJCPjo6Ojo6Pj4+RkpSVlpaZmZubnJ+eoKGio6SkpaWmqKipqqurq62rrK2ura+vrq6ur6+urq6ura6traurqqqqqamop6alpKSjoaGfnp2cmpmZl5eVlJOSkJCPjo6OjpCPj4+RkpSVlpaZmZudnp+goKGjpKWmp6eoqamrrKur"
+    },
+    {
+      "timeMs": 4191.6667,
+      "radii": "n6GkpKempaShnZuZmZWTkpKRkpOUlZaZmpydnp2dnZqZmJWTkpCRkJGSlJWZm52goqWmpaSkoaCdm5uZmJeXl5qcnZ6ho6anqKmop6ShoZ6cmpmXlpeYmpudn6GipKWko6KfnZuZlpSSkY+Qj5GSk5OXmZubnJ2dm5qYmJWTkpKRkJGSlJWXmZugoqOkpaSko6GfnZubmpiYmZqbnZ6hpKaoqaqop6ajoZ6cmpmXmJeampud"
+    },
+    {
+      "timeMs": 4500,
+      "radii": "paGenJeVk5CNjI6OkZKVmJygoaWmp6WkoJ6ZlZOQjo2NjY+RlJabnJ+ipqWlo6GempeTkI+NjIyOkJKTlpmdoaKlpqShn5uZlZKOjouKjI2QkpaZmp+ipKWlo6GdmpeTkI+NjIyLjpCTlpmdoaKlpqWhoJuZlZOQjo2KjI2QkpaZmp+ipKWlo6GempeVko+NjIyOjpCTlpmdoaKlpqWjoJ6Zl5OQjo2NjY+QkpaZnJ+ipqWl"
+    },
+    {
+      "timeMs": 4900,
+      "radii": "tbe6ur2+wL/Bv7+/vLq5trOxr6ypp6SgnZuZmJiXl5aYmJmanJ+hpKeqrK+xtbW6ur2+vb+/v7++vLm3tbKwr6uppqOgnZuZmJaWlpaWlZeamp6foqWprK2xs7W4uru8vb+/v72+vLm3tbOxr6uppqOgnZuZmJaWlpaWlZeamp2foqWprK2xs7W4uru+wL+/v7++vLq5trOxr6ypp6Sgn5uamJiXl5aWmJmanJ6hoqWqrK+x"
+    }
+  ]
+}

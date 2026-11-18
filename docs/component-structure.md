@@ -27,9 +27,6 @@ src/components/
     shape.component.tsx
     shape.types.ts
     shape.styles.ts
-    shape-variants.ts
-    shape-paths.generated.ts
-    shape-morph.helpers.ts
     index.ts
     tests/
       shape.browser.spec.ts
@@ -195,3 +192,11 @@ SideSheet and Snackbar are top-level features with tests/ beside their implement
 sheet/ is private and owns sheet-panel/. ButtonGroup owns contexts/button-group.context.ts and
 button-group-button/. Snackbar owns snackbar-view/. Button's loading visual lives in its private
 button-loading-indicator/ directory. Timing/selection hooks remain in internal/hooks/*.hook.ts.
+
+Shape and LoadingIndicator share the official shape catalog in `src/tokens/shape-variants.ts` and
+`src/tokens/shape-paths.generated.ts`. Their build-time contour sampler lives in
+`src/styles/shape-morph.ts`. LoadingIndicator compiles only its required silhouettes and does not
+import the complete Shape stylesheet. LoadingIndicator's private loading-indicator-geometry.ts
+normalizes silhouette bounds and aligns morph vertices only during CSS extraction. ProgressIndicator owns private linear-progress and
+circular-progress child components; range normalization is shared with LoadingIndicator under
+`src/internal/indicators`, with its own tests directory.

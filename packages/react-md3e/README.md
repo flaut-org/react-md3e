@@ -97,3 +97,11 @@ BottomSheet, SideSheet and Snackbar compose Base UI behavior. Each is available 
 its kebab-case subpath. Button supports loading and native/custom link components. Autocomplete
 supports selectOnFocus and clearOnEscape. See the repository's component documentation for exact
 contracts, portal hydration boundaries and examples.
+
+LoadingIndicator and ProgressIndicator are exported from the root and `/loading-indicator` /
+`/progress-indicator`. They remain RSC-compatible and use precompiled CSS: import the corresponding
+`/<component>/styles.css` entries. LoadingIndicator morphs seven MD3 shapes (contained/uncontained)
+and accepts controlled progress; ProgressIndicator provides linear/circular flat/wavy displays,
+known/unknown progress, 4/8 thicknesses and accessible finite ranges. Both support themes,
+reduced motion and forced colors. See the repository's docs/components/loading-indicator.md and
+docs/components/progress-indicator.md; the fixture `/indicators` and Storybook have working examples.

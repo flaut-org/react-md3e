@@ -81,8 +81,18 @@ selects already-computed CSS values without generating rules or solving springs 
 - Shape's existing `--md3e-shape-morph-duration` and `--md3e-shape-morph-easing` overrides take precedence
   over the inherited motion scheme.
 
-Continuous loading indicators, Skeleton pulse/wave cycles, tooltip opening delays and snackbar
-reading time are component/interaction timing, not spring transitions. They retain their timing.
+LoadingIndicator uses its own video-calibrated monotonic winding/morph curve and fixed stage
+intervals. Both motion schemes keep this continuous choreography forward-only; generic overshooting
+spring tokens must not reverse the angle. See [LoadingIndicator](components/loading-indicator.md).
+Circular indeterminate ProgressIndicator uses fast spatial for its inner winding and default spatial
+for arc sweeps. Linear indeterminate progress instead uses two monotonic passes with a 2100ms cycle
+and 1150ms stagger, following MUI's choreography. Segment edges reset offscreen; generic theme
+springs and determinate value transitions must not move them backward. CSS registered percentage
+variables animate their edges and keep the remaining track's transparent gaps in sync, including
+when the segments overlap. These continuous linear passes keep their own timing in both schemes.
+Continuous carrier rotations and wave texture phases retain constant speed. The CSS `linear()`
+function in a spring token is a sampled physical curve, not the constant-speed `linear` keyword.
+Skeleton pulse/wave cycles, tooltip opening delays and snackbar reading time retain their own timing.
 `prefers-reduced-motion: reduce` disables finite transitions and the existing loading motion regardless
 of the selected scheme. Standard is not a substitute for reduced-motion support.
 

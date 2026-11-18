@@ -23,7 +23,7 @@
     "format:check": "prettier . --check",
     "typecheck": "npm run typecheck --workspaces --if-present && tsc --project tsconfig.tooling.json && tsc --project packages/react-md3e/tests/types-consumer/tsconfig.nodenext.json && tsc --project packages/react-md3e/tests/types-consumer/tsconfig.bundler.json",
     "check:package": "node scripts/check-package.mjs",
-    "test": "node --test packages/react-md3e/src/theme/tests/*.test.mjs apps/next-fixture/tests/fixture.test.mjs",
+    "test": "node --test packages/react-md3e/src/theme/tests/*.test.mjs packages/react-md3e/src/internal/indicators/tests/*.test.mjs apps/next-fixture/tests/fixture.test.mjs",
     "check": "npm run format:check && npm run build && npm run lint && npm run typecheck && npm run check:package && npm run build:fixture && npm run build:storybook && npm test && npm run test:release && npm run test:browser",
     "pack": "npm pack --workspace=@flaut-travel/react-md3e",
     "postbuild": "node scripts/generate-example-themes.mjs",

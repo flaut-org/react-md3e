@@ -93,6 +93,8 @@ export default defineConfig({
     lib: {
       entry: {
         'index': `${source}index.ts`,
+        'loading-indicator': `${source}components/loading-indicator/index.ts`,
+        'progress-indicator': `${source}components/progress-indicator/index.ts`,
         'snackbar': `${source}components/snackbar/index.ts`,
         'side-sheet': `${source}components/side-sheet/index.ts`,
         'bottom-sheet': `${source}components/bottom-sheet/index.ts`,

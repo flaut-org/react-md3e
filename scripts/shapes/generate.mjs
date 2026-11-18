@@ -15,7 +15,7 @@ if (!java || !kotlinHome || !graphicsJar || !collectionJar) {
 }
 
 const temporary = await mkdtemp(path.join(tmpdir(), 'react-md3e-shapes-'));
-const target = path.join(workspaceRoot, 'packages/react-md3e/src/components/shape');
+const target = path.join(workspaceRoot, 'packages/react-md3e/src/tokens');
 const stdlib = path.join(kotlinHome, 'lib/kotlin-stdlib.jar');
 const generator = path.join(temporary, 'export.jar');
 const separator = path.delimiter;
@@ -56,7 +56,7 @@ try {
     throw new Error('Expected exactly 35 finite normalized cubic SVG contours.');
   }
 
-  const source = `${header}import type { ShapeVariant } from './shape.types';\n\nexport const shapePaths: Readonly<Record<ShapeVariant, string>> = ${JSON.stringify(data, null, 2)};\n`;
+  const source = `${header}import type { shapeVariants } from './shape-variants';\n\ntype ShapeVariant = (typeof shapeVariants)[number];\n\nexport const shapePaths: Readonly<Record<ShapeVariant, string>> = ${JSON.stringify(data, null, 2)};\n`;
   const filename = path.join(target, 'shape-paths.generated.ts');
   const options = await resolveConfig(filename);
   const output = await format(source, { ...options, filepath: filename });
