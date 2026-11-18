@@ -9,8 +9,79 @@ or `/range-calendar/styles.css` at the composition boundary. See [Calendar](docs
 for the MUI-style API, ISO/Temporal values and native-runtime requirements. Working examples are at
 `/calendars` in the Next fixture and Components/Calendar and Components/RangeCalendar in Storybook.
 
-Implemented: Calendar, RangeCalendar, Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Radio/RadioGroup, Avatar, TextField, Autocomplete, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, BottomSheet, SideSheet, Snackbar, ThemeProvider, createTheme, static theme export, and Storybook. The first
-consumer milestone remains Flaut's complete homepage; it has not been migrated yet.
+## Component support
+
+Coverage follows Google's [Material 3 component catalog](https://m3.material.io/components), including
+Material You and M3 Expressive. Component names link to the official guidance; public APIs link to
+this library's documentation. Composition parts are listed with their owning component.
+
+✅ Implemented · ⚠️ Partially implemented · ❌ Not implemented
+
+Statuses describe the available public APIs and Material variants. Partial support includes missing
+variants or interactions and functionality available only inside another component. Visual verification
+and platform-specific adaptations are documented in the linked component notes.
+
+| Material component                                                                           | Support | Implementation / missing support                                                                                                                                                             |
+| -------------------------------------------------------------------------------------------- | :-----: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [App bars](https://m3.material.io/components/app-bars/overview)                              |   ⚠️    | [AppBar](docs/components/app-bar.md) provides small, mediumFlexible and largeFlexible top bars. Search app bars and built-in scroll collapse/expansion are absent.                           |
+| [Badges](https://m3.material.io/components/badges/overview)                                  |   ❌    | No badge component for dots, counts or status indicators.                                                                                                                                    |
+| [Bottom sheets](https://m3.material.io/components/bottom-sheets/overview)                    |   ⚠️    | [BottomSheet](docs/components/bottom-sheet.md) provides modal/standard sheets and swipe dismissal; snap points and swipe-to-open are absent.                                                 |
+| [Button groups](https://m3.material.io/components/button-groups/overview)                    |   ✅    | [ButtonGroup / ButtonGroupButton](docs/components/button-group.md): Expressive standard and connected groups, single/multiple selection and ordinary actions.                                |
+| [Buttons](https://m3.material.io/components/buttons/overview)                                |   ✅    | [Button](docs/components/button.md): filled, tonal, outlined, elevated and text; five Expressive sizes, shapes, loading and links.                                                           |
+| [Cards](https://m3.material.io/components/cards/overview)                                    |   ✅    | [Card](docs/components/card.md): filled, elevated and outlined, with CardContent, CardActions, CardMedia and CardActionArea.                                                                 |
+| [Carousel](https://m3.material.io/components/carousel/overview)                              |   ❌    | No carousel component or Material carousel layouts.                                                                                                                                          |
+| [Checkbox](https://m3.material.io/components/checkbox/overview)                              |   ✅    | [Checkbox](docs/components/checkbox.md): checked, unchecked and indeterminate states, labels and native form behavior.                                                                       |
+| [Chips](https://m3.material.io/components/chips/overview)                                    |   ⚠️    | [Autocomplete](docs/components/autocomplete.md) renders removable input chips internally. No public Chip API or assist, filter and suggestion variants.                                      |
+| [Date pickers](https://m3.material.io/components/date-pickers/overview)                      |   ⚠️    | [Calendar / RangeCalendar](docs/components/calendar.md) provide inline date selection. No DatePicker/DateRangePicker field, docked popup, modal picker or date-entry mode.                   |
+| [Dialogs](https://m3.material.io/components/dialogs/overview)                                |   ✅    | [Dialog](docs/components/dialog.md): basic/full-screen layouts, DialogTitle, DialogContent, DialogContentText and DialogActions, with modal focus/dismissal behavior.                        |
+| [Divider](https://m3.material.io/components/divider/overview)                                |   ✅    | [Divider](docs/components/divider.md): horizontal/vertical, full-width, inset and middle variants.                                                                                           |
+| [Extended FABs](https://m3.material.io/components/extended-fab/overview)                     |   ❌    | No extended floating action button component.                                                                                                                                                |
+| [FAB menu](https://m3.material.io/components/fab-menu/overview)                              |   ❌    | No FAB menu or coordinated expansion into related floating actions.                                                                                                                          |
+| [Floating action buttons](https://m3.material.io/components/floating-action-button/overview) |   ❌    | No floating action button component or its Material size variants.                                                                                                                           |
+| [Icon buttons](https://m3.material.io/components/icon-buttons/overview)                      |   ✅    | [IconButton](docs/components/icon-button.md): filled, tonal, outlined and standard; five sizes, three widths, shapes and toggle states.                                                      |
+| [Lists](https://m3.material.io/components/lists/overview)                                    |   ⚠️    | [List / ListItem](docs/components/list.md) provide standard/segmented rows and static/single/multiple selection. Dedicated action rows, expansion and swipe actions are absent.              |
+| [Loading indicator](https://m3.material.io/components/loading-indicator/overview)            |   ✅    | [LoadingIndicator](docs/components/loading-indicator.md): contained/uncontained Expressive shape morphing and controlled progress.                                                           |
+| [Menus](https://m3.material.io/components/menus/overview)                                    |   ❌    | No public Menu/MenuItem API with menu-item keyboard and selection semantics.                                                                                                                 |
+| [Navigation bar](https://m3.material.io/components/navigation-bar/overview)                  |   ❌    | No navigation bar or navigation destination components.                                                                                                                                      |
+| [Navigation drawer](https://m3.material.io/components/navigation-drawer/overview)            |   ❌    | No navigation drawer or drawer-item API; SideSheet is a generic supplementary panel.                                                                                                         |
+| [Navigation rail](https://m3.material.io/components/navigation-rail/overview)                |   ❌    | No navigation rail, including the Expressive expanded rail.                                                                                                                                  |
+| [Progress indicators](https://m3.material.io/components/progress-indicators/overview)        |   ✅    | [ProgressIndicator](docs/components/progress-indicator.md): linear/circular, determinate/indeterminate and flat/wavy appearances.                                                            |
+| [Radio button](https://m3.material.io/components/radio-button/overview)                      |   ✅    | [Radio / RadioGroup](docs/components/radio.md): controlled/uncontrolled selection, keyboard navigation and native forms.                                                                     |
+| [Scroll fields](https://m3.material.io/components/scroll-fields)                             |   ❌    | No Expressive scroll-field component for selecting measurement values.                                                                                                                       |
+| [Search](https://m3.material.io/components/search/overview)                                  |   ⚠️    | [Search / SearchBar](docs/components/search.md) provide contained search with docked/full-screen views. The divided search style is absent.                                                  |
+| [Segmented buttons](https://m3.material.io/components/segmented-buttons/overview)            |   ❌    | No baseline Material segmented-button component. ButtonGroup implements the separate Expressive button-group design.                                                                         |
+| [Side sheets](https://m3.material.io/components/side-sheets/overview)                        |   ✅    | [SideSheet](docs/components/side-sheet.md): modal/standard panels, logical start/end placement, focus handling and dismissal.                                                                |
+| [Sliders](https://m3.material.io/components/sliders/overview)                                |   ❌    | No slider or range-slider component.                                                                                                                                                         |
+| [Snackbar](https://m3.material.io/components/snackbar/overview)                              |   ⚠️    | [Snackbar](docs/components/snackbar.md) provides messages, actions, timeout/pause and positioning. Swipe dismissal is absent.                                                                |
+| [Split buttons](https://m3.material.io/components/split-button)                              |   ❌    | No combined primary action and secondary menu-trigger component.                                                                                                                             |
+| [Switch](https://m3.material.io/components/switch/overview)                                  |   ❌    | No switch component.                                                                                                                                                                         |
+| [Tabs](https://m3.material.io/components/tabs/overview)                                      |   ❌    | No primary/secondary tabs, tab list or tab-panel API.                                                                                                                                        |
+| [Text fields](https://m3.material.io/components/text-fields/overview)                        |   ⚠️    | [TextField](docs/components/text-field.md) provides filled/outlined inputs and textareas, labels, helper/error text and adornments. A built-in character counter and select mode are absent. |
+| [Time pickers](https://m3.material.io/components/time-pickers/overview)                      |   ❌    | No dial or text-entry time picker.                                                                                                                                                           |
+| [Toolbars](https://m3.material.io/components/toolbars/overview)                              |   ❌    | No Material toolbar component or its Expressive layouts.                                                                                                                                     |
+| [Tooltips](https://m3.material.io/components/tooltips/overview)                              |   ⚠️    | [Tooltip](docs/components/tooltip.md) implements plain tooltips. Rich tooltips with structured content/actions are absent.                                                                   |
+
+### Additional library APIs
+
+These are library primitives or Material foundations, rather than separate entries in the
+component catalog above.
+
+| Library API                                                           | Support | Implementation                                                                                                                     |
+| --------------------------------------------------------------------- | :-----: | ---------------------------------------------------------------------------------------------------------------------------------- |
+| [Autocomplete](docs/components/autocomplete.md)                       |   ✅    | Public single/multiple selection combobox composed with TextField; its documented API is independent of a standalone Menu or Chip. |
+| [Avatar](docs/components/avatar.md)                                   |   ✅    | Images, initials and fallback presentation, with circular/rounded/square shapes.                                                   |
+| [Calendar / CalendarDay / RangeCalendar](docs/components/calendar.md) |   ✅    | Standalone inline calendars with Temporal/ISO values, localization, keyboard navigation, range selection and month paging.         |
+| [Collapsible](docs/components/collapsible.md)                         |   ✅    | Controlled/uncontrolled disclosure with a trigger, retained content and animated expansion.                                        |
+| [Popover / PopoverClose](docs/components/popover.md)                  |   ✅    | Anchored interactive panels with positioning, focus handling and dismissal.                                                        |
+| [Shape](docs/components/shape.md)                                     |   ✅    | All 35 Expressive silhouettes, decorative masks and CSS shape morphing.                                                            |
+| [Skeleton](docs/components/skeleton.md)                               |   ✅    | Loading placeholders with text/rectangular/rounded/circular shapes and pulse/wave animations.                                      |
+| [Surface](docs/components/surface.md)                                 |   ✅    | Themed surfaces, shape roles, filled/outlined presentation and elevation.                                                          |
+| [Typography](docs/components/typography.md)                           |   ✅    | All 15 baseline and 15 emphasized Material type roles, independent of HTML semantics.                                              |
+| [ThemeProvider / createTheme / themeToCss](docs/theming.md)           |   ✅    | CSS theme scopes and server/build theme generation for colors, typography, shape, motion and breakpoints.                          |
+
+[partial-support]: docs/assets/component-support-partial.svg
+
+The first consumer milestone remains Flaut's complete homepage; it has not been migrated yet.
 
 ## Local development
 
