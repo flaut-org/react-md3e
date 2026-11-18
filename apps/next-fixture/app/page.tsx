@@ -49,6 +49,9 @@ export default function Page() {
       </ThemeProvider>
       <ButtonDemo />
       <p>
+        <Link href="/badges">Badge examples</Link>
+      </p>
+      <p>
         <Link href="/calendars">Calendar and date range examples</Link>
       </p>
       <p>

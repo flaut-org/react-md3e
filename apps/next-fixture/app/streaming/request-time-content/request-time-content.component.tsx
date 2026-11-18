@@ -23,6 +23,7 @@ import {
   TextField,
   Autocomplete,
   Avatar,
+  Badge,
   Checkbox,
   Radio,
   RadioGroup,
@@ -44,6 +45,9 @@ export async function RequestTimeContent() {
 
   return (
     <div data-fixture="streaming-ready">
+      <p>
+        Streamed inbox, 12 unread messages <Badge badgeContent={12} data-testid="streamed-badge" />
+      </p>
       <Calendar aria-label="Streamed calendar" defaultValue="2024-02-29" today="2024-02-29" />
       <RangeCalendar
         aria-label="Streamed range calendar"

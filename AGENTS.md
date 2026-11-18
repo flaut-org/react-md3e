@@ -142,6 +142,12 @@ changing the package. Treat the user's current instructions as the source of tas
 - Record actual evidence for CSS extraction and server boundaries. Keep Figma parity, untested
   browsers, consumer-authored styled factories, and velocity-preserving motion outside claims unless
   they have been implemented and verified.
+- User-facing changes to the publishable package must include a new `.changeset/<unique-name>.md`
+  in the same change, covering new components/APIs, behavior, styles, exports, and dependency changes.
+  Select only `@flaut-travel/react-md3e`: use `minor` for additive features, `patch` for fixes, and
+  `major` for breaking changes. Documentation-, test-, or internal-tooling-only changes that do not
+  affect the published package need no changeset. Add pending notes at the `.changeset` root; do not
+  edit consumed `.changeset/pre` notes or bump versions/changelogs manually for a feature change.
 - CI validates changes. Changesets 3 and `.github/workflows/release.yml` manage npmjs.org releases
   and GitHub Releases after a maintainer enables RELEASE_ENABLED on the public canonical repository.
   Read docs/releases.md before release work. Use version-packages and release:alpha/beta/stable wrappers;

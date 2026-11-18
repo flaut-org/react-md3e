@@ -73,6 +73,10 @@
       "types": "./dist/components/avatar/index.d.ts",
       "import": "./dist/avatar.js"
     },
+    "./badge": {
+      "types": "./dist/components/badge/index.d.ts",
+      "import": "./dist/badge.js"
+    },
     "./text-field": {
       "types": "./dist/components/text-field/index.d.ts",
       "import": "./dist/text-field.js"
@@ -147,6 +151,7 @@
     "./radio/styles.css": "./dist/radio.css",
     "./radio-group/styles.css": "./dist/radio-group.css",
     "./avatar/styles.css": "./dist/avatar.css",
+    "./badge/styles.css": "./dist/badge.css",
     "./text-field/styles.css": "./dist/text-field.css",
     "./autocomplete/styles.css": "./dist/autocomplete.css",
     "./popover/styles.css": "./dist/popover.css",

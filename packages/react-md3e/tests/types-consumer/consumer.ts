@@ -1,6 +1,7 @@
 import { Calendar, CalendarDay } from '@flaut-travel/react-md3e/calendar';
 import { RangeCalendar } from '@flaut-travel/react-md3e/range-calendar';
 import type {
+  BadgeProps,
   CalendarProps,
   RangeCalendarProps,
   SkeletonProps,
@@ -57,6 +58,7 @@ import { Checkbox } from '@flaut-travel/react-md3e/checkbox';
 import { Radio } from '@flaut-travel/react-md3e/radio';
 import { RadioGroup } from '@flaut-travel/react-md3e/radio-group';
 import { Avatar } from '@flaut-travel/react-md3e/avatar';
+import { Badge } from '@flaut-travel/react-md3e/badge';
 import { List, ListItem } from '@flaut-travel/react-md3e/list';
 import type { ListProps, ListItemProps } from '@flaut-travel/react-md3e/list';
 import { Dialog, DialogContent, DialogActions } from '@flaut-travel/react-md3e/dialog';
@@ -72,6 +74,8 @@ const buttonProps: ButtonProps = { variant: 'tonal', endIcon: '→', selected: t
 const providerProps: ThemeProviderProps = { theme, colorScheme: 'dark' };
 
 export const consumer = {
+  Badge,
+  badgeProps: { badgeContent: 12, variant: 'large', max: 99 } satisfies BadgeProps,
   Calendar,
   CalendarDay,
   RangeCalendar,

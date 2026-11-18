@@ -115,6 +115,7 @@ export default defineConfig({
         'radio': `${source}components/radio/index.ts`,
         'radio-group': `${source}components/radio-group/index.ts`,
         'avatar': `${source}components/avatar/index.ts`,
+        'badge': `${source}components/badge/index.ts`,
         'text-field': `${source}components/text-field/index.ts`,
         'autocomplete': `${source}components/autocomplete/index.ts`,
         'shape': `${source}components/shape/index.ts`,

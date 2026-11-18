@@ -96,6 +96,7 @@ const selectionIndicatorUrl = new URL(
   import.meta.url,
 ).href;
 const skeletonUrl = new URL('../packages/react-md3e/dist/skeleton.js', import.meta.url).href;
+const badgeUrl = new URL('../packages/react-md3e/dist/badge.js', import.meta.url).href;
 const dividerUrl = new URL('../packages/react-md3e/dist/divider.js', import.meta.url).href;
 const typographyUrl = new URL('../packages/react-md3e/dist/typography.js', import.meta.url).href;
 const surfaceUrl = new URL('../packages/react-md3e/dist/surface.js', import.meta.url).href;
@@ -114,7 +115,7 @@ execFileSync(
     '--conditions=react-server',
     '--input-type=module',
     '--eval',
-    `await import(${JSON.stringify(loadingIndicatorUrl)}); await import(${JSON.stringify(progressIndicatorUrl)}); await import(${JSON.stringify(skeletonUrl)}); await import(${JSON.stringify(dividerUrl)}); await import(${JSON.stringify(typographyUrl)}); await import(${JSON.stringify(surfaceUrl)}); await import(${JSON.stringify(shapeUrl)}); await import(${JSON.stringify(cardUrl)}); await import(${JSON.stringify(staticListUrl)}); await import(${JSON.stringify(selectionIndicatorUrl)}); await import(${JSON.stringify(appBarUrl)}); await import(${JSON.stringify(dialogContentUrl)}); await import(${JSON.stringify(dialogActionsUrl)}); await import(${JSON.stringify(providerUrl)}); await import('@flaut-travel/react-md3e/theme');`,
+    `await import(${JSON.stringify(badgeUrl)}); await import(${JSON.stringify(loadingIndicatorUrl)}); await import(${JSON.stringify(progressIndicatorUrl)}); await import(${JSON.stringify(skeletonUrl)}); await import(${JSON.stringify(dividerUrl)}); await import(${JSON.stringify(typographyUrl)}); await import(${JSON.stringify(surfaceUrl)}); await import(${JSON.stringify(shapeUrl)}); await import(${JSON.stringify(cardUrl)}); await import(${JSON.stringify(staticListUrl)}); await import(${JSON.stringify(selectionIndicatorUrl)}); await import(${JSON.stringify(appBarUrl)}); await import(${JSON.stringify(dialogContentUrl)}); await import(${JSON.stringify(dialogActionsUrl)}); await import(${JSON.stringify(providerUrl)}); await import('@flaut-travel/react-md3e/theme');`,
   ],
   { cwd: workspaceRoot, stdio: 'pipe' },
 );
@@ -148,6 +149,7 @@ assert.match(iconButton, /@base-ui\/react\/button/, 'IconButton must compose the
 assert.doesNotMatch(appBar, /use client|useEffect|useState|@base-ui/, 'AppBar must remain a server component.');
 
 for (const name of [
+  'badge',
   'surface',
   'shape',
   'card',
