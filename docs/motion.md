@@ -74,6 +74,11 @@ selects already-computed CSS values without generating rules or solving springs 
 
 - Buttons, IconButton, ButtonGroup, list item shapes, snackbar movement and small popups use fast spatial.
 - Dialog transforms, Collapsible height, Shape morphing, sheet movement and docked Search use default spatial.
+- Calendar period paging follows the requested MUI/m3e carousel choreography: opaque adjacent
+  grids travel a full viewport width. Its 375ms monotonic cubic-bezier(0.35, 0.8, 0.4, 1) matches
+  the MUI recording, with `--md-calendar-slide-duration` / `--md-calendar-slide-easing` overrides.
+  This deliberate exception to theme springs avoids overshooting a page boundary. Weekday headings
+  stay fixed; the outgoing frame is inert. RangeCalendar reuses Calendar's transition.
 - Full-screen Search geometry uses slow spatial.
 - State-layer opacity, color, elevation and most fades use fast effects. Sheet scrims and Search fades
   use default effects. Ripple growth uses slow effects and its fade uses fast effects; pointer delay

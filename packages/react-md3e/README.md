@@ -1,7 +1,15 @@
 # @flaut-travel/react-md3e
 
 Material 3 Expressive React components with precompiled CSS and a token-based theme API.
-Implemented: Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Radio/RadioGroup, Avatar, TextField, Autocomplete, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, BottomSheet, SideSheet, Snackbar, ThemeProvider, createTheme, and themeToCss. React 19 is required.
+
+Calendar and RangeCalendar provide inline date selection using native Temporal.PlainDate and Intl.
+Use ISO strings or Temporal values, with `valueFormat="iso"` for string callbacks. Month navigation
+uses a full-width MUI-style slide and respects reduced motion. Import `/calendar/styles.css`
+or `/range-calendar/styles.css` (which includes Calendar) at the composition boundary. Both are
+available from the package root and their kebab-case subpaths. Native Temporal and Temporal-aware
+Intl are required; older runtimes need an application-installed compatible global polyfill.
+See [Calendar documentation](https://github.com/flaut-org/react-md3e/blob/main/docs/components/calendar.md).
+Implemented: Calendar, RangeCalendar, Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Radio/RadioGroup, Avatar, TextField, Autocomplete, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, BottomSheet, SideSheet, Snackbar, ThemeProvider, createTheme, and themeToCss. React 19 is required.
 
 ```tsx
 import { Button, ThemeProvider } from '@flaut-travel/react-md3e';

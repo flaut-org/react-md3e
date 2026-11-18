@@ -31,6 +31,8 @@ import {
   ListItem,
   Button,
   IconButton,
+  Calendar,
+  RangeCalendar,
 } from '@flaut-travel/react-md3e';
 import { ScopedDialogDemo } from '../../../components/scoped-dialog-demo/scoped-dialog-demo.component';
 
@@ -42,6 +44,12 @@ export async function RequestTimeContent() {
 
   return (
     <div data-fixture="streaming-ready">
+      <Calendar aria-label="Streamed calendar" defaultValue="2024-02-29" today="2024-02-29" />
+      <RangeCalendar
+        aria-label="Streamed range calendar"
+        defaultValue={['2024-02-27', '2024-03-04']}
+        today="2024-02-29"
+      />
       <LoadingIndicator variant="contained" aria-label="Streamed loading" data-testid="streamed-loading-indicator" />
       <ProgressIndicator
         value={65}

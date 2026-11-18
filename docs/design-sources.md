@@ -7,6 +7,10 @@ are recorded in `components/button.md`, `components/icon-button.md`, `components
 
 ## Primary references
 
+Calendar and RangeCalendar use pinned AndroidX DatePickerModalTokens v0_210 and the requested
+MUI/m3e full-width page-slide choreography. [Calendar documentation](components/calendar.md) records the exact revision,
+MUI API references, native Temporal/Intl adaptation and the unverified Figma access.
+
 | Reference                                                                                                                                                                | Purpose                                                         |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------- |
 | [Material 3 components](https://m3.material.io/components)                                                                                                               | Overview, specs, guidelines, and accessibility per component    |
