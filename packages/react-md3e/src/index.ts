@@ -85,6 +85,8 @@ export { RadioGroup } from './components/radio-group';
 export type { RadioGroupProps } from './components/radio-group';
 export { Avatar } from './components/avatar';
 export type { AvatarProps, AvatarSize, AvatarVariant } from './components/avatar';
+export { Badge } from './components/badge';
+export type { BadgeProps, BadgeVariant } from './components/badge';
 export { TextField } from './components/text-field';
 export type {
   TextFieldProps,

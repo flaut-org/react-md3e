@@ -2,6 +2,12 @@
 
 Material 3 Expressive React components with precompiled CSS and a token-based theme API.
 
+Badge provides small notification dots and large counts/status labels, with RTL icon placement,
+error/onError colors and CSS visibility springs. It remains server-compatible. Import Badge from
+the package root or `/badge` and load `/badge/styles.css` at the composition boundary. Include the
+visible count/status in the destination's accessible name; describe the full count when abbreviated. See the
+[Badge API](https://github.com/flaut-org/react-md3e/blob/main/docs/components/badge.md).
+
 Calendar and RangeCalendar provide inline date selection using native Temporal.PlainDate and Intl.
 Use ISO strings or Temporal values, with `valueFormat="iso"` for string callbacks. Month navigation
 uses a full-width MUI-style slide and respects reduced motion. Import `/calendar/styles.css`
@@ -9,7 +15,7 @@ or `/range-calendar/styles.css` (which includes Calendar) at the composition bou
 available from the package root and their kebab-case subpaths. Native Temporal and Temporal-aware
 Intl are required; older runtimes need an application-installed compatible global polyfill.
 See [Calendar documentation](https://github.com/flaut-org/react-md3e/blob/main/docs/components/calendar.md).
-Implemented: Calendar, RangeCalendar, Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Radio/RadioGroup, Avatar, TextField, Autocomplete, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, BottomSheet, SideSheet, Snackbar, ThemeProvider, createTheme, and themeToCss. React 19 is required.
+Implemented: Calendar, RangeCalendar, Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Radio/RadioGroup, Avatar, Badge, TextField, Autocomplete, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, BottomSheet, SideSheet, Snackbar, ThemeProvider, createTheme, and themeToCss. React 19 is required.
 
 ```tsx
 import { Button, ThemeProvider } from '@flaut-travel/react-md3e';
