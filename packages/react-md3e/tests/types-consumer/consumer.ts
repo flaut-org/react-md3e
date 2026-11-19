@@ -1,6 +1,7 @@
 import { Calendar, CalendarDay } from '@flaut-travel/react-md3e/calendar';
 import { RangeCalendar } from '@flaut-travel/react-md3e/range-calendar';
 import type {
+  SwitchProps,
   BadgeProps,
   CalendarProps,
   RangeCalendarProps,
@@ -55,6 +56,7 @@ import { Popover, PopoverClose } from '@flaut-travel/react-md3e/popover';
 import { TextField } from '@flaut-travel/react-md3e/text-field';
 import { Autocomplete } from '@flaut-travel/react-md3e/autocomplete';
 import { Checkbox } from '@flaut-travel/react-md3e/checkbox';
+import { Switch } from '@flaut-travel/react-md3e/switch';
 import { Radio } from '@flaut-travel/react-md3e/radio';
 import { RadioGroup } from '@flaut-travel/react-md3e/radio-group';
 import { Avatar } from '@flaut-travel/react-md3e/avatar';
@@ -74,6 +76,8 @@ const buttonProps: ButtonProps = { variant: 'tonal', endIcon: '→', selected: t
 const providerProps: ThemeProviderProps = { theme, colorScheme: 'dark' };
 
 export const consumer = {
+  Switch,
+  switchProps: { checked: true, onChange: (_event, checked) => checked, name: 'notifications' } satisfies SwitchProps,
   Badge,
   badgeProps: { badgeContent: 12, variant: 'large', max: 99 } satisfies BadgeProps,
   Calendar,

@@ -195,7 +195,7 @@ assert.match(selectableList, /^['"]use client['"]/m);
 assert.match(selectableList, /@base-ui\/react\/toggle-group/);
 assert.doesNotMatch(staticList, /use client|useContext|@base-ui/);
 
-for (const name of ['checkbox', 'radio', 'radio-group', 'autocomplete', 'popover']) {
+for (const name of ['checkbox', 'switch', 'radio', 'radio-group', 'autocomplete', 'popover']) {
   const code = await readFile(path.join(packageRoot, `dist/components/${name}/${name}.component.js`), 'utf8');
 
   assert.match(code, /^['"]use client['"]/m);

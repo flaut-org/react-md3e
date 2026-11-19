@@ -112,6 +112,7 @@ export default defineConfig({
         'dialog': `${source}components/dialog/index.ts`,
         'list': `${source}components/list/index.ts`,
         'checkbox': `${source}components/checkbox/index.ts`,
+        'switch': `${source}components/switch/index.ts`,
         'radio': `${source}components/radio/index.ts`,
         'radio-group': `${source}components/radio-group/index.ts`,
         'avatar': `${source}components/avatar/index.ts`,

@@ -94,7 +94,10 @@ export default defineConfig(
       'react/prop-types': 'off',
       'react/require-default-props': 'off',
       // These public controls contain Base UI's label-associated native inputs.
-      'jsx-a11y/label-has-associated-control': ['error', { controlComponents: ['Checkbox', 'Radio'], depth: 3 }],
+      'jsx-a11y/label-has-associated-control': [
+        'error',
+        { controlComponents: ['Checkbox', 'Radio', 'Switch'], depth: 3 },
+      ],
     },
   },
   {

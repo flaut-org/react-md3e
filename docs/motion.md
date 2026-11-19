@@ -73,6 +73,8 @@ selects already-computed CSS values without generating rules or solving springs 
 ## Component mapping
 
 - Buttons, IconButton, ButtonGroup, list item shapes, snackbar movement and small popups use fast spatial.
+- Switch handle position and press/selection size use fast spatial; pointer dragging follows input
+  directly and settles through CSS on release. Track/handle/icon colors and state layers use fast effects.
 - Dialog transforms, Collapsible height, Shape morphing, sheet movement and docked Search use default spatial.
 - Calendar period paging follows the requested MUI/m3e carousel choreography: opaque adjacent
   grids travel a full viewport width. Its 375ms monotonic cubic-bezier(0.35, 0.8, 0.4, 1) matches
