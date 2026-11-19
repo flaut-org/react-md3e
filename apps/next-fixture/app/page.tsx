@@ -49,6 +49,9 @@ export default function Page() {
       </ThemeProvider>
       <ButtonDemo />
       <p>
+        <Link href="/switches">Switch examples</Link>
+      </p>
+      <p>
         <Link href="/badges">Badge examples</Link>
       </p>
       <p>

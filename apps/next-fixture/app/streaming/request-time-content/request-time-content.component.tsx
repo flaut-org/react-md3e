@@ -25,6 +25,7 @@ import {
   Avatar,
   Badge,
   Checkbox,
+  Switch,
   Radio,
   RadioGroup,
   AppBar,
@@ -105,6 +106,9 @@ export async function RequestTimeContent() {
       </Avatar>
       <label>
         <Checkbox defaultChecked /> Streamed checkbox
+      </label>
+      <label>
+        <Switch aria-label="Streamed notifications" defaultChecked /> Streamed notifications
       </label>
       <RadioGroup aria-label="Streamed radios" defaultValue="one">
         <label>

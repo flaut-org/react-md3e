@@ -1,6 +1,6 @@
 # Components
 
-Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Radio/RadioGroup, Avatar, TextField, Autocomplete, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, BottomSheet, SideSheet, Snackbar and the shared private ListItemContent are
+Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Switch, Radio/RadioGroup, Avatar, TextField, Autocomplete, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, BottomSheet, SideSheet, Snackbar and the shared private ListItemContent are
 implemented. API and provenance documents live in `docs/components`.
 
 Component files form an ownership tree. A component used only by one parent lives in a named child

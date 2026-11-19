@@ -79,6 +79,8 @@ export type {
 } from './components/list';
 export { Checkbox } from './components/checkbox';
 export type { CheckboxProps } from './components/checkbox';
+export { Switch } from './components/switch';
+export type { SwitchProps } from './components/switch';
 export { Radio } from './components/radio';
 export type { RadioProps } from './components/radio';
 export { RadioGroup } from './components/radio-group';

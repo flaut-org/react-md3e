@@ -61,6 +61,10 @@
       "types": "./dist/components/checkbox/index.d.ts",
       "import": "./dist/checkbox.js"
     },
+    "./switch": {
+      "types": "./dist/components/switch/index.d.ts",
+      "import": "./dist/switch.js"
+    },
     "./radio": {
       "types": "./dist/components/radio/index.d.ts",
       "import": "./dist/radio.js"
@@ -148,6 +152,7 @@
     "./dialog/styles.css": "./dist/dialog.css",
     "./list/styles.css": "./dist/list.css",
     "./checkbox/styles.css": "./dist/checkbox.css",
+    "./switch/styles.css": "./dist/switch.css",
     "./radio/styles.css": "./dist/radio.css",
     "./radio-group/styles.css": "./dist/radio-group.css",
     "./avatar/styles.css": "./dist/avatar.css",
