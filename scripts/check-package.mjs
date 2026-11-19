@@ -209,6 +209,7 @@ for (const [name, primitive] of [
   ['tooltip', 'tooltip'],
   ['collapsible', 'collapsible'],
   ['button-group', 'toggle-group'],
+  ['segmented-button', 'toggle-group'],
   ['snackbar', 'toast'],
   ['sheet', 'drawer'],
 ]) {
@@ -324,6 +325,16 @@ assert.ok([...autocompleteStyles].some((file) => file.includes('/text-field/')))
 assert.ok([...autocompleteStyles].some((file) => file.includes('/list-item-content/')));
 assert.ok(![...buttonStyles, ...autocompleteStyles].some((file) => file.includes('/shape/')));
 assert.ok(!buttonCss.includes('--md-sys-color-primary:'), 'Component CSS must not duplicate the theme defaults.');
+
+const segmentStyles = new Set();
+const segmentCss = await readCssTree(manifest.exports['./segmented-button/styles.css'], segmentStyles);
+
+assert.ok([...segmentStyles].some((file) => file.includes('/segmented-button/')));
+assert.ok([...segmentStyles].some((file) => file.includes('/internal/ripple/')));
+assert.ok(![...segmentStyles].some((file) => /\/(shape|button|button-group)\//.test(file)));
+assert.ok(
+  segmentCss.includes('aria-checked') && segmentCss.includes('forced-colors') && segmentCss.includes('linear('),
+);
 
 for (const [name, target] of Object.entries(manifest.exports)) {
   if (name.endsWith('/styles.css')) {

@@ -10,6 +10,8 @@ import type {
   TooltipProps,
   CollapsibleProps,
   ButtonGroupProps,
+  SegmentedButtonProps,
+  ButtonSegmentProps,
   BottomSheetProps,
   SideSheetProps,
   SnackbarProps,
@@ -44,6 +46,7 @@ import { Divider } from '@flaut-travel/react-md3e/divider';
 import { Tooltip } from '@flaut-travel/react-md3e/tooltip';
 import { Collapsible } from '@flaut-travel/react-md3e/collapsible';
 import { ButtonGroup, ButtonGroupButton } from '@flaut-travel/react-md3e/button-group';
+import { SegmentedButton, ButtonSegment } from '@flaut-travel/react-md3e/segmented-button';
 import { BottomSheet } from '@flaut-travel/react-md3e/bottom-sheet';
 import { SideSheet } from '@flaut-travel/react-md3e/side-sheet';
 import { Snackbar } from '@flaut-travel/react-md3e/snackbar';
@@ -91,6 +94,10 @@ export const consumer = {
   Collapsible,
   ButtonGroup,
   ButtonGroupButton,
+  SegmentedButton,
+  ButtonSegment,
+  segmentedProps: { 'aria-label': 'View', 'defaultValue': 'week', 'name': 'view' } satisfies SegmentedButtonProps,
+  segmentProps: { value: 'week', icon: '▦' } satisfies ButtonSegmentProps,
   BottomSheet,
   SideSheet,
   Snackbar,

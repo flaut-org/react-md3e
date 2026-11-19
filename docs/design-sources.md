@@ -44,6 +44,11 @@ checks. Integrations can be added when they are actually used.
 
 ## Provenance when implementing
 
+SegmentedButton uses the rendered official MD3 segmented-button specifications, AndroidX token
+version v0_162 at 009564af4f3f92df06e213711cb5327ceabc4e47 and the requested M3E CSS reference at
+aa2f9ad252c06301e8874d3188d486464e8cc170. See [SegmentedButton](components/segmented-button.md)
+for exact paths, independent CSS adaptations and Figma access limits.
+
 For each adopted component or token family, record the official page, source revision or Figma
 file/node version when available, and any web-specific adaptation. Branch links above are discovery
 links, not pinned specifications.

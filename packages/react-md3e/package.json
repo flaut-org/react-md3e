@@ -133,6 +133,10 @@
       "types": "./dist/components/button-group/index.d.ts",
       "import": "./dist/button-group.js"
     },
+    "./segmented-button": {
+      "types": "./dist/components/segmented-button/index.d.ts",
+      "import": "./dist/segmented-button.js"
+    },
     "./bottom-sheet": {
       "types": "./dist/components/bottom-sheet/index.d.ts",
       "import": "./dist/bottom-sheet.js"
@@ -170,6 +174,7 @@
     "./tooltip/styles.css": "./dist/tooltip.css",
     "./collapsible/styles.css": "./dist/collapsible.css",
     "./button-group/styles.css": "./dist/button-group.css",
+    "./segmented-button/styles.css": "./dist/segmented-button.css",
     "./bottom-sheet/styles.css": "./dist/bottom-sheet.css",
     "./side-sheet/styles.css": "./dist/side-sheet.css",
     "./snackbar/styles.css": "./dist/snackbar.css",

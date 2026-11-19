@@ -28,7 +28,7 @@ Every UI subpath has a CSS export: `/button/styles.css`, `/icon-button/styles.cs
 `/radio/styles.css`, `/radio-group/styles.css`, `/avatar/styles.css`, `/text-field/styles.css`,
 `/autocomplete/styles.css`, `/popover/styles.css`, `/surface/styles.css`, `/card/styles.css`,
 `/shape/styles.css`, `/search/styles.css`, `/typography/styles.css`, `/skeleton/styles.css`,
-`/divider/styles.css`, `/tooltip/styles.css`, `/collapsible/styles.css`, `/button-group/styles.css`,
+`/divider/styles.css`, `/tooltip/styles.css`, `/collapsible/styles.css`, `/button-group/styles.css`, `/segmented-button/styles.css`,
 `/bottom-sheet/styles.css`, `/side-sheet/styles.css`, and `/snackbar/styles.css`.
 
 A family includes its public composition parts and transitive presentation dependencies. For example,

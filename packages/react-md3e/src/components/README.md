@@ -1,6 +1,10 @@
 # Components
 
-Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Switch, Radio/RadioGroup, Avatar, TextField, Autocomplete, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, BottomSheet, SideSheet, Snackbar and the shared private ListItemContent are
+SegmentedButton owns ButtonSegment, contexts/segmented-button.context.ts and shared extracted styles.
+Its baseline outlined selection uses Base UI ToggleGroup/Toggle with Material radio/checkbox roles;
+the separate ButtonGroup owns the Expressive design. See docs/components/segmented-button.md.
+
+Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Switch, Radio/RadioGroup, Avatar, TextField, Autocomplete, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, SegmentedButton/ButtonSegment, BottomSheet, SideSheet, Snackbar and the shared private ListItemContent are
 implemented. API and provenance documents live in `docs/components`.
 
 Component files form an ownership tree. A component used only by one parent lives in a named child

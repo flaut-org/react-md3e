@@ -58,6 +58,9 @@ export default function Page() {
         <Link href="/calendars">Calendar and date range examples</Link>
       </p>
       <p>
+        <Link href="/segmented-buttons">Segmented button examples</Link>
+      </p>
+      <p>
         <Link href="/essentials">Homepage essentials</Link>
       </p>
       <p>
