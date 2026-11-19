@@ -72,6 +72,12 @@ selects already-computed CSS values without generating rules or solving springs 
 
 ## Component mapping
 
+- Slider handle thickness and value labels use fast spatial; colors use fast effects.
+  Current values position tracks and handles directly during input, without a JavaScript spring.
+  Handle-facing track corners stay fixed at the bounds. Value labels grow from their handle-facing
+  edge, clamp the scale to 0–1 and defer hiding until the closing spring finishes; interrupted
+  animations reverse the same CSSAnimation from its current playhead. See the frame analysis in [Slider](components/slider.md).
+
 - Buttons, IconButton, ButtonGroup, list item shapes, snackbar movement and small popups use fast spatial.
 - Switch handle position and press/selection size use fast spatial; pointer dragging follows input
   directly and settles through CSS on release. Track/handle/icon colors and state layers use fast effects.

@@ -65,6 +65,10 @@
       "types": "./dist/components/switch/index.d.ts",
       "import": "./dist/switch.js"
     },
+    "./slider": {
+      "types": "./dist/components/slider/index.d.ts",
+      "import": "./dist/slider.js"
+    },
     "./radio": {
       "types": "./dist/components/radio/index.d.ts",
       "import": "./dist/radio.js"
@@ -157,6 +161,7 @@
     "./list/styles.css": "./dist/list.css",
     "./checkbox/styles.css": "./dist/checkbox.css",
     "./switch/styles.css": "./dist/switch.css",
+    "./slider/styles.css": "./dist/slider.css",
     "./radio/styles.css": "./dist/radio.css",
     "./radio-group/styles.css": "./dist/radio-group.css",
     "./avatar/styles.css": "./dist/avatar.css",

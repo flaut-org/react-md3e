@@ -1,0 +1,11 @@
+.story-slider-stack {
+  display: grid;
+  gap: 40px;
+  padding-block: 32px;
+}
+
+.story-slider-vertical {
+  display: flex;
+  gap: 64px;
+  padding: 24px;
+}

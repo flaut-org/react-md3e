@@ -135,6 +135,10 @@ modules; directory placement does not justify a client directive.
 
 ## Tests and verification
 
+Slider owns slider-track/ and slider-thumb/ children. Track segment geometry stays with slider-track;
+family validation, types and shared styles live under slider/. Tests remain in slider/tests, and
+the fixture and Storybook demonstrations live beneath their respective sliders/slider owners.
+
 SegmentedButton follows the same ownership tree: segmented-button.component.tsx owns
 button-segment/button-segment.component.tsx, contexts/segmented-button.context.ts and shared family
 styles/types. Its behavior and type checks live in segmented-button/tests; the fixture demonstration

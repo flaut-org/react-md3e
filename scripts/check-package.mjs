@@ -195,7 +195,7 @@ assert.match(selectableList, /^['"]use client['"]/m);
 assert.match(selectableList, /@base-ui\/react\/toggle-group/);
 assert.doesNotMatch(staticList, /use client|useContext|@base-ui/);
 
-for (const name of ['checkbox', 'switch', 'radio', 'radio-group', 'autocomplete', 'popover']) {
+for (const name of ['checkbox', 'switch', 'slider', 'radio', 'radio-group', 'autocomplete', 'popover']) {
   const code = await readFile(path.join(packageRoot, `dist/components/${name}/${name}.component.js`), 'utf8');
 
   assert.match(code, /^['"]use client['"]/m);
@@ -334,6 +334,17 @@ assert.ok([...segmentStyles].some((file) => file.includes('/internal/ripple/')))
 assert.ok(![...segmentStyles].some((file) => /\/(shape|button|button-group)\//.test(file)));
 assert.ok(
   segmentCss.includes('aria-checked') && segmentCss.includes('forced-colors') && segmentCss.includes('linear('),
+);
+
+const sliderStyles = new Set();
+const sliderCss = await readCssTree(manifest.exports['./slider/styles.css'], sliderStyles);
+
+assert.ok([...sliderStyles].some((file) => file.includes('/slider/')));
+assert.ok(![...sliderStyles].some((file) => /\/(shape|tooltip|internal\/ripple)\//.test(file)));
+assert.ok(
+  sliderCss.includes('md3-slider-active') &&
+    sliderCss.includes('prefers-reduced-motion') &&
+    sliderCss.includes('forced-colors'),
 );
 
 for (const [name, target] of Object.entries(manifest.exports)) {

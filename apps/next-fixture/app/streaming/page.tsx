@@ -6,6 +6,7 @@ import '@flaut-travel/react-md3e/button-group/styles.css';
 import '@flaut-travel/react-md3e/card/styles.css';
 import '@flaut-travel/react-md3e/checkbox/styles.css';
 import '@flaut-travel/react-md3e/switch/styles.css';
+import '@flaut-travel/react-md3e/slider/styles.css';
 import '@flaut-travel/react-md3e/collapsible/styles.css';
 import '@flaut-travel/react-md3e/divider/styles.css';
 import '@flaut-travel/react-md3e/dialog/styles.css';

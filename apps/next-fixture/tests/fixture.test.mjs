@@ -190,3 +190,20 @@ test('SegmentedButton is server-rendered with its own CSS closure and Material s
   assert.match(styles, /md3-segment-container/);
   assert.doesNotMatch(styles, /data-morph|md3-calendar-enter/);
 });
+
+test('Slider ships native named ranges and extracted family CSS before hydration', async () => {
+  const response = await fetch(`${baseUrl}/sliders`, { signal: AbortSignal.timeout(10_000) });
+
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  const styles = await routeCss('/sliders');
+
+  assert.match(html, /data-md3-slider=""/);
+  assert.match(html, /type="range"/);
+  assert.match(html, /aria-label="Minimum price"/);
+  assert.match(html, /aria-valuenow="25"/);
+  assert.match(styles, /md3-slider-active/);
+  assert.match(styles, /--_stop-offset/);
+  assert.doesNotMatch(styles, /data-morph|ripple-enter|md3-calendar-enter/);
+});

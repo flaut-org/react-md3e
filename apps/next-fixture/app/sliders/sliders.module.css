@@ -1,0 +1,18 @@
+.stack {
+  display: grid;
+  gap: 32px;
+  margin-block: 32px 48px;
+}
+
+.verticals {
+  display: flex;
+  align-items: stretch;
+  gap: 64px;
+  padding-block: 24px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
