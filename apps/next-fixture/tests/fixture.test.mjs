@@ -172,3 +172,21 @@ test('route CSS includes Button dependencies without loading unused Shape styles
   assert.doesNotMatch(buttons, /data-morph/);
   assert.match(shapes, /data-morph/);
 });
+
+test('SegmentedButton is server-rendered with its own CSS closure and Material selection roles', async () => {
+  const response = await fetch(`${baseUrl}/segmented-buttons`, { signal: AbortSignal.timeout(10_000) });
+
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  const styles = await routeCss('/segmented-buttons');
+
+  assert.match(html, /data-md3-segmented-button=""/);
+  assert.match(html, /role="radiogroup"/);
+  assert.match(html, /role="checkbox"/);
+  assert.match(html, /aria-checked="true"/);
+  assert.match(html, /name="cabin"/);
+  assert.match(styles, /ripple-enter/);
+  assert.match(styles, /md3-segment-container/);
+  assert.doesNotMatch(styles, /data-morph|md3-calendar-enter/);
+});

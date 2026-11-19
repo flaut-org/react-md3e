@@ -135,6 +135,11 @@ modules; directory placement does not justify a client directive.
 
 ## Tests and verification
 
+SegmentedButton follows the same ownership tree: segmented-button.component.tsx owns
+button-segment/button-segment.component.tsx, contexts/segmented-button.context.ts and shared family
+styles/types. Its behavior and type checks live in segmented-button/tests; the fixture demonstration
+lives beneath the segmented-buttons route and imports only the built package.
+
 Place component behavior and type tests in that component's `tests` directory. Tests exercising a
 whole family can live at the family root; a focused child test belongs next to the child. Hook,
 style-authoring and theme-generator tests likewise live in their module's `tests` directory.

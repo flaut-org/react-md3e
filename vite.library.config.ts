@@ -101,6 +101,7 @@ export default defineConfig({
         'side-sheet': `${source}components/side-sheet/index.ts`,
         'bottom-sheet': `${source}components/bottom-sheet/index.ts`,
         'button-group': `${source}components/button-group/index.ts`,
+        'segmented-button': `${source}components/segmented-button/index.ts`,
         'collapsible': `${source}components/collapsible/index.ts`,
         'tooltip': `${source}components/tooltip/index.ts`,
         'divider': `${source}components/divider/index.ts`,

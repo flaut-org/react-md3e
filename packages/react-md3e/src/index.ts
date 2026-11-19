@@ -168,6 +168,13 @@ export type { CollapsibleProps } from './components/collapsible';
 export { ButtonGroup, ButtonGroupButton } from './components/button-group';
 export type { ButtonGroupProps, ButtonGroupButtonProps, ButtonGroupVariant } from './components/button-group';
 
+export { SegmentedButton, ButtonSegment } from './components/segmented-button';
+export type {
+  SegmentedButtonProps,
+  SegmentedButtonCommonProps,
+  ButtonSegmentProps,
+} from './components/segmented-button';
+
 export { BottomSheet } from './components/bottom-sheet';
 export type { BottomSheetProps, BottomSheetCloseReason } from './components/bottom-sheet';
 
