@@ -44,6 +44,11 @@ checks. Integrations can be added when they are actually used.
 
 ## Provenance when implementing
 
+Slider combines the rendered official MD3 slider specifications, AndroidX SliderTokens v2_3_5 at
+009564af4f3f92df06e213711cb5327ceabc4e47 and the requested M3E CSS reference at
+f5bf147ce86c68ee7f8aec15767042a907028a22. See [Slider](components/slider.md) for exact source paths,
+independent CSS adaptations, all-size measurements and Figma access limits.
+
 SegmentedButton uses the rendered official MD3 segmented-button specifications, AndroidX token
 version v0_162 at 009564af4f3f92df06e213711cb5327ceabc4e47 and the requested M3E CSS reference at
 aa2f9ad252c06301e8874d3188d486464e8cc170. See [SegmentedButton](components/segmented-button.md)

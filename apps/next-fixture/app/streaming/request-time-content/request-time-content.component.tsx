@@ -26,6 +26,7 @@ import {
   Badge,
   Checkbox,
   Switch,
+  Slider,
   Radio,
   RadioGroup,
   AppBar,
@@ -49,6 +50,7 @@ export async function RequestTimeContent() {
       <p>
         Streamed inbox, 12 unread messages <Badge badgeContent={12} data-testid="streamed-badge" />
       </p>
+      <Slider label="Streamed volume" defaultValue={35} data-testid="streamed-slider" />
       <Calendar aria-label="Streamed calendar" defaultValue="2024-02-29" today="2024-02-29" />
       <RangeCalendar
         aria-label="Streamed range calendar"

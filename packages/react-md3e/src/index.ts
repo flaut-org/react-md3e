@@ -81,6 +81,16 @@ export { Checkbox } from './components/checkbox';
 export type { CheckboxProps } from './components/checkbox';
 export { Switch } from './components/switch';
 export type { SwitchProps } from './components/switch';
+export { Slider } from './components/slider';
+export type {
+  SliderProps,
+  SliderCommonProps,
+  SliderVariant,
+  SliderSize,
+  SliderRange,
+  SliderMark,
+  SliderValueLabelDisplay,
+} from './components/slider';
 export { Radio } from './components/radio';
 export type { RadioProps } from './components/radio';
 export { RadioGroup } from './components/radio-group';

@@ -2,6 +2,11 @@
 
 Material 3 Expressive React components with precompiled CSS and a token-based theme API.
 
+Slider provides standard, centered and two-handle range selection, five Expressive sizes,
+horizontal/vertical orientation, marks, value indicators and optional inset icons. Base UI owns
+keyboard/pointer behavior and native form inputs. Import from the root or `/slider`, with explicit
+`/slider/styles.css` loading. See the [Slider API](https://github.com/flaut-org/react-md3e/blob/main/docs/components/slider.md).
+
 SegmentedButton and ButtonSegment provide baseline Material 3 outlined single/multiple selection,
 radio/checkbox semantics, keyboard navigation, selection indicators, native form values/reset and
 RTL. Import from the root or `/segmented-button`, with `/segmented-button/styles.css` at the owning
@@ -26,7 +31,7 @@ or `/range-calendar/styles.css` (which includes Calendar) at the composition bou
 available from the package root and their kebab-case subpaths. Native Temporal and Temporal-aware
 Intl are required; older runtimes need an application-installed compatible global polyfill.
 See [Calendar documentation](https://github.com/flaut-org/react-md3e/blob/main/docs/components/calendar.md).
-Implemented: Calendar, RangeCalendar, Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Switch, Radio/RadioGroup, Avatar, Badge, TextField, Autocomplete, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, SegmentedButton/ButtonSegment, BottomSheet, SideSheet, Snackbar, ThemeProvider, createTheme, and themeToCss. React 19 is required.
+Implemented: Calendar, RangeCalendar, Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Switch, Slider, Radio/RadioGroup, Avatar, Badge, TextField, Autocomplete, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, SegmentedButton/ButtonSegment, BottomSheet, SideSheet, Snackbar, ThemeProvider, createTheme, and themeToCss. React 19 is required.
 
 ```tsx
 import { Button, ThemeProvider } from '@flaut-travel/react-md3e';
