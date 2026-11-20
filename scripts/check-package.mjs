@@ -205,6 +205,12 @@ for (const name of ['checkbox', 'switch', 'slider', 'radio', 'radio-group', 'aut
   );
 }
 
+for (const name of ['menu-surface', 'menu-item-content']) {
+  const code = await readFile(path.join(packageRoot, `dist/components/${name}/${name}.component.js`), 'utf8');
+
+  assert.doesNotMatch(code, /use client|useContext|useState|useEffect|@base-ui/);
+}
+
 for (const [name, primitive] of [
   ['tooltip', 'tooltip'],
   ['collapsible', 'collapsible'],
@@ -315,7 +321,8 @@ const buttonStyles = new Set();
 const buttonCss = await readCssTree(manifest.exports['./button/styles.css'], buttonStyles);
 const autocompleteStyles = new Set();
 
-await readCssTree(manifest.exports['./autocomplete/styles.css'], autocompleteStyles);
+const autocompleteCss = await readCssTree(manifest.exports['./autocomplete/styles.css'], autocompleteStyles);
+
 assert.ok(
   [...buttonStyles].some((file) => file.includes('/internal/ripple/')),
   'Button CSS must include its ripple.',
@@ -323,6 +330,16 @@ assert.ok(
 assert.ok([...buttonStyles].some((file) => file.includes('/button-loading-indicator/')));
 assert.ok([...autocompleteStyles].some((file) => file.includes('/text-field/')));
 assert.ok([...autocompleteStyles].some((file) => file.includes('/list-item-content/')));
+
+for (const dependency of ['/menu-surface/', '/menu-item-content/', '/selection-indicator/', '/internal/ripple/']) {
+  assert.ok(
+    [...autocompleteStyles].some((file) => file.includes(dependency)),
+    `Autocomplete CSS must include ${dependency}`,
+  );
+}
+
+assert.ok(![...autocompleteStyles].some((file) => /\/(menu|popover)\//.test(file)));
+assert.ok(autocompleteCss.includes('--md3e-menu-scale'));
 assert.ok(![...buttonStyles, ...autocompleteStyles].some((file) => file.includes('/shape/')));
 assert.ok(!buttonCss.includes('--md-sys-color-primary:'), 'Component CSS must not duplicate the theme defaults.');
 
@@ -350,7 +367,14 @@ assert.ok(
 const menuStyles = new Set();
 const menuCss = await readCssTree(manifest.exports['./menu/styles.css'], menuStyles);
 
-for (const dependency of ['/menu/', '/list-item-content/', '/selection-indicator/', '/internal/ripple/']) {
+for (const dependency of [
+  '/menu/',
+  '/menu-surface/',
+  '/menu-item-content/',
+  '/list-item-content/',
+  '/selection-indicator/',
+  '/internal/ripple/',
+]) {
   assert.ok(
     [...menuStyles].some((file) => file.includes(dependency)),
     `Menu CSS must include ${dependency}`,
@@ -358,6 +382,13 @@ for (const dependency of ['/menu/', '/list-item-content/', '/selection-indicator
 }
 
 assert.ok(![...menuStyles].some((file) => /\/(shape|text-field|autocomplete|popover)\//.test(file)));
+
+for (const file of menuStyles) {
+  if (/\/(menu-surface|menu-item-content)\//.test(file)) {
+    assert.ok(autocompleteStyles.has(file), 'Menu and Autocomplete must reference the same presentation CSS assets.');
+  }
+}
+
 assert.ok(
   menuCss.includes('--md3e-menu-scale') &&
     menuCss.includes('prefers-reduced-motion') &&

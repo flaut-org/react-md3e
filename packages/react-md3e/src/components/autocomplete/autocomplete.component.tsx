@@ -8,6 +8,8 @@ import { useControlledInputGuard } from '../../internal/hooks/use-controlled-inp
 import { useSelectOnFocus } from '../../internal/hooks/use-select-on-focus.hook';
 import { usePortalContainer } from '../../internal/hooks/use-portal-container.hook';
 import { TextField } from '../text-field/text-field.component';
+import { MenuSurface } from '../menu-surface/menu-surface.component';
+import { menuItemBody } from '../menu-item-content/menu-item-content.styles';
 import { AutocompleteInput } from './autocomplete-input/autocomplete-input.component';
 import { AutocompleteOption } from './autocomplete-option/autocomplete-option.component';
 import { AutocompleteChip } from './autocomplete-chip/autocomplete-chip.component';
@@ -355,32 +357,41 @@ export function Autocomplete<T, Multiple extends boolean = false>({
       >
         <span hidden ref={anchorRef} />
         {renderInput ? renderInput(params) : <TextField {...params} />}
-        <Combobox.Portal container={host} dir={dir ?? direction}>
-          <Combobox.Positioner anchor={anchor} sideOffset={4} align="start" className={autocompletePositioner}>
-            <Combobox.Popup className={autocompletePopup} data-md3-autocomplete-popup="" initialFocus={false}>
-              <Combobox.Empty>
-                <div className={autocompleteStatus}>{loading ? loadingText : noOptionsText}</div>
-              </Combobox.Empty>
-              <Combobox.List
-                className={autocompleteList}
-                aria-label={typeof label === 'string' ? label : props['aria-label']}
-                aria-busy={loading}
+        {host && (
+          <Combobox.Portal container={host} dir={dir ?? direction}>
+            <Combobox.Positioner anchor={anchor} sideOffset={4} align="start" className={autocompletePositioner}>
+              <Combobox.Popup
+                render={<MenuSurface />}
+                className={autocompletePopup}
+                data-md3-autocomplete-popup=""
+                initialFocus={false}
               >
-                {(option: T, index: number) => (
-                  <AutocompleteOption
-                    key={getOptionKey?.(option) ?? `${getOptionLabel(option)}-${index}`}
-                    option={option}
-                    index={index}
-                    label={getOptionLabel(option)}
-                    disabled={getOptionDisabled?.(option) ?? false}
-                    inputValue={currentQuery}
-                    renderOption={renderOption}
-                  />
-                )}
-              </Combobox.List>
-            </Combobox.Popup>
-          </Combobox.Positioner>
-        </Combobox.Portal>
+                <Combobox.Empty>
+                  <div className={autocompleteStatus}>
+                    <span className={menuItemBody}>{loading ? loadingText : noOptionsText}</span>
+                  </div>
+                </Combobox.Empty>
+                <Combobox.List
+                  className={autocompleteList}
+                  aria-label={typeof label === 'string' ? label : props['aria-label']}
+                  aria-busy={loading}
+                >
+                  {(option: T, index: number) => (
+                    <AutocompleteOption
+                      key={getOptionKey?.(option) ?? `${getOptionLabel(option)}-${index}`}
+                      option={option}
+                      index={index}
+                      label={getOptionLabel(option)}
+                      disabled={getOptionDisabled?.(option) ?? false}
+                      inputValue={currentQuery}
+                      renderOption={renderOption}
+                    />
+                  )}
+                </Combobox.List>
+              </Combobox.Popup>
+            </Combobox.Positioner>
+          </Combobox.Portal>
+        )}
       </Combobox.Root>
     </div>
   );

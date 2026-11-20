@@ -5,10 +5,11 @@ import { Menu as BaseMenu } from '@base-ui/react/menu';
 import { useRipple } from '../../../internal/hooks/use-ripple.hook';
 import { rippleSurface } from '../../../internal/ripple/ripple.styles';
 import { MenuContext } from '../contexts/menu.context';
-import { MenuItemContent } from '../menu-item-content/menu-item-content.component';
+import { MenuItemContent } from '../../menu-item-content/menu-item-content.component';
+import { menuItem, menuItemBody } from '../../menu-item-content/menu-item-content.styles';
 import { MenuPopup } from '../menu-popup/menu-popup.component';
 import { changeMenuOpen, menuTextValue } from '../menu.helpers';
-import { menuItem, menuArrow, menuItemBody } from '../menu.styles';
+import { menuArrow } from '../menu.styles';
 import type { MenuSubmenuProps } from '../menu.types';
 
 export function MenuSubmenu({

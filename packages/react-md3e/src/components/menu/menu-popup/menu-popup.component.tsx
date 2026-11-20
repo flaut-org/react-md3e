@@ -2,6 +2,7 @@
 
 import { Menu as BaseMenu } from '@base-ui/react/menu';
 import { usePortalContainer } from '../../../internal/hooks/use-portal-container.hook';
+import { MenuSurface } from '../../menu-surface/menu-surface.component';
 import { menuPortal, menuPositioner, menuPopup } from '../menu.styles';
 import type { MenuProps, MenuSurfaceProps } from '../menu.types';
 
@@ -52,14 +53,12 @@ export function MenuPopup({
           >
             <BaseMenu.Popup
               {...props}
+              render={<MenuSurface variant={variant} density={density} layout={layout} />}
               finalFocus={finalFocus}
               dir={resolvedDirection}
               aria-labelledby={props['aria-labelledby'] ?? (props['aria-label'] ? undefined : labelledBy)}
               className={[menuPopup, className].filter(Boolean).join(' ')}
               data-md3-menu=""
-              data-variant={variant}
-              data-density={density}
-              data-layout={layout}
               data-nested={nested}
             />
           </BaseMenu.Positioner>

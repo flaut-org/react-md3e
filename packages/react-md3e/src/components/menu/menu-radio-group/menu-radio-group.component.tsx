@@ -3,7 +3,8 @@
 import { useContext, useMemo } from 'react';
 import { Menu as BaseMenu } from '@base-ui/react/menu';
 import { MenuContext } from '../contexts/menu.context';
-import { menuGroup, menuGroupLabel, menuItemBody } from '../menu.styles';
+import { menuItemBody } from '../../menu-item-content/menu-item-content.styles';
+import { menuGroup, menuGroupLabel } from '../menu.styles';
 import type { MenuRadioGroupProps } from '../menu.types';
 
 export function MenuRadioGroup({

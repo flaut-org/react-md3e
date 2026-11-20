@@ -1,7 +1,7 @@
-import { ListItemContent } from '../../list-item-content/list-item-content.component';
-import { SelectionIndicator } from '../../selection-indicator/selection-indicator.component';
-import { menuTrailing } from '../menu.styles';
-import type { MenuItemContentProps } from '../menu.types';
+import { ListItemContent } from '../list-item-content/list-item-content.component';
+import { SelectionIndicator } from '../selection-indicator/selection-indicator.component';
+import { menuTrailing } from './menu-item-content.styles';
+import type { MenuItemContentProps } from './menu-item-content.types';
 
 export function MenuItemContent({
   children,

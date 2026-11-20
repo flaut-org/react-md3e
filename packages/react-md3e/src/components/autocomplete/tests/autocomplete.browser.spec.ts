@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import type { Locator } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { createTheme } from '@flaut-travel/react-md3e/theme';
 
@@ -9,6 +10,165 @@ const rgb = (hex: string) =>
     .match(/../g)!
     .map((part) => parseInt(part, 16))
     .join(', ')})`;
+
+async function unfoldingGeometry(popup: Locator, time?: number) {
+  if (time !== undefined) {
+    await expect
+      .poll(() =>
+        popup.evaluate((element) =>
+          element
+            .getAnimations()
+            .some(
+              (animation) => animation instanceof CSSTransition && animation.transitionProperty === '--md3e-menu-scale',
+            ),
+        ),
+      )
+      .toBe(true);
+  }
+
+  return popup.evaluate((element, seek) => {
+    if (seek !== undefined) {
+      const animation = element
+        .getAnimations()
+        .find(
+          (candidate) => candidate instanceof CSSTransition && candidate.transitionProperty === '--md3e-menu-scale',
+        )!;
+
+      animation.pause();
+      animation.currentTime = seek;
+    }
+
+    const body = element.querySelector('[data-md3-menu-item-body]')!;
+    const range = document.createRange();
+
+    range.selectNodeContents(body);
+
+    return {
+      width: element.getBoundingClientRect().width,
+      height: element.getBoundingClientRect().height,
+      textHeight: range.getBoundingClientRect().height,
+      textWidth: range.getBoundingClientRect().width,
+    };
+  }, time);
+}
+
+test('Autocomplete shares Expressive Menu geometry and selection while retaining virtual combobox focus', async ({
+  page,
+}) => {
+  await page.goto('/fields');
+
+  const input = page.getByRole('combobox', { name: 'Server destination', exact: true });
+
+  await input.click();
+
+  const popup = page.locator('[data-md3-autocomplete-popup]');
+  const selected = page.getByRole('option', { name: 'Paris', exact: true });
+
+  await expect(popup).toHaveAttribute('data-md3-menu-surface', '');
+  await expect(popup).toHaveCSS('border-radius', '16px');
+  await expect(popup).toHaveCSS('padding', '4px');
+  await expect(popup).toHaveCSS('background-color', rgb(forest.schemes.light.surfaceContainerLow));
+  await expect(selected).toHaveCSS('font-size', '14px');
+  await expect(selected).toHaveCSS('line-height', '20px');
+  await expect(selected).toHaveCSS('min-height', '48px');
+  await expect(selected).toHaveCSS('border-radius', '12px');
+  await expect(selected).toHaveCSS('background-color', rgb(forest.schemes.light.tertiaryContainer));
+  await expect(selected.locator('[data-leading-kind] [data-indicator="checkmark"]')).toHaveCount(1);
+  await expect(page.getByRole('listbox')).toHaveCSS('gap', '2px');
+  await expect(page.getByRole('menu')).toHaveCount(0);
+  await expect(input).toBeFocused();
+  await input.press('ArrowDown');
+
+  const activeId = await input.getAttribute('aria-activedescendant');
+
+  await expect(page.locator(`[id="${activeId}"]`)).toHaveCSS('outline-width', '3px');
+  await expect(input).toHaveValue('Paris');
+  await input.press('Escape');
+  await input.click();
+  await expect(selected).toHaveAttribute('aria-selected', 'true');
+});
+
+test('Autocomplete unfolds and closes through Menu motion without stretching default or custom option content', async ({
+  page,
+}) => {
+  await page.goto('/fields');
+
+  for (const name of ['Server destination', 'Destination']) {
+    const input = page.getByRole('combobox', { name, exact: true });
+
+    await input.evaluate((element) =>
+      element
+        .closest<HTMLElement>('[data-md3-theme]')!
+        .style.setProperty('--md-sys-motion-spring-fast-spatial-duration', '5s'),
+    );
+    await input.click();
+
+    const popup = page.locator('[data-md3-autocomplete-popup]');
+    const opening = await unfoldingGeometry(popup, 500);
+    const nearOpen = await unfoldingGeometry(popup, (100 / forest.motion.fast.spatial.duration) * 5000);
+
+    await popup.evaluate((element) => element.getAnimations().forEach((animation) => animation.finish()));
+
+    const full = await unfoldingGeometry(popup);
+
+    expect(opening.height).toBeGreaterThan(0);
+    expect(opening.height).toBeLessThan(full.height);
+    expect(opening.width).toBeCloseTo(full.width, 2);
+    expect(opening.textHeight).toBeCloseTo(full.textHeight, 1);
+    expect(opening.textWidth).toBeCloseTo(full.textWidth, 1);
+    expect(nearOpen.height).toBeGreaterThanOrEqual(full.height * 0.9);
+    await expect(input).toBeFocused();
+    await input.press('Escape');
+    await expect(popup).toHaveAttribute('data-ending-style', '');
+
+    const closing = await unfoldingGeometry(popup, 500);
+
+    expect(closing.height).toBeGreaterThan(0);
+    expect(closing.height).toBeLessThan(full.height);
+    expect(closing.textHeight).toBeCloseTo(full.textHeight, 1);
+    await expect(input).toBeFocused();
+    await popup.evaluate((element) => element.getAnimations().forEach((animation) => animation.finish()));
+    await expect(popup).toHaveCount(0);
+  }
+});
+
+test('a full-width Autocomplete menu follows the field and scrolls keyboard-highlighted results into view', async ({
+  page,
+}) => {
+  await page.goto('http://127.0.0.1:6106/iframe.html?id=components-autocomplete--long-options&viewMode=story');
+
+  const input = page.getByRole('combobox', { name: 'Destination', exact: true });
+
+  await input.click();
+
+  const popup = page.locator('[data-md3-autocomplete-popup]');
+
+  await expect(popup).not.toHaveAttribute('data-starting-style', '');
+  await popup.evaluate((element) => element.getAnimations().forEach((animation) => animation.finish()));
+
+  const fieldBox = (await input.locator('..').boundingBox())!;
+  const popupBox = (await popup.boundingBox())!;
+
+  expect(popupBox.width).toBeGreaterThan(280);
+  expect(popupBox.width).toBeCloseTo(fieldBox.width, 1);
+  expect(popupBox.height).toBeLessThanOrEqual(480);
+
+  for (let index = 0; index < 40; index += 1) {
+    await input.press('ArrowDown');
+  }
+
+  const last = page.getByRole('option', { name: 'Destination 40', exact: true });
+
+  await expect(input).toHaveAttribute('aria-activedescendant', (await last.getAttribute('id'))!);
+  await expect.poll(() => popup.evaluate((element) => element.scrollTop)).toBeGreaterThan(0);
+
+  const lastBox = (await last.boundingBox())!;
+
+  expect(lastBox.y).toBeGreaterThanOrEqual(popupBox.y);
+  expect(lastBox.y + lastBox.height).toBeLessThanOrEqual(popupBox.y + popupBox.height + 1);
+  await input.press('Enter');
+  await expect(input).toHaveValue('Destination 40');
+});
 
 test('keyboard filtering supports accents, virtual focus, disabled options, Enter and Escape', async ({ page }) => {
   await page.goto('/fields');
@@ -182,7 +342,7 @@ test('portals preserve nested themes and dialog focus; Escape closes suggestions
   await page.getByRole('combobox', { name: 'Dark destination' }).click();
   await expect(page.locator('[data-md3-autocomplete-popup]')).toHaveCSS(
     'background-color',
-    rgb(forest.schemes.dark.surfaceContainer),
+    rgb(forest.schemes.dark.surfaceContainerLow),
   );
   await page.keyboard.press('Escape');
   await page.getByRole('button', { name: 'Open destination dialog' }).click();

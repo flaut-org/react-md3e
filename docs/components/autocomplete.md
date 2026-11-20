@@ -95,8 +95,11 @@ renderInput={(params) => (
 ```
 
 A renderOption root owns the supplied role/id/events/ref. Keep custom option content non-interactive.
-Default rows reuse ListItemContent and SelectionIndicator presentation with their own Combobox.Item
-semantics. A selectable List is not nested inside the popup. Private chips support keyboard/pointer
+Default rows reuse MenuItemContent, its item styles, SelectionIndicator and ripple with their own
+Combobox.Item semantics. MenuSurface supplies the same presentation as Menu without mounting a
+Menu root or moving focus into menu items. A selectable List is not nested inside the popup.
+Custom option roots retain their supplied props/ref; their children receive the same inverse-scale
+body wrapper as default options so text does not stretch during unfolding. Private chips support keyboard/pointer
 removal and inherit selection-control behavior from Base UI; they are not a public Chip component.
 A small render adapter omits Base UI 1.9.0's unsupported aria-readonly attribute on generic chip divs;
 readOnly behavior is owned by the Combobox root and removal controls.
@@ -116,14 +119,28 @@ request ordering or caching. The AsyncSearch story demonstrates cancelling stale
 
 ## Theme, motion and server behavior
 
-Filled/outlined fields inherit TextField tokens. The popup uses surfaceContainer, extra-small corners,
-elevation-level-2-inspired shadow, 48px minimum rows and secondaryContainer/onSecondaryContainer for
-selection. Highlighting has a visible secondary focus outline/state layer. Text roles, shapes, RTL,
-light/dark and nested themes inherit through CSS. Portal placement uses the existing hook to resolve
-the nearest theme/parent portal after refs mount; no styles or computed theme values are copied.
-Base UI computes popup geometry through positioning styles/variables. CSS rules and transitions are
-compiled at build time. Reduced motion removes popup/label transitions; forced colors retain focus,
-selection and popup boundaries.
+Filled/outlined fields inherit TextField tokens. The popup shares MenuSurface and MenuItemContent
+with the Expressive Menu: surfaceContainerLow, large/16px corners, level-3 elevation, 4px padding,
+2px option spacing and labelLarge (14/20) text. Rows have 48px minimum targets, 16px horizontal insets
+and medium/12px selected corners. Selection uses tertiaryContainer/onTertiaryContainer and a leading
+checkmark. Virtual focus keeps the shared 3px secondary focus ring while DOM focus stays in the input.
+These presentation components live at the top component level because both families use them;
+they are private and expose no new public API.
+
+The menu stays aligned to the field width, including full-width fields wider than Menu's usual
+280px maximum. Its surface scrolls within 480px and the available viewport, and keyboard navigation
+scrolls the highlighted result into view. Text roles, shapes, RTL, light/dark and nested themes inherit
+through CSS. Portals wait for the existing hook to resolve their nearest theme/parent portal after
+refs mount; no styles or computed theme values are copied. Base UI still owns popup geometry,
+filtering, selected values, form inputs and combobox accessibility.
+
+The shared surface unfolds with fast spatial and fades with fast effects, just like Menu. Inherited
+CSS progress and inverse option-body transforms keep default/custom option text at its natural size.
+Empty/loading messages use the same compensation. Base UI retains the exiting popup until transitions
+finish. CSS rules and transitions compile at build time. Reduced motion removes finite transitions;
+forced colors retain virtual focus, selection and popup boundaries. Import `/autocomplete/styles.css`
+only; its dependency closure includes the shared presentation without loading Menu interaction,
+its trigger/submenu styles or Popover.
 
 Autocomplete/TextField hydrate for interaction; RSC can instantiate them with serializable options
 and default values. Server HTML contains the styled labeled input and selected display label before
@@ -145,18 +162,26 @@ aria-hidden-focus findings. No accessibility rule is globally disabled.
 
 ## References and limits
 
-Read on 2026-11-15:
+Read on 2026-11-15; Expressive presentation rechecked on 2026-11-20:
 
 - [Material text fields](https://m3.material.io/components/text-fields/specs) and
   [menus](https://m3.material.io/components/menus/guidelines), adapted to a web combobox.
 - [AndroidX MenuTokens.kt](https://github.com/androidx/androidx/blob/89d9aa6a5b9fc6e4847002be42f3c6891b091c9e/compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/tokens/MenuTokens.kt),
   v0_210 at revision 89d9aa6a5b9fc6e4847002be42f3c6891b091c9e, plus [TextField references](text-field.md).
+- The updated Expressive common token table and FastSpatial/FastEffects assignment recorded in
+  [Menu](menu.md) supersede the old baseline popup appearance. Autocomplete reuses that implementation.
+- The requested [m3e Autocomplete](https://matraic.github.io/m3e/components/autocomplete.html),
+  [OptionPanelElement.ts](https://github.com/matraic/m3e/blob/54bb59c2a8270dd6fde905b68761d3e968cad81a/packages/web/src/option/OptionPanelElement.ts)
+  and [OptionElement.ts](https://github.com/matraic/m3e/blob/54bb59c2a8270dd6fde905b68761d3e968cad81a/packages/web/src/option/OptionElement.ts)
+  confirm menu-style listbox presentation, large panel corners, labelLarge option typography,
+  tertiary selection and a leading checkmark. The official common token table takes precedence over
+  m3e's surfaceContainer and panel height. Existing 48px web targets are retained.
 - [Base UI Combobox](https://base-ui.com/react/components/combobox) and
   [Autocomplete](https://base-ui.com/react/components/autocomplete), documentation and installed 1.9.0 source.
 
 No MUI/AndroidX implementation was copied; Figma parity is not claimed. This first selection adapter
-has no freeSolo/create-option mode, grouped/virtualized results, public Chip API, full MUI prop/slot
-compatibility or public menu component. Those need separate behavior/design work; unsupported props
+has no freeSolo/create-option mode, grouped/virtualized results, public Chip API or full MUI prop/slot
+compatibility. Those need separate behavior/design work; unsupported props
 are rejected by TypeScript.
 
 ## Focus and Escape migration options

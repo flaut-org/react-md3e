@@ -50,6 +50,11 @@ the related m3e Menu/Autocomplete reference at 54bb59c2a8270dd6fde905b68761d3e96
 See [Menu](components/menu.md) for exact paths, CSS/web adaptations, the verified Figma 403 and
 frame-by-frame analysis of the requested Guidelines 20/22 recordings (555 frames at 60fps).
 
+Autocomplete shares that Expressive Menu presentation, independently of its Combobox interactions.
+The requested m3e Autocomplete and OptionPanelElement/OptionElement sources at the same pinned
+revision confirm large panel corners, labelLarge typography, tertiary selection and leading checks.
+See [Autocomplete](components/autocomplete.md) for exact URLs and the retained web adaptations.
+
 Slider combines the rendered official MD3 slider specifications, AndroidX SliderTokens v2_3_5 at
 009564af4f3f92df06e213711cb5327ceabc4e47 and the requested M3E CSS reference at
 f5bf147ce86c68ee7f8aec15767042a907028a22. See [Slider](components/slider.md) for exact source paths,
