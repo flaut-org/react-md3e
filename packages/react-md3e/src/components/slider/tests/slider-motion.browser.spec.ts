@@ -199,7 +199,8 @@ test('a press during closing reverses from the current scale without a jump or a
   expect(reopening.visibility).toBe('visible');
   expect(reopening.height).toBeGreaterThan(0);
   expect(reopening.height).toBeLessThan(full.height);
-  expect(reopening.playhead).toBeGreaterThanOrEqual(closing.playhead);
+  // Native animation timestamps can round slightly below the held millisecond value on reversal.
+  expect(reopening.playhead).toBeGreaterThanOrEqual(closing.playhead - 1e-6);
   expect(reopening.playhead).toBeLessThan(closing.playhead + 80);
   await finishMotion(label(root));
   await expect(label(root)).toHaveCSS('opacity', '1');
