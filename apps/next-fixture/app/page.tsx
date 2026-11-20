@@ -64,6 +64,9 @@ export default function Page() {
         <Link href="/sliders">Slider examples</Link>
       </p>
       <p>
+        <Link href="/menus">Menu examples</Link>
+      </p>
+      <p>
         <Link href="/essentials">Homepage essentials</Link>
       </p>
       <p>

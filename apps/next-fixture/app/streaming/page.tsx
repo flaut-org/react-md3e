@@ -12,6 +12,7 @@ import '@flaut-travel/react-md3e/divider/styles.css';
 import '@flaut-travel/react-md3e/dialog/styles.css';
 import '@flaut-travel/react-md3e/list/styles.css';
 import '@flaut-travel/react-md3e/popover/styles.css';
+import '@flaut-travel/react-md3e/menu/styles.css';
 import '@flaut-travel/react-md3e/radio/styles.css';
 import '@flaut-travel/react-md3e/radio-group/styles.css';
 import '@flaut-travel/react-md3e/search/styles.css';

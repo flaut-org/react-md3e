@@ -202,7 +202,12 @@
       "types": "./dist/components/range-calendar/index.d.ts",
       "import": "./dist/range-calendar.js"
     },
-    "./range-calendar/styles.css": "./dist/range-calendar.css"
+    "./range-calendar/styles.css": "./dist/range-calendar.css",
+    "./menu": {
+      "types": "./dist/components/menu/index.d.ts",
+      "import": "./dist/menu.js"
+    },
+    "./menu/styles.css": "./dist/menu.css"
   },
   "scripts": {
     "clean": "node ../../scripts/clean-package.mjs",

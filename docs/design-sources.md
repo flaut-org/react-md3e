@@ -44,6 +44,12 @@ checks. Integrations can be added when they are actually used.
 
 ## Provenance when implementing
 
+Menu uses the rendered November 2025 Expressive menu specifications and expanded common token
+table, baseline AndroidX MenuTokens v0_210 at 33b3d2d28722bf91670634ab0e707192330de497, and
+the related m3e Menu/Autocomplete reference at 54bb59c2a8270dd6fde905b68761d3e968cad81a.
+See [Menu](components/menu.md) for exact paths, CSS/web adaptations, the verified Figma 403 and
+frame-by-frame analysis of the requested Guidelines 20/22 recordings (555 frames at 60fps).
+
 Slider combines the rendered official MD3 slider specifications, AndroidX SliderTokens v2_3_5 at
 009564af4f3f92df06e213711cb5327ceabc4e47 and the requested M3E CSS reference at
 f5bf147ce86c68ee7f8aec15767042a907028a22. See [Slider](components/slider.md) for exact source paths,

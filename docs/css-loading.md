@@ -26,7 +26,7 @@ Every UI subpath has a CSS export: `/button/styles.css`, `/icon-button/styles.cs
 `/calendar/styles.css`, `/range-calendar/styles.css`, `/slider/styles.css`,
 `/app-bar/styles.css`, `/dialog/styles.css`, `/list/styles.css`, `/checkbox/styles.css`,
 `/radio/styles.css`, `/radio-group/styles.css`, `/avatar/styles.css`, `/text-field/styles.css`,
-`/autocomplete/styles.css`, `/popover/styles.css`, `/surface/styles.css`, `/card/styles.css`,
+`/autocomplete/styles.css`, `/popover/styles.css`, `/menu/styles.css`, `/surface/styles.css`, `/card/styles.css`,
 `/shape/styles.css`, `/search/styles.css`, `/typography/styles.css`, `/skeleton/styles.css`,
 `/divider/styles.css`, `/tooltip/styles.css`, `/collapsible/styles.css`, `/button-group/styles.css`, `/segmented-button/styles.css`,
 `/bottom-sheet/styles.css`, `/side-sheet/styles.css`, and `/snackbar/styles.css`.

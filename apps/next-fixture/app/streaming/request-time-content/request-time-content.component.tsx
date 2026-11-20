@@ -18,6 +18,8 @@ import {
   Shape,
   Card,
   CardContent,
+  Menu,
+  MenuItem,
   Popover,
   PopoverClose,
   TextField,
@@ -47,6 +49,9 @@ export async function RequestTimeContent() {
 
   return (
     <div data-fixture="streaming-ready">
+      <Menu trigger={<Button>Streamed menu</Button>} data-testid="streamed-menu">
+        <MenuItem>Streamed command</MenuItem>
+      </Menu>
       <p>
         Streamed inbox, 12 unread messages <Badge badgeContent={12} data-testid="streamed-badge" />
       </p>

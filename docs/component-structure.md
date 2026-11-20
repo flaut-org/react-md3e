@@ -135,6 +135,12 @@ modules; directory placement does not justify a client directive.
 
 ## Tests and verification
 
+Menu owns menu-item/, menu-checkbox-item/, menu-radio-item/, menu-radio-group/, menu-group/,
+menu-divider/ and menu-submenu/ public parts, plus private menu-popup/, menu-item-control/ and
+menu-item-content/. The presentation context stays in menu/contexts/menu.context.ts. Public types
+and extracted styles live at the family root; tests live in menu/tests. The content adapter reuses
+ListItemContent and SelectionIndicator rather than duplicating list-row presentation.
+
 Slider owns slider-track/ and slider-thumb/ children. Track segment geometry stays with slider-track;
 family validation, types and shared styles live under slider/. Tests remain in slider/tests, and
 the fixture and Storybook demonstrations live beneath their respective sliders/slider owners.

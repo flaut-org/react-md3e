@@ -7,7 +7,7 @@ SegmentedButton owns ButtonSegment, contexts/segmented-button.context.ts and sha
 Its baseline outlined selection uses Base UI ToggleGroup/Toggle with Material radio/checkbox roles;
 the separate ButtonGroup owns the Expressive design. See docs/components/segmented-button.md.
 
-Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Switch, Slider, Radio/RadioGroup, Avatar, TextField, Autocomplete, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, SegmentedButton/ButtonSegment, BottomSheet, SideSheet, Snackbar and the shared private ListItemContent are
+Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Switch, Slider, Radio/RadioGroup, Avatar, TextField, Autocomplete, Search/SearchBar, Popover, Menu, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, SegmentedButton/ButtonSegment, BottomSheet, SideSheet, Snackbar and the shared private ListItemContent are
 implemented. API and provenance documents live in `docs/components`.
 
 Component files form an ownership tree. A component used only by one parent lives in a named child
@@ -19,8 +19,7 @@ Contexts go in the owner's `contexts` directory; shared contexts use the nearest
 Behavior and type tests go in the owner's `tests` directory. Private children do not need export
 barrels. See `docs/component-structure.md` for the current tree and discovery configuration.
 
-ListItemContent is shared presentation for the static/selectable row implementations and future
-Menu/Autocomplete adapters. Those adapters retain their own Base UI semantics. Static styles and
+ListItemContent is shared presentation for the static/selectable row implementations and Menu/Autocomplete adapters. Those adapters retain their own Base UI semantics. Static styles and
 file nesting never add a client boundary.
 
 Shape's sampler runs only during CSS extraction. Variant changes use native CSS transitions;
@@ -31,3 +30,7 @@ compose Base UI interaction. BottomSheet and SideSheet share the private sheet/ 
 sheet-panel/. ButtonGroup owns its contexts/ and button-group-button/ child; Snackbar owns snackbar-view/.
 Standard sheet portals wait for their actual container before mounting, preserving CSS theme
 inheritance and inline document placement. Modal portals inherit the enclosing CSS theme. No style engine runs on the client.
+
+Menu owns its public item/group/submenu parts and private popup/control/content adapters.
+Its own context shares appearance and disabled state; Base UI owns interaction. MenuItemContent
+reuses ListItemContent and SelectionIndicator. Menu styles and types stay at the family root.

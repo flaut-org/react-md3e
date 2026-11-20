@@ -135,3 +135,8 @@ and accepts controlled progress; ProgressIndicator provides linear/circular flat
 known/unknown progress, 4/8 thicknesses and accessible finite ranges. Both support themes,
 reduced motion and forced colors. See the repository's docs/components/loading-indicator.md and
 docs/components/progress-indicator.md; the fixture `/indicators` and Storybook have working examples.
+
+Menu and its item, selection, grouping and submenu parts are available from `/menu` or the root.
+Import `/menu/styles.css` at the composition boundary. Expressive standard/vibrant menus use
+Base UI focus/typeahead/dismissal and support keyboard-accessible nested menus and grouped surfaces with gaps. See
+[Menu documentation](https://github.com/flaut-org/react-md3e/blob/main/docs/components/menu.md).

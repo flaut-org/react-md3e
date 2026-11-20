@@ -126,6 +126,7 @@ export default defineConfig({
         'surface': `${source}components/surface/index.ts`,
         'card': `${source}components/card/index.ts`,
         'popover': `${source}components/popover/index.ts`,
+        'menu': `${source}components/menu/index.ts`,
       },
       formats: ['es'],
     },

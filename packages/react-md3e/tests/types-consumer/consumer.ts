@@ -203,3 +203,14 @@ export const invalidMotionTheme = createTheme({ motionScheme: 'legacy' });
 
 export const loadingModule = import('@flaut-travel/react-md3e/loading-indicator');
 export const progressModule = import('@flaut-travel/react-md3e/progress-indicator');
+
+export const menuModule = import('@flaut-travel/react-md3e/menu');
+export type {
+  MenuProps,
+  MenuItemProps,
+  MenuCheckboxItemProps,
+  MenuRadioGroupProps,
+  MenuSubmenuProps,
+} from '@flaut-travel/react-md3e';
+
+export type { MenuLayout } from '@flaut-travel/react-md3e/menu';
