@@ -207,3 +207,18 @@ test('Slider ships native named ranges and extracted family CSS before hydration
   assert.match(styles, /--_stop-offset/);
   assert.doesNotMatch(styles, /data-morph|ripple-enter|md3-calendar-enter/);
 });
+
+test('Menu server composition loads its extracted dependency closure without other popup families', async () => {
+  const response = await fetch(`${baseUrl}/menus`, { signal: AbortSignal.timeout(10_000) });
+
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  const styles = await routeCss('/menus');
+
+  assert.match(html, /aria-haspopup="menu"/);
+  assert.match(html, /Server menu/);
+  assert.match(styles, /@property --md3e-menu-scale/);
+  assert.match(styles, /ripple-enter/);
+  assert.doesNotMatch(styles, /data-morph|md3-calendar-enter|data-md3-slider|md3-slider-active/);
+});

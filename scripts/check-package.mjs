@@ -195,7 +195,7 @@ assert.match(selectableList, /^['"]use client['"]/m);
 assert.match(selectableList, /@base-ui\/react\/toggle-group/);
 assert.doesNotMatch(staticList, /use client|useContext|@base-ui/);
 
-for (const name of ['checkbox', 'switch', 'slider', 'radio', 'radio-group', 'autocomplete', 'popover']) {
+for (const name of ['checkbox', 'switch', 'slider', 'radio', 'radio-group', 'autocomplete', 'popover', 'menu']) {
   const code = await readFile(path.join(packageRoot, `dist/components/${name}/${name}.component.js`), 'utf8');
 
   assert.match(code, /^['"]use client['"]/m);
@@ -345,6 +345,23 @@ assert.ok(
   sliderCss.includes('md3-slider-active') &&
     sliderCss.includes('prefers-reduced-motion') &&
     sliderCss.includes('forced-colors'),
+);
+
+const menuStyles = new Set();
+const menuCss = await readCssTree(manifest.exports['./menu/styles.css'], menuStyles);
+
+for (const dependency of ['/menu/', '/list-item-content/', '/selection-indicator/', '/internal/ripple/']) {
+  assert.ok(
+    [...menuStyles].some((file) => file.includes(dependency)),
+    `Menu CSS must include ${dependency}`,
+  );
+}
+
+assert.ok(![...menuStyles].some((file) => /\/(shape|text-field|autocomplete|popover)\//.test(file)));
+assert.ok(
+  menuCss.includes('--md3e-menu-scale') &&
+    menuCss.includes('prefers-reduced-motion') &&
+    menuCss.includes('forced-colors'),
 );
 
 for (const [name, target] of Object.entries(manifest.exports)) {

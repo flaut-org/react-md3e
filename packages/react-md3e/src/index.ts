@@ -208,3 +208,29 @@ export type {
   ProgressIndicatorAppearance,
   ProgressIndicatorColor,
 } from './components/progress-indicator';
+
+export {
+  Menu,
+  MenuItem,
+  MenuCheckboxItem,
+  MenuRadioItem,
+  MenuRadioGroup,
+  MenuGroup,
+  MenuDivider,
+  MenuSubmenu,
+} from './components/menu';
+export type {
+  MenuProps,
+  MenuVariant,
+  MenuDensity,
+  MenuLayout,
+  MenuPlacement,
+  MenuCloseReason,
+  MenuItemProps,
+  MenuCheckboxItemProps,
+  MenuRadioItemProps,
+  MenuRadioGroupProps,
+  MenuGroupProps,
+  MenuDividerProps,
+  MenuSubmenuProps,
+} from './components/menu';

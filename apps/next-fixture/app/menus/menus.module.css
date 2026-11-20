@@ -1,0 +1,21 @@
+.stack {
+  display: grid;
+  gap: 24px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+
+.row h2 {
+  width: 100%;
+}
+
+.edge {
+  position: fixed;
+  bottom: 8px;
+  right: 8px;
+}

@@ -72,6 +72,12 @@ selects already-computed CSS values without generating rules or solving springs 
 
 ## Component mapping
 
+- Menu unfolding and active/inactive corners use fast spatial; opacity/colors
+  use fast effects. An inherited scale is bounded at 0.001–1.05; inverse transforms on item bodies
+  keep glyphs and icons at their natural size while surfaces and row centers expand. Grouped surfaces
+  share the same progress. CSS owns enter/exit and Base UI retains exiting content. See the frame
+  analysis in [Menu](components/menu.md).
+
 - Slider handle thickness and value labels use fast spatial; colors use fast effects.
   Current values position tracks and handles directly during input, without a JavaScript spring.
   Handle-facing track corners stay fixed at the bounds. Value labels grow from their handle-facing

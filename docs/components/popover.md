@@ -5,7 +5,7 @@ radio groups, or other application content. Its surface uses Material 3 theme ro
 CSS. PopoverClose is an optional Button composition part that requests closure of its parent.
 
 This is a web composition with MD3 tokens, not a separately standardized MD3 Expressive component.
-Use Dialog for a blocking task, Autocomplete for searchable choices, and a future Menu for commands.
+Use Dialog for a blocking task, Autocomplete for searchable choices, and Menu for commands.
 The passenger/cabin example lives in the consumers; travel-specific state and limits are not part of
 Popover.
 
