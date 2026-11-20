@@ -33,7 +33,9 @@ Every UI subpath has a CSS export: `/button/styles.css`, `/icon-button/styles.cs
 
 A family includes its public composition parts and transitive presentation dependencies. For example,
 Button includes loading and ripple; Card includes Surface and its action/content/media parts;
-Autocomplete includes TextField, row presentation, selection indicators and chips. Importing the
+Autocomplete includes TextField, shared MenuSurface/MenuItemContent presentation, ripple, selection
+indicators and chips. It does not require importing `/menu/styles.css` or load Menu's interaction
+adapters, trigger/group/submenu styles. Importing the
 family does not require manually discovering these internal files. Dependencies shared by several
 families reference the same private CSS assets. Framework bundlers resolve the ordinary CSS imports;
 internal hashed filenames are not a public API.

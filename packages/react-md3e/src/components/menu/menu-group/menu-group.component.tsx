@@ -1,7 +1,8 @@
 'use client';
 
 import { Menu as BaseMenu } from '@base-ui/react/menu';
-import { menuGroup, menuGroupLabel, menuItemBody } from '../menu.styles';
+import { menuItemBody } from '../../menu-item-content/menu-item-content.styles';
+import { menuGroup, menuGroupLabel } from '../menu.styles';
 import type { MenuGroupProps } from '../menu.types';
 
 export function MenuGroup({ label, className, children, ...props }: MenuGroupProps) {

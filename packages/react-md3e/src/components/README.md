@@ -31,6 +31,8 @@ sheet-panel/. ButtonGroup owns its contexts/ and button-group-button/ child; Sna
 Standard sheet portals wait for their actual container before mounting, preserving CSS theme
 inheritance and inline document placement. Modal portals inherit the enclosing CSS theme. No style engine runs on the client.
 
-Menu owns its public item/group/submenu parts and private popup/control/content adapters.
-Its own context shares appearance and disabled state; Base UI owns interaction. MenuItemContent
-reuses ListItemContent and SelectionIndicator. Menu styles and types stay at the family root.
+Menu owns its public item/group/submenu parts and private popup/control adapters.
+Its own context shares appearance and disabled state; Base UI owns interaction. MenuSurface and
+MenuItemContent are shared private top-level presentation for Menu and Autocomplete, reusing
+ListItemContent and SelectionIndicator. Their extracted styles stay with their owners; Menu retains
+its trigger, grouped-surface and submenu styles. Autocomplete keeps Combobox semantics and virtual focus.

@@ -1,8 +1,9 @@
 import type { ComponentPropsWithRef, MouseEvent, ReactElement, ReactNode, Ref, RefObject } from 'react';
+import type { MenuSurfaceAppearance } from '../menu-surface/menu-surface.types';
 
-export type MenuVariant = 'standard' | 'vibrant';
-export type MenuDensity = 0 | -1 | -2 | -3;
-export type MenuLayout = 'standard' | 'grouped';
+export type MenuVariant = NonNullable<MenuSurfaceAppearance['variant']>;
+export type MenuDensity = NonNullable<MenuSurfaceAppearance['density']>;
+export type MenuLayout = NonNullable<MenuSurfaceAppearance['layout']>;
 type Side = 'top' | 'bottom' | 'left' | 'right';
 export type MenuPlacement = Side | `${Side}-${'start' | 'end'}`;
 export type MenuCloseReason =

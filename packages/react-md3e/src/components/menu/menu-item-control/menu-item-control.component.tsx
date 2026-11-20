@@ -6,9 +6,9 @@ import { mergeProps } from '@base-ui/react/merge-props';
 import { useRipple } from '../../../internal/hooks/use-ripple.hook';
 import { rippleSurface } from '../../../internal/ripple/ripple.styles';
 import { MenuContext } from '../contexts/menu.context';
-import { MenuItemContent } from '../menu-item-content/menu-item-content.component';
+import { MenuItemContent } from '../../menu-item-content/menu-item-content.component';
 import { clickMenuItem, menuTextValue } from '../menu.helpers';
-import { menuItem, menuItemBody } from '../menu.styles';
+import { menuItem, menuItemBody } from '../../menu-item-content/menu-item-content.styles';
 import type { MenuItemProps, MenuCheckboxItemProps, MenuRadioItemProps } from '../menu.types';
 
 type ControlProps =

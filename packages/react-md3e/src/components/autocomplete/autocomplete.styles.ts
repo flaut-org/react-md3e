@@ -1,5 +1,5 @@
 import { css } from '@linaria/core';
-import { motion, color, typography } from '../../styles/theme-tokens';
+import { color, typography } from '../../styles/theme-tokens';
 import type { StyleObject } from '../../styles/style-object.types';
 
 const rootStyles = {
@@ -32,18 +32,7 @@ export const autocompletePositioner = css`
 `;
 
 const popupStyles = {
-  'boxSizing': 'border-box',
-  'maxBlockSize': 'var(--available-height)',
-  'borderRadius': 'var(--md-sys-shape-corner-extra-small, 4px)',
-  'backgroundColor': color('surfaceContainer'),
-  'color': color('onSurface'),
-  'boxShadow': '0 2px 6px rgb(0 0 0 / 20%), 0 1px 2px rgb(0 0 0 / 12%)',
-  'overflow': 'hidden',
-  'transformOrigin': 'var(--transform-origin)',
-  'transition': `opacity ${motion('effects')}, transform ${motion('spatial')}`,
-  '&[data-starting-style], &[data-ending-style]': { opacity: 0, transform: 'translateY(-4px)' },
-  '@media (prefers-reduced-motion: reduce)': { transition: 'none' },
-  '@media (forced-colors: active)': { border: '1px solid CanvasText', backgroundColor: 'Canvas', color: 'CanvasText' },
+  '&[data-md3-autocomplete-popup]': { inlineSize: '100%', minInlineSize: 0, maxInlineSize: '100%', gap: 0 },
 } satisfies StyleObject;
 
 export const autocompletePopup = css`
@@ -51,12 +40,10 @@ export const autocompletePopup = css`
 `;
 
 const listStyles = {
-  'maxBlockSize': 'min(320px, var(--available-height))',
-  'overflowY': 'auto',
-  'overscrollBehavior': 'contain',
-  'padding': '8px 4px',
-  'outline': 'none',
-  '&[data-empty]': { padding: 0 },
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 2,
+  outline: 'none',
 } satisfies StyleObject;
 
 export const autocompleteList = css`
@@ -66,7 +53,7 @@ export const autocompleteList = css`
 const statusStyles = {
   ...typography('bodyMedium'),
   padding: '16px',
-  color: color('onSurfaceVariant'),
+  color: 'var(--_menu-supporting)',
 } satisfies StyleObject;
 
 export const autocompleteStatus = css`

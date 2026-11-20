@@ -5,12 +5,15 @@ Status: Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Switch, Sli
 ## Ownership and boundaries
 
 Menu composes Base UI Menu for focus, typeahead, selection, dismissal and cascading submenus.
-It owns its public item/group/submenu parts, private popup/control/content adapters and presentation
-context. ListItemContent, SelectionIndicator and ripple remain shared top-level/internal dependencies.
+It owns its public item/group/submenu parts, private popup/control adapters and presentation context.
+MenuSurface and MenuItemContent are private top-level presentation shared with Autocomplete; they
+reuse ListItemContent, SelectionIndicator and ripple. Autocomplete retains Base UI Combobox and its
+input-focused listbox semantics, and adapts only field width and virtual focus presentation.
 Grouped layout gives MenuGroup/RadioGroup separate surfaces with transparent gaps. An inherited
 CSS progress and inverse item-body transform preserve glyph size during unfolding.
-Its explicit `/menu/styles.css` closure contains the required styles without loading Autocomplete
-or Popover. See [Menu](components/menu.md) for the Expressive contract and source provenance.
+The explicit `/menu/styles.css` and `/autocomplete/styles.css` entries both include those shared CSS
+assets without loading one another's interaction family or Popover. See [Menu](components/menu.md)
+and [Autocomplete](components/autocomplete.md) for the contracts and source provenance.
 
 Slider composes Base UI Slider for native inputs, keyboard/pointer behavior and commit lifecycle.
 It owns private slider-track/ and slider-thumb/ children, shared family styles and validation helpers.

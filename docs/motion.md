@@ -72,7 +72,7 @@ selects already-computed CSS values without generating rules or solving springs 
 
 ## Component mapping
 
-- Menu unfolding and active/inactive corners use fast spatial; opacity/colors
+- Menu and Autocomplete unfolding, plus Menu active/inactive corners, use fast spatial; opacity/colors
   use fast effects. An inherited scale is bounded at 0.001–1.05; inverse transforms on item bodies
   keep glyphs and icons at their natural size while surfaces and row centers expand. Grouped surfaces
   share the same progress. CSS owns enter/exit and Base UI retains exiting content. See the frame

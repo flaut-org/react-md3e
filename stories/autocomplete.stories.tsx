@@ -16,7 +16,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Selection autocomplete built from TextField and Base UI Combobox. Supports independent selected/input values, object equality, single/multiple selection, scoped portals, filtering, loading and empty states. renderInput must preserve TextField slot props, refs, input ID and adornments.',
+          'Selection autocomplete built from TextField and Base UI Combobox, sharing Expressive Menu surfaces, options and unfolding motion. Supports independent selected/input values, object equality, single/multiple selection, scoped portals, filtering, loading and empty states. renderInput must preserve TextField slot props, refs, input ID and adornments.',
       },
     },
   },
@@ -27,6 +27,9 @@ type Story = StoryObj<AutocompleteProps<string>>;
 export const Playground: Story = {};
 export const Filled: Story = { args: { variant: 'filled' } };
 export const WithValue: Story = { args: { defaultValue: 'Paris' } };
+export const LongOptions: Story = {
+  args: { fullWidth: true, options: Array.from({ length: 40 }, (_value, index) => `Destination ${index + 1}`) },
+};
 export const AutoHighlight: Story = { args: { autoHighlight: true, openOnFocus: true } };
 export const Disabled: Story = { args: { disabled: true, defaultValue: 'Paris' } };
 export const ReadOnly: Story = { args: { readOnly: true, defaultValue: 'Paris' } };
