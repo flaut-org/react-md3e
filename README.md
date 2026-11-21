@@ -1,13 +1,80 @@
-# react-md3e
+<h1 align="center">react-md3e</h1>
 
-An independent React library for Material 3 Expressive, with server-compatible components,
-build-time CSS, and a token-based theme API inspired by Google's Material Theme Builder.
+<div align="center">
 
-Calendar and RangeCalendar provide inline Temporal-based date selection with animated month changes,
-keyboard navigation, Intl localization and one-to-three-panel ranges. Import `/calendar/styles.css`
-or `/range-calendar/styles.css` at the composition boundary. See [Calendar](docs/components/calendar.md)
-for the MUI-style API, ISO/Temporal values and native-runtime requirements. Working examples are at
-`/calendars` in the Next fixture and Components/Calendar and Components/RangeCalendar in Storybook.
+![GitHub License](https://img.shields.io/github/license/flaut-org/react-md3e?style=for-the-badge)
+![GitHub branch status](https://img.shields.io/github/checks-status/flaut-org/react-md3e/main?style=for-the-badge)
+
+</div>
+
+A modern React component library implementing Google's [Material Design 3 (Material You)](https://m3.material.io/) and Material Design 3 Expressive, built for the modern React ecosystem with performance, accessibility, and React Server Components in mind.
+
+## Motivation
+
+The primary motivation behind react-md3e is to provide a modern alternative to [@mui/material](https://github.com/mui/material-ui), addressing several long-standing limitations in both its design system and underlying architecture.
+
+### Material Design 3 and Material Design 3 Expressive
+
+Despite being one of the most popular React component libraries, Material UI still relies on the Material Design 2 specification.
+
+The [issue requesting Material Design 3 support](https://github.com/mui/material-ui/issues/29345) has been open since October 2021. Years later, Material Design 3 remains unsupported, with no publicly announced release timeline. Meanwhile, Google has continued to evolve its design system with the introduction of Material Design 3 Expressive.
+
+react-md3e aims to bridge this gap by embracing the latest Material Design specifications from the ground up, rather than adapting a legacy implementation.
+
+### React Server Components as a first-class citizen
+
+Although Material UI supports server-side rendering and is compatible with the Next.js App Router, its components are shipped with the 'use client' directive.
+
+This means that even purely presentational components that do not require client-side interactivity must be included in the client-side JavaScript bundle and participate in hydration.
+
+This architecture limits the benefits of React Server Components, increases the amount of JavaScript delivered to the browser, and introduces unnecessary runtime overhead.
+
+react-md3e takes a server-first approach: components should remain Server Components whenever possible, with client-side boundaries introduced only where interactivity genuinely requires them.
+
+### Styling without runtime CSS-in-JS
+
+Material UI continues to use Emotion as its default styling engine. While CSS-in-JS offers flexibility, runtime style generation comes with architectural and performance trade-offs:
+
+1. Increased client-side JavaScript bundle size.
+2. Runtime style generation and injection.
+3. Additional server-side styling infrastructure.
+4. Increased hydration and rendering overhead.
+5. Limitations when working with React Server Components.
+
+react-md3e aims to eliminate these costs by relying on static CSS, native browser capabilities, CSS custom properties, and design tokens instead of runtime CSS-in-JS.
+
+### Familiar API and easy migration
+
+Adopting a new component library should not require rewriting an entire application.
+
+One of the core goals of react-md3e is to maintain API compatibility with @mui/material wherever reasonably possible. This includes familiar component names, prop conventions, composition patterns, event handling, and TypeScript interfaces.
+
+By preserving established API conventions, react-md3e aims to:
+
+- Reduce the effort required to migrate existing Material UI applications.
+- Enable gradual, component-by-component migration instead of a complete rewrite.
+- Minimize the learning curve for developers already familiar with Material UI.
+- Make modern Material Design specifications and React Server Components accessible to existing React applications.
+- While full drop-in compatibility is not guaranteed, API differences should be intentional and justified by the Material Design specification, architectural improvements, or performance considerations.
+
+Compatibility should never come at the expense of modern architecture.
+
+## Design principles
+
+- **Material Design 3 native** — built around the latest Material Design specifications rather than retrofitted onto Material Design 2.
+- **Expressive by design** — support for Material Design 3 Expressive shapes, typography, motion, and component patterns.
+- **Server-first architecture** — React Server Components wherever possible, Client Components only where necessary.
+- **Zero-runtime styling** — no Emotion, styled-components, or runtime CSS-in-JS dependencies.
+- **Performance-oriented** — minimal JavaScript, efficient rendering, and tree-shakable components.
+- **MUI-compatible API** — familiar component APIs and conventions designed to simplify migration from @mui/material.
+- **Framework-agnostic** — designed to work with modern React frameworks without unnecessary framework-specific dependencies.
+- **Accessibility** — accessible components by design, with proper semantics and keyboard interactions.
+- **TypeScript-first** — strongly typed component APIs.
+
+## Usage
+
+> [!CAUTION]
+> Currently in early alpha. The API is subject to breaking changes and may undergo a complete overhaul. Please wait for the public beta release.
 
 ## Component support
 
@@ -61,31 +128,9 @@ and platform-specific adaptations are documented in the linked component notes.
 | [Toolbars](https://m3.material.io/components/toolbars/overview)                              |   ❌    | No Material toolbar component or its Expressive layouts.                                                                                                                                                                  |
 | [Tooltips](https://m3.material.io/components/tooltips/overview)                              |   ⚠️    | [Tooltip](docs/components/tooltip.md) implements plain tooltips. Rich tooltips with structured content/actions are absent.                                                                                                |
 
-### Additional library APIs
-
-These are library primitives or Material foundations, rather than separate entries in the
-component catalog above.
-
-| Library API                                                           | Support | Implementation                                                                                                                     |
-| --------------------------------------------------------------------- | :-----: | ---------------------------------------------------------------------------------------------------------------------------------- |
-| [Autocomplete](docs/components/autocomplete.md)                       |   ✅    | Public single/multiple selection combobox composed with TextField; its documented API is independent of a standalone Menu or Chip. |
-| [Avatar](docs/components/avatar.md)                                   |   ✅    | Images, initials and fallback presentation, with circular/rounded/square shapes.                                                   |
-| [Calendar / CalendarDay / RangeCalendar](docs/components/calendar.md) |   ✅    | Standalone inline calendars with Temporal/ISO values, localization, keyboard navigation, range selection and month paging.         |
-| [Collapsible](docs/components/collapsible.md)                         |   ✅    | Controlled/uncontrolled disclosure with a trigger, retained content and animated expansion.                                        |
-| [Popover / PopoverClose](docs/components/popover.md)                  |   ✅    | Anchored interactive panels with positioning, focus handling and dismissal.                                                        |
-| [Shape](docs/components/shape.md)                                     |   ✅    | All 35 Expressive silhouettes, decorative masks and CSS shape morphing.                                                            |
-| [Skeleton](docs/components/skeleton.md)                               |   ✅    | Loading placeholders with text/rectangular/rounded/circular shapes and pulse/wave animations.                                      |
-| [Surface](docs/components/surface.md)                                 |   ✅    | Themed surfaces, shape roles, filled/outlined presentation and elevation.                                                          |
-| [Typography](docs/components/typography.md)                           |   ✅    | All 15 baseline and 15 emphasized Material type roles, independent of HTML semantics.                                              |
-| [ThemeProvider / createTheme / themeToCss](docs/theming.md)           |   ✅    | CSS theme scopes and server/build theme generation for colors, typography, shape, motion and breakpoints.                          |
-
-[partial-support]: docs/assets/component-support-partial.svg
-
-The first consumer milestone remains Flaut's complete homepage; it has not been migrated yet.
-
 ## Local development
 
-Install the exact Node.js 26 LTS version in `.tool-versions` through asdf. CI uses
+Install the exact Node.js version in `.tool-versions` through asdf. CI uses
 `actions/setup-node` with `node-version-file: .tool-versions`.
 
 Add the plugin once if needed:
@@ -96,148 +141,33 @@ asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 
 ```sh
 asdf install
-asdf exec npm ci
-asdf exec npm exec -- playwright install chromium
-asdf exec npm run check
+npm ci
+npm exec -- playwright install chromium
+npm run check
 ```
 
 Start Storybook at `http://localhost:6006`:
 
 ```sh
-asdf exec npm run storybook
+npm run storybook
 ```
 
 Use the toolbar to switch between precomputed Material, forest, and expressive themes and
-light/dark/system modes, plus independent standard/expressive motion. Stories cover all Button appearances, sizes, shapes, disabled state,
-leading/trailing icons, controlled selection, ripple opt-out, and nested theme comparisons.
-AppBar and IconButton have dedicated stories covering flexible layouts, subtitles, RTL, scrolling
-composition, icon widths, accessible names, and minimum interaction targets. Dialog stories cover
-basic/full-screen layouts, icons, long content, forms, nested confirmations, and retained state.
+light/dark/system modes, plus independent standard/expressive motion.
 
 Start the Next.js RSC/streaming fixture at `http://localhost:3000` with `npm run dev`. Both commands
 first build the package. Run `npm run dev:library` in a second terminal to watch UI
 implementation/style changes. After changing theme generation or public types, run a full
 `npm run build` to regenerate the theme bundle, declarations, and example theme data.
 
-## Use the package
+## Releases
 
-```tsx
-import { Button, ThemeProvider } from '@flaut-travel/react-md3e';
-import { createTheme } from '@flaut-travel/react-md3e/theme';
-import '@flaut-travel/react-md3e/theme/styles.css';
-import '@flaut-travel/react-md3e/button/styles.css';
-
-const theme = createTheme({ sourceColor: '#386a20' });
-
-export default function Page() {
-  return (
-    <ThemeProvider theme={theme} colorScheme="system">
-      <Button variant="filled">Continue</Button>
-      <Button variant="tonal" shape="square">
-        Learn more
-      </Button>
-    </ThemeProvider>
-  );
-}
-```
-
-The example is usable from a Server Component. Button composes Base UI and is a client component for
-button behavior and the pointer/keyboard ripple; it is server-rendered and then hydrated.
-ThemeProvider is a CSS scope without hooks or React context and stays server-compatible. Import the
-theme stylesheet once and component styles at their route or composition boundary. Composite CSS entries
-include their internal dependencies. Event handlers belong in consumer client components. See
-[CSS loading](docs/css-loading.md) for route-level imports and migration from the full stylesheet.
-
-`createTheme` runs in server/build code and returns serializable light/dark color roles, tonal
-palettes, harmonized custom colors, typography, shape, and CSS variables. Its separate entry keeps
-color generation out of component imports. `themeToCss` can export custom themes as build-time CSS.
-See [theming](docs/theming.md), [motion schemes](docs/motion.md), [Button](docs/components/button.md),
-[IconButton](docs/components/icon-button.md), [AppBar](docs/components/app-bar.md), and
-[Dialog](docs/components/dialog.md), [List/ListItem](docs/components/list.md),
-[Checkbox](docs/components/checkbox.md), [Radio/RadioGroup](docs/components/radio.md), and [Avatar](docs/components/avatar.md), [TextField](docs/components/text-field.md), and
-[Autocomplete](docs/components/autocomplete.md), [Search/SearchBar](docs/components/search.md), and [Popover](docs/components/popover.md), [Surface](docs/components/surface.md),
-[Shape](docs/components/shape.md), [Typography](docs/components/typography.md), and [Card](docs/components/card.md).
-AppBar stays server-compatible; IconButton composes Base UI and hydrates for interaction. The
-Next fixture exposes them at `/components`, and Dialog at `/dialog`; streamed content exercises
-the same built package and client boundaries. `/lists` demonstrates static RSC lists, radio/checkbox
-selection and a language/currency Dialog. Matching examples are available in Storybook. `/selection-controls` demonstrates native Checkbox/RadioGroup
-form behavior and Avatar image fallback. `/fields` adds TextField and Autocomplete, including
-forms, object/multiple selection and nested Dialog composition. Each has dedicated Storybook examples. `/popovers` demonstrates anchored interactive panels,
-including passenger/cabin selection and nested Dialog/Autocomplete composition. `/surfaces` adds
-Surface tokens, the complete 35-shape gallery with CSS morphing, and server/interactive Cards.
-Shape morphs when variant changes, supports morph={false}, and honors reduced motion while
-remaining server-compatible. Surface is the renamed Paper API; imports use `/surface`.
-
-## Commands
-
-| Command                   | Purpose                                                                     |
-| ------------------------- | --------------------------------------------------------------------------- |
-| `npm run build`           | Build the package and precompute example themes                             |
-| `npm run dev:library`     | Watch the UI module/CSS build after an initial full build                   |
-| `npm run storybook`       | Build the package, then run Storybook on port 6006                          |
-| `npm run build:storybook` | Build static Storybook; build the package first                             |
-| `npm run dev`             | Build the package, then start the Next.js fixture                           |
-| `npm run build:fixture`   | Production Next/Turbopack build; build the package first                    |
-| `npm run typecheck`       | Check library, fixtures, stories, tooling, and public API examples          |
-| `npm run lint`            | Airbnb Extended, React hooks, and library dependency restrictions           |
-| `npm run format`          | Format source and documentation                                             |
-| `npm run check:package`   | Validate exports, packed files, server imports, and UI runtime isolation    |
-| `npm test`                | Theme unit tests and HTTP production fixture tests                          |
-| `npm run test:browser`    | Chromium interaction, theme, accessibility, streaming, and Storybook checks |
-| `npm run check`           | Run all checks in dependency order                                          |
-| `npm run pack`            | Create a local npm tarball without publication                              |
-
-Browser tests require built Next and Storybook outputs. CI installs Chromium with `--with-deps`. No
-fonts, credentials, external API, or backend are needed by the examples.
-
-## Architecture
-
-Linaria/WyW extracts typed style objects from colocated `*.styles.ts`. TypeScript checks properties
-and nested rules through `satisfies StyleObject` (csstype). Distributed UI modules use compiled
-class strings. Ripple JavaScript handles press coordinates and lifetime, with precompiled CSS
-keyframes; it never inserts CSS rules. The isolated theme entry bundles Google's official color
-utilities; it is not part of the component import graph.
-
-Modern CSS support for `light-dark()`, `color-mix()`, and `linear()` is required. Native MD3 values
-are used instead of MD2 aliases. `sx`, MUI System compatibility, a public `styled` factory, and
-image-based seed extraction are not implemented in this slice.
-
-See [architecture](docs/architecture.md), [component structure](docs/component-structure.md), [styling](docs/styling-contract.md),
-[design sources](docs/design-sources.md), [source imports](docs/module-resolution.md), and
-[homepage migration](docs/migration/homepage.md). Formatting and linting are documented in [tooling](docs/tooling.md). Development rules are in [AGENTS.md](AGENTS.md)
-and [CONTRIBUTING.md](CONTRIBUTING.md).
+Changesets prepares release PRs and changelogs for the public npm package. `alpha` and `beta` use their
+own npm channels and GitHub prereleases; stable versions use latest. Read [release instructions](docs/releases.md)
+for token-free npm releases, channel transitions, and the exact GitHub/npm UI steps.
+Publication runs through the verified Release workflow.
 
 ## License
 
 MIT for original code. The bundled Material Color Utilities retains its Apache-2.0 notices and
 license in the distributed package.
-
-`/search` demonstrates contained Search/SearchBar with docked/fullscreen motion, native forms,
-application-owned results, keyboard navigation and nested themes. Dedicated Storybook entries are available.
-
-`/typography` demonstrates all 30 baseline/emphasized styles, semantic/custom elements, theme
-overrides, inherited rich text and truncation. Components/Typography in Storybook uses the same built package.
-
-`/essentials` demonstrates the remaining homepage primitives: Skeleton, Divider, Tooltip,
-Collapsible, ButtonGroup, BottomSheet, SideSheet and Snackbar. Each has Storybook examples,
-colocated type/behavior tests and [API documentation](docs/components/skeleton.md).
-See also [Divider](docs/components/divider.md), [Tooltip](docs/components/tooltip.md),
-[Collapsible](docs/components/collapsible.md), [ButtonGroup](docs/components/button-group.md),
-[BottomSheet](docs/components/bottom-sheet.md), [SideSheet](docs/components/side-sheet.md), and
-[Snackbar](docs/components/snackbar.md). Button now supports loading and native/routing links;
-Autocomplete adds selectOnFocus/clearOnEscape. The Flaut homepage migration remains a separate task.
-
-## Releases
-
-Changesets prepares release PRs and changelogs for the public npm package. Alpha and beta use their
-own npm channels and GitHub prereleases; stable versions use latest. Read [release instructions](docs/releases.md)
-for token-free npm releases, channel transitions, and the exact GitHub/npm UI steps.
-Publication runs through the verified Release workflow.
-
-LoadingIndicator and ProgressIndicator are exported from the root and `/loading-indicator` /
-`/progress-indicator`. They remain RSC-compatible and use precompiled CSS: import the corresponding
-`/<component>/styles.css` entries. LoadingIndicator morphs seven MD3 shapes (contained/uncontained)
-and accepts controlled progress; ProgressIndicator provides linear/circular flat/wavy displays,
-known/unknown progress, 4/8 thicknesses and accessible finite ranges. Both support themes,
-reduced motion and forced colors. See the repository's docs/components/loading-indicator.md and
-docs/components/progress-indicator.md; the fixture `/indicators` and Storybook have working examples.
