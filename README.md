@@ -2,8 +2,8 @@
 
 <div align="center">
 
-![GitHub License](https://img.shields.io/github/license/flaut-org/react-md3e?style=for-the-badge)
-![GitHub branch status](https://img.shields.io/github/checks-status/flaut-org/react-md3e/main?style=for-the-badge)
+![GitHub License](https://img.shields.io/github/license/flaut-org/react-md3e?style=for-the-badge&color=%232196f3)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/flaut-org/react-md3e/ci.yml?style=for-the-badge)
 
 </div>
 
