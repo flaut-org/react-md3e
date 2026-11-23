@@ -87,13 +87,19 @@ test('primary action, menu selection, checkbox persistence and submenus remain i
   await expect(trigger).toHaveAttribute('aria-expanded', 'true');
   await page.keyboard.press('Escape');
   await expect(page.getByRole('menu', { name: 'Send actions', exact: true })).toBeHidden();
+  await page.mouse.move(0, 0);
   await trigger.press('ArrowDown');
   await expect(page.getByRole('menuitem', { name: 'Schedule send' })).toBeFocused();
   await expect(page.getByRole('menuitemcheckbox', { name: 'Request receipt' })).toHaveAttribute(
     'aria-checked',
     'false',
   );
+  // Focus can arrive before the popup finishes unfolding; settle its geometry before cascading.
+  await page.getByRole('menu', { name: 'Send actions', exact: true }).evaluate(async (element) => {
+    await Promise.all(element.getAnimations().map((animation) => animation.finished));
+  });
   await page.keyboard.press('End');
+  await expect(page.getByRole('menuitem', { name: 'Send format', exact: true })).toBeFocused();
   await page.keyboard.press('ArrowRight');
   await expect(page.getByRole('menuitem', { name: 'Plain text', exact: true })).toBeFocused();
   await page.keyboard.press('Enter');
@@ -383,14 +389,19 @@ test('a full-width split button remains within a small viewport and opening inse
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('http://127.0.0.1:6106/iframe.html?id=components-splitbutton--full-width&viewMode=story');
 
-  const count = await page.locator('style').count();
   const group = page.getByRole('group', { name: 'Send', exact: true });
+
+  await expect(group).toBeVisible();
+
+  // Storybook asynchronously adds its own inspector CSS independently of component interaction.
+  const styles = page.locator('style').filter({ hasNotText: '#storybook-highlights-menu' });
+  const initialStyles = await styles.allTextContents();
   const box = (await group.boundingBox())!;
 
   expect(box.x).toBeGreaterThanOrEqual(0);
   expect(box.x + box.width).toBeLessThanOrEqual(390);
   await group.getByRole('button', { name: 'More send options' }).click();
   await expect(page.getByRole('menuitem', { name: 'Schedule send' })).toBeVisible();
-  expect(await page.locator('style').count()).toBe(count);
+  expect(await styles.allTextContents()).toEqual(initialStyles);
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(390);
 });

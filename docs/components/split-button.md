@@ -108,3 +108,10 @@ two Tab stops, submenu/checkbox persistence, all size/color geometries, standard
 motion schemes, RTL, reduced motion, forced colors, accessibility, SSR and streaming. Package checks
 verify extracted CSS closure, reuse of Menu assets and the passive wrapper boundary. Browser
 verification uses Chromium.
+
+The cascading keyboard test moves the pointer outside the menu, waits for the root popup's actual
+animations to finish, and waits for End to focus the submenu trigger before sending ArrowRight.
+Initial focus can arrive while popup geometry is still changing. The Storybook CSS-insertion check takes its
+baseline after the story is visible and excludes only Storybook's asynchronous
+`#storybook-highlights-menu` inspector stylesheet. It compares the remaining style contents, so
+component style insertion or changes still fail the check.
