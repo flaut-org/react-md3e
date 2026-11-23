@@ -114,6 +114,7 @@ export default defineConfig({
         'extended-fab': `${source}components/extended-fab/index.ts`,
         'fab-menu': `${source}components/fab-menu/index.ts`,
         'segmented-button': `${source}components/segmented-button/index.ts`,
+        'tabs': `${source}components/tabs/index.ts`,
         'collapsible': `${source}components/collapsible/index.ts`,
         'tooltip': `${source}components/tooltip/index.ts`,
         'divider': `${source}components/divider/index.ts`,

@@ -227,7 +227,12 @@
       "types": "./dist/components/menu/index.d.ts",
       "import": "./dist/menu.js"
     },
-    "./menu/styles.css": "./dist/menu.css"
+    "./menu/styles.css": "./dist/menu.css",
+    "./tabs": {
+      "types": "./dist/components/tabs/index.d.ts",
+      "import": "./dist/tabs.js"
+    },
+    "./tabs/styles.css": "./dist/tabs.css"
   },
   "scripts": {
     "clean": "node ../../scripts/clean-package.mjs",

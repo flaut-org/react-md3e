@@ -135,6 +135,9 @@ modules; directory placement does not justify a client directive.
 
 ## Tests and verification
 
+Tabs owns tab-list/, tab/tab-content/ and tab-panel/, with shared family types/styles and
+tabs/tests for behavior and public types. Its fixture composition lives beneath tabs/tabs-demo.
+
 Fab, ExtendedFab and FabMenu share a private top-level fab-button/ presentation owner because all
 three use it. FabMenu owns fab-menu-item/, its public part, plus family styles and build-time stagger
 calculations; interaction remains in Button/Menu. Each family owns its tests/ directory. The fixture
