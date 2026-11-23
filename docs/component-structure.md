@@ -135,6 +135,11 @@ modules; directory placement does not justify a client directive.
 
 ## Tests and verification
 
+Fab, ExtendedFab and FabMenu share a private top-level fab-button/ presentation owner because all
+three use it. FabMenu owns fab-menu-item/, its public part, plus family styles and build-time stagger
+calculations; interaction remains in Button/Menu. Each family owns its tests/ directory. The fixture
+uses fabs/fab-demo/ for stateful examples; each family has its own Storybook examples.
+
 SplitButton owns its connected-button styles/types and tests at split-button/tests. It composes
 the top-level Button and Menu without promoting its prescribed chevron into a separate component
 or adding a context. The fixture's interactive examples live under split-buttons/split-button-demo;

@@ -68,6 +68,7 @@ export default function Page() {
       </p>
       <p>
         <Link href="/split-buttons">Split button examples</Link>
+        <Link href="/fabs">Floating action button examples</Link>
       </p>
       <p>
         <Link href="/essentials">Homepage essentials</Link>

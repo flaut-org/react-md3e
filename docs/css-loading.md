@@ -22,7 +22,7 @@ export default function Page() {
 }
 ```
 
-Every UI subpath has a CSS export: `/button/styles.css`, `/icon-button/styles.css`,
+Every UI subpath has a CSS export: `/button/styles.css`, `/fab/styles.css`, `/extended-fab/styles.css`, `/fab-menu/styles.css`, `/icon-button/styles.css`,
 `/calendar/styles.css`, `/range-calendar/styles.css`, `/slider/styles.css`,
 `/app-bar/styles.css`, `/dialog/styles.css`, `/list/styles.css`, `/checkbox/styles.css`,
 `/radio/styles.css`, `/radio-group/styles.css`, `/avatar/styles.css`, `/text-field/styles.css`,
@@ -32,7 +32,9 @@ Every UI subpath has a CSS export: `/button/styles.css`, `/icon-button/styles.cs
 `/bottom-sheet/styles.css`, `/side-sheet/styles.css`, and `/snackbar/styles.css`.
 
 A family includes its public composition parts and transitive presentation dependencies. For example,
-Button includes loading and ripple; Card includes Surface and its action/content/media parts;
+Button includes loading and ripple;
+Fab/ExtendedFab include their shared FabButton and Button presentation; FabMenu additionally includes
+Menu and MenuItem dependencies; Card includes Surface and its action/content/media parts;
 SplitButton includes the existing Button/Menu families and their shared menu presentation.
 Autocomplete includes TextField, shared MenuSurface/MenuItemContent presentation, ripple, selection
 indicators and chips. It does not require importing `/menu/styles.css` or load Menu's interaction

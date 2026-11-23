@@ -239,3 +239,21 @@ test('SplitButton server composition loads Button and Menu styling without unrel
   assert.match(styles, /ripple-enter/);
   assert.doesNotMatch(styles, /data-morph|md3-calendar-enter|md3-slider-active/);
 });
+
+test('floating actions render server markup with their Button/Menu CSS dependencies', async () => {
+  const response = await fetch(`${baseUrl}/fabs`, { signal: AbortSignal.timeout(10_000) });
+
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  const styles = await routeCss('/fabs');
+
+  assert.match(html, /data-md3-fab=""/);
+  assert.match(html, /data-md3-extended-fab=""/);
+  assert.match(html, /Server create actions/);
+  assert.match(html, /aria-haspopup="menu"/);
+  assert.match(styles, /data-md3-fab-button/);
+  assert.match(styles, /--_fab-menu-open-delay/);
+  assert.match(styles, /ripple-enter/);
+  assert.doesNotMatch(styles, /data-morph|md3-calendar-enter|md3-slider-active/);
+});
