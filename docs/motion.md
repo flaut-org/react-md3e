@@ -72,6 +72,12 @@ selects already-computed CSS values without generating rules or solving springs 
 
 ## Component mapping
 
+- Tabs indicator position and width use fast spatial springs; text/state layers use fast effects.
+  Scroll reveal uses immediate local scrolling and never moves page ancestors. The keyboard focus
+  frame has a separate recording-calibrated 500ms ease pulse (3px → 6px → 3px), keeping its outer
+  edges fixed. This explicit reference choreography is shared by both schemes; reduced motion
+  retains a static 3px frame. See [Tabs](components/tabs.md).
+
 - SplitButton corner morphs and its reused Menu use the inherited fast springs. The prescribed
   chevron rotation always uses standard fast spatial, scoped through the shared spring CSS tokens
   on that icon. It is sampled at build time, mirrors inward in RTL and respects reduced motion.

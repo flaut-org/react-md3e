@@ -195,7 +195,17 @@ assert.match(selectableList, /^['"]use client['"]/m);
 assert.match(selectableList, /@base-ui\/react\/toggle-group/);
 assert.doesNotMatch(staticList, /use client|useContext|@base-ui/);
 
-for (const name of ['checkbox', 'switch', 'slider', 'radio', 'radio-group', 'autocomplete', 'popover', 'menu']) {
+for (const name of [
+  'checkbox',
+  'switch',
+  'slider',
+  'radio',
+  'radio-group',
+  'autocomplete',
+  'popover',
+  'menu',
+  'tabs',
+]) {
   const code = await readFile(path.join(packageRoot, `dist/components/${name}/${name}.component.js`), 'utf8');
 
   assert.match(code, /^['"]use client['"]/m);
@@ -363,6 +373,25 @@ assert.ok(![...autocompleteStyles].some((file) => /\/(menu|popover)\//.test(file
 assert.ok(autocompleteCss.includes('--md3e-menu-scale'));
 assert.ok(![...buttonStyles, ...autocompleteStyles].some((file) => file.includes('/shape/')));
 assert.ok(!buttonCss.includes('--md-sys-color-primary:'), 'Component CSS must not duplicate the theme defaults.');
+
+const tabsStyles = new Set();
+const tabsCss = await readCssTree(manifest.exports['./tabs/styles.css'], tabsStyles);
+
+for (const dependency of ['/tabs/', '/internal/ripple/']) {
+  assert.ok([...tabsStyles].some((file) => file.includes(dependency)));
+}
+
+assert.match(tabsCss, /--active-tab-left/);
+assert.match(tabsCss, /--md-sys-motion-spring-fast-spatial/);
+assert.match(tabsCss, /prefers-reduced-motion/);
+assert.match(tabsCss, /forced-colors/);
+
+for (const part of ['tab-list/tab-list', 'tab/tab', 'tab-panel/tab-panel']) {
+  const code = await readFile(path.join(packageRoot, `dist/components/tabs/${part}.component.js`), 'utf8');
+
+  assert.match(code, /^['"]use client['"]/m);
+  assert.match(code, /@base-ui\/react\/tabs/);
+}
 
 const segmentStyles = new Set();
 const segmentCss = await readCssTree(manifest.exports['./segmented-button/styles.css'], segmentStyles);

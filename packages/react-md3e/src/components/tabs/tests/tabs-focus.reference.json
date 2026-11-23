@@ -1,0 +1,23 @@
+{
+  "recording": "Screen Recording 2026-11-23 at 22.57.21.mov",
+  "reference": "https://github.com/matraic/m3e/blob/e8bf648be92ae30ca11f51645d4d9d0167730a5c/packages/web/src/core/shared/primitives/FocusRingElement.ts",
+  "geometry": {
+    "radius": 16,
+    "restThickness": 3,
+    "peakThickness": 6,
+    "selectedPrimaryBottomInset": 4,
+    "selectedSecondaryBottomInset": 3,
+    "unselectedBottomInset": 0
+  },
+  "motion": {
+    "duration": 500,
+    "samples": [
+      { "time": 0, "thickness": 3 },
+      { "time": 125, "thickness": 5.5 },
+      { "time": 250, "thickness": 6 },
+      { "time": 375, "thickness": 3.5 },
+      { "time": 500, "thickness": 3 }
+    ],
+    "thicknessTolerance": 0.75
+  }
+}

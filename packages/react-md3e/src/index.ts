@@ -255,3 +255,6 @@ export type {
   MenuDividerProps,
   MenuSubmenuProps,
 } from './components/menu';
+
+export { Tabs, TabList, Tab, TabPanel } from './components/tabs';
+export type { TabsProps, TabListProps, TabProps, TabPanelProps, TabValue } from './components/tabs';

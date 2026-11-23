@@ -62,6 +62,7 @@ export default function Page() {
       </p>
       <p>
         <Link href="/sliders">Slider examples</Link>
+        <Link href="/tabs">Tabs examples</Link>
       </p>
       <p>
         <Link href="/menus">Menu examples</Link>

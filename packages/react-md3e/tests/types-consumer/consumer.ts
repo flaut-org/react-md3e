@@ -43,6 +43,8 @@ import type {
   MotionScheme,
   MotionSpring,
   MotionTokens,
+  TabsProps,
+  TabValue,
 } from '@flaut-travel/react-md3e';
 import { Skeleton } from '@flaut-travel/react-md3e/skeleton';
 import { Divider } from '@flaut-travel/react-md3e/divider';
@@ -78,6 +80,8 @@ import { Button as StandaloneButton } from '@flaut-travel/react-md3e/button';
 import { AppBar as StandaloneAppBar } from '@flaut-travel/react-md3e/app-bar';
 import { IconButton as StandaloneIconButton } from '@flaut-travel/react-md3e/icon-button';
 import { createTheme, themeToCss } from '@flaut-travel/react-md3e/theme';
+
+import { Tabs, TabList, Tab, TabPanel } from '@flaut-travel/react-md3e/tabs';
 
 const theme: Theme = createTheme({ sourceColor: '#386a20' });
 const buttonProps: ButtonProps = { variant: 'tonal', endIcon: '→', selected: true };
@@ -247,3 +251,8 @@ export type {
 export type { FabProps as StandaloneFabProps } from '@flaut-travel/react-md3e/fab';
 export type { ExtendedFabProps as StandaloneExtendedFabProps } from '@flaut-travel/react-md3e/extended-fab';
 export type { FabMenuProps as StandaloneFabMenuProps } from '@flaut-travel/react-md3e/fab-menu';
+
+export const tabsProps: TabsProps = { variant: 'primary', defaultValue: 'one' };
+export const tabValue: TabValue = 1;
+
+export const tabsParts = [Tabs, TabList, Tab, TabPanel];

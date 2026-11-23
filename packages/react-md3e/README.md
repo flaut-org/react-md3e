@@ -2,6 +2,11 @@
 
 Material 3 Expressive React components with precompiled CSS and a token-based theme API.
 
+Tabs, TabList, Tab and TabPanel provide primary/secondary Material 3 tabs, fixed/scrollable rows,
+icons and badges, controlled/uncontrolled selection, keyboard navigation, RTL and standard/Expressive
+indicator springs. Import from the root or `/tabs` and load `/tabs/styles.css` at the composition
+boundary. See the [Tabs API](https://github.com/flaut-org/react-md3e/blob/main/docs/components/tabs.md).
+
 Slider provides standard, centered and two-handle range selection, five Expressive sizes,
 horizontal/vertical orientation, marks, value indicators and optional inset icons. Base UI owns
 keyboard/pointer behavior and native form inputs. Import from the root or `/slider`, with explicit
@@ -41,7 +46,7 @@ or `/range-calendar/styles.css` (which includes Calendar) at the composition bou
 available from the package root and their kebab-case subpaths. Native Temporal and Temporal-aware
 Intl are required; older runtimes need an application-installed compatible global polyfill.
 See [Calendar documentation](https://github.com/flaut-org/react-md3e/blob/main/docs/components/calendar.md).
-Implemented: Calendar, RangeCalendar, Button, Fab, ExtendedFab, FabMenu/FabMenuItem, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Switch, Slider, Radio/RadioGroup, Avatar, Badge, TextField, Autocomplete, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, SplitButton, SegmentedButton/ButtonSegment, BottomSheet, SideSheet, Snackbar, ThemeProvider, createTheme, and themeToCss. React 19 is required.
+Implemented: Calendar, RangeCalendar, Button, Fab, ExtendedFab, FabMenu/FabMenuItem, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Switch, Slider, Radio/RadioGroup, Avatar, Badge, TextField, Autocomplete, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, SplitButton, SegmentedButton/ButtonSegment, Tabs/TabList/Tab/TabPanel, BottomSheet, SideSheet, Snackbar, ThemeProvider, createTheme, and themeToCss. React 19 is required.
 
 ```tsx
 import { Button, ThemeProvider } from '@flaut-travel/react-md3e';
