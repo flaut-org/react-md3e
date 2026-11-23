@@ -67,6 +67,9 @@ export default function Page() {
         <Link href="/menus">Menu examples</Link>
       </p>
       <p>
+        <Link href="/split-buttons">Split button examples</Link>
+      </p>
+      <p>
         <Link href="/essentials">Homepage essentials</Link>
       </p>
       <p>

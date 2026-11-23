@@ -12,6 +12,7 @@ import type {
   TooltipProps,
   CollapsibleProps,
   ButtonGroupProps,
+  SplitButtonProps,
   SegmentedButtonProps,
   ButtonSegmentProps,
   BottomSheetProps,
@@ -48,6 +49,7 @@ import { Divider } from '@flaut-travel/react-md3e/divider';
 import { Tooltip } from '@flaut-travel/react-md3e/tooltip';
 import { Collapsible } from '@flaut-travel/react-md3e/collapsible';
 import { ButtonGroup, ButtonGroupButton } from '@flaut-travel/react-md3e/button-group';
+import { SplitButton } from '@flaut-travel/react-md3e/split-button';
 import { SegmentedButton, ButtonSegment } from '@flaut-travel/react-md3e/segmented-button';
 import { BottomSheet } from '@flaut-travel/react-md3e/bottom-sheet';
 import { SideSheet } from '@flaut-travel/react-md3e/side-sheet';
@@ -100,6 +102,16 @@ export const consumer = {
   Collapsible,
   ButtonGroup,
   ButtonGroupButton,
+  SplitButton,
+  splitButtonProps: {
+    children: 'Save',
+    menu: null,
+    menuButtonLabel: 'More save options',
+    variant: 'filled',
+    size: 'small',
+    buttonProps: { type: 'submit', name: 'intent', value: 'save' },
+    menuProps: { placement: 'bottom-end', layout: 'grouped' },
+  } satisfies SplitButtonProps,
   SegmentedButton,
   ButtonSegment,
   segmentedProps: { 'aria-label': 'View', 'defaultValue': 'week', 'name': 'view' } satisfies SegmentedButtonProps,

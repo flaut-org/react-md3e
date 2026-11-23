@@ -72,6 +72,11 @@ selects already-computed CSS values without generating rules or solving springs 
 
 ## Component mapping
 
+- SplitButton corner morphs and its reused Menu use the inherited fast springs. The prescribed
+  chevron rotation always uses standard fast spatial, scoped through the shared spring CSS tokens
+  on that icon. It is sampled at build time, mirrors inward in RTL and respects reduced motion.
+  See [SplitButton](components/split-button.md).
+
 - Menu and Autocomplete unfolding, plus Menu active/inactive corners, use fast spatial; opacity/colors
   use fast effects. An inherited scale is bounded at 0.001–1.05; inverse transforms on item bodies
   keep glyphs and icons at their natural size while surfaces and row centers expand. Grouped surfaces

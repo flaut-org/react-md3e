@@ -8,6 +8,7 @@ import {
   Divider,
   Tooltip,
   ButtonGroup,
+  SplitButton,
   ButtonGroupButton,
   Collapsible,
   BottomSheet,
@@ -49,6 +50,9 @@ export async function RequestTimeContent() {
 
   return (
     <div data-fixture="streaming-ready">
+      <SplitButton menuButtonLabel="More streamed options" menu={<MenuItem>Streamed split action</MenuItem>}>
+        Streamed split button
+      </SplitButton>
       <Menu trigger={<Button>Streamed menu</Button>} data-testid="streamed-menu">
         <MenuItem>Streamed command</MenuItem>
       </Menu>

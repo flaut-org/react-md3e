@@ -222,3 +222,20 @@ test('Menu server composition loads its extracted dependency closure without oth
   assert.match(styles, /ripple-enter/);
   assert.doesNotMatch(styles, /data-morph|md3-calendar-enter|data-md3-slider|md3-slider-active/);
 });
+
+test('SplitButton server composition loads Button and Menu styling without unrelated component families', async () => {
+  const response = await fetch(`${baseUrl}/split-buttons`, { signal: AbortSignal.timeout(10_000) });
+
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  const styles = await routeCss('/split-buttons');
+
+  assert.match(html, /data-md3-split-button=""/);
+  assert.match(html, /More save options/);
+  assert.match(html, /aria-haspopup="menu"/);
+  assert.match(styles, /@property --md3e-menu-scale/);
+  assert.match(styles, /--_split-expanded-angle/);
+  assert.match(styles, /ripple-enter/);
+  assert.doesNotMatch(styles, /data-morph|md3-calendar-enter|md3-slider-active/);
+});

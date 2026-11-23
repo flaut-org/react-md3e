@@ -135,6 +135,11 @@ modules; directory placement does not justify a client directive.
 
 ## Tests and verification
 
+SplitButton owns its connected-button styles/types and tests at split-button/tests. It composes
+the top-level Button and Menu without promoting its prescribed chevron into a separate component
+or adding a context. The fixture's interactive examples live under split-buttons/split-button-demo;
+the controlled Storybook example lives under stories/split-button/controlled-split-button.
+
 Menu owns menu-item/, menu-checkbox-item/, menu-radio-item/, menu-radio-group/, menu-group/,
 menu-divider/ and menu-submenu/ public parts, plus private menu-popup/ and menu-item-control/.
 The presentation context stays in menu/contexts/menu.context.ts. Public types and family-specific

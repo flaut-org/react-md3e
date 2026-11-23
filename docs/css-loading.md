@@ -28,11 +28,12 @@ Every UI subpath has a CSS export: `/button/styles.css`, `/icon-button/styles.cs
 `/radio/styles.css`, `/radio-group/styles.css`, `/avatar/styles.css`, `/text-field/styles.css`,
 `/autocomplete/styles.css`, `/popover/styles.css`, `/menu/styles.css`, `/surface/styles.css`, `/card/styles.css`,
 `/shape/styles.css`, `/search/styles.css`, `/typography/styles.css`, `/skeleton/styles.css`,
-`/divider/styles.css`, `/tooltip/styles.css`, `/collapsible/styles.css`, `/button-group/styles.css`, `/segmented-button/styles.css`,
+`/divider/styles.css`, `/tooltip/styles.css`, `/collapsible/styles.css`, `/button-group/styles.css`, `/split-button/styles.css`, `/segmented-button/styles.css`,
 `/bottom-sheet/styles.css`, `/side-sheet/styles.css`, and `/snackbar/styles.css`.
 
 A family includes its public composition parts and transitive presentation dependencies. For example,
 Button includes loading and ripple; Card includes Surface and its action/content/media parts;
+SplitButton includes the existing Button/Menu families and their shared menu presentation.
 Autocomplete includes TextField, shared MenuSurface/MenuItemContent presentation, ripple, selection
 indicators and chips. It does not require importing `/menu/styles.css` or load Menu's interaction
 adapters, trigger/group/submenu styles. Importing the
@@ -72,6 +73,9 @@ Vite 7 `cssCodeSplit: true` extracts private per-module assets. A build-only plu
 chunk import graph and Vite CSS metadata to produce family entrypoints. It includes synchronous and
 asynchronous composition dependencies, deduplicates asset paths, and preserves dependency-before-owner
 order. It then removes generated CSS imports from UI JS, leaving loading to the explicit CSS exports.
+Compositions accepting public parts through ReactNode declare their family dependency at build time:
+SplitButton includes the complete Menu entry, whose item/group/submenu exports are not visible in
+SplitButton's own JavaScript imports. These dependencies are emitted before the owner's styles.
 This does not parse styles, generate rules in the browser, or infer usage from HTML.
 
 `sideEffects: ['**/*.css']` keeps CSS imports alive. No component, state, variant, theme rule, media

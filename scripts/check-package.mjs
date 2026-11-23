@@ -211,6 +211,15 @@ for (const name of ['menu-surface', 'menu-item-content']) {
   assert.doesNotMatch(code, /use client|useContext|useState|useEffect|@base-ui/);
 }
 
+const splitButton = await readFile(
+  path.join(packageRoot, 'dist/components/split-button/split-button.component.js'),
+  'utf8',
+);
+
+assert.doesNotMatch(splitButton, /use client|useContext|useState|useEffect|@base-ui/);
+assert.match(splitButton, /button\/button.component.js/);
+assert.match(splitButton, /menu\/menu.component.js/);
+
 for (const [name, primitive] of [
   ['tooltip', 'tooltip'],
   ['collapsible', 'collapsible'],
@@ -366,6 +375,32 @@ assert.ok(
 
 const menuStyles = new Set();
 const menuCss = await readCssTree(manifest.exports['./menu/styles.css'], menuStyles);
+const splitButtonStyles = new Set();
+const splitButtonCss = await readCssTree(manifest.exports['./split-button/styles.css'], splitButtonStyles);
+
+for (const dependency of [
+  '/split-button/',
+  '/button/',
+  '/menu/',
+  '/menu-surface/',
+  '/menu-item-content/',
+  '/internal/ripple/',
+]) {
+  assert.ok(
+    [...splitButtonStyles].some((file) => file.includes(dependency)),
+    `SplitButton CSS must include ${dependency}`,
+  );
+}
+
+for (const file of menuStyles) {
+  // The public CSS wrappers differ; their extracted Menu dependency assets must be identical.
+  if (file.includes('/styles/')) {
+    assert.ok(splitButtonStyles.has(file), 'SplitButton must reuse the existing Menu stylesheet assets.');
+  }
+}
+
+assert.ok(![...splitButtonStyles].some((file) => /\/(autocomplete|popover|shape|button-group)\//.test(file)));
+assert.ok(splitButtonCss.includes('--md3e-menu-scale') && splitButtonCss.includes('--_split-expanded-angle'));
 
 for (const dependency of [
   '/menu/',

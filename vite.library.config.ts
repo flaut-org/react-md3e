@@ -5,6 +5,10 @@ import preserveDirectives from 'rollup-plugin-preserve-directives';
 import { fileURLToPath } from 'node:url';
 
 const source = fileURLToPath(new URL('./packages/react-md3e/src/', import.meta.url));
+// Public composition parts passed through ReactNode are absent from the owner's JS import graph.
+const compositionCssDependencies: Readonly<Record<string, readonly string[]>> = {
+  'split-button.js': ['menu.js'],
+};
 
 /** Vite extracts each style module; this only publishes dependency-aware CSS entrypoints. */
 function componentCss(): Plugin {
@@ -34,6 +38,10 @@ function componentCss(): Plugin {
               }
             }
           };
+
+          for (const dependency of compositionCssDependencies[entry] ?? []) {
+            visit(dependency);
+          }
 
           visit(entry);
 
@@ -101,6 +109,7 @@ export default defineConfig({
         'side-sheet': `${source}components/side-sheet/index.ts`,
         'bottom-sheet': `${source}components/bottom-sheet/index.ts`,
         'button-group': `${source}components/button-group/index.ts`,
+        'split-button': `${source}components/split-button/index.ts`,
         'segmented-button': `${source}components/segmented-button/index.ts`,
         'collapsible': `${source}components/collapsible/index.ts`,
         'tooltip': `${source}components/tooltip/index.ts`,
