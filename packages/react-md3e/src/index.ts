@@ -1,4 +1,16 @@
 export { Button } from './components/button';
+export { Fab } from './components/fab';
+export type { FabProps, FabLinkProps, FabSize, FabColor } from './components/fab';
+export { ExtendedFab } from './components/extended-fab';
+export type { ExtendedFabProps, ExtendedFabLinkProps, ExtendedFabSize } from './components/extended-fab';
+export { FabMenu, FabMenuItem } from './components/fab-menu';
+export type {
+  FabMenuProps,
+  FabMenuItemProps,
+  FabMenuColor,
+  FabMenuButtonProps,
+  FabMenuPopupProps,
+} from './components/fab-menu';
 export { SplitButton } from './components/split-button';
 export type {
   SplitButtonProps,

@@ -141,6 +141,18 @@
       "types": "./dist/components/split-button/index.d.ts",
       "import": "./dist/split-button.js"
     },
+    "./fab": {
+      "types": "./dist/components/fab/index.d.ts",
+      "import": "./dist/fab.js"
+    },
+    "./extended-fab": {
+      "types": "./dist/components/extended-fab/index.d.ts",
+      "import": "./dist/extended-fab.js"
+    },
+    "./fab-menu": {
+      "types": "./dist/components/fab-menu/index.d.ts",
+      "import": "./dist/fab-menu.js"
+    },
     "./segmented-button": {
       "types": "./dist/components/segmented-button/index.d.ts",
       "import": "./dist/segmented-button.js"
@@ -184,6 +196,9 @@
     "./collapsible/styles.css": "./dist/collapsible.css",
     "./button-group/styles.css": "./dist/button-group.css",
     "./split-button/styles.css": "./dist/split-button.css",
+    "./fab/styles.css": "./dist/fab.css",
+    "./extended-fab/styles.css": "./dist/extended-fab.css",
+    "./fab-menu/styles.css": "./dist/fab-menu.css",
     "./segmented-button/styles.css": "./dist/segmented-button.css",
     "./bottom-sheet/styles.css": "./dist/bottom-sheet.css",
     "./side-sheet/styles.css": "./dist/side-sheet.css",

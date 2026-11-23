@@ -220,6 +220,18 @@ assert.doesNotMatch(splitButton, /use client|useContext|useState|useEffect|@base
 assert.match(splitButton, /button\/button.component.js/);
 assert.match(splitButton, /menu\/menu.component.js/);
 
+for (const name of ['fab', 'extended-fab', 'fab-button']) {
+  const code = await readFile(path.join(packageRoot, `dist/components/${name}/${name}.component.js`), 'utf8');
+
+  assert.doesNotMatch(code, /use client|useContext|useState|useEffect|@base-ui/);
+}
+
+const fabMenu = await readFile(path.join(packageRoot, 'dist/components/fab-menu/fab-menu.component.js'), 'utf8');
+
+assert.match(fabMenu, /^['"]use client['"]/m);
+assert.match(fabMenu, /menu\/menu.component.js/);
+assert.doesNotMatch(fabMenu, /@base-ui\/react\/popover|requestAnimationFrame|Math\.exp/);
+
 for (const [name, primitive] of [
   ['tooltip', 'tooltip'],
   ['collapsible', 'collapsible'],
@@ -401,6 +413,35 @@ for (const file of menuStyles) {
 
 assert.ok(![...splitButtonStyles].some((file) => /\/(autocomplete|popover|shape|button-group)\//.test(file)));
 assert.ok(splitButtonCss.includes('--md3e-menu-scale') && splitButtonCss.includes('--_split-expanded-angle'));
+
+for (const family of ['fab', 'extended-fab', 'fab-menu']) {
+  const familyStyles = new Set();
+  const css = await readCssTree(manifest.exports[`./${family}/styles.css`], familyStyles);
+
+  for (const dependency of ['/fab-button/', '/button/', '/internal/ripple/']) {
+    assert.ok(
+      [...familyStyles].some((file) => file.includes(dependency)),
+      `${family} must include ${dependency}`,
+    );
+  }
+
+  assert.ok(![...familyStyles].some((file) => /\/(autocomplete|popover|shape|slider)\//.test(file)));
+  assert.match(css, /prefers-reduced-motion/);
+  assert.match(css, /forced-colors/);
+
+  if (family === 'fab-menu') {
+    for (const dependency of ['/menu/', '/menu-surface/', '/menu-item-content/', '/fab-menu/']) {
+      assert.ok(
+        [...familyStyles].some((file) => file.includes(dependency)),
+        `FabMenu must reuse ${dependency}`,
+      );
+    }
+
+    assert.match(css, /--_fab-menu-open-delay/);
+  } else {
+    assert.ok(![...familyStyles].some((file) => /\/(menu|menu-surface|fab-menu)\//.test(file)));
+  }
+}
 
 for (const dependency of [
   '/menu/',

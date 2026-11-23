@@ -9,6 +9,10 @@ import {
   Tooltip,
   ButtonGroup,
   SplitButton,
+  Fab,
+  ExtendedFab,
+  FabMenu,
+  FabMenuItem,
   ButtonGroupButton,
   Collapsible,
   BottomSheet,
@@ -53,6 +57,12 @@ export async function RequestTimeContent() {
       <SplitButton menuButtonLabel="More streamed options" menu={<MenuItem>Streamed split action</MenuItem>}>
         Streamed split button
       </SplitButton>
+      <Fab aria-label="Streamed floating action">+</Fab>
+      <ExtendedFab startIcon="+">Streamed extended action</ExtendedFab>
+      <FabMenu label="Streamed create actions" icon="+">
+        <FabMenuItem>Streamed document</FabMenuItem>
+        <FabMenuItem>Streamed folder</FabMenuItem>
+      </FabMenu>
       <Menu trigger={<Button>Streamed menu</Button>} data-testid="streamed-menu">
         <MenuItem>Streamed command</MenuItem>
       </Menu>

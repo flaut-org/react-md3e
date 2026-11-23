@@ -226,3 +226,24 @@ export type {
 } from '@flaut-travel/react-md3e';
 
 export type { MenuLayout } from '@flaut-travel/react-md3e/menu';
+
+export const fabModule = import('@flaut-travel/react-md3e/fab');
+export const extendedFabModule = import('@flaut-travel/react-md3e/extended-fab');
+export const fabMenuModule = import('@flaut-travel/react-md3e/fab-menu');
+export type {
+  FabProps,
+  FabLinkProps,
+  FabSize,
+  FabColor,
+  ExtendedFabProps,
+  ExtendedFabLinkProps,
+  ExtendedFabSize,
+  FabMenuProps,
+  FabMenuItemProps,
+  FabMenuColor,
+  FabMenuButtonProps,
+  FabMenuPopupProps,
+} from '@flaut-travel/react-md3e';
+export type { FabProps as StandaloneFabProps } from '@flaut-travel/react-md3e/fab';
+export type { ExtendedFabProps as StandaloneExtendedFabProps } from '@flaut-travel/react-md3e/extended-fab';
+export type { FabMenuProps as StandaloneFabMenuProps } from '@flaut-travel/react-md3e/fab-menu';
