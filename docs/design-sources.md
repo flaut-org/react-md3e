@@ -44,6 +44,11 @@ checks. Integrations can be added when they are actually used.
 
 ## Provenance when implementing
 
+SplitButton uses the rendered official split-button specifications, AndroidX SplitButton and its
+five size token sets (18_0_18) at 33b3d2d28722bf91670634ab0e707192330de497, and the m3e reference
+at 54bb59c2a8270dd6fde905b68761d3e968cad81a. See [SplitButton](components/split-button.md) for exact
+URLs, optical offsets, the required standard-motion rotation, web hit targets and reuse of Menu.
+
 Menu uses the rendered November 2025 Expressive menu specifications and expanded common token
 table, baseline AndroidX MenuTokens v0_210 at 33b3d2d28722bf91670634ab0e707192330de497, and
 the related m3e Menu/Autocomplete reference at 54bb59c2a8270dd6fde905b68761d3e968cad81a.

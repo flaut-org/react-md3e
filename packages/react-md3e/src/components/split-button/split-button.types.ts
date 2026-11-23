@@ -6,8 +6,18 @@ export type SplitButtonVariant = Exclude<ButtonVariant, 'text'>;
 export type SplitButtonSize = ButtonSize;
 export type SplitButtonActionProps = Omit<
   ButtonProps,
-  'component' | 'children' | 'variant' | 'size' | 'shape' | 'selected' | 'fullWidth' | 'startIcon' | 'endIcon' |
-  'disableRipple' | 'loading' | 'onClick'
+  | 'component'
+  | 'children'
+  | 'variant'
+  | 'size'
+  | 'shape'
+  | 'selected'
+  | 'fullWidth'
+  | 'startIcon'
+  | 'endIcon'
+  | 'disableRipple'
+  | 'loading'
+  | 'onClick'
 >;
 export type SplitButtonMenuButtonProps = Omit<
   ComponentPropsWithRef<'button'>,

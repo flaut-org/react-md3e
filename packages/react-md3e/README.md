@@ -13,6 +13,11 @@ RTL. Import from the root or `/segmented-button`, with `/segmented-button/styles
 composition. See the [SegmentedButton API](https://github.com/flaut-org/react-md3e/blob/main/docs/components/segmented-button.md).
 The separate ButtonGroup supplies the Expressive connected/standard design.
 
+SplitButton pairs a primary Button with the existing Menu. It supports filled, tonal, outlined
+and elevated colors, all five Button sizes, connected shape morphs and an inward menu chevron.
+Import `/split-button/styles.css` at the composition boundary; it includes Button/Menu dependencies.
+See [SplitButton](https://github.com/flaut-org/react-md3e/blob/main/docs/components/split-button.md).
+
 Switch provides immediate on/off settings using Base UI, with native forms, optional handle icons,
 keyboard activation, RTL-aware pointer dragging and standard/Expressive CSS springs. Import from the
 root or `/switch`, and load `/switch/styles.css`. See the
@@ -31,7 +36,7 @@ or `/range-calendar/styles.css` (which includes Calendar) at the composition bou
 available from the package root and their kebab-case subpaths. Native Temporal and Temporal-aware
 Intl are required; older runtimes need an application-installed compatible global polyfill.
 See [Calendar documentation](https://github.com/flaut-org/react-md3e/blob/main/docs/components/calendar.md).
-Implemented: Calendar, RangeCalendar, Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Switch, Slider, Radio/RadioGroup, Avatar, Badge, TextField, Autocomplete, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, SegmentedButton/ButtonSegment, BottomSheet, SideSheet, Snackbar, ThemeProvider, createTheme, and themeToCss. React 19 is required.
+Implemented: Calendar, RangeCalendar, Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Switch, Slider, Radio/RadioGroup, Avatar, Badge, TextField, Autocomplete, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, SplitButton, SegmentedButton/ButtonSegment, BottomSheet, SideSheet, Snackbar, ThemeProvider, createTheme, and themeToCss. React 19 is required.
 
 ```tsx
 import { Button, ThemeProvider } from '@flaut-travel/react-md3e';

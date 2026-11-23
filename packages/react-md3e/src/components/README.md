@@ -1,5 +1,9 @@
 # Components
 
+SplitButton composes Button and Menu as a passive server-compatible group. Its own styles contain
+connected geometry and a standard-motion chevron; Menu owns its popup, items, focus and selection.
+The split-button CSS entry includes both families and their shared presentation dependencies.
+
 Slider owns slider-track/ and slider-thumb/ children, shared family styles and validation helpers.
 Its interaction uses Base UI Slider; numeric geometry supplies values to extracted CSS.
 
@@ -7,7 +11,7 @@ SegmentedButton owns ButtonSegment, contexts/segmented-button.context.ts and sha
 Its baseline outlined selection uses Base UI ToggleGroup/Toggle with Material radio/checkbox roles;
 the separate ButtonGroup owns the Expressive design. See docs/components/segmented-button.md.
 
-Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Switch, Slider, Radio/RadioGroup, Avatar, TextField, Autocomplete, Search/SearchBar, Popover, Menu, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, SegmentedButton/ButtonSegment, BottomSheet, SideSheet, Snackbar and the shared private ListItemContent are
+Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Switch, Slider, Radio/RadioGroup, Avatar, TextField, Autocomplete, Search/SearchBar, Popover, Menu, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, SplitButton, SegmentedButton/ButtonSegment, BottomSheet, SideSheet, Snackbar and the shared private ListItemContent are
 implemented. API and provenance documents live in `docs/components`.
 
 Component files form an ownership tree. A component used only by one parent lives in a named child

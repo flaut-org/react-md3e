@@ -1,4 +1,13 @@
 export { Button } from './components/button';
+export { SplitButton } from './components/split-button';
+export type {
+  SplitButtonProps,
+  SplitButtonVariant,
+  SplitButtonSize,
+  SplitButtonActionProps,
+  SplitButtonMenuButtonProps,
+  SplitButtonMenuProps,
+} from './components/split-button';
 export { Calendar, CalendarDay } from './components/calendar';
 export type {
   CalendarProps,

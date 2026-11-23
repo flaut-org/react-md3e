@@ -51,7 +51,7 @@ export function SplitButton({
         variant={variant}
         size={size}
         startIcon={startIcon}
-        disabled={unavailable || buttonProps?.disabled}
+        disabled={unavailable || Boolean(buttonProps?.disabled)}
         loading={loading}
         disableRipple={disableRipple}
         className={[splitButtonAction, buttonProps?.className].filter(Boolean).join(' ')}
@@ -63,10 +63,10 @@ export function SplitButton({
         placement="bottom-end"
         {...menuProps}
         dir={dir}
-        open={open}
-        defaultOpen={defaultOpen}
-        onOpenChange={onOpenChange}
-        onClose={onClose}
+        {...(open !== undefined && { open })}
+        {...(defaultOpen !== undefined && { defaultOpen })}
+        {...(onOpenChange && { onOpenChange })}
+        {...(onClose && { onClose })}
         disabled={unavailable}
         trigger={
           <Button
@@ -74,7 +74,7 @@ export function SplitButton({
             type="button"
             variant={variant}
             size={size}
-            disabled={unavailable || menuButtonProps?.disabled}
+            disabled={unavailable || Boolean(menuButtonProps?.disabled)}
             disableRipple={disableRipple}
             aria-label={menuButtonLabel}
             className={[splitButtonMenuButton, menuButtonProps?.className].filter(Boolean).join(' ')}

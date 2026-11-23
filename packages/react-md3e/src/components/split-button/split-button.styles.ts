@@ -60,15 +60,16 @@ export const splitButtonRoot = css`
 
 const actionStyles = {
   '&[data-md3-split-action]': {
+    '--_split-outer': 'min(var(--md-sys-shape-corner-full, 9999px), calc(var(--_height) / 2))',
     '--_split-current-inner': 'var(--_split-inner)',
-    '--_radius': '9999px var(--_split-current-inner) var(--_split-current-inner) 9999px',
+    '--_radius': 'var(--_split-outer) var(--_split-current-inner) var(--_split-current-inner) var(--_split-outer)',
     '--_pressed': 'var(--_radius)',
     'flex': '1 1 auto',
     'paddingInlineStart': 'calc(var(--_split-leading-start) - var(--_outline-width))',
     'paddingInlineEnd': 'calc(var(--_split-leading-end) - var(--_outline-width))',
   },
   '&[data-md3-split-action]:dir(rtl)': {
-    '--_radius': 'var(--_split-current-inner) 9999px 9999px var(--_split-current-inner)',
+    '--_radius': 'var(--_split-current-inner) var(--_split-outer) var(--_split-outer) var(--_split-current-inner)',
   },
   '&:is(:focus-visible, :active):not(:disabled)': { '--_split-current-inner': 'var(--_split-interactive-inner)' },
   '@media (hover: hover)': {
@@ -82,18 +83,19 @@ export const splitButtonAction = css`
 
 const menuButtonStyles = {
   '&[data-md3-split-menu-button]': {
+    '--_split-outer': 'min(var(--md-sys-shape-corner-full, 9999px), calc(var(--_height) / 2))',
     '--_split-current-inner': 'var(--_split-inner)',
-    '--_radius': 'var(--_split-current-inner) 9999px 9999px var(--_split-current-inner)',
+    '--_radius': 'var(--_split-current-inner) var(--_split-outer) var(--_split-outer) var(--_split-current-inner)',
     '--_pressed': 'var(--_radius)',
     'flex': '0 0 auto',
     'inlineSize': 'calc(var(--_split-chevron-size) + 2 * var(--_split-trailing-padding))',
     'paddingInline': 'calc(var(--_split-trailing-padding) - var(--_outline-width))',
   },
   '&[data-md3-split-menu-button]:dir(rtl)': {
-    '--_radius': '9999px var(--_split-current-inner) var(--_split-current-inner) 9999px',
+    '--_radius': 'var(--_split-outer) var(--_split-current-inner) var(--_split-current-inner) var(--_split-outer)',
   },
   '&[data-md3-split-menu-button][data-popup-open]': {
-    '--_split-current-inner': '9999px',
+    '--_split-current-inner': 'var(--_split-outer)',
     '--_split-icon-offset': '0px',
     '--_split-icon-angle': 'var(--_split-expanded-angle)',
   },
@@ -123,7 +125,8 @@ const chevronStyles = {
   'fill': 'none',
   'stroke': 'currentColor',
   'strokeWidth': 2,
-  'transform': 'translateX(calc(var(--_split-icon-offset) * var(--_split-icon-direction))) rotate(var(--_split-icon-angle, 0deg))',
+  'transform':
+    'translateX(calc(var(--_split-icon-offset) * var(--_split-icon-direction))) rotate(var(--_split-icon-angle, 0deg))',
   'transition': `transform ${motion('spatial')}`,
   '@media (prefers-reduced-motion: reduce)': { transition: 'none' },
 } satisfies StyleObject;

@@ -137,6 +137,10 @@
       "types": "./dist/components/button-group/index.d.ts",
       "import": "./dist/button-group.js"
     },
+    "./split-button": {
+      "types": "./dist/components/split-button/index.d.ts",
+      "import": "./dist/split-button.js"
+    },
     "./segmented-button": {
       "types": "./dist/components/segmented-button/index.d.ts",
       "import": "./dist/segmented-button.js"
@@ -179,6 +183,7 @@
     "./tooltip/styles.css": "./dist/tooltip.css",
     "./collapsible/styles.css": "./dist/collapsible.css",
     "./button-group/styles.css": "./dist/button-group.css",
+    "./split-button/styles.css": "./dist/split-button.css",
     "./segmented-button/styles.css": "./dist/segmented-button.css",
     "./bottom-sheet/styles.css": "./dist/bottom-sheet.css",
     "./side-sheet/styles.css": "./dist/side-sheet.css",

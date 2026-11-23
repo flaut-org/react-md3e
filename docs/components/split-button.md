@@ -60,13 +60,13 @@ The two buttons share Button's colors, typography, disabled state, focus ring, r
 area. They have 2px spacing, full outer corners, and size-dependent inner corners. Both trailing
 width and primary-action geometry remain stable while the menu opens.
 
-| Size | Height | Primary start / end inset | Trailing icon | Trailing inset | Inner resting / interactive | Closed icon offset, LTR |
-| --- | --- | --- | --- | --- | --- | --- |
-| extraSmall | 32px | 12 / 10px | 22px | 13px | 4 / 8px | -1px |
-| small | 40px | 16 / 12px | 22px | 13px | 4 / 12px | -1px |
-| medium | 56px | 24 / 24px | 26px | 15px | 4 / 12px | -2px |
-| large | 96px | 48 / 48px | 38px | 29px | 8 / 20px | -3px |
-| extraLarge | 136px | 64 / 64px | 50px | 43px | 12 / 20px | -6px |
+| Size       | Height | Primary start / end inset | Trailing icon | Trailing inset | Inner resting / interactive | Closed icon offset, LTR |
+| ---------- | ------ | ------------------------- | ------------- | -------------- | --------------------------- | ----------------------- |
+| extraSmall | 32px   | 12 / 10px                 | 22px          | 13px           | 4 / 8px                     | -1px                    |
+| small      | 40px   | 16 / 12px                 | 22px          | 13px           | 4 / 12px                    | -1px                    |
+| medium     | 56px   | 24 / 24px                 | 26px          | 15px           | 4 / 12px                    | -2px                    |
+| large      | 96px   | 48 / 48px                 | 38px          | 29px           | 8 / 20px                    | -3px                    |
+| extraLarge | 136px  | 64 / 64px                 | 50px          | 43px           | 12 / 20px                   | -6px                    |
 
 Insets include the existing Button border in CSS box sizing. Theme shape roles can customize the
 inner corners. Hover, keyboard focus and press morph the inner corners; the outer corners remain
@@ -102,3 +102,9 @@ Read on 2026-11-20:
 
 No AndroidX/m3e implementation or icon source was copied. Exact Figma/video parity and physical
 velocity preservation are not claimed. Alternative non-menu panels are outside this Menu-based API.
+
+Colocated behavior/type tests cover independent actions, native forms/refs, controlled cancellation,
+two Tab stops, submenu/checkbox persistence, all size/color geometries, standard rotation in both
+motion schemes, RTL, reduced motion, forced colors, accessibility, SSR and streaming. Package checks
+verify extracted CSS closure, reuse of Menu assets and the passive wrapper boundary. Browser
+verification uses Chromium.

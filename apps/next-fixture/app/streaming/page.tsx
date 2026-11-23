@@ -3,6 +3,7 @@ import '@flaut-travel/react-md3e/avatar/styles.css';
 import '@flaut-travel/react-md3e/badge/styles.css';
 import '@flaut-travel/react-md3e/bottom-sheet/styles.css';
 import '@flaut-travel/react-md3e/button-group/styles.css';
+import '@flaut-travel/react-md3e/split-button/styles.css';
 import '@flaut-travel/react-md3e/card/styles.css';
 import '@flaut-travel/react-md3e/checkbox/styles.css';
 import '@flaut-travel/react-md3e/switch/styles.css';
