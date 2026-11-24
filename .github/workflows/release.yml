@@ -18,34 +18,9 @@ jobs:
       github.event.repository.private == false &&
       github.ref == 'refs/heads/main' &&
       vars.RELEASE_ENABLED == 'true'
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
     permissions:
       contents: read
-    env:
-      NEXT_TELEMETRY_DISABLED: '1'
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-      - uses: actions/setup-node@v7
-        with:
-          node-version-file: .tool-versions
-          cache: npm
-      - run: npm ci
-      - run: npm exec -- playwright install --with-deps chromium
-      - run: npm run check
-      - name: Upload failed browser diagnostics
-        if: failure()
-        uses: actions/upload-artifact@v7
-        with:
-          name: playwright-${{ github.job }}-${{ github.run_attempt }}
-          path: |
-            test-results/
-            playwright-report/
-          if-no-files-found: ignore
-          retention-days: 7
+    uses: ./.github/workflows/ci.yml
 
   release:
     needs: verify
@@ -60,11 +35,9 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-      - uses: actions/setup-node@v7
+      - uses: ./.github/actions/restore-dependencies
         with:
-          node-version-file: .tool-versions
-          package-manager-cache: false
-      - run: npm ci
+          cache-key: ${{ needs.verify.outputs.dependency-cache-key }}
       - uses: changesets/action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
