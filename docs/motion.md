@@ -72,6 +72,13 @@ selects already-computed CSS values without generating rules or solving springs 
 
 ## Component mapping
 
+- NavigationRail width, row geometry and label reveal use default spatial; bar/rail selection uses
+  fast spatial, with fast effects for focused inline selection. Drawer indicator surfaces fade without
+  stretching. Modal navigation entry uses default spatial, baseline drawer exit fast effects, and
+  scrims default effects. The shared 500ms focus emphasis matches the inspected M3E focus primitive.
+  Native intrinsic-size interpolation keeps glyphs unscaled. See [Navigation](components/navigation.md)
+  for synchronized frames and the official recording’s measured width trajectory and timing limits.
+
 - Tabs indicator position and width use fast spatial springs; text/state layers use fast effects.
   Scroll reveal uses immediate local scrolling and never moves page ancestors. The keyboard focus
   frame has a separate recording-calibrated 500ms ease pulse (3px → 6px → 3px), keeping its outer

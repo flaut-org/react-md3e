@@ -1,8 +1,17 @@
 # Architecture
 
-Status: Button, Fab, ExtendedFab, FabMenu/FabMenuItem, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Switch, Slider, Radio/RadioGroup, Avatar, Badge, TextField, Autocomplete, Search/SearchBar, Popover, Menu, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, SplitButton, SegmentedButton/ButtonSegment, Tabs/TabList/Tab/TabPanel, BottomSheet, SideSheet, Snackbar, and theme infrastructure implemented, 2026-11-23.
+Status: Button, Fab, ExtendedFab, FabMenu/FabMenuItem, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Switch, Slider, Radio/RadioGroup, Avatar, Badge, TextField, Autocomplete, Search/SearchBar, Popover, Menu, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, SplitButton, SegmentedButton/ButtonSegment, Tabs/TabList/Tab/TabPanel, NavigationBar, NavigationRail, NavigationDrawer, NavigationItem, BottomSheet, SideSheet, Snackbar, and theme infrastructure implemented, 2026-11-24.
 
 ## Ownership and boundaries
+
+NavigationBar, NavigationRail and NavigationDrawer are passive server layout wrappers around shared
+Navigation. Its native nav/items/header/footer composition is passed through NavigationSelection,
+an interaction-only client boundary; selection survives modal portal unmounting. Navigation owns
+navigation-panel/, the shared Base UI Drawer adapter, and its selection context. Public NavigationItem
+lives at the top component level because all three families share it. It uses Base UI Button/native
+links, the existing ripple and local keyboard reveal. Layout, intrinsic-width interpolation, indicator
+and label motion stay in extracted CSS. Each family exports its CSS dependency closure. See
+[Navigation](components/navigation.md) for API, exact sources, frame comparison and adaptations.
 
 Tabs owns TabList, Tab/TabContent and TabPanel. Base UI Tabs supplies selection, focus, panel
 registration and indicator geometry; extracted CSS supplies primary/secondary presentation and

@@ -1,0 +1,20 @@
+{
+  "source": "https://firebasestorage.googleapis.com/v0/b/design-spec/o/projects%2Fgoogle-material-3%2Fimages%2Fmalqalnw-GM3_Expressive_Nav-Rail_Guidelines_27_IA_V07.mp4?alt=media",
+  "sourcePage": "https://m3.material.io/components/navigation-rail/guidelines",
+  "method": "Chromium video seek at 60 requested samples/s, 800x689 decoded canvas, first purple content pixel at scanline y=250. Several frames repeat. Normalize against settled boundary displacement, independently of CSS implementation.",
+  "onsetEstimateMs": 1166.6667,
+  "onsetUncertaintyMs": 33.3333,
+  "initialBoundaryPx": 181,
+  "settledBoundaryPx": 317,
+  "normalizedTolerance": 0.14,
+  "samples": [
+    { "elapsedMs": 0, "boundaryPx": 181 },
+    { "elapsedMs": 33.3333, "boundaryPx": 201 },
+    { "elapsedMs": 66.6667, "boundaryPx": 238 },
+    { "elapsedMs": 100, "boundaryPx": 255 },
+    { "elapsedMs": 133.3333, "boundaryPx": 295 },
+    { "elapsedMs": 166.6667, "boundaryPx": 309 },
+    { "elapsedMs": 233.3333, "boundaryPx": 319 },
+    { "elapsedMs": 500, "boundaryPx": 317 }
+  ]
+}

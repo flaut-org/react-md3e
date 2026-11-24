@@ -1,7 +1,7 @@
 import type { Properties } from 'csstype';
 
 type Variables = Readonly<Record<`--${string}`, string | number>>;
-type NestedSelector = `&${string}` | `@media ${string}` | `@supports ${string}` | `@container ${string}`;
+type NestedSelector = `&${string}` | ':where(&)' | `@media ${string}` | `@supports ${string}` | `@container ${string}`;
 type Keyframes = Readonly<Partial<Record<'from' | 'to' | `${number}%`, Properties<string | number> & Variables>>>;
 
 interface PropertyRegistration {

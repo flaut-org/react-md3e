@@ -45,6 +45,12 @@ import type {
   MotionTokens,
   TabsProps,
   TabValue,
+  NavigationBarProps,
+  NavigationRailProps,
+  NavigationDrawerProps,
+  NavigationItemProps,
+  NavigationItemLinkProps,
+  NavigationValue,
 } from '@flaut-travel/react-md3e';
 import { Skeleton } from '@flaut-travel/react-md3e/skeleton';
 import { Divider } from '@flaut-travel/react-md3e/divider';
@@ -82,6 +88,9 @@ import { IconButton as StandaloneIconButton } from '@flaut-travel/react-md3e/ico
 import { createTheme, themeToCss } from '@flaut-travel/react-md3e/theme';
 
 import { Tabs, TabList, Tab, TabPanel } from '@flaut-travel/react-md3e/tabs';
+import { NavigationBar, NavigationItem } from '@flaut-travel/react-md3e/navigation-bar';
+import { NavigationRail } from '@flaut-travel/react-md3e/navigation-rail';
+import { NavigationDrawer } from '@flaut-travel/react-md3e/navigation-drawer';
 
 const theme: Theme = createTheme({ sourceColor: '#386a20' });
 const buttonProps: ButtonProps = { variant: 'tonal', endIcon: '→', selected: true };
@@ -256,3 +265,23 @@ export const tabsProps: TabsProps = { variant: 'primary', defaultValue: 'one' };
 export const tabValue: TabValue = 1;
 
 export const tabsParts = [Tabs, TabList, Tab, TabPanel];
+
+export const navigationBarProps: NavigationBarProps = {
+  'aria-label': 'Primary',
+  'iconPosition': 'auto',
+  'defaultValue': 'home',
+};
+export const navigationRailProps: NavigationRailProps = {
+  'aria-label': 'Primary',
+  'expanded': true,
+  'indicator': 'fullWidth',
+};
+export const navigationDrawerProps: NavigationDrawerProps = {
+  'aria-label': 'Primary',
+  'variant': 'modal',
+  'defaultOpen': true,
+};
+export const navigationItemProps: NavigationItemProps = { value: 'home', label: 'Home' };
+export const navigationLinkProps: NavigationItemLinkProps = { href: '/', selected: true, label: 'Home' };
+export const navigationValue: NavigationValue = 0;
+export const navigationParts = [NavigationBar, NavigationRail, NavigationDrawer, NavigationItem];

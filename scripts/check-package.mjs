@@ -375,6 +375,42 @@ assert.ok(![...buttonStyles, ...autocompleteStyles].some((file) => file.includes
 assert.ok(!buttonCss.includes('--md-sys-color-primary:'), 'Component CSS must not duplicate the theme defaults.');
 
 const tabsStyles = new Set();
+
+for (const name of ['navigation-bar', 'navigation-rail', 'navigation-drawer']) {
+  const code = await readFile(path.join(packageRoot, `dist/components/${name}/${name}.component.js`), 'utf8');
+
+  assert.doesNotMatch(code, /use client|useContext|useState|useEffect|@base-ui/);
+
+  const familyStyles = new Set();
+  const familyCss = await readCssTree(manifest.exports[`./${name}/styles.css`], familyStyles);
+
+  for (const dependency of [`/${name}/`, '/navigation/', '/navigation-item/', '/internal/ripple/']) {
+    assert.ok(
+      [...familyStyles].some((file) => file.includes(dependency)),
+      `${name} must include ${dependency}`,
+    );
+  }
+
+  assert.match(familyCss, /prefers-reduced-motion/);
+  assert.match(familyCss, /forced-colors/);
+  assert.match(familyCss, /--md-sys-motion-spring-fast-spatial/);
+  assert.ok(![...familyStyles].some((file) => /\/(shape|sheet)\//.test(file)));
+}
+
+const navigationItem = await readFile(
+  path.join(packageRoot, 'dist/components/navigation-item/navigation-item.component.js'),
+  'utf8',
+);
+const navigationPanel = await readFile(
+  path.join(packageRoot, 'dist/components/navigation/navigation-panel/navigation-panel.component.js'),
+  'utf8',
+);
+
+assert.match(navigationItem, /^['"]use client['"]/m);
+assert.match(navigationItem, /@base-ui\/react\/button/);
+assert.match(navigationPanel, /^['"]use client['"]/m);
+assert.match(navigationPanel, /@base-ui\/react\/drawer/);
+
 const tabsCss = await readCssTree(manifest.exports['./tabs/styles.css'], tabsStyles);
 
 for (const dependency of ['/tabs/', '/internal/ripple/']) {

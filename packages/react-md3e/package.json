@@ -232,7 +232,22 @@
       "types": "./dist/components/tabs/index.d.ts",
       "import": "./dist/tabs.js"
     },
-    "./tabs/styles.css": "./dist/tabs.css"
+    "./tabs/styles.css": "./dist/tabs.css",
+    "./navigation-bar": {
+      "types": "./dist/components/navigation-bar/index.d.ts",
+      "import": "./dist/navigation-bar.js"
+    },
+    "./navigation-rail": {
+      "types": "./dist/components/navigation-rail/index.d.ts",
+      "import": "./dist/navigation-rail.js"
+    },
+    "./navigation-drawer": {
+      "types": "./dist/components/navigation-drawer/index.d.ts",
+      "import": "./dist/navigation-drawer.js"
+    },
+    "./navigation-bar/styles.css": "./dist/navigation-bar.css",
+    "./navigation-rail/styles.css": "./dist/navigation-rail.css",
+    "./navigation-drawer/styles.css": "./dist/navigation-drawer.css"
   },
   "scripts": {
     "clean": "node ../../scripts/clean-package.mjs",
