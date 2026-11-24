@@ -81,7 +81,9 @@ for (const colorScheme of ['light', 'dark']) {
       `http://127.0.0.1:6106/?path=/story/components-navigationrail--collapsed&globals=colorScheme:${colorScheme}`,
     );
 
-    const preview = page.frameLocator('#storybook-preview-iframe');
+    const previewFrame = page.frameLocator('#storybook-preview-iframe');
+    // Docs renders additional copies of each component while the selected story is loading.
+    const preview = previewFrame.locator('#storybook-root');
 
     await expect(preview.locator('[data-md3-navigation="rail"]')).toBeVisible();
 
@@ -104,12 +106,19 @@ for (const colorScheme of ['light', 'dark']) {
         await familyButton.click();
       }
 
+      if (family !== 'NavigationRail') {
+        await page.locator(`a[href*="/docs/components-${family.toLowerCase()}--docs"]`).click();
+        await expect(previewFrame.locator('#storybook-docs')).toBeVisible();
+      }
+
       await link.click();
       await expect(page).toHaveURL(new RegExp(`/story/${id}`));
+      await expect(preview).toBeVisible();
 
       if (family === 'NavigationRail') {
         const rail = preview.locator('[data-md3-navigation="rail"]');
 
+        await expect(rail).toBeVisible();
         await expect(rail).toHaveAttribute('data-expanded', 'false');
         await expect(rail).toHaveAttribute('data-appearance', story === 'baseline' ? 'baseline' : 'expressive');
         await expect(rail).toHaveCSS('width', story === 'baseline' ? '80px' : '96px');
