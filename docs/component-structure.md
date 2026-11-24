@@ -135,6 +135,13 @@ modules; directory placement does not justify a client directive.
 
 ## Tests and verification
 
+NavigationBar, NavigationRail and NavigationDrawer share the private Navigation composition owner.
+Navigation owns contexts/navigation.context.ts, navigation-selection/ and navigation-panel/.
+NavigationItem is a shared public component in its own top-level directory, re-exported from all
+three families. Family styles/types and colocated tests remain with each public root. Storybook’s
+navigation/ owner shares its sample items/icons between the three story families; the Next fixture
+owns a separate navigation/navigation-demo/. Neither sample enters the publishable package.
+
 Tabs owns tab-list/, tab/tab-content/ and tab-panel/, with shared family types/styles and
 tabs/tests for behavior and public types. Its fixture composition lives beneath tabs/tabs-demo.
 

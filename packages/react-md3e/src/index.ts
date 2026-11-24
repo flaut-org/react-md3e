@@ -258,3 +258,12 @@ export type {
 
 export { Tabs, TabList, Tab, TabPanel } from './components/tabs';
 export type { TabsProps, TabListProps, TabProps, TabPanelProps, TabValue } from './components/tabs';
+export { NavigationBar } from './components/navigation-bar';
+export type { NavigationBarProps } from './components/navigation-bar';
+export { NavigationRail } from './components/navigation-rail';
+export type { NavigationRailProps, NavigationRailCloseReason } from './components/navigation-rail';
+export { NavigationDrawer } from './components/navigation-drawer';
+export type { NavigationDrawerProps, NavigationDrawerCloseReason } from './components/navigation-drawer';
+export { NavigationItem } from './components/navigation-item/navigation-item.component';
+export type { NavigationItemProps, NavigationItemLinkProps } from './components/navigation-item/navigation-item.types';
+export type { NavigationValue } from './components/navigation/navigation.types';

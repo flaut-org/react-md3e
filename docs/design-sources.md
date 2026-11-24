@@ -44,6 +44,12 @@ checks. Integrations can be added when they are actually used.
 
 ## Provenance when implementing
 
+Navigation bar/rail/drawer use the rendered official specifications and expanded token tables,
+AndroidX revision 0fb269260ea4c1e7b27b58500699ab07cefdca83, and M3E revision
+e8bf648be92ae30ca11f51645d4d9d0167730a5c. [Navigation](components/navigation.md) records
+exact source paths, baseline/Expressive distinctions, the Figma 403, web adaptations and the
+normalized width trajectory measured from the official Guidelines 27 expansion recording.
+
 SplitButton uses the rendered official split-button specifications, AndroidX SplitButton and its
 five size token sets (18_0_18) at 33b3d2d28722bf91670634ab0e707192330de497, and the m3e reference
 at 54bb59c2a8270dd6fde905b68761d3e968cad81a. See [SplitButton](components/split-button.md) for exact

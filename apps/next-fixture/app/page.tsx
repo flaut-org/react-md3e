@@ -75,6 +75,9 @@ export default function Page() {
         <Link href="/essentials">Homepage essentials</Link>
       </p>
       <p>
+        <Link href="/navigation">Navigation bar, rail and drawer examples</Link>
+      </p>
+      <p>
         <Link href="/indicators">Loading and progress indicators</Link>
       </p>
       <p>
