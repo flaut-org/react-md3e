@@ -61,7 +61,7 @@ const itemStyles = {
     transition: `opacity ${motion('effects')}`,
   },
   '&[data-highlighted]:not([data-disabled])::before': { opacity: 0.08 },
-  '&:active:not([data-disabled])::before': { opacity: 0.1 },
+  '&:active:not(:has([data-md3-ripple-ink])):not([data-disabled])::before': { opacity: 0.1 },
   '&:focus-visible, &[data-focus-visible]': { outline: `3px solid ${color('secondary')}`, outlineOffset: -3 },
   '&[data-disabled]': {
     '--_list-label': 'color-mix(in srgb, var(--_menu-disabled) 38%, transparent)',

@@ -36,7 +36,7 @@ const styles = {
   '&[data-checked], &[data-indeterminate]': { '--_control-state': color('primary') },
   "&[data-error='true']": { '--_control-state': color('error') },
   '&:focus-visible': { outline: `3px solid ${color('secondary')}`, outlineOffset: -3 },
-  '&:active:not([data-disabled], [data-readonly])::before': { opacity: 0.1 },
+  '&:active:not(:has([data-md3-ripple-ink])):not([data-disabled], [data-readonly])::before': { opacity: 0.1 },
   '&[data-disabled], &[data-readonly]': { cursor: 'default' },
   '@media (hover: hover)': { '&:hover:not([data-disabled], [data-readonly])::before': { opacity: 0.08 } },
   '@media (prefers-reduced-motion: reduce)': { '&::before': { transition: 'none' } },

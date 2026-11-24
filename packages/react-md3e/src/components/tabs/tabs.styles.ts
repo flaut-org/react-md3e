@@ -105,13 +105,14 @@ const tabStyles = {
   '&[aria-selected="true"] > [data-md3-tab-focus-ring]': {
     insetBlockEnd: 'calc(var(--_md3-tab-indicator-height) + 1px)',
   },
-  '&:focus-visible:not([aria-disabled="true"])::before, &:active:not([aria-disabled="true"])::before': { opacity: 0.1 },
+  '&:focus-visible:not([aria-disabled="true"])::before, &:active:not(:has([data-md3-ripple-ink])):not([aria-disabled="true"])::before':
+    { opacity: 0.1 },
   '&:not([aria-selected="true"]):is(:focus-visible, :active):not([aria-disabled="true"])': {
     color: color('onSurface'),
   },
   '@media (hover: hover)': {
     '&:hover:not([aria-disabled="true"])::before': { opacity: 0.08 },
-    '&:hover:active:not([aria-disabled="true"])::before': { opacity: 0.1 },
+    '&:hover:active:not(:has([data-md3-ripple-ink])):not([aria-disabled="true"])::before': { opacity: 0.1 },
     '&:hover:not([aria-selected="true"]):not([aria-disabled="true"])': { color: color('onSurface') },
   },
   "&[aria-disabled='true']": { color: `color-mix(in srgb, ${color('onSurface')} 38%, transparent)`, cursor: 'default' },

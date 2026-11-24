@@ -83,8 +83,10 @@ visible boundaries and focus.
 ## Ripple
 
 Pressing starts a bounded ripple from the pointer position; keyboard and assistive activations start
-at the center. A 450ms CSS keyframe expands the ink toward the center. Quick presses remain visible
-for at least 225ms before a 150ms opacity fade; held presses remain until release. Touch input waits
+at the center. Following the pinned m3e reference, a blurred disk stays at that origin while a
+450ms linear CSS keyframe expands it from scale 0 to 4. Its initial radius reaches the farthest
+corner; blur is 20px and opacity is 0.1. Release immediately starts a 350ms opacity fade with
+cubic-bezier(0, 0, 0.2, 0.1), including quick presses; held presses remain until release. Touch input waits
 150ms to avoid flashing during scrolling; quick taps still animate, and pointer cancellation clears
 the press. Disabled buttons and `disableRipple` suppress it. Reduced motion and forced colors use
 static state/focus feedback instead.
@@ -95,7 +97,8 @@ it up on disable/unmount. Base UI's mergeProps composes consumer and internal ha
 element, stylesheet rule, animation library, or frame-by-frame JavaScript is created.
 
 This is a web ripple, not an Android sparkle shader. State layers and the keyboard focus ring remain
-independent of ripple.
+independent of ripple. A visible ripple supplies the pressed feedback without stacking a second
+solid pressed layer. When ripple is disabled or suppressed, the static pressed layer remains.
 
 ## Source provenance
 
@@ -105,9 +108,19 @@ Read on 2026-11-15:
   browser, including configuration, selected roles, measurements, and shape morphs.
 - [Base UI Button](https://base-ui.com/react/components/button) and installed 1.9.0 source: client
   boundary, native button semantics, disabled behavior, and ref/event composition.
+
+Read on 2026-11-24: ripple presentation/geometry now adapt
+[m3e RippleElement.ts](https://github.com/matraic/m3e/blob/7520f333699ceeaaf9eb7704a54fe28e14cf08af/packages/web/src/core/shared/primitives/RippleElement.ts)
+and its tokens at revision `7520f333699ceeaaf9eb7704a54fe28e14cf08af` (MIT, Copyright (c) 2025–2026
+matraic). The full license is included in the package. Seventeen synchronized source-rendered
+reference frames are compared in both schemes; input and accessibility adaptations are documented
+in [Motion](../motion.md). The previous Material Web growth/fade/minimum-press policy is superseded.
+
+Earlier interaction reference:
+
 - [Google Material Web ripple reference](https://github.com/material-components/material-web/blob/main/ripple/internal/ripple.ts):
-  pointer-origin/centered activation, ink growth, 225ms minimum press, and 150ms touch delay. Our
-  React controller and static CSS are independently implemented; no Lit runtime is used.
+  pointer-origin/centered activation and retained 150ms touch-scroll delay. The React controller
+  remains independent; no Lit runtime is used.
 - [Official Android button guide](https://github.com/material-components/material-components-android/blob/master/docs/components/CommonButton.md).
 - AndroidX revision `89d9aa6a5b9fc6e4847002be42f3c6891b091c9e`:
   [button size tokens](https://github.com/androidx/androidx/tree/89d9aa6a5b9fc6e4847002be42f3c6891b091c9e/compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/tokens),

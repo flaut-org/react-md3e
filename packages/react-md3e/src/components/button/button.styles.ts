@@ -125,7 +125,7 @@ const buttonRootStyles = {
   "&:active:not(:disabled):not([aria-disabled='true'])": {
     borderRadius: 'var(--_pressed)',
   },
-  "&:active:not(:disabled):not([aria-disabled='true'])::before": {
+  "&:active:not(:has([data-md3-ripple-ink])):not(:disabled):not([aria-disabled='true'])::before": {
     opacity: 0.1,
   },
   "&:disabled, &[aria-disabled='true']": {
@@ -149,7 +149,7 @@ const buttonRootStyles = {
     "&:hover:not(:disabled):not([aria-disabled='true']):not(:focus-visible)::before": {
       opacity: 0.08,
     },
-    "&:active:not(:disabled):not([aria-disabled='true'])::before": {
+    "&:active:not(:has([data-md3-ripple-ink])):not(:disabled):not([aria-disabled='true'])::before": {
       opacity: 0.1,
     },
   },

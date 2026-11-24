@@ -41,7 +41,7 @@ const rootStyles = {
     '&[data-checked]': { '--_switch-handle': color('primaryContainer') },
   },
   '&:focus-visible > [data-md3-switch-position]': { outline: `3px solid ${color('secondary')}`, outlineOffset: 2 },
-  '&:focus-visible > [data-md3-switch-position]::before, &:active:not([data-disabled], [data-readonly]) > [data-md3-switch-position]::before, &[data-dragging] > [data-md3-switch-position]::before':
+  '&:focus-visible > [data-md3-switch-position]::before, &:active:not(:has([data-md3-ripple-ink])):not([data-disabled], [data-readonly]) > [data-md3-switch-position]::before, &[data-dragging]:not(:has([data-md3-ripple-ink])) > [data-md3-switch-position]::before':
     { opacity: 0.1 },
   '&:active:not([data-disabled], [data-readonly]) [data-md3-switch-handle], &[data-dragging] [data-md3-switch-handle]':
     { inlineSize: 28, blockSize: 28 },

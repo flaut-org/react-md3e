@@ -70,15 +70,16 @@ const segmentStyles = {
     outline: `3px solid ${color('secondary')}`,
     outlineOffset: 3,
   },
-  '&:focus-visible:not(:disabled) > [data-md3-segment-container]::before, &:active:not(:disabled):not([data-readonly="true"]) > [data-md3-segment-container]::before':
+  '&:focus-visible:not(:disabled) > [data-md3-segment-container]::before, &:active:not(:has([data-md3-ripple-ink])):not(:disabled):not([data-readonly="true"]) > [data-md3-segment-container]::before':
     {
       opacity: 0.1,
     },
   '@media (hover: hover)': {
     '&:hover:not(:disabled):not(:focus-visible) > [data-md3-segment-container]::before': { opacity: 0.08 },
-    '&:hover:active:not(:disabled):not([data-readonly="true"]) > [data-md3-segment-container]::before': {
-      opacity: 0.1,
-    },
+    '&:hover:active:not(:has([data-md3-ripple-ink])):not(:disabled):not([data-readonly="true"]) > [data-md3-segment-container]::before':
+      {
+        opacity: 0.1,
+      },
   },
   '&:disabled': {
     '--_fg': `color-mix(in srgb, ${color('onSurface')} 38%, transparent)`,

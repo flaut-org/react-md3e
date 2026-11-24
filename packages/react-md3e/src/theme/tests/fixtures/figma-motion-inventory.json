@@ -1,0 +1,1257 @@
+{
+  "fileKey": "069YnUCbHFX6TEmu4G6aLS",
+  "inspectedAt": "2026-11-24",
+  "scope": "All 33 pages; prototype reactions, including nested instances. Counts include repeated instances.",
+  "nodes": 40487,
+  "transitions": 5158,
+  "limitations": [
+    "No independent standard/expressive spring profiles were found in these prototype transitions.",
+    "get_motion_context returned no keyframe nodes for the inspected Navigation and Button representatives.",
+    "Figma MCP Starter quota was reached before video/frame export; no Figma playback parity is claimed."
+  ],
+  "pages": [
+    {
+      "id": "55141:14168",
+      "name": "Buttons",
+      "nodes": 16430,
+      "reactions": 2558,
+      "profiles": [
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "CUSTOM_CUBIC_BEZIER",
+              "easingFunctionCubicBezier": {
+                "x1": 0.20000000298023224,
+                "y1": 0,
+                "x2": 0,
+                "y2": 1
+              }
+            },
+            "duration": 0.20000000298023224
+          },
+          "count": 2558,
+          "examples": [
+            {
+              "id": "53923:36617",
+              "name": "Segment-start",
+              "destination": "53923:36910",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "53923:36617",
+              "name": "Segment-start",
+              "destination": "53923:36854",
+              "trigger": {
+                "type": "ON_PRESS"
+              }
+            },
+            {
+              "id": "53923:36618",
+              "name": "Segment-2",
+              "destination": "53923:36770",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "55141:14169",
+      "name": "App bars",
+      "nodes": 205,
+      "reactions": 84,
+      "profiles": [
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "CUSTOM_CUBIC_BEZIER",
+              "easingFunctionCubicBezier": {
+                "x1": 0.20000000298023224,
+                "y1": 0,
+                "x2": 0,
+                "y2": 1
+              }
+            },
+            "duration": 0.20000000298023224
+          },
+          "count": 84,
+          "examples": [
+            {
+              "id": "58114:20567",
+              "name": "Leading icon",
+              "destination": "58663:30926",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "58114:20572",
+              "name": "Leading icon",
+              "destination": "58663:30926",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "58114:20575",
+              "name": "Trailing action 2",
+              "destination": "58663:30926",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "55141:14171",
+      "name": "Cards",
+      "nodes": 157,
+      "reactions": 45,
+      "profiles": [
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "CUSTOM_CUBIC_BEZIER",
+              "easingFunctionCubicBezier": {
+                "x1": 0.20000000298023224,
+                "y1": 0,
+                "x2": 0,
+                "y2": 1
+              }
+            },
+            "duration": 0.20000000298023224
+          },
+          "count": 45,
+          "examples": [
+            {
+              "id": "58710:12853",
+              "name": "Icon button - standard",
+              "destination": "58663:30926",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "58710:12862",
+              "name": "Secondary action",
+              "destination": "58650:10298",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "58710:12863",
+              "name": "Primary action",
+              "destination": "58651:12289",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "55141:14173",
+      "name": "Checkboxes",
+      "nodes": 125,
+      "reactions": 12,
+      "profiles": [
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "CUSTOM_CUBIC_BEZIER",
+              "easingFunctionCubicBezier": {
+                "x1": 0.20000000298023224,
+                "y1": 0,
+                "x2": 0,
+                "y2": 1
+              }
+            },
+            "duration": 0.20000000298023224
+          },
+          "count": 12,
+          "examples": [
+            {
+              "id": "51859:5714",
+              "name": "Type=Error unselected, State=Hovered",
+              "destination": "51859:5675",
+              "trigger": {
+                "type": "ON_PRESS"
+              }
+            },
+            {
+              "id": "51859:5668",
+              "name": "Type=Error unselected, State=Enabled",
+              "destination": "51859:5714",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "51859:5691",
+              "name": "Type=Error indeterminate, State=Hovered",
+              "destination": "51859:5660",
+              "trigger": {
+                "type": "ON_PRESS"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "55141:14251",
+      "name": "Navigation",
+      "nodes": 1765,
+      "reactions": 643,
+      "profiles": [
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "CUSTOM_CUBIC_BEZIER",
+              "easingFunctionCubicBezier": {
+                "x1": 0.20000000298023224,
+                "y1": 0,
+                "x2": 0,
+                "y2": 1
+              }
+            },
+            "duration": 0.20000000298023224
+          },
+          "count": 643,
+          "examples": [
+            {
+              "id": "51593:5267",
+              "name": "Selected=False, State=Enabled, Show icon=True",
+              "destination": "51593:5285",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "51593:5267",
+              "name": "Selected=False, State=Enabled, Show icon=True",
+              "destination": "52034:21354",
+              "trigger": {
+                "type": "ON_PRESS"
+              }
+            },
+            {
+              "id": "51593:5285",
+              "name": "Selected=False, State=Hovered, Show icon=True",
+              "destination": "52034:21354",
+              "trigger": {
+                "type": "ON_PRESS"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "55141:14250",
+      "name": "Menu",
+      "nodes": 578,
+      "reactions": 90,
+      "profiles": [
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "CUSTOM_CUBIC_BEZIER",
+              "easingFunctionCubicBezier": {
+                "x1": 0.20000000298023224,
+                "y1": 0,
+                "x2": 0,
+                "y2": 1
+              }
+            },
+            "duration": 0.20000000298023224
+          },
+          "count": 40,
+          "examples": [
+            {
+              "id": "54061:37027",
+              "name": "State=Enabled",
+              "destination": "54061:37045",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "54061:37052",
+              "name": "State=Enabled",
+              "destination": "54061:37070",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "54061:37077",
+              "name": "State=Enabled",
+              "destination": "54061:37095",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            }
+          ]
+        },
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "EASE_IN_AND_OUT"
+            },
+            "duration": 0.30000001192092896
+          },
+          "count": 43,
+          "examples": [
+            {
+              "id": "58966:4039",
+              "name": "Menu-item 01 - First",
+              "destination": "58966:4113",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "58966:4040",
+              "name": "Menu-item 02",
+              "destination": "58966:4113",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "58966:4041",
+              "name": "Menu-item 03",
+              "destination": "58966:4113",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            }
+          ]
+        },
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "EASE_OUT"
+            },
+            "duration": 0.3
+          },
+          "count": 3,
+          "examples": [
+            {
+              "id": "58966:4107",
+              "name": "State=Enabled, Selected=True",
+              "destination": "58966:4119",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "58966:4113",
+              "name": "State=Hovered, Selected=False",
+              "destination": "58966:4139",
+              "trigger": {
+                "type": "ON_PRESS"
+              }
+            },
+            {
+              "id": "58966:4119",
+              "name": "State=Hovered, Selected=True",
+              "destination": "58966:4146",
+              "trigger": {
+                "type": "ON_PRESS"
+              }
+            }
+          ]
+        },
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "EASE_OUT"
+            },
+            "duration": 0.30000001192092896
+          },
+          "count": 2,
+          "examples": [
+            {
+              "id": "58966:4146",
+              "name": "State=Pressed, Selected=True",
+              "destination": "58966:4107",
+              "trigger": {
+                "type": "MOUSE_LEAVE",
+                "delay": 0
+              }
+            },
+            {
+              "id": "58966:4178",
+              "name": "State=Enabled, Selected=True",
+              "destination": "58966:4190",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            }
+          ]
+        },
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "EASE_OUT"
+            },
+            "duration": 0.20000000298023224
+          },
+          "count": 2,
+          "examples": [
+            {
+              "id": "58966:4210",
+              "name": "State=Pressed, Selected=False",
+              "destination": "58966:4172",
+              "trigger": {
+                "type": "MOUSE_LEAVE",
+                "delay": 0
+              }
+            },
+            {
+              "id": "58966:4217",
+              "name": "State=Pressed, Selected=True",
+              "destination": "58966:4178",
+              "trigger": {
+                "type": "MOUSE_LEAVE",
+                "delay": 0
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "55141:14249",
+      "name": "Lists",
+      "nodes": 8416,
+      "reactions": 390,
+      "profiles": [
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "CUSTOM_CUBIC_BEZIER",
+              "easingFunctionCubicBezier": {
+                "x1": 0.20000000298023224,
+                "y1": 0,
+                "x2": 0,
+                "y2": 1
+              }
+            },
+            "duration": 0.20000000298023224
+          },
+          "count": 311,
+          "examples": [
+            {
+              "id": "51964:69233",
+              "name": "Radio buttons",
+              "destination": "51739:4625",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "51964:69124",
+              "name": "Radio buttons",
+              "destination": "51739:4625",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "51964:70107",
+              "name": "Radio buttons",
+              "destination": "51739:4625",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            }
+          ]
+        },
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "EASE_IN_AND_OUT"
+            },
+            "duration": 0.20000000298023224
+          },
+          "count": 78,
+          "examples": [
+            {
+              "id": "59106:13030",
+              "name": "List item 01",
+              "destination": "59106:13224",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "59106:13032",
+              "name": "List item 02",
+              "destination": "59106:13224",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "59106:13034",
+              "name": "List item 03",
+              "destination": "59106:13224",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            }
+          ]
+        },
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "EASE_OUT"
+            },
+            "duration": 0.20000000298023224
+          },
+          "count": 1,
+          "examples": [
+            {
+              "id": "59106:13268",
+              "name": "Alignment=Middle-aligned, State=Pressed, Selected=False",
+              "destination": "59106:13184",
+              "trigger": {
+                "type": "MOUSE_LEAVE",
+                "delay": 0
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "49823:12141",
+      "name": "Styles",
+      "nodes": 1203,
+      "reactions": 0,
+      "profiles": []
+    },
+    {
+      "id": "55141:14176",
+      "name": "Dialogs",
+      "nodes": 106,
+      "reactions": 20,
+      "profiles": [
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "CUSTOM_CUBIC_BEZIER",
+              "easingFunctionCubicBezier": {
+                "x1": 0.20000000298023224,
+                "y1": 0,
+                "x2": 0,
+                "y2": 1
+              }
+            },
+            "duration": 0.20000000298023224
+          },
+          "count": 20,
+          "examples": [
+            {
+              "id": "50723:10962",
+              "name": "Secondary button",
+              "destination": "58650:8171",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "50723:10963",
+              "name": "Primary button",
+              "destination": "58650:8171",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "55141:14254",
+      "name": "Search",
+      "nodes": 179,
+      "reactions": 56,
+      "profiles": [
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "CUSTOM_CUBIC_BEZIER",
+              "easingFunctionCubicBezier": {
+                "x1": 0.20000000298023224,
+                "y1": 0,
+                "x2": 0,
+                "y2": 1
+              }
+            },
+            "duration": 0.20000000298023224
+          },
+          "count": 36,
+          "examples": [
+            {
+              "id": "52977:33900",
+              "name": "Leading-icon",
+              "destination": "58663:30926",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "52977:33904",
+              "name": "1st trailing-icon",
+              "destination": "58663:30926",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            }
+          ]
+        },
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "EASE_IN_AND_OUT"
+            },
+            "duration": 0.20000000298023224
+          },
+          "count": 20,
+          "examples": [
+            {
+              "id": "59178:4974",
+              "name": "List item 1",
+              "destination": "59106:13224",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "59178:4975",
+              "name": "List item 2",
+              "destination": "59106:13224",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "55141:14170",
+      "name": "Sheets",
+      "nodes": 91,
+      "reactions": 18,
+      "profiles": [
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "CUSTOM_CUBIC_BEZIER",
+              "easingFunctionCubicBezier": {
+                "x1": 0.20000000298023224,
+                "y1": 0,
+                "x2": 0,
+                "y2": 1
+              }
+            },
+            "duration": 0.20000000298023224
+          },
+          "count": 18,
+          "examples": [
+            {
+              "id": "53211:27631",
+              "name": "Close affordance",
+              "destination": "58663:30926",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "53198:27860",
+              "name": "Primary button",
+              "destination": "58651:12289",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "55141:14255",
+      "name": "Sliders",
+      "nodes": 2083,
+      "reactions": 0,
+      "profiles": []
+    },
+    {
+      "id": "55141:14257",
+      "name": "Switch",
+      "nodes": 137,
+      "reactions": 16,
+      "profiles": [
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "CUSTOM_CUBIC_BEZIER",
+              "easingFunctionCubicBezier": {
+                "x1": 0.20000000298023224,
+                "y1": 0,
+                "x2": 0,
+                "y2": 1
+              }
+            },
+            "duration": 0.20000000298023224
+          },
+          "count": 16,
+          "examples": [
+            {
+              "id": "54446:25292",
+              "name": "Target",
+              "destination": "54446:25296",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "54446:25298",
+              "name": "Target",
+              "destination": "54446:25308",
+              "trigger": {
+                "type": "ON_PRESS"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "55141:14258",
+      "name": "Tabs",
+      "nodes": 417,
+      "reactions": 200,
+      "profiles": [
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "CUSTOM_CUBIC_BEZIER",
+              "easingFunctionCubicBezier": {
+                "x1": 0.20000000298023224,
+                "y1": 0,
+                "x2": 0,
+                "y2": 1
+              }
+            },
+            "duration": 0.20000000298023224
+          },
+          "count": 200,
+          "examples": [
+            {
+              "id": "54563:40026",
+              "name": "Tab 1",
+              "destination": "54563:40384",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "54563:40026",
+              "name": "Tab 1",
+              "destination": "54563:40367",
+              "trigger": {
+                "type": "ON_PRESS"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "55141:14259",
+      "name": "Text fields",
+      "nodes": 1387,
+      "reactions": 180,
+      "profiles": [
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "CUSTOM_CUBIC_BEZIER",
+              "easingFunctionCubicBezier": {
+                "x1": 0.20000000298023224,
+                "y1": 0,
+                "x2": 0,
+                "y2": 1
+              }
+            },
+            "duration": 0.20000000298023224
+          },
+          "count": 180,
+          "examples": [
+            {
+              "id": "52798:25002",
+              "name": "Leading icon",
+              "destination": "58663:30926",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "52798:25282",
+              "name": "Leading icon",
+              "destination": "58663:30926",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "55141:14256",
+      "name": "Snackbar",
+      "nodes": 85,
+      "reactions": 28,
+      "profiles": [
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "CUSTOM_CUBIC_BEZIER",
+              "easingFunctionCubicBezier": {
+                "x1": 0.20000000298023224,
+                "y1": 0,
+                "x2": 0,
+                "y2": 1
+              }
+            },
+            "duration": 0.20000000298023224
+          },
+          "count": 28,
+          "examples": [
+            {
+              "id": "53977:33616",
+              "name": "State=Enabled",
+              "destination": "53977:33619",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "53977:33616",
+              "name": "State=Enabled",
+              "destination": "53977:33625",
+              "trigger": {
+                "type": "ON_PRESS"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "55141:14253",
+      "name": "Radio button",
+      "nodes": 45,
+      "reactions": 8,
+      "profiles": [
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "CUSTOM_CUBIC_BEZIER",
+              "easingFunctionCubicBezier": {
+                "x1": 0.20000000298023224,
+                "y1": 0,
+                "x2": 0,
+                "y2": 1
+              }
+            },
+            "duration": 0.20000000298023224
+          },
+          "count": 8,
+          "examples": [
+            {
+              "id": "51739:4645",
+              "name": "Selected=False, State=Pressed",
+              "destination": "51739:4625",
+              "trigger": {
+                "type": "MOUSE_UP",
+                "delay": 0
+              }
+            },
+            {
+              "id": "51739:4629",
+              "name": "Selected=False, State=Hovered",
+              "destination": "51739:4621",
+              "trigger": {
+                "type": "MOUSE_LEAVE",
+                "delay": 0,
+                "deprecatedVersion": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "55141:14252",
+      "name": "Loading & progress",
+      "nodes": 637,
+      "reactions": 14,
+      "profiles": [
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "CUSTOM_CUBIC_BEZIER",
+              "easingFunctionCubicBezier": {
+                "x1": 0.20000000298023224,
+                "y1": 0,
+                "x2": 0,
+                "y2": 1
+              }
+            },
+            "duration": 0.4000000059604645
+          },
+          "count": 14,
+          "examples": [
+            {
+              "id": "58005:8556",
+              "name": "Steps=1, Show container=False",
+              "destination": "58005:8563",
+              "trigger": {
+                "type": "AFTER_TIMEOUT",
+                "timeout": 0.0010000000474974513
+              }
+            },
+            {
+              "id": "58005:8559",
+              "name": "Steps=1, Show container=True",
+              "destination": "58005:8566",
+              "trigger": {
+                "type": "AFTER_TIMEOUT",
+                "timeout": 0.0010000000474974513
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "11:1833",
+      "name": "Getting started",
+      "nodes": 102,
+      "reactions": 0,
+      "profiles": []
+    },
+    {
+      "id": "55879:3580",
+      "name": "Table of contents",
+      "nodes": 209,
+      "reactions": 0,
+      "profiles": []
+    },
+    {
+      "id": "55595:3788",
+      "name": "Avatars",
+      "nodes": 72,
+      "reactions": 0,
+      "profiles": []
+    },
+    {
+      "id": "55594:2483",
+      "name": "Icons",
+      "nodes": 284,
+      "reactions": 0,
+      "profiles": []
+    },
+    {
+      "id": "55594:2480",
+      "name": "Examples",
+      "nodes": 1275,
+      "reactions": 83,
+      "profiles": [
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "CUSTOM_CUBIC_BEZIER",
+              "easingFunctionCubicBezier": {
+                "x1": 0.20000000298023224,
+                "y1": 0,
+                "x2": 0,
+                "y2": 1
+              }
+            },
+            "duration": 0.20000000298023224
+          },
+          "count": 83,
+          "examples": [
+            {
+              "id": "56576:15669",
+              "name": "Icon button - standard",
+              "destination": "58663:30926",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "58278:22882",
+              "name": "Icon button - standard",
+              "destination": "58663:30926",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "58548:7093",
+      "name": "Shape",
+      "nodes": 161,
+      "reactions": 0,
+      "profiles": []
+    },
+    {
+      "id": "55594:2484",
+      "name": "Utilities",
+      "nodes": 1086,
+      "reactions": 0,
+      "profiles": []
+    },
+    {
+      "id": "55597:372",
+      "name": "---",
+      "nodes": 0,
+      "reactions": 0,
+      "profiles": []
+    },
+    {
+      "id": "55141:14167",
+      "name": "Badges",
+      "nodes": 7,
+      "reactions": 0,
+      "profiles": []
+    },
+    {
+      "id": "55141:14172",
+      "name": "Carousel",
+      "nodes": 94,
+      "reactions": 0,
+      "profiles": []
+    },
+    {
+      "id": "55141:14174",
+      "name": "Chips",
+      "nodes": 1159,
+      "reactions": 232,
+      "profiles": [
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "CUSTOM_CUBIC_BEZIER",
+              "easingFunctionCubicBezier": {
+                "x1": 0.20000000298023224,
+                "y1": 0,
+                "x2": 0,
+                "y2": 1
+              }
+            },
+            "duration": 0.20000000298023224
+          },
+          "count": 232,
+          "examples": [
+            {
+              "id": "53923:28736",
+              "name": "Style=Elevated, State=Hovered, Selected=True, Show icon=True",
+              "destination": "53923:28708",
+              "trigger": {
+                "type": "ON_PRESS"
+              }
+            },
+            {
+              "id": "53923:28740",
+              "name": "Style=Outlined, State=Hovered, Selected=True, Show icon=True",
+              "destination": "53923:28712",
+              "trigger": {
+                "type": "ON_PRESS"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "55141:14175",
+      "name": "Date & time pickers",
+      "nodes": 1068,
+      "reactions": 322,
+      "profiles": [
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "CUSTOM_CUBIC_BEZIER",
+              "easingFunctionCubicBezier": {
+                "x1": 0.20000000298023224,
+                "y1": 0,
+                "x2": 0,
+                "y2": 1
+              }
+            },
+            "duration": 0.20000000298023224
+          },
+          "count": 322,
+          "examples": [
+            {
+              "id": "51954:18867",
+              "name": "Type=Selected, State=Hovered",
+              "destination": "51954:18880",
+              "trigger": {
+                "type": "ON_PRESS"
+              }
+            },
+            {
+              "id": "51954:18844",
+              "name": "Type=Today, State=Hovered",
+              "destination": "51954:18853",
+              "trigger": {
+                "type": "ON_PRESS"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "55141:14177",
+      "name": "Dividers",
+      "nodes": 19,
+      "reactions": 0,
+      "profiles": []
+    },
+    {
+      "id": "58295:22726",
+      "name": "Toolbars",
+      "nodes": 887,
+      "reactions": 157,
+      "profiles": [
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "CUSTOM_CUBIC_BEZIER",
+              "easingFunctionCubicBezier": {
+                "x1": 0.20000000298023224,
+                "y1": 0,
+                "x2": 0,
+                "y2": 1
+              }
+            },
+            "duration": 0.20000000298023224
+          },
+          "count": 157,
+          "examples": [
+            {
+              "id": "58027:76096",
+              "name": "State=Enabled",
+              "destination": "58694:34214",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "58694:34214",
+              "name": "State=Hovered",
+              "destination": "58694:34224",
+              "trigger": {
+                "type": "ON_PRESS"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "55141:14261",
+      "name": "Tooltips",
+      "nodes": 18,
+      "reactions": 2,
+      "profiles": [
+        {
+          "transition": {
+            "type": "SMART_ANIMATE",
+            "easing": {
+              "type": "CUSTOM_CUBIC_BEZIER",
+              "easingFunctionCubicBezier": {
+                "x1": 0.20000000298023224,
+                "y1": 0,
+                "x2": 0,
+                "y2": 1
+              }
+            },
+            "duration": 0.20000000298023224
+          },
+          "count": 2,
+          "examples": [
+            {
+              "id": "54061:33877",
+              "name": "Primary button",
+              "destination": "58650:8171",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            },
+            {
+              "id": "54061:33878",
+              "name": "Secondary button",
+              "destination": "58650:8171",
+              "trigger": {
+                "type": "ON_HOVER"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

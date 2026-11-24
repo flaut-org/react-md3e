@@ -1,0 +1,84 @@
+{
+  "source": "https://github.com/androidx/androidx/blob/009564af4f3f92df06e213711cb5327ceabc4e47/compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/tokens/",
+  "method": "Independent fourth-order Runge–Kutta integration of x'' + 2*zeta*sqrt(k)*x' + k*x = k, mass=1, initial x=0 and v=0, maximum step 0.05ms. Reference displacement, not Figma playback frames.",
+  "tolerance": 0.003,
+  "timesMs": [0, 16.666667, 33.333333, 50, 100, 150, 200, 300, 500, 750],
+  "schemes": {
+    "expressive": {
+      "fast": {
+        "spatial": {
+          "damping": 0.6,
+          "stiffness": 800,
+          "displacement": [0, 0.091177, 0.294386, 0.527367, 1.011091, 1.090636, 1.030977, 0.992385, 1.000083, 1.000003]
+        },
+        "effects": {
+          "damping": 1,
+          "stiffness": 3800,
+          "displacement": [0, 0.274321, 0.608625, 0.812798, 0.984934, 0.999012, 0.999941, 1, 1, 1]
+        }
+      },
+      "default": {
+        "spatial": {
+          "damping": 0.8,
+          "stiffness": 380,
+          "displacement": [0, 0.04433, 0.148669, 0.280177, 0.659831, 0.891228, 0.988346, 1.013123, 0.999858, 1]
+        },
+        "effects": {
+          "damping": 1,
+          "stiffness": 1600,
+          "displacement": [0, 0.144305, 0.38494, 0.593994, 0.908422, 0.982649, 0.996981, 0.99992, 1, 1]
+        }
+      },
+      "slow": {
+        "spatial": {
+          "damping": 0.8,
+          "stiffness": 200,
+          "displacement": [0, 0.024481, 0.086211, 0.170644, 0.464016, 0.712675, 0.875456, 1.002656, 1.005735, 0.999772]
+        },
+        "effects": {
+          "damping": 1,
+          "stiffness": 800,
+          "displacement": [0, 0.08166, 0.243214, 0.413064, 0.773718, 0.924665, 0.976744, 0.998041, 0.999989, 1]
+        }
+      }
+    },
+    "standard": {
+      "fast": {
+        "spatial": {
+          "damping": 0.9,
+          "stiffness": 1400,
+          "displacement": [0, 0.134189, 0.373855, 0.593597, 0.931017, 0.99645, 1.001475, 1.000076, 1, 1]
+        },
+        "effects": {
+          "damping": 1,
+          "stiffness": 3800,
+          "displacement": [0, 0.274321, 0.608625, 0.812798, 0.984934, 0.999012, 0.999941, 1, 1, 1]
+        }
+      },
+      "default": {
+        "spatial": {
+          "damping": 0.9,
+          "stiffness": 700,
+          "displacement": [0, 0.074736, 0.230728, 0.40286, 0.788043, 0.947153, 0.992654, 1.001261, 1.000001, 1]
+        },
+        "effects": {
+          "damping": 1,
+          "stiffness": 1600,
+          "displacement": [0, 0.144305, 0.38494, 0.593994, 0.908422, 0.982649, 0.996981, 0.99992, 1, 1]
+        }
+      },
+      "slow": {
+        "spatial": {
+          "damping": 0.9,
+          "stiffness": 300,
+          "displacement": [0, 0.035062, 0.118196, 0.224555, 0.549116, 0.778644, 0.906095, 0.99118, 1.000836, 1.000003]
+        },
+        "effects": {
+          "damping": 1,
+          "stiffness": 800,
+          "displacement": [0, 0.08166, 0.243214, 0.413064, 0.773718, 0.924665, 0.976744, 0.998041, 0.999989, 1]
+        }
+      }
+    }
+  }
+}

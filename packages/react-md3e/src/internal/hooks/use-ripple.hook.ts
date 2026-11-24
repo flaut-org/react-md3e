@@ -13,7 +13,6 @@ interface Press {
   point?: RipplePoint;
   delay?: Timer;
   ink?: HTMLSpanElement;
-  startedAt?: number;
 }
 
 /** Create the visual ink node using precompiled classes and geometry variables. */
@@ -23,9 +22,6 @@ function createRippleInk(ownerDocument: Document, geometry: RippleGeometry): HTM
     '--_ripple-size': `${geometry.size}px`,
     '--_ripple-start-x': `${geometry.startX}px`,
     '--_ripple-start-y': `${geometry.startY}px`,
-    '--_ripple-end-x': `${geometry.endX}px`,
-    '--_ripple-end-y': `${geometry.endY}px`,
-    '--_ripple-scale': String(geometry.scale),
   };
 
   ink.className = rippleInk;
@@ -100,29 +96,25 @@ export function useRipple(disabled: boolean) {
 
         surface.append(ink);
         press.ink = ink;
-        press.startedAt = performance.now();
       }
     }
   }
 
-  function fade(press: Press, cancelled = false) {
+  function fade(press: Press) {
     clearDelay(press);
 
     const { ink } = press;
 
     if (ink) {
-      const wait = cancelled ? 0 : Math.max(0, 225 - (performance.now() - (press.startedAt ?? 0)));
-
-      schedule(() => {
-        ink.dataset.leaving = 'true';
-        schedule(() => ink.remove(), 150);
-      }, wait);
+      // Match m3e: release begins fading immediately, even during expansion.
+      ink.dataset.leaving = 'true';
+      schedule(() => ink.remove(), 350);
     }
   }
 
   function cancel() {
     if (active.current) {
-      fade(active.current, true);
+      fade(active.current);
     }
 
     active.current = null;
