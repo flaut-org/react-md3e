@@ -173,20 +173,35 @@ jobs:
           retention-days: 1
 
   integration:
-    name: ${{ matrix.name }}
+    name: HTTP integration tests
+    needs: [install, build-apps]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/restore-dependencies
+        with:
+          cache-key: ${{ needs.install.outputs.cache-key }}
+      - uses: actions/download-artifact@v7
+        with:
+          name: package-build
+      - uses: actions/download-artifact@v7
+        with:
+          name: fixture-build
+      - run: tar -xf fixture-build.tar -C apps/next-fixture
+      - run: npm run test:http
+
+  playwright:
+    name: Playwright ${{ matrix.shard }}/${{ strategy.job-total }}
     needs: [install, build-apps]
     runs-on: ubuntu-latest
     timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - name: HTTP integration tests
-            browser: false
-            command: npm run test:http
-          - name: Playwright
-            browser: true
-            command: npm run test:browser
+        shard: [1, 2, 3, 4]
     steps:
       - uses: actions/checkout@v7
         with:
@@ -202,19 +217,17 @@ jobs:
           name: fixture-build
       - run: tar -xf fixture-build.tar -C apps/next-fixture
       - uses: actions/download-artifact@v7
-        if: matrix.browser
         with:
           name: storybook-build
           path: storybook-static
       - name: Install Chromium and system dependencies
-        if: matrix.browser
         run: npm exec -- playwright install --with-deps chromium
-      - run: ${{ matrix.command }}
+      - run: npm run test:browser -- --shard=${{ matrix.shard }}/${{ strategy.job-total }}
       - name: Upload failed browser diagnostics
-        if: failure() && matrix.browser
+        if: failure()
         uses: actions/upload-artifact@v7
         with:
-          name: playwright-${{ github.job }}-${{ github.run_attempt }}
+          name: playwright-shard-${{ matrix.shard }}-${{ github.run_attempt }}
           path: |
             test-results/
             playwright-report/
@@ -222,7 +235,7 @@ jobs:
           retention-days: 7
 
   check:
-    needs: [install, build, validate, unit, build-apps, integration]
+    needs: [install, build, validate, unit, build-apps, integration, playwright]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 1

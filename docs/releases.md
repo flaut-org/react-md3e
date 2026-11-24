@@ -194,6 +194,6 @@ Rerunning an old failed commit does not include a local fix.
 
 In GitHub UI, open the failed CI or Release run, then the failing named job (under verify for Release).
 The aggregate check job lists all prerequisite results. Failed browser runs upload test-results/
-(including retained Playwright traces) and any playwright-report/ as a playwright-integration-<attempt>
+(including retained Playwright traces) and any playwright-report/ as a playwright-shard-<index>-<attempt>
 artifact on the run's summary page.
 Download the artifact for diagnostics; run-attempt suffixes distinguish it.

@@ -125,10 +125,13 @@ The local `npm run check` command remains the sequential full validation entry p
 5. **Build fixture** and **Build storybook** run in parallel after unit tests. They consume the package
    artifact and upload their production output. The fixture archive includes hidden `.next` files,
    preserves permissions/links and excludes the compiler cache.
-6. **HTTP integration tests** and **Playwright** run in parallel against those production artifacts.
+6. **HTTP integration tests** and four **Playwright** shards run in parallel against those production artifacts.
    Playwright needs both app builds because its servers use `next start` and the static Storybook
    preview. Running it alongside those builds would require building the apps a second time in the
-   browser job. Chromium/system dependencies are installed only in the Playwright job.
+   browser jobs. Each shard restores dependencies and both app artifacts, then installs Chromium/system
+   dependencies and runs `test:browser -- --shard=<index>/4`. The existing `fullyParallel: true` config
+   distributes individual tests across shards; each shard keeps two workers, for up to eight workers
+   across four runners. Matrix fail-fast is disabled so one failure does not cancel other shards.
 7. **check** always runs and succeeds only when every preceding job succeeded. Failed, skipped or
    cancelled prerequisites make this aggregate check fail. It retains the existing required-check name.
 
@@ -138,7 +141,13 @@ Node and restores the install job's exact cache key. A missing cache fails expli
 silently running a second install. Release's publication job uses the same dependency cache after
 verification. Build artifacts are scoped to the current workflow run, retained for one day and
 replaced when their producer is rerun; downstream-only retries reuse the existing artifacts.
-Failed Playwright jobs retain browser diagnostics for seven days.
+Failed Playwright shards retain browser diagnostics for seven days, with the shard index and run
+attempt in the artifact name to prevent collisions. The aggregate check waits for every shard.
+
+To reproduce one shard locally after building the package, fixture and Storybook, run
+`npm run test:browser -- --shard=1/4` (replace `1` with `2`, `3` or `4` for the other shards).
+Local `npm run test:browser` still runs the complete suite with two workers. See the official
+[Playwright sharding guide](https://playwright.dev/docs/test-sharding) for the distribution rules.
 
 Cache restore/save behavior follows the official
 [actions/cache guidance](https://github.com/actions/cache/blob/main/caching-strategies.md).
