@@ -299,7 +299,7 @@ test('themes, ripple, focus and accessibility preferences use precompiled styles
 
 test('Storybook exposes multiple selection, custom indicators and explicit RTL composition', async ({ page }) => {
   await page.goto(
-    'http://127.0.0.1:6106/iframe.html?id=components-segmentedbutton--multiple&viewMode=story&globals=brand:forest;colorScheme:dark',
+    'http://127.0.0.1:6106/iframe.html?id=components-segmentedbutton--multiple&viewMode=story&globals=brand:forest;colorScheme:dark;a11y.manual:!true',
   );
 
   const group = page.getByRole('group', { name: 'Calendar view', exact: true });

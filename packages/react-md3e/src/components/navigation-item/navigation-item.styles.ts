@@ -34,12 +34,13 @@ const item = {
   '&:focus-visible': { outline: 'none' },
   '&:focus-visible > [data-md3-navigation-focus-ring]': { display: 'var(--_nav-block-focus-display, block)' },
   '&:focus-visible [data-md3-navigation-inline-focus-ring]': { display: 'var(--_nav-inline-focus-display, none)' },
-  '&:is(:focus-visible, :active):not(:disabled):not([aria-disabled="true"]) > [data-md3-navigation-surface]::before': {
-    opacity: 0.1,
-  },
+  '&:is(:focus-visible, :active:not(:has([data-md3-ripple-ink]))):not(:disabled):not([aria-disabled="true"]) > [data-md3-navigation-surface]::before':
+    {
+      opacity: 0.1,
+    },
   '@media (hover: hover)': {
     '&:hover:not(:disabled):not([aria-disabled="true"]) > [data-md3-navigation-surface]::before': { opacity: 0.08 },
-    '&:is(:focus-visible, :active):hover:not(:disabled):not([aria-disabled="true"]) > [data-md3-navigation-surface]::before':
+    '&:is(:focus-visible, :active:not(:has([data-md3-ripple-ink]))):hover:not(:disabled):not([aria-disabled="true"]) > [data-md3-navigation-surface]::before':
       { opacity: 0.1 },
   },
   '&:disabled, &[aria-disabled="true"]': {

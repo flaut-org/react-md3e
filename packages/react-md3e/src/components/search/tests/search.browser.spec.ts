@@ -309,7 +309,9 @@ test('Search is accessible in Next and Storybook, streams, and inserts no style 
   await expect(page.getByRole('searchbox', { name: 'Streamed search bar', exact: true })).toHaveValue('Streamed query');
   await page.getByRole('searchbox', { name: 'Streamed search', exact: true }).click();
   await expect(page.getByRole('dialog').getByText('Streamed search results')).toBeVisible();
-  await page.goto('http://127.0.0.1:6106/iframe.html?id=components-search--destinations&viewMode=story');
+  await page.goto(
+    'http://127.0.0.1:6106/iframe.html?id=components-search--destinations&viewMode=story&globals=a11y.manual:!true',
+  );
   await page.getByRole('searchbox', { name: searchName, exact: true }).click();
   await page.getByRole('dialog').getByRole('searchbox').fill('Porto');
   await expect(page.getByRole('dialog').getByRole('button', { name: 'Porto', exact: true })).toBeVisible();

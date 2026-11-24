@@ -33,7 +33,7 @@ const areaStyles = {
     transition: `opacity ${motion('effects')}`,
   },
   '&:focus-visible': { outline: `3px solid ${color('secondary')}`, outlineOffset: -3 },
-  '&:focus-visible::before, &:active::before': { opacity: 0.1 },
+  '&:focus-visible::before, &:active:not(:has([data-md3-ripple-ink]))::before': { opacity: 0.1 },
   '&:disabled, &[aria-disabled="true"]': {
     backgroundColor: 'var(--_card-disabled-background)',
     color: `color-mix(in srgb, ${color('onSurface')} 38%, transparent)`,
@@ -43,7 +43,7 @@ const areaStyles = {
   '&:disabled [data-md3-card-media], &[aria-disabled="true"] [data-md3-card-media]': { opacity: 0.38 },
   '@media (hover: hover)': {
     '&:hover:not(:disabled):not([aria-disabled="true"]):not(:focus-visible)::before': { opacity: 0.08 },
-    '&:active:not(:disabled):not([aria-disabled="true"])::before': { opacity: 0.1 },
+    '&:active:not(:has([data-md3-ripple-ink])):not(:disabled):not([aria-disabled="true"])::before': { opacity: 0.1 },
   },
   '@media (prefers-reduced-motion: reduce)': { '&::before': { transition: 'none' } },
   '@media (forced-colors: active)': {

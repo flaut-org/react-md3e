@@ -33,14 +33,17 @@ Each scheme has fast, default, and slow spatial/effects springs. Spatial springs
 size, scale, corner radii, and shape morphing. Effects springs animate color, opacity, and elevation
 without overshoot. Effects parameters are identical in both official schemes.
 
-| Spring          | Expressive damping / stiffness | Standard damping / stiffness |
-| --------------- | ------------------------------ | ---------------------------- |
-| fast spatial    | 0.6 / 800                      | 0.9 / 1400                   |
-| default spatial | 0.8 / 380                      | 0.9 / 700                    |
-| slow spatial    | 0.8 / 200                      | 0.9 / 300                    |
-| fast effects    | 1 / 3800                       | 1 / 3800                     |
-| default effects | 1 / 1600                       | 1 / 1600                     |
-| slow effects    | 1 / 800                        | 1 / 800                      |
+| Spring          | Expressive damping / stiffness | Standard damping / stiffness | Expressive / standard duration |
+| --------------- | ------------------------------ | ---------------------------- | ------------------------------ |
+| fast spatial    | 0.6 / 800                      | 0.9 / 1400                   | 350 / 350ms                    |
+| default spatial | 0.8 / 380                      | 0.9 / 700                    | 500 / 500ms                    |
+| slow spatial    | 0.8 / 200                      | 0.9 / 300                    | 650 / 750ms                    |
+| fast effects    | 1 / 3800                       | 1 / 3800                     | 150 / 150ms                    |
+| default effects | 1 / 1600                       | 1 / 1600                     | 200 / 200ms                    |
+| slow effects    | 1 / 800                        | 1 / 800                      | 300 / 300ms                    |
+
+Durations and the sampled easing generator follow the pinned m3e web reference below. They replace
+our previous 0.001-settling-time conversion; the AndroidX physical parameters are unchanged.
 
 `theme.motion.fast.spatial`, for example, exposes damping, stiffness, duration in milliseconds, and a
 precomputed CSS easing string. The entire motion object is immutable and JSON-serializable.
@@ -113,8 +116,9 @@ selects already-computed CSS values without generating rules or solving springs 
   stay fixed; the outgoing frame is inert. RangeCalendar reuses Calendar's transition.
 - Full-screen Search geometry uses slow spatial.
 - State-layer opacity, color, elevation and most fades use fast effects. Sheet scrims and Search fades
-  use default effects. Ripple growth uses slow effects and its fade uses fast effects; pointer delay
-  and minimum press lifetime remain interaction timing rather than motion scheme settings.
+  use default effects. Ripple follows m3e's independent choreography: 450ms linear expansion and
+  350ms opacity fade with cubic-bezier(0, 0, 0.2, 0.1). These fixed timings apply in both schemes;
+  theme springs do not control this explicit reference effect. Touch-scroll delay stays 150ms.
 - Shape's existing `--md3e-shape-morph-duration` and `--md3e-shape-morph-easing` overrides take precedence
   over the inherited motion scheme.
 
@@ -135,19 +139,88 @@ of the selected scheme. Standard is not a substitute for reduced-motion support.
 
 ## Web adaptation and limits
 
-The numerical spring parameters are official MD3/AndroidX values. The conversion is independently
-implemented: unit mass, zero initial velocity, a unit step, and normalized displacement tolerance
-0.001. Underdamped duration uses an exponential envelope so the first target crossing cannot end the
-animation prematurely. Critically damped springs use a monotonic settling check at millisecond
-resolution. Each curve contains 81 equally spaced samples and exact zero/one endpoints.
+The numerical spring parameters are official MD3/AndroidX values. The CSS conversion adapts
+matraic/m3e `SpringEasing.ts` at revision `7520f333699ceeaaf9eb7704a54fe28e14cf08af` (MIT).
+It samples a unit-mass, zero-initial-velocity step at 1,001 points over each fixed web duration,
+keeps extrema, then splits the most inaccurate segments until at most 32 stops remain. Output
+uses four decimal places for displacement and two for stop percentages. The final displacement
+is forced to one, including any residual settling jump at the end, exactly as in that reference.
 
-These durations and sampled curves are a documented web adaptation, not fixed durations mandated by
-Google or an exact implementation of Compose's distance-dependent settling algorithm. CSS linear()
-provides native interpolation. This implementation does not preserve physical velocity when a
-transition is interrupted or retargeted, and does not simulate gesture springs at runtime. Base UI
-continues to own interaction and transition lifecycle behavior.
+Only the module placement, function order, strict index checks, naming and formatting were adapted.
+The sampler is bundled into the separate server/build theme entry. It never runs in the UI graph.
+Our existing separate `-duration` and `-easing` CSS variables retain their public contract; m3e's
+runtime CSS feature detection, composite token names and cubic-bezier fallback are not imported.
+This library already requires native CSS `linear()` support for spring motion.
+
+The timings are a web adaptation, not Compose's distance-dependent settling algorithm. CSS does
+not preserve physical velocity when a transition is interrupted or retargeted, and this library does
+not simulate gesture springs at runtime. Base UI continues to own interaction and transition lifecycle.
+
+Ripple geometry and presentation also adapt the pinned m3e `RippleElement.ts`: the disk radius is
+the distance from the origin to the farthest corner; it expands from scale 0 to 4 without translating,
+uses 20px blur and 0.1 opacity, holds until release, and starts fading immediately on release. While
+ink is present, the host does not stack a second solid pressed layer; its hover/focus layer remains.
+When ripple is disabled or suppressed, the static pressed layer remains available. This
+replaces the translating disk, spring timing and 225ms minimum hold. The React controller, coordinate
+normalization for scaled surfaces, primary-pointer filtering, Enter/assistive activation, touch-scroll
+delay, cancellation and suppression under reduced motion/forced colors remain ours. m3e instead
+starts touch immediately, listens to Space and shortens motion under reduced motion. Its public
+manual-radius, centered and unbounded ripple APIs are not added to our private hook. See
+[Button's ripple contract](components/button.md#ripple). MIT attribution and the full license ship
+with the package in `THIRD_PARTY_NOTICES.md` and `licenses/m3e.txt`.
 
 ## Sources and verification
+
+The 2026-11-24 Figma audit read prototype transitions across all 33 pages of the
+[Material 3 Design Kit copy](https://www.figma.com/design/069YnUCbHFX6TEmu4G6aLS/Material-3-Design-Kit--Community-?node-id=55141-14251).
+The committed `src/theme/tests/fixtures/figma-motion-inventory.json` records 40,487 inspected nodes
+and 5,158 transition records, including repeated instances. Of these, 4,995 use legacy Smart Animate,
+200ms and cubic-bezier(0.2, 0, 0, 1). Menu/list variants also use ease-in-out/ease-out at 200/300ms;
+LoadingIndicator's step prototype uses 400ms. These prototype transitions contain no independent
+standard/expressive spring profiles. `get_motion_context` returned no keyframe nodes for the
+inspected Navigation and Button representatives. Prototype easing is not evidence that both MD3
+spring schemes should be replaced with the same 200ms curve.
+
+All twelve exported spring curves and durations are checked for exact equality against output
+from the unmodified pinned m3e module (`src/theme/tests/fixtures/m3e-springs.reference.json`).
+Storybook browser tests additionally sample synchronized animation playheads at ten checkpoints
+from 0 to 750ms against an independent Runge–Kutta physical reference. Values at/after the web
+cutoff are one; the 0.003 displacement tolerance covers curve reduction. Screenshots and measured
+positions are attached to tests. This verifies the shared profiles inherited by components, not
+every component's choreography.
+
+For ripple, the unmodified m3e source was bundled with esbuild and Lit 3.3.2 outside this package.
+Seventeen reference PNGs and measured styles were captured in Chromium at DPR 1 on a 200×100px
+surface: off-center, centered and corner growth; persistent hold; and four fade playheads. They live
+in `src/internal/hooks/tests/fixtures/m3e-ripple`. Storybook tests drive the real Button/useRipple
+handlers, isolate its ink layer from the independent shape/state layer, and compare the same
+seventeen frames in both schemes. An additional reference frame composes the original StateLayerElement
+and RippleElement to check the hover layer beneath the ink, without the duplicate pressed overlay.
+Pointer/touch tests cover root and nested state layers plus static reduced-motion/disableRipple feedback.
+Ink-only frames allow at most one 8-bit channel value of difference per pixel. The composite scene
+permits at most two channel values on up to 0.1% of pixels: local capture has two such pixels out of
+20,000 at the lower-left rounded edge (opacity compositing versus color-mix antialiasing). These
+scoped comparisons do not claim pixel parity for entire components, colors or all host geometries.
+
+The Figma MCP Starter quota was exhausted before prototype video/frame capture. Figma playback
+parity remains unverified. The m3e source and frame comparison are the requested replacement
+reference, not evidence of Figma playback parity or official-spec compliance.
+
+Read on 2026-11-24 at m3e revision `7520f333699ceeaaf9eb7704a54fe28e14cf08af`:
+
+- [SpringEasing.ts](https://github.com/matraic/m3e/blob/7520f333699ceeaaf9eb7704a54fe28e14cf08af/packages/web/src/theme/SpringEasing.ts):
+  both schemes, fixed durations, sampled curves and reduction algorithm.
+- [ThemeElement.ts](https://github.com/matraic/m3e/blob/7520f333699ceeaaf9eb7704a54fe28e14cf08af/packages/web/src/theme/ThemeElement.ts):
+  actual `linear()` versus fallback selection; the sampled branch is the reference for current Chromium.
+- [RippleElement.ts](https://github.com/matraic/m3e/blob/7520f333699ceeaaf9eb7704a54fe28e14cf08af/packages/web/src/core/shared/primitives/RippleElement.ts),
+  [RippleToken.ts](https://github.com/matraic/m3e/blob/7520f333699ceeaaf9eb7704a54fe28e14cf08af/packages/web/src/core/shared/primitives/RippleToken.ts)
+  and [PressedController.ts](https://github.com/matraic/m3e/blob/7520f333699ceeaaf9eb7704a54fe28e14cf08af/packages/web/src/core/shared/controllers/PressedController.ts):
+  geometry, CSS, durations and input lifecycle; adaptations are listed above.
+
+Storybook loads local Roboto 400/500/600/700 files through its private development dependency.
+Its browser check verifies the actual Chromium platform fonts for Latin and Cyrillic text, including
+the custom-font flag, rather than accepting the CSS font-family declaration as proof. The themed
+Georgia/Arial typography customization example remains intentional.
 
 Read on 2026-11-17:
 

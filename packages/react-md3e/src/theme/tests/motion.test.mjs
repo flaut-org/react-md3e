@@ -1,17 +1,31 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { createTheme, themeToCss } from '@flaut-travel/react-md3e/theme';
+import m3eReference from './fixtures/m3e-springs.reference.json' with { type: 'json' };
 
 const speeds = ['fast', 'default', 'slow'];
 const kinds = ['spatial', 'effects'];
-const values = (spring) => spring.easing.slice(7, -1).split(',').map(Number);
+const stops = (spring) =>
+  spring.easing
+    .slice(7, -1)
+    .split(',')
+    .map((part) => {
+      const [value, percent] = part.trim().split(' ').map(parseFloat);
+
+      const endpoint = value === 0 ? 0 : 1;
+
+      return { value, progress: percent === undefined ? endpoint : percent / 100 };
+    });
+const values = (spring) => stops(spring).map(({ value }) => value);
 
 function atTime(spring, seconds) {
-  const samples = values(spring);
-  const index = ((seconds * 1000) / spring.duration) * (samples.length - 1);
-  const start = Math.floor(index);
+  const samples = stops(spring);
+  const progress = (seconds * 1000) / spring.duration;
+  const end = samples.findIndex((sample) => sample.progress > progress);
+  const a = samples[end - 1];
+  const b = samples[end];
 
-  return samples[start] + (samples[start + 1] - samples[start]) * (index - start);
+  return a.value + ((b.value - a.value) * (progress - a.progress)) / (b.progress - a.progress);
 }
 
 test('motion provides both official six-spring schemes independently of the palette variant', () => {
@@ -35,7 +49,9 @@ test('motion provides both official six-spring schemes independently of the pale
     assert.equal(expressive.motion[speed].effects.stiffness, [3800, 1600, 800][index]);
     assert.equal(expressive.motion[speed].effects.damping, 1);
     assert.deepEqual(standard.motion[speed].effects, expressive.motion[speed].effects);
-    assert.ok(standard.motion[speed].spatial.duration < expressive.motion[speed].spatial.duration);
+    assert.equal(standard.motion[speed].spatial.duration, [350, 500, 750][index]);
+    assert.equal(expressive.motion[speed].spatial.duration, [350, 500, 650][index]);
+    assert.equal(expressive.motion[speed].effects.duration, [150, 200, 300][index]);
   }
 
   assert.ok(expressive.motion.fast.spatial.duration < expressive.motion.default.spatial.duration);
@@ -51,7 +67,8 @@ test('compiled curves preserve spring overshoot, monotonic effects, endpoints, a
         const spring = theme.motion[speed][kind];
         const samples = values(spring);
 
-        assert.equal(samples.length, 81);
+        assert.ok(samples.length <= 32);
+        assert.deepEqual(spring, m3eReference.schemes[motionScheme][`${speed}-${kind}`]);
         assert.equal(samples[0], 0);
         assert.equal(samples.at(-1), 1);
         assert.ok(samples.every(Number.isFinite));

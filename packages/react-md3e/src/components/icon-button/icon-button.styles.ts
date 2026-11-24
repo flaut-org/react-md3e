@@ -64,10 +64,12 @@ const rootStyles = {
   '&:active:not(:disabled)': { '--_radius': 'var(--_pressed)' },
   '&:focus-visible': { outline: 'none' },
   '&:focus-visible > span': { outline: `3px solid ${color('secondary')}`, outlineOffset: 3 },
-  '&:focus-visible > span::before, &:active:not(:disabled) > span::before': { opacity: 0.1 },
+  '&:focus-visible > span::before, &:active:not(:has([data-md3-ripple-ink])):not(:disabled) > span::before': {
+    opacity: 0.1,
+  },
   '@media (hover: hover)': {
     '&:hover:not(:disabled):not(:focus-visible) > span::before': { opacity: 0.08 },
-    '&:hover:active:not(:disabled) > span::before': { opacity: 0.1 },
+    '&:hover:active:not(:has([data-md3-ripple-ink])):not(:disabled) > span::before': { opacity: 0.1 },
   },
   '&:disabled': {
     '--_bg': `color-mix(in srgb, ${color('onSurface')} 10%, transparent)`,

@@ -1,0 +1,317 @@
+{
+  "source": "https://github.com/matraic/m3e/blob/7520f333699ceeaaf9eb7704a54fe28e14cf08af/packages/web/src/core/shared/primitives/RippleElement.ts",
+  "revision": "7520f333699ceeaaf9eb7704a54fe28e14cf08af",
+  "method": "Unmodified reference component bundled with esbuild (legacy decorators), Lit 3.3.2. Chromium, DPR 1, 200x100px host with 24px radius. CSS animation/transition playheads paused at synchronized times. Persistent ripple; hold captured after real animationend. Black ink on #f7f2fa.",
+  "cases": [
+    {
+      "name": "origin",
+      "x": 20,
+      "y": 50,
+      "stage": "grow",
+      "elapsedMs": 0,
+      "file": "origin-0ms.png",
+      "measured": {
+        "left": "-166.815px",
+        "top": "-136.815px",
+        "width": "373.625px",
+        "height": "373.625px",
+        "transform": "matrix(0, 0, 0, 0, 0, 0)",
+        "opacity": "0.1",
+        "filter": "blur(20px)",
+        "backgroundColor": "rgb(0, 0, 0)",
+        "animationDuration": "0.45s",
+        "animationTimingFunction": "linear"
+      }
+    },
+    {
+      "name": "origin",
+      "x": 20,
+      "y": 50,
+      "stage": "grow",
+      "elapsedMs": 16.666667,
+      "file": "origin-16.666667ms.png",
+      "measured": {
+        "left": "-166.815px",
+        "top": "-136.815px",
+        "width": "373.625px",
+        "height": "373.625px",
+        "transform": "matrix(0.148148, 0, 0, 0.148148, 0, 0)",
+        "opacity": "0.1",
+        "filter": "blur(20px)",
+        "backgroundColor": "rgb(0, 0, 0)",
+        "animationDuration": "0.45s",
+        "animationTimingFunction": "linear"
+      }
+    },
+    {
+      "name": "origin",
+      "x": 20,
+      "y": 50,
+      "stage": "grow",
+      "elapsedMs": 33.333333,
+      "file": "origin-33.333333ms.png",
+      "measured": {
+        "left": "-166.815px",
+        "top": "-136.815px",
+        "width": "373.625px",
+        "height": "373.625px",
+        "transform": "matrix(0.296296, 0, 0, 0.296296, 0, 0)",
+        "opacity": "0.1",
+        "filter": "blur(20px)",
+        "backgroundColor": "rgb(0, 0, 0)",
+        "animationDuration": "0.45s",
+        "animationTimingFunction": "linear"
+      }
+    },
+    {
+      "name": "origin",
+      "x": 20,
+      "y": 50,
+      "stage": "grow",
+      "elapsedMs": 50,
+      "file": "origin-50ms.png",
+      "measured": {
+        "left": "-166.815px",
+        "top": "-136.815px",
+        "width": "373.625px",
+        "height": "373.625px",
+        "transform": "matrix(0.444444, 0, 0, 0.444444, 0, 0)",
+        "opacity": "0.1",
+        "filter": "blur(20px)",
+        "backgroundColor": "rgb(0, 0, 0)",
+        "animationDuration": "0.45s",
+        "animationTimingFunction": "linear"
+      }
+    },
+    {
+      "name": "origin",
+      "x": 20,
+      "y": 50,
+      "stage": "grow",
+      "elapsedMs": 75,
+      "file": "origin-75ms.png",
+      "measured": {
+        "left": "-166.815px",
+        "top": "-136.815px",
+        "width": "373.625px",
+        "height": "373.625px",
+        "transform": "matrix(0.666667, 0, 0, 0.666667, 0, 0)",
+        "opacity": "0.1",
+        "filter": "blur(20px)",
+        "backgroundColor": "rgb(0, 0, 0)",
+        "animationDuration": "0.45s",
+        "animationTimingFunction": "linear"
+      }
+    },
+    {
+      "name": "origin",
+      "x": 20,
+      "y": 50,
+      "stage": "grow",
+      "elapsedMs": 100,
+      "file": "origin-100ms.png",
+      "measured": {
+        "left": "-166.815px",
+        "top": "-136.815px",
+        "width": "373.625px",
+        "height": "373.625px",
+        "transform": "matrix(0.888889, 0, 0, 0.888889, 0, 0)",
+        "opacity": "0.1",
+        "filter": "blur(20px)",
+        "backgroundColor": "rgb(0, 0, 0)",
+        "animationDuration": "0.45s",
+        "animationTimingFunction": "linear"
+      }
+    },
+    {
+      "name": "origin",
+      "x": 20,
+      "y": 50,
+      "stage": "grow",
+      "elapsedMs": 225,
+      "file": "origin-225ms.png",
+      "measured": {
+        "left": "-166.815px",
+        "top": "-136.815px",
+        "width": "373.625px",
+        "height": "373.625px",
+        "transform": "matrix(2, 0, 0, 2, 0, 0)",
+        "opacity": "0.1",
+        "filter": "blur(20px)",
+        "backgroundColor": "rgb(0, 0, 0)",
+        "animationDuration": "0.45s",
+        "animationTimingFunction": "linear"
+      }
+    },
+    {
+      "name": "origin",
+      "x": 20,
+      "y": 50,
+      "stage": "grow",
+      "elapsedMs": 449,
+      "file": "origin-449ms.png",
+      "measured": {
+        "left": "-166.815px",
+        "top": "-136.815px",
+        "width": "373.625px",
+        "height": "373.625px",
+        "transform": "matrix(3.99111, 0, 0, 3.99111, 0, 0)",
+        "opacity": "0.1",
+        "filter": "blur(20px)",
+        "backgroundColor": "rgb(0, 0, 0)",
+        "animationDuration": "0.45s",
+        "animationTimingFunction": "linear"
+      }
+    },
+    {
+      "name": "origin",
+      "x": 20,
+      "y": 50,
+      "stage": "hold",
+      "elapsedMs": 500,
+      "file": "origin-held.png",
+      "measured": {
+        "pressed": true,
+        "transform": "matrix(4, 0, 0, 4, 0, 0)"
+      }
+    },
+    {
+      "name": "origin",
+      "x": 20,
+      "y": 50,
+      "stage": "fade",
+      "elapsedMs": 0,
+      "file": "origin-fade-0ms.png",
+      "measured": {
+        "opacity": "0.1",
+        "transform": "matrix(4, 0, 0, 4, 0, 0)"
+      }
+    },
+    {
+      "name": "origin",
+      "x": 20,
+      "y": 50,
+      "stage": "fade",
+      "elapsedMs": 50,
+      "file": "origin-fade-50ms.png",
+      "measured": {
+        "opacity": "0.0888775",
+        "transform": "matrix(4, 0, 0, 4, 0, 0)"
+      }
+    },
+    {
+      "name": "origin",
+      "x": 20,
+      "y": 50,
+      "stage": "fade",
+      "elapsedMs": 150,
+      "file": "origin-fade-150ms.png",
+      "measured": {
+        "opacity": "0.0615566",
+        "transform": "matrix(4, 0, 0, 4, 0, 0)"
+      }
+    },
+    {
+      "name": "origin",
+      "x": 20,
+      "y": 50,
+      "stage": "fade",
+      "elapsedMs": 300,
+      "file": "origin-fade-300ms.png",
+      "measured": {
+        "opacity": "0.0159315",
+        "transform": "matrix(4, 0, 0, 4, 0, 0)"
+      }
+    },
+    {
+      "name": "center",
+      "x": 100,
+      "y": 50,
+      "stage": "grow",
+      "elapsedMs": 33.333333,
+      "file": "center-33.333333ms.png",
+      "measured": {
+        "left": "-11.8034px",
+        "top": "-61.8034px",
+        "width": "223.594px",
+        "height": "223.594px",
+        "transform": "matrix(0.296296, 0, 0, 0.296296, 0, 0)",
+        "opacity": "0.1",
+        "filter": "blur(20px)",
+        "backgroundColor": "rgb(0, 0, 0)",
+        "animationDuration": "0.45s",
+        "animationTimingFunction": "linear"
+      }
+    },
+    {
+      "name": "center",
+      "x": 100,
+      "y": 50,
+      "stage": "grow",
+      "elapsedMs": 75,
+      "file": "center-75ms.png",
+      "measured": {
+        "left": "-11.8034px",
+        "top": "-61.8034px",
+        "width": "223.594px",
+        "height": "223.594px",
+        "transform": "matrix(0.666667, 0, 0, 0.666667, 0, 0)",
+        "opacity": "0.1",
+        "filter": "blur(20px)",
+        "backgroundColor": "rgb(0, 0, 0)",
+        "animationDuration": "0.45s",
+        "animationTimingFunction": "linear"
+      }
+    },
+    {
+      "name": "corner",
+      "x": 0,
+      "y": 0,
+      "stage": "grow",
+      "elapsedMs": 33.333333,
+      "file": "corner-33.333333ms.png",
+      "measured": {
+        "left": "-223.607px",
+        "top": "-223.607px",
+        "width": "447.203px",
+        "height": "447.203px",
+        "transform": "matrix(0.296296, 0, 0, 0.296296, 0, 0)",
+        "opacity": "0.1",
+        "filter": "blur(20px)",
+        "backgroundColor": "rgb(0, 0, 0)",
+        "animationDuration": "0.45s",
+        "animationTimingFunction": "linear"
+      }
+    },
+    {
+      "name": "corner",
+      "x": 0,
+      "y": 0,
+      "stage": "grow",
+      "elapsedMs": 75,
+      "file": "corner-75ms.png",
+      "measured": {
+        "left": "-223.607px",
+        "top": "-223.607px",
+        "width": "447.203px",
+        "height": "447.203px",
+        "transform": "matrix(0.666667, 0, 0, 0.666667, 0, 0)",
+        "opacity": "0.1",
+        "filter": "blur(20px)",
+        "backgroundColor": "rgb(0, 0, 0)",
+        "animationDuration": "0.45s",
+        "animationTimingFunction": "linear"
+      }
+    }
+  ],
+  "composite": {
+    "source": "https://github.com/matraic/m3e/blob/7520f333699ceeaaf9eb7704a54fe28e14cf08af/packages/web/src/core/shared/primitives/StateLayerElement.ts",
+    "method": "Unmodified StateLayerElement + RippleElement. Settled hover layer and 50ms ripple playhead. ButtonElement composes these primitives without enable-pressed. No pointer focus ring.",
+    "file": "hover-and-ripple-50ms.png",
+    "elapsedMs": 50,
+    "hoverOpacity": 0.08,
+    "pressedEnabled": false
+  },
+  "browser": "159.0.8154.6",
+  "playwright": "1.65.1"
+}

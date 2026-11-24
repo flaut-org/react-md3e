@@ -1,9 +1,121 @@
 import { expect, test } from '@playwright/test';
 import { createTheme } from '@flaut-travel/react-md3e/theme';
+import m3eReference from './fixtures/m3e-springs.reference.json' with { type: 'json' };
+import springReference from './fixtures/spring-displacement.reference.json' with { type: 'json' };
 
 const expressive = createTheme();
 const standard = createTheme({ motionScheme: 'standard' });
 const seconds = (value: number) => `${value / 1000}s`;
+
+for (const scheme of ['standard', 'expressive'] as const) {
+  test(`${scheme}: all six exported curves match independent spring displacement at synchronized frames`, async ({
+    page,
+  }, testInfo) => {
+    await page.goto(
+      `http://127.0.0.1:6106/iframe.html?id=components-button--playground&viewMode=story&globals=motionScheme:${scheme}`,
+    );
+    await expect(page.getByRole('button', { name: 'Get started', exact: true })).toBeVisible();
+
+    const profiles = await page
+      .locator('[data-md3-theme]')
+      .first()
+      .evaluate((scope) => {
+        const styles = getComputedStyle(scope);
+        const panel = document.createElement('section');
+        const rows = [];
+
+        panel.setAttribute('data-motion-audit', '');
+        Object.assign(panel.style, {
+          position: 'fixed',
+          inset: '24px',
+          height: '384px',
+          background: 'white',
+          color: 'black',
+          zIndex: '9999',
+          padding: '16px',
+          font: '14px Roboto, sans-serif',
+        });
+        document.body.append(panel);
+
+        for (const speed of ['fast', 'default', 'slow']) {
+          for (const kind of ['spatial', 'effects']) {
+            const prefix = `--md-sys-motion-spring-${speed}-${kind}`;
+            const duration = parseFloat(styles.getPropertyValue(`${prefix}-duration`));
+            const easing = styles.getPropertyValue(`${prefix}-easing`).trim();
+            const row = document.createElement('div');
+            const dot = document.createElement('span');
+
+            row.textContent = `${speed} ${kind}`;
+            Object.assign(row.style, { position: 'relative', height: '56px' });
+            dot.setAttribute('data-motion-probe', `${speed}-${kind}`);
+            Object.assign(dot.style, {
+              position: 'absolute',
+              left: '180px',
+              top: '0px',
+              width: '24px',
+              height: '24px',
+              background: kind === 'spatial' ? '#6750a4' : '#006875',
+              borderRadius: '50%',
+            });
+            row.append(dot);
+            panel.append(row);
+
+            const animation = dot.animate([{ transform: 'translateX(0px)' }, { transform: 'translateX(600px)' }], {
+              duration,
+              easing,
+              fill: 'both',
+            });
+
+            animation.pause();
+            animation.currentTime = 0;
+            rows.push({ speed, kind, duration, easing });
+          }
+        }
+
+        return rows;
+      });
+    const frames = [];
+
+    for (const [index, time] of springReference.timesMs.entries()) {
+      const actual = await page.locator('[data-motion-probe]').evaluateAll(
+        (nodes, elapsed) =>
+          nodes.map((node) => {
+            const animation = node.getAnimations()[0]!;
+
+            animation.currentTime = Math.min(elapsed, Number(animation.effect!.getTiming().duration));
+
+            return new DOMMatrixReadOnly(getComputedStyle(node).transform).m41 / 600;
+          }),
+        time,
+      );
+
+      for (const [profileIndex, profile] of profiles.entries()) {
+        const speed = profile.speed as 'fast' | 'default' | 'slow';
+        const kind = profile.kind as 'spatial' | 'effects';
+        const reference = m3eReference.schemes[scheme][`${speed}-${kind}`];
+        const expected =
+          time >= reference.duration ? 1 : springReference.schemes[scheme][speed][kind].displacement[index]!;
+
+        expect(profile.duration).toBe(reference.duration);
+        expect(profile.easing).toBe(reference.easing);
+
+        expect(Math.abs(actual[profileIndex]! - expected)).toBeLessThan(springReference.tolerance);
+      }
+
+      frames.push({ elapsedMs: time, displacement: actual });
+
+      const path = testInfo.outputPath(`${scheme}-${time}ms.png`);
+
+      await page.locator('[data-motion-audit]').screenshot({ path, animations: 'allow' });
+      await testInfo.attach(`${time}ms`, { path, contentType: 'image/png' });
+    }
+
+    await testInfo.attach(`${scheme}-curves.json`, {
+      body: JSON.stringify({ profiles, frames }, null, 2),
+      contentType: 'application/json',
+    });
+  });
+}
 
 test('static and inline motion themes style server HTML before hydration', async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });

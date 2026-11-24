@@ -38,7 +38,7 @@ test('radio controls arrive in server/streaming HTML and Storybook provides work
   await page.goto('/streaming');
   await expect(page.getByRole('radio', { name: 'Streamed radio' })).toBeChecked();
   await page.goto(
-    'http://127.0.0.1:6106/iframe.html?id=components-radiogroup--controlled&viewMode=story&globals=colorScheme:dark',
+    'http://127.0.0.1:6106/iframe.html?id=components-radiogroup--controlled&viewMode=story&globals=colorScheme:dark;a11y.manual:!true',
   );
   await page.getByRole('radio', { name: 'Business' }).click();
   await expect(page.getByText('Selected: business')).toBeVisible();

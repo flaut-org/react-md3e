@@ -75,7 +75,7 @@ test('all new component stories render from the built package', async ({ page })
 
   for (const [name, selector] of examples) {
     await page.goto(
-      `http://127.0.0.1:6106/iframe.html?id=components-${name!.replaceAll('-', '')}--playground&viewMode=story&globals=brand:forest;colorScheme:dark`,
+      `http://127.0.0.1:6106/iframe.html?id=components-${name!.replaceAll('-', '')}--playground&viewMode=story&globals=brand:forest;colorScheme:dark;a11y.manual:!true`,
     );
     await expect(page.locator(selector!).first()).toBeVisible();
   }

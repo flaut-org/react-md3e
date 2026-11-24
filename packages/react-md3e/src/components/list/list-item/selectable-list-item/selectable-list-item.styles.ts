@@ -32,11 +32,13 @@ const controlStyles = {
     pointerEvents: 'none',
     transition: `opacity ${motion('effects')}`,
   },
-  '&:focus-visible::before, &:active:not(:disabled)::before': { opacity: 0.1 },
+  '&:focus-visible::before, &:active:not(:has([data-md3-ripple-ink])):not(:disabled)::before': { opacity: 0.1 },
   '&:disabled': { cursor: 'default' },
   '@media (hover: hover)': {
     '&:hover:not(:disabled)::before': { opacity: 0.08 },
-    '&:hover:active:not(:disabled)::before, &:hover:focus-visible::before': { opacity: 0.1 },
+    '&:hover:active:not(:has([data-md3-ripple-ink])):not(:disabled)::before, &:hover:focus-visible::before': {
+      opacity: 0.1,
+    },
   },
   '@media (prefers-reduced-motion: reduce)': { '&::before': { transition: 'none' } },
 } satisfies StyleObject;
