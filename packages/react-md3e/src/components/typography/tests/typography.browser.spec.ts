@@ -133,7 +133,7 @@ test('Storybook renders all 30 styles, narrow layouts remain usable, and accessi
   page,
 }) => {
   await page.goto(
-    'http://127.0.0.1:6106/iframe.html?id=components-typography--type-scale&viewMode=story&globals=brand:forest;colorScheme:dark',
+    'http://127.0.0.1:6106/iframe.html?id=components-typography--type-scale&viewMode=story&globals=brand:forest;colorScheme:dark;a11y.manual:!true',
   );
   await expect(page.locator('.typography-example-row [data-md3-typography]')).toHaveCount(30);
   await expect(page.locator('[data-variant="displayLarge"][data-emphasized="true"]')).toHaveCSS(

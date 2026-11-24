@@ -358,7 +358,7 @@ test('streamed and Storybook sliders retain styling, labels, range behavior and 
   );
   await expect(handle(page.getByTestId('streamed-slider'))).toHaveCSS('height', '44px');
   await page.goto(
-    'http://127.0.0.1:6106/iframe.html?id=components-slider--range&viewMode=story&globals=brand:forest;colorScheme:dark',
+    'http://127.0.0.1:6106/iframe.html?id=components-slider--range&viewMode=story&globals=brand:forest;colorScheme:dark;a11y.manual:!true',
   );
 
   const minimum = page.getByRole('slider', { name: 'Minimum price', exact: true });
