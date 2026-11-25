@@ -1,5 +1,3 @@
-import '@flaut-travel/react-md3e/text-field/styles.css';
-
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { TextField } from '@flaut-travel/react-md3e';

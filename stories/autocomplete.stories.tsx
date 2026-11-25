@@ -1,6 +1,3 @@
-import '@flaut-travel/react-md3e/autocomplete/styles.css';
-import '@flaut-travel/react-md3e/text-field/styles.css';
-
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useEffect, useRef, useState } from 'react';
 import { Autocomplete, TextField } from '@flaut-travel/react-md3e';

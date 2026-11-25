@@ -6,6 +6,8 @@ import path from 'node:path';
 import { after, before, test } from 'node:test';
 import { setTimeout as delay } from 'node:timers/promises';
 import { fileURLToPath } from 'node:url';
+import { readFile } from 'node:fs/promises';
+import { runInNewContext } from 'node:vm';
 
 const workspaceRoot = fileURLToPath(new URL('../../../', import.meta.url));
 let server;
@@ -171,6 +173,62 @@ test('route CSS includes Button dependencies without loading unused Shape styles
   assert.match(buttons, /--md-sys-color-primary/);
   assert.doesNotMatch(buttons, /data-morph/);
   assert.match(shapes, /data-morph/);
+});
+
+test('root and subpath imports load only Button/Checkbox dependencies without manual CSS', async () => {
+  const root = await routeCss('/automatic-css');
+  const subpath = await routeCss('/automatic-css/subpath');
+
+  for (const styles of [root, subpath]) {
+    assert.match(styles, /ripple-enter/);
+    assert.match(styles, /data-indicator/);
+    assert.match(styles, /md3-button-loading/);
+    assert.doesNotMatch(styles, /data-morph|md3-calendar-enter|--md3e-menu-scale|md3-slider-active|data-md3-app-bar/);
+    assert.equal(
+      [...styles.matchAll(/@keyframes ripple-enter[\w-]*\s*\{/g)].length,
+      1,
+      'Shared ripple must load once.',
+    );
+    assert.ok(Buffer.byteLength(styles) < 55_000, 'The acceptance route must not receive catalog CSS.');
+  }
+});
+
+test('automatic styles preserve actual Next RSC client references', async () => {
+  for (const route of ['automatic-css', 'automatic-css/subpath', 'automatic-css/server']) {
+    const code = await readFile(
+      path.join(workspaceRoot, `apps/next-fixture/.next/server/app/${route}/page_client-reference-manifest.js`),
+      'utf8',
+    );
+    const context = {};
+
+    runInNewContext(code, context);
+
+    const { __RSC_MANIFEST: manifests } = context;
+    const manifest = manifests[`/${route}/page`];
+    const modules = Object.keys(manifest.clientModules).filter(
+      (name) => name.includes('react-md3e/dist/') && /\.js(?:\?|$)/.test(name),
+    );
+    // Webpack's manifest is a global registry and also lists CSS resources. Check the actual
+    // Flight references sent for this route, rather than treating the whole registry as its bundle.
+    const flight = await readFile(path.join(workspaceRoot, `apps/next-fixture/.next/server/app/${route}.rsc`), 'utf8');
+    const referencedIds = new Set(
+      [...flight.matchAll(/^[\da-f]+:I(\[[^\n]+\])/gm)].map((match) => String(JSON.parse(match[1])[0])),
+    );
+    const usedModules = modules.filter((name) => referencedIds.has(String(manifest.clientModules[name].id)));
+
+    if (route.endsWith('/server')) {
+      assert.deepEqual(usedModules, [], 'Server presentation must ship no library client references.');
+    } else {
+      assert.ok(usedModules.some((name) => name.includes('/button/button.component.js')));
+      assert.ok(usedModules.some((name) => name.includes('/checkbox/checkbox.component.js')));
+    }
+
+    assert.ok(
+      !modules.some((name) => /theme-provider|\/surface\/|\/typography\/|\/badge\//.test(name)),
+      'Server presentation must not become a client reference.',
+    );
+    assert.ok(!modules.some((name) => name.includes('/dist/node/')), 'Next must select styled bundler exports.');
+  }
 });
 
 test('SegmentedButton is server-rendered with its own CSS closure and Material selection roles', async () => {

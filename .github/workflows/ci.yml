@@ -139,7 +139,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [fixture, storybook]
+        target: [fixture, 'fixture:webpack', webpack-subpaths, storybook, vite-fixture]
     steps:
       - uses: actions/checkout@v7
         with:
@@ -153,13 +153,21 @@ jobs:
       - run: npm run build:${{ matrix.target }}
       # Tar preserves hidden .next files, links and permissions without transporting its build cache.
       - name: Archive production fixture
-        if: matrix.target == 'fixture'
+        if: startsWith(matrix.target, 'fixture')
         run: tar --exclude='.next/cache' -cf fixture-build.tar -C apps/next-fixture .next
       - uses: actions/upload-artifact@v7
-        if: matrix.target == 'fixture'
+        if: startsWith(matrix.target, 'fixture')
         with:
-          name: fixture-build
+          name: ${{ matrix.target == 'fixture' && 'fixture-build' || 'fixture-webpack-build' }}
           path: fixture-build.tar
+          if-no-files-found: error
+          overwrite: true
+          retention-days: 1
+      - uses: actions/upload-artifact@v7
+        if: matrix.target == 'vite-fixture'
+        with:
+          name: vite-fixture-build
+          path: packages/react-md3e/tests/vite-consumer/dist/
           if-no-files-found: error
           overwrite: true
           retention-days: 1
@@ -173,10 +181,14 @@ jobs:
           retention-days: 1
 
   integration:
-    name: HTTP integration tests
+    name: HTTP integration (${{ matrix.bundler }})
     needs: [install, build-apps]
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        bundler: [turbopack, webpack]
     steps:
       - uses: actions/checkout@v7
         with:
@@ -189,12 +201,12 @@ jobs:
           name: package-build
       - uses: actions/download-artifact@v7
         with:
-          name: fixture-build
+          name: ${{ matrix.bundler == 'turbopack' && 'fixture-build' || 'fixture-webpack-build' }}
       - run: tar -xf fixture-build.tar -C apps/next-fixture
       - run: npm run test:http
 
   playwright:
-    name: Playwright ${{ matrix.shard }}/${{ strategy.job-total }}
+    name: Playwright ${{ matrix.bundler }} shard ${{ matrix.shard }}
     needs: [install, build-apps]
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -202,6 +214,7 @@ jobs:
       fail-fast: false
       matrix:
         shard: [1, 2, 3, 4]
+        bundler: [turbopack, webpack]
     steps:
       - uses: actions/checkout@v7
         with:
@@ -214,20 +227,24 @@ jobs:
           name: package-build
       - uses: actions/download-artifact@v7
         with:
-          name: fixture-build
+          name: ${{ matrix.bundler == 'turbopack' && 'fixture-build' || 'fixture-webpack-build' }}
       - run: tar -xf fixture-build.tar -C apps/next-fixture
       - uses: actions/download-artifact@v7
         with:
           name: storybook-build
           path: storybook-static
+      - uses: actions/download-artifact@v7
+        with:
+          name: vite-fixture-build
+          path: packages/react-md3e/tests/vite-consumer/dist
       - name: Install Chromium and system dependencies
         run: npm exec -- playwright install --with-deps chromium
-      - run: npm run test:browser -- --shard=${{ matrix.shard }}/${{ strategy.job-total }}
+      - run: npm run test:browser -- --shard=${{ matrix.shard }}/4
       - name: Upload failed browser diagnostics
         if: failure()
         uses: actions/upload-artifact@v7
         with:
-          name: playwright-shard-${{ matrix.shard }}-${{ github.run_attempt }}
+          name: playwright-${{ matrix.bundler }}-shard-${{ matrix.shard }}-${{ github.run_attempt }}
           path: |
             test-results/
             playwright-report/

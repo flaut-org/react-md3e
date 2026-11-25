@@ -1,5 +1,3 @@
-import '@flaut-travel/react-md3e/calendar/styles.css';
-import '@flaut-travel/react-md3e/surface/styles.css';
 import { useState } from 'react';
 import { Calendar, Surface } from '@flaut-travel/react-md3e';
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -13,7 +11,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Inline Material calendar using native Temporal.PlainDate and Intl. No field, popup, adapter or localization provider is required. Import calendar/styles.css at the composition boundary.',
+          'Inline Material calendar using native Temporal.PlainDate and Intl. No field, popup, adapter or localization provider is required. Component styles load automatically.',
       },
     },
   },

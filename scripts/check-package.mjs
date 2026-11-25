@@ -3,6 +3,7 @@ import { execFileSync } from 'node:child_process';
 import { access, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { SourceMap } from 'node:module';
 
 const workspaceRoot = fileURLToPath(new URL('../', import.meta.url));
 const packageRoot = path.join(workspaceRoot, 'packages/react-md3e');
@@ -39,6 +40,16 @@ for (const target of exportTargets(manifest.exports)) {
 const entry = await readFile(path.join(packageRoot, manifest.exports['.'].import), 'utf8');
 
 assert.ok(!/^\s*['"]use client['"]/m.test(entry), 'The package root must remain server-safe.');
+assert.doesNotMatch(entry, /import\s+['"][^'"]+\.css['"]/, 'The root must not eagerly import CSS.');
+
+for (const [name, target] of Object.entries(manifest.exports)) {
+  if (typeof target === 'object' && name !== './theme') {
+    assert.equal(target.module, target.import);
+    assert.equal(target.browser, target.import);
+    assert.equal(target.default, target.import);
+    assert.equal(target.node, target.import.replace('./dist/', './dist/node/'));
+  }
+}
 
 const packed = JSON.parse(
   execFileSync(npm, ['pack', '--dry-run', '--json', '--ignore-scripts'], {
@@ -74,38 +85,58 @@ execFileSync(process.execPath, ['--input-type=module', '--eval', "await import('
   stdio: 'pipe',
 });
 
+const uiSubpaths = Object.entries(manifest.exports)
+  .filter(([name, target]) => typeof target === 'object' && name !== './theme')
+  .map(([name]) => `@flaut-travel/react-md3e${name === '.' ? '' : name.slice(1)}`);
+
+execFileSync(
+  process.execPath,
+  [
+    '--input-type=module',
+    '--eval',
+    `
+  import assert from 'node:assert/strict';
+  for (const name of ${JSON.stringify(uiSubpaths)}) {
+    assert.ok(import.meta.resolve(name).includes('/dist/node/'));
+    await import(name);
+  }
+`,
+  ],
+  { cwd: workspaceRoot, stdio: 'pipe' },
+);
+
 // Raw Node does not implement RSC client references. Check server-only modules here;
 // Next production/streaming tests verify that the root's client export is a real boundary.
-const appBarUrl = new URL('../packages/react-md3e/dist/app-bar.js', import.meta.url).href;
+const appBarUrl = new URL('../packages/react-md3e/dist/node/app-bar.js', import.meta.url).href;
 const dialogContentUrl = new URL(
-  '../packages/react-md3e/dist/components/dialog/dialog-content/dialog-content.component.js',
+  '../packages/react-md3e/dist/node/components/dialog/dialog-content/dialog-content.component.js',
   import.meta.url,
 ).href;
 const dialogActionsUrl = new URL(
-  '../packages/react-md3e/dist/components/dialog/dialog-actions/dialog-actions.component.js',
+  '../packages/react-md3e/dist/node/components/dialog/dialog-actions/dialog-actions.component.js',
   import.meta.url,
 ).href;
 const staticListUrl = new URL(
-  '../packages/react-md3e/dist/components/list/static-list/static-list.component.js',
+  '../packages/react-md3e/dist/node/components/list/static-list/static-list.component.js',
   import.meta.url,
 ).href;
 // StaticListItem and Avatar compose an image client boundary, so Next verifies them.
 // Raw react-server Node imports cannot interpret client-reference module directives.
 const selectionIndicatorUrl = new URL(
-  '../packages/react-md3e/dist/components/selection-indicator/selection-indicator.component.js',
+  '../packages/react-md3e/dist/node/components/selection-indicator/selection-indicator.component.js',
   import.meta.url,
 ).href;
-const skeletonUrl = new URL('../packages/react-md3e/dist/skeleton.js', import.meta.url).href;
-const badgeUrl = new URL('../packages/react-md3e/dist/badge.js', import.meta.url).href;
-const dividerUrl = new URL('../packages/react-md3e/dist/divider.js', import.meta.url).href;
-const typographyUrl = new URL('../packages/react-md3e/dist/typography.js', import.meta.url).href;
-const surfaceUrl = new URL('../packages/react-md3e/dist/surface.js', import.meta.url).href;
-const shapeUrl = new URL('../packages/react-md3e/dist/shape.js', import.meta.url).href;
-const loadingIndicatorUrl = new URL('../packages/react-md3e/dist/loading-indicator.js', import.meta.url).href;
-const progressIndicatorUrl = new URL('../packages/react-md3e/dist/progress-indicator.js', import.meta.url).href;
-const cardUrl = new URL('../packages/react-md3e/dist/components/card/card.component.js', import.meta.url).href;
+const skeletonUrl = new URL('../packages/react-md3e/dist/node/skeleton.js', import.meta.url).href;
+const badgeUrl = new URL('../packages/react-md3e/dist/node/badge.js', import.meta.url).href;
+const dividerUrl = new URL('../packages/react-md3e/dist/node/divider.js', import.meta.url).href;
+const typographyUrl = new URL('../packages/react-md3e/dist/node/typography.js', import.meta.url).href;
+const surfaceUrl = new URL('../packages/react-md3e/dist/node/surface.js', import.meta.url).href;
+const shapeUrl = new URL('../packages/react-md3e/dist/node/shape.js', import.meta.url).href;
+const loadingIndicatorUrl = new URL('../packages/react-md3e/dist/node/loading-indicator.js', import.meta.url).href;
+const progressIndicatorUrl = new URL('../packages/react-md3e/dist/node/progress-indicator.js', import.meta.url).href;
+const cardUrl = new URL('../packages/react-md3e/dist/node/components/card/card.component.js', import.meta.url).href;
 const providerUrl = new URL(
-  '../packages/react-md3e/dist/theme/theme-provider/theme-provider.component.js',
+  '../packages/react-md3e/dist/node/theme/theme-provider/theme-provider.component.js',
   import.meta.url,
 ).href;
 
@@ -304,6 +335,7 @@ assert.match(
 
 // Follow the actual UI module graph: generation tools must not enter component imports.
 const visited = new Set();
+const automaticStyles = new Set();
 
 async function inspectUi(relative) {
   const absolute = path.resolve(packageRoot, relative);
@@ -324,7 +356,54 @@ async function inspectUi(relative) {
     `Styling or generation runtime leaked into ${relative}`,
   );
 
-  assert.doesNotMatch(code, /import\s+['"][^'"]+\.css['"]/, 'UI JS must leave CSS loading to explicit style entries.');
+  const imports = [...code.matchAll(/^import\s+['"]([^'"]+\.css)['"];\n/gm)];
+  const nodeRelative = relative.replace(/^dist\//, 'dist/node/');
+  const nodeCode = await readFile(path.join(packageRoot, nodeRelative), 'utf8');
+
+  assert.doesNotMatch(nodeCode, /import\s+['"][^'"]+\.css['"]/, 'Native Node modules must remain CSS-free.');
+  assert.equal(code.replace(/^import\s+['"][^'"]+\.css['"];\n/gm, ''), nodeCode);
+
+  const source = await readFile(path.join(packageRoot, `${relative}.map`), 'utf8');
+  const nodeSource = await readFile(path.join(packageRoot, `${nodeRelative}.map`), 'utf8');
+  const map = new SourceMap(JSON.parse(source));
+  const nodeMap = new SourceMap(JSON.parse(nodeSource));
+  const mappedLocation = (location, file) =>
+    location.originalSource
+      ? {
+          source: path.resolve(path.dirname(file), location.originalSource),
+          line: location.originalLine,
+          column: location.originalColumn,
+          name: location.name,
+        }
+      : {};
+  let removedLines = 0;
+
+  for (const [line, text] of code.split('\n').entries()) {
+    if (/^import\s+['"][^'"]+\.css['"];/.test(text)) {
+      removedLines += 1;
+    } else {
+      const column = text.search(/\S/);
+
+      if (column >= 0) {
+        assert.deepEqual(
+          mappedLocation(map.findEntry(line, column), path.join(packageRoot, relative)),
+          mappedLocation(nodeMap.findEntry(line - removedLines, column), path.join(packageRoot, nodeRelative)),
+          `CSS imports shifted the original source location in ${relative}:${line + 1}`,
+        );
+      }
+    }
+  }
+
+  if (code.includes('"use client"')) {
+    assert.ok(code.startsWith('"use client";\n'), `Client directive must precede every import in ${relative}`);
+  }
+
+  for (const match of imports) {
+    const css = path.relative(packageRoot, path.resolve(path.dirname(absolute), match[1]));
+
+    assert.ok(files.has(css), `Automatic CSS is missing from the tarball: ${css}`);
+    automaticStyles.add(css);
+  }
 
   for (const match of code.matchAll(/(?:from\s*|import\s*)['"](\.[^'"]+\.js)['"]/g)) {
     await inspectUi(path.relative(packageRoot, path.resolve(path.dirname(absolute), match[1])));
@@ -332,6 +411,14 @@ async function inspectUi(relative) {
 }
 
 await inspectUi(manifest.exports['.'].import);
+
+for (const [name, target] of Object.entries(manifest.exports)) {
+  if (typeof target === 'object' && name !== './theme') {
+    await inspectUi(target.import);
+  }
+}
+
+assert.ok(automaticStyles.size > 50, 'Implementation modules must automatically import the extracted styles.');
 
 async function readCssTree(relative, seenCss = new Set()) {
   const absolute = path.resolve(packageRoot, relative);
@@ -353,6 +440,42 @@ async function readCssTree(relative, seenCss = new Set()) {
   }
 
   return result;
+}
+
+async function readAutomaticCss(relative, styles = new Set(), modules = new Set()) {
+  const absolute = path.resolve(packageRoot, relative);
+
+  if (!modules.has(absolute)) {
+    modules.add(absolute);
+
+    const code = await readFile(absolute, 'utf8');
+
+    for (const match of code.matchAll(/(?:from\s*|import\s*|import\()['"](\.[^'"]+\.(?:js|css))['"]/g)) {
+      const dependency = path.relative(packageRoot, path.resolve(path.dirname(absolute), match[1]));
+
+      if (dependency.endsWith('.css')) {
+        styles.add(path.resolve(packageRoot, dependency));
+      } else {
+        await readAutomaticCss(dependency, styles, modules);
+      }
+    }
+  }
+
+  return styles;
+}
+
+for (const [name, target] of Object.entries(manifest.exports)) {
+  if (typeof target === 'object' && name !== '.' && name !== './theme') {
+    const explicit = new Set();
+
+    await readCssTree(manifest.exports[`${name}/styles.css`], explicit);
+
+    assert.deepEqual(
+      [...(await readAutomaticCss(target.import))].sort(),
+      [...explicit].filter((file) => file.includes('/styles/')).sort(),
+      `${name} automatic CSS must preserve the legacy dependency closure.`,
+    );
+  }
 }
 
 const buttonStyles = new Set();

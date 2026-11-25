@@ -1,4 +1,3 @@
-import '@flaut-travel/react-md3e/progress-indicator/styles.css';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ProgressIndicator } from '@flaut-travel/react-md3e';
 

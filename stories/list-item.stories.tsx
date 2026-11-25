@@ -1,5 +1,3 @@
-import '@flaut-travel/react-md3e/list/styles.css';
-
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { List, ListItem } from '@flaut-travel/react-md3e';
 import type { StaticListItemProps } from '@flaut-travel/react-md3e/list';

@@ -1,5 +1,3 @@
-import '@flaut-travel/react-md3e/tabs/styles.css';
-
 import type { Decorator, Meta, StoryObj } from '@storybook/react-vite';
 import { Tabs, TabList, Tab, TabPanel } from '@flaut-travel/react-md3e/tabs';
 

@@ -1,5 +1,3 @@
-import '@flaut-travel/react-md3e/segmented-button/styles.css';
-
 import { ButtonSegment, SegmentedButton, ThemeProvider } from '@flaut-travel/react-md3e';
 import { SegmentedButtonDemo } from './segmented-button-demo/segmented-button-demo.component';
 

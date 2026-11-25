@@ -1,9 +1,3 @@
-import '@flaut-travel/react-md3e/button/styles.css';
-import '@flaut-travel/react-md3e/icon-button/styles.css';
-import '@flaut-travel/react-md3e/shape/styles.css';
-import '@flaut-travel/react-md3e/collapsible/styles.css';
-import '@flaut-travel/react-md3e/dialog/styles.css';
-
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { MotionScheme, Theme } from '@flaut-travel/react-md3e';
 import { useState } from 'react';

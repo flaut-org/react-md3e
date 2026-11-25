@@ -1,5 +1,3 @@
-import '@flaut-travel/react-md3e/slider/styles.css';
-
 import { Slider, ThemeProvider } from '@flaut-travel/react-md3e';
 import { SliderDemo } from './slider-demo/slider-demo.component';
 import styles from './sliders.module.css';

@@ -1,23 +1,68 @@
 import { defineConfig } from 'vite';
-import type { Plugin } from 'vite';
+import type { Plugin, Rollup } from 'vite';
 import wyw from '@wyw-in-js/vite';
 import preserveDirectives from 'rollup-plugin-preserve-directives';
 import { fileURLToPath } from 'node:url';
+import path from 'node:path';
 
 const source = fileURLToPath(new URL('./packages/react-md3e/src/', import.meta.url));
 // Public composition parts passed through ReactNode are absent from the owner's JS import graph.
 const compositionCssDependencies: Readonly<Record<string, readonly string[]>> = {
-  'app-bar.js': ['search.js'],
-  'split-button.js': ['menu.js'],
+  'components/app-bar/app-bar.component.js': ['search.js'],
+  'components/split-button/split-button.component.js': ['menu.js'],
 };
 
-/** Vite extracts each style module; this only publishes dependency-aware CSS entrypoints. */
+function importedCss(chunk: Rollup.OutputChunk): ReadonlySet<string> {
+  return (
+    (chunk as Rollup.OutputChunk & { viteMetadata?: { importedCss: Set<string> } }).viteMetadata?.importedCss ??
+    new Set()
+  );
+}
+
+/** Insert whole unmapped lines after the directive prologue; existing columns and VLQ deltas stay valid. */
+function createCssImports(chunk: Rollup.OutputChunk, styles: readonly string[]): { code: string; mappings?: string } {
+  if (styles.length === 0) {
+    return { code: chunk.code };
+  }
+
+  const prologue = /^(?:(?:'[^'\r\n]*'|"[^"\r\n]*");\r?\n)*/.exec(chunk.code)?.[0] ?? '';
+  const imports = styles
+    .map((file) => {
+      const relative = path.posix.relative(path.posix.dirname(chunk.fileName), file);
+
+      return `import ${JSON.stringify(relative.startsWith('.') ? relative : `./${relative}`)};\n`;
+    })
+    .join('');
+
+  // Vite's pure-CSS removal preserves character positions. Keep that property here too.
+  const code = `${prologue}${imports}${chunk.code.slice(prologue.length)}`;
+
+  if (chunk.map) {
+    const lines = chunk.map.mappings.split(';');
+
+    lines.splice(prologue.split('\n').length - 1, 0, ...styles.map(() => ''));
+
+    return { code, mappings: lines.join(';') };
+  }
+
+  return { code };
+}
+
+/** Reuse Vite's extracted assets for automatic imports, native Node modules and legacy CSS entries. */
 function componentCss(): Plugin {
   return {
     name: 'react-md3e-component-css',
     generateBundle: {
       order: 'post',
       handler(_options, bundle) {
+        for (const [owner, dependencies] of Object.entries(compositionCssDependencies)) {
+          for (const file of [owner, ...dependencies]) {
+            if (bundle[file]?.type !== 'chunk') {
+              this.error(`Missing CSS composition module: ${file}`);
+            }
+          }
+        }
+
         const collect = (entry: string): string[] => {
           const visited = new Set<string>();
           const styles = new Set<string>();
@@ -27,22 +72,20 @@ function componentCss(): Plugin {
             if (chunk?.type === 'chunk' && !visited.has(fileName)) {
               visited.add(fileName);
 
+              for (const dependency of compositionCssDependencies[fileName] ?? []) {
+                visit(dependency);
+              }
+
               for (const dependency of [...chunk.imports, ...chunk.dynamicImports]) {
                 visit(dependency);
               }
 
               // Vite 7 records extracted assets after removing its pure-CSS chunks.
-              const metadata = (chunk as typeof chunk & { viteMetadata?: { importedCss: Set<string> } }).viteMetadata;
-
-              for (const file of metadata?.importedCss ?? []) {
+              for (const file of importedCss(chunk)) {
                 styles.add(file);
               }
             }
           };
-
-          for (const dependency of compositionCssDependencies[entry] ?? []) {
-            visit(dependency);
-          }
 
           visit(entry);
 
@@ -77,10 +120,59 @@ function componentCss(): Plugin {
           }
         }
 
-        // Explicit CSS entrypoints keep JS barrels/RSC imports from eagerly loading every stylesheet.
+        // Preserve the same relative ESM graph for native Node, which cannot evaluate CSS imports.
+        // Bundlers select the module/browser conditions; Node (including react-server) selects node.
         for (const chunk of Object.values(bundle)) {
           if (chunk.type === 'chunk') {
-            chunk.code = chunk.code.replace(/^import\s+(['"])[^'"]+\.css\1;?\s*$/gm, '');
+            // WyW may retain an import alongside Vite's metadata. Replace it with equal-width
+            // whitespace before generating canonical imports, preserving the existing source map.
+            chunk.code = chunk.code.replace(/^import\s+(['"])[^'"\n]+\.css\1;?[^\S\n]*$/gm, (line) =>
+              ' '.repeat(line.length),
+            );
+            this.emitFile({ type: 'asset', fileName: `node/${chunk.fileName}`, source: chunk.code });
+
+            if (chunk.map) {
+              const map = JSON.parse(chunk.map.toString()) as { sources: string[]; sourceRoot?: string };
+
+              // The parallel graph is one directory deeper. Keep original source locations/content.
+              if (!map.sourceRoot) {
+                map.sources = map.sources.map((file) => (/^(?:\/|[\w+.-]+:)/.test(file) ? file : `../${file}`));
+              }
+
+              this.emitFile({
+                type: 'asset',
+                fileName: `node/${chunk.sourcemapFileName ?? `${chunk.fileName}.map`}`,
+                source: JSON.stringify(map),
+              });
+            }
+
+            const styles = new Set<string>();
+
+            for (const dependency of compositionCssDependencies[chunk.fileName] ?? []) {
+              for (const file of collect(dependency)) {
+                styles.add(file);
+              }
+            }
+
+            for (const file of importedCss(chunk)) {
+              styles.add(file);
+            }
+
+            // Only direct metadata and explicit composition edges: never import the full catalog
+            // or a transitive closure from a barrel. Shared assets keep their canonical URLs.
+            const result = createCssImports(chunk, [...styles]);
+
+            chunk.code = result.code;
+
+            if (chunk.map && result.mappings !== undefined) {
+              chunk.map.mappings = result.mappings;
+
+              const asset = bundle[chunk.sourcemapFileName ?? `${chunk.fileName}.map`];
+
+              if (asset?.type === 'asset') {
+                asset.source = chunk.map.toString();
+              }
+            }
           }
         }
 
@@ -99,9 +191,11 @@ export default defineConfig({
     minify: false,
     cssMinify: true,
     cssCodeSplit: true,
+    sourcemap: true,
     lib: {
       entry: {
         'index': `${source}index.ts`,
+        'theme-provider': `${source}theme/theme-provider/index.ts`,
         'calendar': `${source}components/calendar/index.ts`,
         'range-calendar': `${source}components/range-calendar/index.ts`,
         'loading-indicator': `${source}components/loading-indicator/index.ts`,

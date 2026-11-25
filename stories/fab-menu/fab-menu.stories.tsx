@@ -1,5 +1,3 @@
-import '@flaut-travel/react-md3e/fab-menu/styles.css';
-
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FabMenu, FabMenuItem } from '@flaut-travel/react-md3e';
 

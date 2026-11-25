@@ -13,6 +13,8 @@
     "packages/react-md3e/src/**/tests/**/*.ts",
     "packages/react-md3e/src/**/tests/**/*.tsx",
     "packages/react-md3e/tests/types-consumer/**/*.ts",
-    "apps/next-fixture/**/tests/**/*.ts"
+    "apps/next-fixture/**/tests/**/*.ts",
+    "packages/react-md3e/tests/vite-consumer/**/*.ts",
+    "packages/react-md3e/tests/vite-consumer/**/*.tsx"
   ]
 }

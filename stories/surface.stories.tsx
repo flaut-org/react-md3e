@@ -1,5 +1,3 @@
-import '@flaut-travel/react-md3e/surface/styles.css';
-
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Surface } from '@flaut-travel/react-md3e';
 

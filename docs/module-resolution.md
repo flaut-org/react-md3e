@@ -16,7 +16,11 @@ ESLint's `import-x/extensions` enforces the convention, including type imports.
 
 TypeScript uses `moduleResolution: Bundler` for source checking. Vite resolves extensionless
 files and directory indexes, extracts CSS, and writes real `.js` module paths to the distributed
-JavaScript while preserving client directives.
+JavaScript while preserving client directives. The componentCss() plugin adds static CSS imports
+to their owning implementation modules and keeps a parallel CSS-free `dist/node` graph for native
+Node. UI conditional exports select the styled graph for `module`/`browser`, the CSS-free graph
+for `node`, and the styled graph for other `import`/`default` consumers. See
+[CSS loading](css-loading.md) for SSR externalization and resolver requirements.
 
 Raw `tsc` declaration emit retains source module specifiers. After that step,
 `scripts/finalize-declarations.mjs` parses each `.d.ts` with the installed TypeScript compiler API
@@ -41,8 +45,8 @@ extensionless convention does not enable extension searching in native Node ESM.
 - An expected type error verifies that invalid MD2 button variants are rejected.
 
 `npm run check:package` imports distributed JavaScript in Node and inspects the actual UI module
-graph. Production Next/Turbopack and Storybook builds validate RSC/client boundaries and CSS
-consumption. Build before standalone lint/type checks; `npm run check` orders these steps.
+graph. Production Next/Turbopack, Next/Webpack, Vite and Storybook builds validate RSC/client boundaries
+and automatic CSS consumption. Build before standalone lint/type checks; `npm run check` orders these steps.
 
 References:
 [TypeScript library bundling considerations](https://www.typescriptlang.org/docs/handbook/modules/guides/choosing-compiler-options.html#considerations-for-bundling-libraries)

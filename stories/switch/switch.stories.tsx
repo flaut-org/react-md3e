@@ -1,5 +1,4 @@
 import './switch.stories.css';
-import '@flaut-travel/react-md3e/switch/styles.css';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Switch } from '@flaut-travel/react-md3e';

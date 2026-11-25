@@ -1,5 +1,3 @@
-import '@flaut-travel/react-md3e/skeleton/styles.css';
-
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Skeleton } from '@flaut-travel/react-md3e';
 

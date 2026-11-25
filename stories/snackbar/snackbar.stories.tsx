@@ -1,6 +1,3 @@
-import '@flaut-travel/react-md3e/button/styles.css';
-import '@flaut-travel/react-md3e/snackbar/styles.css';
-
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button, Snackbar } from '@flaut-travel/react-md3e';
 import { SnackbarStory } from './snackbar-story/snackbar-story.component';

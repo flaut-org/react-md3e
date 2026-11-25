@@ -18,7 +18,6 @@ Create themes on the server or during the consumer build:
 ```tsx
 import { ThemeProvider } from '@flaut-travel/react-md3e';
 import { createTheme } from '@flaut-travel/react-md3e/theme';
-import '@flaut-travel/react-md3e/theme/styles.css';
 
 const theme = createTheme({ breakpoints: { sm: 640, md: 1024 } });
 

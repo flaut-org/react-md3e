@@ -1,6 +1,3 @@
-import '@flaut-travel/react-md3e/button/styles.css';
-import '@flaut-travel/react-md3e/shape/styles.css';
-
 import { useState } from 'react';
 import { Button, Shape, shapeVariants } from '@flaut-travel/react-md3e';
 import type { ShapeSize, ShapeVariant } from '@flaut-travel/react-md3e';

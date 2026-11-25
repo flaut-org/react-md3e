@@ -16,7 +16,7 @@ await mkdir(new URL('../stories/', import.meta.url), { recursive: true });
 await writeFile(new URL('../stories/themes.generated.json', import.meta.url), JSON.stringify(themes));
 await writeFile(
   new URL('../apps/next-fixture/app/forest.generated.css', import.meta.url),
-  themeToCss(themes.forest, { selector: '.forest-static' }),
+  themeToCss(themes.forest, { selector: '.forest-static[data-md3-theme]' }),
 );
 
 const motionSchemes = Object.fromEntries(

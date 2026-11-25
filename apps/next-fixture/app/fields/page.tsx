@@ -1,9 +1,3 @@
-import '@flaut-travel/react-md3e/autocomplete/styles.css';
-import '@flaut-travel/react-md3e/button/styles.css';
-import '@flaut-travel/react-md3e/dialog/styles.css';
-import '@flaut-travel/react-md3e/icon-button/styles.css';
-import '@flaut-travel/react-md3e/text-field/styles.css';
-
 import { Autocomplete, TextField, ThemeProvider } from '@flaut-travel/react-md3e';
 import { createTheme } from '@flaut-travel/react-md3e/theme';
 import { FieldsDemo } from './fields-demo/fields-demo.component';

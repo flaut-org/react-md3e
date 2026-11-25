@@ -1,5 +1,3 @@
-import '@flaut-travel/react-md3e/navigation-bar/styles.css';
-import '@flaut-travel/react-md3e/badge/styles.css';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { NavigationBar } from '@flaut-travel/react-md3e/navigation-bar';
 import type { NavigationBarProps } from '@flaut-travel/react-md3e/navigation-bar';

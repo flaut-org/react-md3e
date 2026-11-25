@@ -1,5 +1,3 @@
-import '@flaut-travel/react-md3e/tabs/styles.css';
-
 import { Suspense } from 'react';
 import { Tabs, TabList, Tab, TabPanel, ThemeProvider } from '@flaut-travel/react-md3e';
 import { createTheme } from '@flaut-travel/react-md3e/theme';

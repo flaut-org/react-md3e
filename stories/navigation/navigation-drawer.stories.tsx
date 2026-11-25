@@ -1,6 +1,3 @@
-import '@flaut-travel/react-md3e/navigation-drawer/styles.css';
-import '@flaut-travel/react-md3e/button/styles.css';
-import '@flaut-travel/react-md3e/divider/styles.css';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { NavigationDrawer, NavigationItem } from '@flaut-travel/react-md3e/navigation-drawer';
 import type { NavigationDrawerProps } from '@flaut-travel/react-md3e/navigation-drawer';

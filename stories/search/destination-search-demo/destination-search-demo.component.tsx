@@ -1,9 +1,3 @@
-import '@flaut-travel/react-md3e/avatar/styles.css';
-import '@flaut-travel/react-md3e/button/styles.css';
-import '@flaut-travel/react-md3e/icon-button/styles.css';
-import '@flaut-travel/react-md3e/list/styles.css';
-import '@flaut-travel/react-md3e/search/styles.css';
-
 import { useState } from 'react';
 import { Avatar, Button, IconButton, List, ListItem, Search } from '@flaut-travel/react-md3e';
 import type { SearchProps } from '@flaut-travel/react-md3e';

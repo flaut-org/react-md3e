@@ -25,7 +25,7 @@ export function Decorations() {
 }
 ```
 
-Import `/styles.css` once at the application root. Shape, shapeVariants and their types are exported
+Precompiled Shape styles load automatically from the component import. Shape, shapeVariants and their types are exported
 from the root and `/shape`. The example works in RSC, server HTML without JS and streamed content.
 
 ## API and catalog

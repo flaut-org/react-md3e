@@ -1,7 +1,3 @@
-import '@flaut-travel/react-md3e/fab/styles.css';
-import '@flaut-travel/react-md3e/extended-fab/styles.css';
-import '@flaut-travel/react-md3e/fab-menu/styles.css';
-
 import { ExtendedFab, Fab, FabMenu, FabMenuItem, ThemeProvider } from '@flaut-travel/react-md3e';
 import { createTheme } from '@flaut-travel/react-md3e/theme';
 import { FabDemo } from './fab-demo/fab-demo.component';

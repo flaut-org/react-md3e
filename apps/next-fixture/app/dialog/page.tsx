@@ -1,8 +1,3 @@
-import '@flaut-travel/react-md3e/button/styles.css';
-import '@flaut-travel/react-md3e/dialog/styles.css';
-import '@flaut-travel/react-md3e/icon-button/styles.css';
-import '@flaut-travel/react-md3e/text-field/styles.css';
-
 import Link from 'next/link';
 import {
   Dialog,

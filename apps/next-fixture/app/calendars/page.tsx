@@ -1,7 +1,3 @@
-import '@flaut-travel/react-md3e/calendar/styles.css';
-import '@flaut-travel/react-md3e/range-calendar/styles.css';
-import '@flaut-travel/react-md3e/button/styles.css';
-
 import Link from 'next/link';
 import { Calendar, RangeCalendar, ThemeProvider } from '@flaut-travel/react-md3e';
 import { CalendarDemo } from './calendar-demo/calendar-demo.component';

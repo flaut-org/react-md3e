@@ -28,8 +28,7 @@ export function TripHeading() {
 }
 ```
 
-Import the component/types from the package root or `/typography`; import `/styles.css` once at the
-application root. Typography follows the ordinary component ownership/files/tests conventions.
+Import the component/types from the package root or `/typography`; precompiled CSS loads automatically. Typography follows the ordinary component ownership/files/tests conventions.
 
 ## API
 

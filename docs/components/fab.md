@@ -1,8 +1,7 @@
 # Floating action buttons
 
 `Fab`, `ExtendedFab`, `FabMenu` and its `FabMenuItem` actions implement the Material 3 Expressive
-floating action family. Import from the root or `/fab`, `/extended-fab` and `/fab-menu`. Load each
-used family's `/styles.css` entry at its composition boundary; dependencies are included.
+floating action family. Import from the root or `/fab`, `/extended-fab` and `/fab-menu`. Styles and their dependencies load automatically from the component imports.
 
 ```tsx
 <Fab aria-label="Create document"><AddIcon /></Fab>

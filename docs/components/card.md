@@ -24,7 +24,7 @@ export function TripCard() {
 }
 ```
 
-Import `/styles.css` once at the application root. The root and `/card` entry export all five parts
+Precompiled component and Surface styles load automatically. The root and `/card` entry export all five parts
 and their own public types. A container is the only required part; layouts/headings are owned by the
 consumer. Media and action parts are optional.
 

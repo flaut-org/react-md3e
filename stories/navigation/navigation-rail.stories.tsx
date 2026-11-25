@@ -1,8 +1,3 @@
-import '@flaut-travel/react-md3e/navigation-rail/styles.css';
-import '@flaut-travel/react-md3e/icon-button/styles.css';
-import '@flaut-travel/react-md3e/extended-fab/styles.css';
-import '@flaut-travel/react-md3e/button/styles.css';
-import '@flaut-travel/react-md3e/badge/styles.css';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { NavigationRail } from '@flaut-travel/react-md3e/navigation-rail';
 import type { NavigationRailProps } from '@flaut-travel/react-md3e/navigation-rail';

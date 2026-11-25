@@ -2,12 +2,10 @@
 
 Material 3 primary and secondary tabs organize related content at the same level. The same geometry
 works with Material You and Expressive themes; the existing theme's motion scheme controls indicator
-springs. Import the family from the root or `/tabs` and load `/tabs/styles.css` at its composition
-boundary, plus `/theme/styles.css` once in the application.
+springs. Import the family from the root or `/tabs` with automatic CSS loading, including ThemeProvider defaults.
 
 ```tsx
 import { Tabs, TabList, Tab, TabPanel } from '@flaut-travel/react-md3e/tabs';
-import '@flaut-travel/react-md3e/tabs/styles.css';
 
 <Tabs defaultValue="flights">
   <TabList aria-label="Travel search">
@@ -131,7 +129,7 @@ Web adaptations include explicit composition, a static SSR indicator fallback, n
 scrolling with keyboard reveal, manual activation by default, and precomputed theme springs. Swipe
 between panels, animated panel carousels, pagination arrow controls, density presets and vertical tabs
 are outside this implementation. The minimum scrollable tab width is 90px; inline padding is 16px.
-Badges are arbitrary content; import `/badge/styles.css` as well if composing the separate Badge API.
+Badges are arbitrary content; the separate Badge API loads its CSS automatically.
 Consumer routing should not turn this content-switching button into a navigation link.
 
 Verification lives in `tabs/tests`, the Next fixture `/tabs` and Storybook Components/Tabs. Browser

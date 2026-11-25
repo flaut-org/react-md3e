@@ -29,12 +29,20 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "module": "./dist/index.js",
+      "browser": "./dist/index.js",
+      "node": "./dist/node/index.js",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./package.json": "./package.json",
     "./button": {
       "types": "./dist/components/button/index.d.ts",
-      "import": "./dist/button.js"
+      "module": "./dist/button.js",
+      "browser": "./dist/button.js",
+      "node": "./dist/node/button.js",
+      "import": "./dist/button.js",
+      "default": "./dist/button.js"
     },
     "./theme": {
       "types": "./dist/theme/index.d.ts",
@@ -43,131 +51,259 @@
     "./styles.css": "./dist/styles.css",
     "./icon-button": {
       "types": "./dist/components/icon-button/index.d.ts",
-      "import": "./dist/icon-button.js"
+      "module": "./dist/icon-button.js",
+      "browser": "./dist/icon-button.js",
+      "node": "./dist/node/icon-button.js",
+      "import": "./dist/icon-button.js",
+      "default": "./dist/icon-button.js"
     },
     "./app-bar": {
       "types": "./dist/components/app-bar/index.d.ts",
-      "import": "./dist/app-bar.js"
+      "module": "./dist/app-bar.js",
+      "browser": "./dist/app-bar.js",
+      "node": "./dist/node/app-bar.js",
+      "import": "./dist/app-bar.js",
+      "default": "./dist/app-bar.js"
     },
     "./dialog": {
       "types": "./dist/components/dialog/index.d.ts",
-      "import": "./dist/dialog.js"
+      "module": "./dist/dialog.js",
+      "browser": "./dist/dialog.js",
+      "node": "./dist/node/dialog.js",
+      "import": "./dist/dialog.js",
+      "default": "./dist/dialog.js"
     },
     "./list": {
       "types": "./dist/components/list/index.d.ts",
-      "import": "./dist/list.js"
+      "module": "./dist/list.js",
+      "browser": "./dist/list.js",
+      "node": "./dist/node/list.js",
+      "import": "./dist/list.js",
+      "default": "./dist/list.js"
     },
     "./checkbox": {
       "types": "./dist/components/checkbox/index.d.ts",
-      "import": "./dist/checkbox.js"
+      "module": "./dist/checkbox.js",
+      "browser": "./dist/checkbox.js",
+      "node": "./dist/node/checkbox.js",
+      "import": "./dist/checkbox.js",
+      "default": "./dist/checkbox.js"
     },
     "./switch": {
       "types": "./dist/components/switch/index.d.ts",
-      "import": "./dist/switch.js"
+      "module": "./dist/switch.js",
+      "browser": "./dist/switch.js",
+      "node": "./dist/node/switch.js",
+      "import": "./dist/switch.js",
+      "default": "./dist/switch.js"
     },
     "./slider": {
       "types": "./dist/components/slider/index.d.ts",
-      "import": "./dist/slider.js"
+      "module": "./dist/slider.js",
+      "browser": "./dist/slider.js",
+      "node": "./dist/node/slider.js",
+      "import": "./dist/slider.js",
+      "default": "./dist/slider.js"
     },
     "./radio": {
       "types": "./dist/components/radio/index.d.ts",
-      "import": "./dist/radio.js"
+      "module": "./dist/radio.js",
+      "browser": "./dist/radio.js",
+      "node": "./dist/node/radio.js",
+      "import": "./dist/radio.js",
+      "default": "./dist/radio.js"
     },
     "./radio-group": {
       "types": "./dist/components/radio-group/index.d.ts",
-      "import": "./dist/radio-group.js"
+      "module": "./dist/radio-group.js",
+      "browser": "./dist/radio-group.js",
+      "node": "./dist/node/radio-group.js",
+      "import": "./dist/radio-group.js",
+      "default": "./dist/radio-group.js"
     },
     "./avatar": {
       "types": "./dist/components/avatar/index.d.ts",
-      "import": "./dist/avatar.js"
+      "module": "./dist/avatar.js",
+      "browser": "./dist/avatar.js",
+      "node": "./dist/node/avatar.js",
+      "import": "./dist/avatar.js",
+      "default": "./dist/avatar.js"
     },
     "./badge": {
       "types": "./dist/components/badge/index.d.ts",
-      "import": "./dist/badge.js"
+      "module": "./dist/badge.js",
+      "browser": "./dist/badge.js",
+      "node": "./dist/node/badge.js",
+      "import": "./dist/badge.js",
+      "default": "./dist/badge.js"
     },
     "./text-field": {
       "types": "./dist/components/text-field/index.d.ts",
-      "import": "./dist/text-field.js"
+      "module": "./dist/text-field.js",
+      "browser": "./dist/text-field.js",
+      "node": "./dist/node/text-field.js",
+      "import": "./dist/text-field.js",
+      "default": "./dist/text-field.js"
     },
     "./autocomplete": {
       "types": "./dist/components/autocomplete/index.d.ts",
-      "import": "./dist/autocomplete.js"
+      "module": "./dist/autocomplete.js",
+      "browser": "./dist/autocomplete.js",
+      "node": "./dist/node/autocomplete.js",
+      "import": "./dist/autocomplete.js",
+      "default": "./dist/autocomplete.js"
     },
     "./popover": {
       "types": "./dist/components/popover/index.d.ts",
-      "import": "./dist/popover.js"
+      "module": "./dist/popover.js",
+      "browser": "./dist/popover.js",
+      "node": "./dist/node/popover.js",
+      "import": "./dist/popover.js",
+      "default": "./dist/popover.js"
     },
     "./surface": {
       "types": "./dist/components/surface/index.d.ts",
-      "import": "./dist/surface.js"
+      "module": "./dist/surface.js",
+      "browser": "./dist/surface.js",
+      "node": "./dist/node/surface.js",
+      "import": "./dist/surface.js",
+      "default": "./dist/surface.js"
     },
     "./card": {
       "types": "./dist/components/card/index.d.ts",
-      "import": "./dist/card.js"
+      "module": "./dist/card.js",
+      "browser": "./dist/card.js",
+      "node": "./dist/node/card.js",
+      "import": "./dist/card.js",
+      "default": "./dist/card.js"
     },
     "./shape": {
       "types": "./dist/components/shape/index.d.ts",
-      "import": "./dist/shape.js"
+      "module": "./dist/shape.js",
+      "browser": "./dist/shape.js",
+      "node": "./dist/node/shape.js",
+      "import": "./dist/shape.js",
+      "default": "./dist/shape.js"
     },
     "./search": {
       "types": "./dist/components/search/index.d.ts",
-      "import": "./dist/search.js"
+      "module": "./dist/search.js",
+      "browser": "./dist/search.js",
+      "node": "./dist/node/search.js",
+      "import": "./dist/search.js",
+      "default": "./dist/search.js"
     },
     "./typography": {
       "types": "./dist/components/typography/index.d.ts",
-      "import": "./dist/typography.js"
+      "module": "./dist/typography.js",
+      "browser": "./dist/typography.js",
+      "node": "./dist/node/typography.js",
+      "import": "./dist/typography.js",
+      "default": "./dist/typography.js"
     },
     "./skeleton": {
       "types": "./dist/components/skeleton/index.d.ts",
-      "import": "./dist/skeleton.js"
+      "module": "./dist/skeleton.js",
+      "browser": "./dist/skeleton.js",
+      "node": "./dist/node/skeleton.js",
+      "import": "./dist/skeleton.js",
+      "default": "./dist/skeleton.js"
     },
     "./divider": {
       "types": "./dist/components/divider/index.d.ts",
-      "import": "./dist/divider.js"
+      "module": "./dist/divider.js",
+      "browser": "./dist/divider.js",
+      "node": "./dist/node/divider.js",
+      "import": "./dist/divider.js",
+      "default": "./dist/divider.js"
     },
     "./tooltip": {
       "types": "./dist/components/tooltip/index.d.ts",
-      "import": "./dist/tooltip.js"
+      "module": "./dist/tooltip.js",
+      "browser": "./dist/tooltip.js",
+      "node": "./dist/node/tooltip.js",
+      "import": "./dist/tooltip.js",
+      "default": "./dist/tooltip.js"
     },
     "./collapsible": {
       "types": "./dist/components/collapsible/index.d.ts",
-      "import": "./dist/collapsible.js"
+      "module": "./dist/collapsible.js",
+      "browser": "./dist/collapsible.js",
+      "node": "./dist/node/collapsible.js",
+      "import": "./dist/collapsible.js",
+      "default": "./dist/collapsible.js"
     },
     "./button-group": {
       "types": "./dist/components/button-group/index.d.ts",
-      "import": "./dist/button-group.js"
+      "module": "./dist/button-group.js",
+      "browser": "./dist/button-group.js",
+      "node": "./dist/node/button-group.js",
+      "import": "./dist/button-group.js",
+      "default": "./dist/button-group.js"
     },
     "./split-button": {
       "types": "./dist/components/split-button/index.d.ts",
-      "import": "./dist/split-button.js"
+      "module": "./dist/split-button.js",
+      "browser": "./dist/split-button.js",
+      "node": "./dist/node/split-button.js",
+      "import": "./dist/split-button.js",
+      "default": "./dist/split-button.js"
     },
     "./fab": {
       "types": "./dist/components/fab/index.d.ts",
-      "import": "./dist/fab.js"
+      "module": "./dist/fab.js",
+      "browser": "./dist/fab.js",
+      "node": "./dist/node/fab.js",
+      "import": "./dist/fab.js",
+      "default": "./dist/fab.js"
     },
     "./extended-fab": {
       "types": "./dist/components/extended-fab/index.d.ts",
-      "import": "./dist/extended-fab.js"
+      "module": "./dist/extended-fab.js",
+      "browser": "./dist/extended-fab.js",
+      "node": "./dist/node/extended-fab.js",
+      "import": "./dist/extended-fab.js",
+      "default": "./dist/extended-fab.js"
     },
     "./fab-menu": {
       "types": "./dist/components/fab-menu/index.d.ts",
-      "import": "./dist/fab-menu.js"
+      "module": "./dist/fab-menu.js",
+      "browser": "./dist/fab-menu.js",
+      "node": "./dist/node/fab-menu.js",
+      "import": "./dist/fab-menu.js",
+      "default": "./dist/fab-menu.js"
     },
     "./segmented-button": {
       "types": "./dist/components/segmented-button/index.d.ts",
-      "import": "./dist/segmented-button.js"
+      "module": "./dist/segmented-button.js",
+      "browser": "./dist/segmented-button.js",
+      "node": "./dist/node/segmented-button.js",
+      "import": "./dist/segmented-button.js",
+      "default": "./dist/segmented-button.js"
     },
     "./bottom-sheet": {
       "types": "./dist/components/bottom-sheet/index.d.ts",
-      "import": "./dist/bottom-sheet.js"
+      "module": "./dist/bottom-sheet.js",
+      "browser": "./dist/bottom-sheet.js",
+      "node": "./dist/node/bottom-sheet.js",
+      "import": "./dist/bottom-sheet.js",
+      "default": "./dist/bottom-sheet.js"
     },
     "./side-sheet": {
       "types": "./dist/components/side-sheet/index.d.ts",
-      "import": "./dist/side-sheet.js"
+      "module": "./dist/side-sheet.js",
+      "browser": "./dist/side-sheet.js",
+      "node": "./dist/node/side-sheet.js",
+      "import": "./dist/side-sheet.js",
+      "default": "./dist/side-sheet.js"
     },
     "./snackbar": {
       "types": "./dist/components/snackbar/index.d.ts",
-      "import": "./dist/snackbar.js"
+      "module": "./dist/snackbar.js",
+      "browser": "./dist/snackbar.js",
+      "node": "./dist/node/snackbar.js",
+      "import": "./dist/snackbar.js",
+      "default": "./dist/snackbar.js"
     },
     "./button/styles.css": "./dist/button.css",
     "./theme/styles.css": "./dist/theme.css",
@@ -205,49 +341,94 @@
     "./snackbar/styles.css": "./dist/snackbar.css",
     "./loading-indicator": {
       "types": "./dist/components/loading-indicator/index.d.ts",
-      "import": "./dist/loading-indicator.js"
+      "module": "./dist/loading-indicator.js",
+      "browser": "./dist/loading-indicator.js",
+      "node": "./dist/node/loading-indicator.js",
+      "import": "./dist/loading-indicator.js",
+      "default": "./dist/loading-indicator.js"
     },
     "./loading-indicator/styles.css": "./dist/loading-indicator.css",
     "./progress-indicator": {
       "types": "./dist/components/progress-indicator/index.d.ts",
-      "import": "./dist/progress-indicator.js"
+      "module": "./dist/progress-indicator.js",
+      "browser": "./dist/progress-indicator.js",
+      "node": "./dist/node/progress-indicator.js",
+      "import": "./dist/progress-indicator.js",
+      "default": "./dist/progress-indicator.js"
     },
     "./progress-indicator/styles.css": "./dist/progress-indicator.css",
     "./calendar": {
       "types": "./dist/components/calendar/index.d.ts",
-      "import": "./dist/calendar.js"
+      "module": "./dist/calendar.js",
+      "browser": "./dist/calendar.js",
+      "node": "./dist/node/calendar.js",
+      "import": "./dist/calendar.js",
+      "default": "./dist/calendar.js"
     },
     "./calendar/styles.css": "./dist/calendar.css",
     "./range-calendar": {
       "types": "./dist/components/range-calendar/index.d.ts",
-      "import": "./dist/range-calendar.js"
+      "module": "./dist/range-calendar.js",
+      "browser": "./dist/range-calendar.js",
+      "node": "./dist/node/range-calendar.js",
+      "import": "./dist/range-calendar.js",
+      "default": "./dist/range-calendar.js"
     },
     "./range-calendar/styles.css": "./dist/range-calendar.css",
     "./menu": {
       "types": "./dist/components/menu/index.d.ts",
-      "import": "./dist/menu.js"
+      "module": "./dist/menu.js",
+      "browser": "./dist/menu.js",
+      "node": "./dist/node/menu.js",
+      "import": "./dist/menu.js",
+      "default": "./dist/menu.js"
     },
     "./menu/styles.css": "./dist/menu.css",
     "./tabs": {
       "types": "./dist/components/tabs/index.d.ts",
-      "import": "./dist/tabs.js"
+      "module": "./dist/tabs.js",
+      "browser": "./dist/tabs.js",
+      "node": "./dist/node/tabs.js",
+      "import": "./dist/tabs.js",
+      "default": "./dist/tabs.js"
     },
     "./tabs/styles.css": "./dist/tabs.css",
     "./navigation-bar": {
       "types": "./dist/components/navigation-bar/index.d.ts",
-      "import": "./dist/navigation-bar.js"
+      "module": "./dist/navigation-bar.js",
+      "browser": "./dist/navigation-bar.js",
+      "node": "./dist/node/navigation-bar.js",
+      "import": "./dist/navigation-bar.js",
+      "default": "./dist/navigation-bar.js"
     },
     "./navigation-rail": {
       "types": "./dist/components/navigation-rail/index.d.ts",
-      "import": "./dist/navigation-rail.js"
+      "module": "./dist/navigation-rail.js",
+      "browser": "./dist/navigation-rail.js",
+      "node": "./dist/node/navigation-rail.js",
+      "import": "./dist/navigation-rail.js",
+      "default": "./dist/navigation-rail.js"
     },
     "./navigation-drawer": {
       "types": "./dist/components/navigation-drawer/index.d.ts",
-      "import": "./dist/navigation-drawer.js"
+      "module": "./dist/navigation-drawer.js",
+      "browser": "./dist/navigation-drawer.js",
+      "node": "./dist/node/navigation-drawer.js",
+      "import": "./dist/navigation-drawer.js",
+      "default": "./dist/navigation-drawer.js"
     },
     "./navigation-bar/styles.css": "./dist/navigation-bar.css",
     "./navigation-rail/styles.css": "./dist/navigation-rail.css",
-    "./navigation-drawer/styles.css": "./dist/navigation-drawer.css"
+    "./navigation-drawer/styles.css": "./dist/navigation-drawer.css",
+    "./theme-provider": {
+      "types": "./dist/theme/theme-provider/index.d.ts",
+      "module": "./dist/theme-provider.js",
+      "browser": "./dist/theme-provider.js",
+      "node": "./dist/node/theme-provider.js",
+      "import": "./dist/theme-provider.js",
+      "default": "./dist/theme-provider.js"
+    },
+    "./theme-provider/styles.css": "./dist/theme-provider.css"
   },
   "scripts": {
     "clean": "node ../../scripts/clean-package.mjs",

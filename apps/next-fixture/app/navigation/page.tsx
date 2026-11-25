@@ -1,9 +1,3 @@
-import '@flaut-travel/react-md3e/navigation-bar/styles.css';
-import '@flaut-travel/react-md3e/navigation-rail/styles.css';
-import '@flaut-travel/react-md3e/navigation-drawer/styles.css';
-import '@flaut-travel/react-md3e/button/styles.css';
-import '@flaut-travel/react-md3e/icon-button/styles.css';
-import '@flaut-travel/react-md3e/extended-fab/styles.css';
 import { Suspense } from 'react';
 import { connection } from 'next/server';
 import {

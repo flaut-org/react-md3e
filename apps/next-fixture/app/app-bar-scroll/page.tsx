@@ -1,6 +1,3 @@
-import '@flaut-travel/react-md3e/app-bar/styles.css';
-import '@flaut-travel/react-md3e/button/styles.css';
-
 import { AppBar, Button, IconButton, Search, ThemeProvider } from '@flaut-travel/react-md3e';
 import { AppBarScrollDemo } from './app-bar-scroll-demo/app-bar-scroll-demo.component';
 import styles from './app-bar-scroll.module.css';

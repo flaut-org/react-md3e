@@ -2,14 +2,13 @@
 
 Switch toggles an immediate, standalone setting. It composes Base UI Switch for checked state,
 keyboard activation, labels, native form participation and accessibility. Import it from the package
-root or `/switch`, and load `/switch/styles.css` at the owning composition boundary.
+root or `/switch`, with automatic CSS loading.
 
 ```tsx
 'use client';
 
 import { useState } from 'react';
 import { Switch } from '@flaut-travel/react-md3e/switch';
-import '@flaut-travel/react-md3e/switch/styles.css';
 
 export function Notifications() {
   const [checked, setChecked] = useState(false);

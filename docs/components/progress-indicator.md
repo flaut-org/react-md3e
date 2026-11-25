@@ -7,7 +7,6 @@ React rendering; it is ordinary value/ARIA handling, not runtime CSS rule genera
 
 ```tsx
 import { ProgressIndicator } from '@flaut-travel/react-md3e';
-import '@flaut-travel/react-md3e/progress-indicator/styles.css';
 
 <ProgressIndicator value={40} aria-label="Uploading files" />;
 <ProgressIndicator type="circular" appearance="wavy" value={40} aria-label="Uploading files" />;
@@ -26,7 +25,7 @@ instead of flat bars. No value is needed:
 <ProgressIndicator type="linear" appearance="wavy" variant="indeterminate" aria-label="Searching for flights" />
 ```
 
-Import `@flaut-travel/react-md3e/progress-indicator/styles.css` at this composition boundary.
+Precompiled styles load automatically from the component import.
 Storybook's **Components / ProgressIndicator / Wavy Linear Indeterminate** demonstrates this exact
 configuration with its default 4px stroke and 10px container. `thickness={8}` selects the thicker
 14px container. The two segments travel forward while their wave phase moves independently;

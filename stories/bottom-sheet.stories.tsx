@@ -1,8 +1,3 @@
-import '@flaut-travel/react-md3e/bottom-sheet/styles.css';
-import '@flaut-travel/react-md3e/button/styles.css';
-import '@flaut-travel/react-md3e/text-field/styles.css';
-import '@flaut-travel/react-md3e/typography/styles.css';
-
 import type { Decorator, Meta, StoryObj } from '@storybook/react-vite';
 import { BottomSheet, Button, TextField, Typography } from '@flaut-travel/react-md3e';
 

@@ -1,5 +1,3 @@
-import '@flaut-travel/react-md3e/extended-fab/styles.css';
-
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ExtendedFab } from '@flaut-travel/react-md3e';
 import { CollapsibleExtendedFab } from './collapsible-extended-fab/collapsible-extended-fab.component';

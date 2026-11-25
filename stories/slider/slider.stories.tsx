@@ -1,5 +1,4 @@
 import './slider.stories.css';
-import '@flaut-travel/react-md3e/slider/styles.css';
 
 import type { Decorator, Meta, StoryObj } from '@storybook/react-vite';
 import { Slider } from '@flaut-travel/react-md3e';

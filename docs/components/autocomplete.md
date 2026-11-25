@@ -138,8 +138,7 @@ The shared surface unfolds with fast spatial and fades with fast effects, just l
 CSS progress and inverse option-body transforms keep default/custom option text at its natural size.
 Empty/loading messages use the same compensation. Base UI retains the exiting popup until transitions
 finish. CSS rules and transitions compile at build time. Reduced motion removes finite transitions;
-forced colors retain virtual focus, selection and popup boundaries. Import `/autocomplete/styles.css`
-only; its dependency closure includes the shared presentation without loading Menu interaction,
+forced colors retain virtual focus, selection and popup boundaries. Automatic CSS loading includes the shared presentation without loading Menu interaction,
 its trigger/submenu styles or Popover.
 
 Autocomplete/TextField hydrate for interaction; RSC can instantiate them with serializable options

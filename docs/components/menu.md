@@ -1,7 +1,6 @@
 # Menu
 
-Menu implements Material 3 Expressive vertical command menus. Load `/menu/styles.css` at the
-route/composition boundary and `/theme/styles.css` once. All public parts and their own types are
+Menu implements Material 3 Expressive vertical command menus. Component and ThemeProvider styles load automatically. All public parts and their own types are
 available from the package root and `/menu`; Base UI remains an implementation detail.
 
 MenuSurface and MenuItemContent are private, passive presentation shared with Autocomplete. They
@@ -11,8 +10,6 @@ Combobox listbox semantics rather than mounting a Menu inside the text field.
 
 ```tsx
 import { Button, Menu, MenuItem, MenuDivider, MenuSubmenu } from '@flaut-travel/react-md3e';
-import '@flaut-travel/react-md3e/menu/styles.css';
-import '@flaut-travel/react-md3e/button/styles.css';
 
 <Menu trigger={<Button>Document actions</Button>}>
   <MenuItem leading="☆" trailing="⌘N">

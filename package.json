@@ -26,7 +26,7 @@
     "test": "npm run test:unit && npm run test:http",
     "test:unit": "node --test packages/react-md3e/src/theme/tests/*.test.mjs packages/react-md3e/src/internal/indicators/tests/*.test.mjs packages/react-md3e/src/components/badge/tests/*.test.mjs packages/react-md3e/src/components/calendar/tests/*.test.mjs packages/react-md3e/src/components/range-calendar/tests/*.test.mjs packages/react-md3e/src/components/slider/tests/*.test.mjs",
     "test:http": "node --test apps/next-fixture/tests/fixture.test.mjs",
-    "check": "npm run format:check && npm run build && npm run lint && npm run typecheck && npm run check:package && npm run build:fixture && npm run build:storybook && npm test && npm run test:release && npm run test:browser",
+    "check": "npm run format:check && npm run build && npm run lint && npm run typecheck && npm run check:package && npm run build:fixture && npm run build:vite-fixture && npm run build:storybook && npm test && npm run test:release && npm run test:browser && npm run test:bundlers",
     "pack": "npm pack --workspace=@flaut-travel/react-md3e",
     "postbuild": "node scripts/generate-example-themes.mjs",
     "storybook": "npm run build && storybook dev --port 6006 --disable-telemetry",
@@ -41,7 +41,12 @@
     "release:check": "node scripts/release.mjs check",
     "release": "node scripts/release.mjs publish",
     "test:release": "node --test scripts/tests/release.test.mjs",
-    "release:ci": "npm run build && npm run check:package && npm run release"
+    "release:ci": "npm run build && npm run check:package && npm run release",
+    "build:fixture:webpack": "npm run build:webpack --workspace=@react-md3e/next-fixture",
+    "build:vite-fixture": "node scripts/build-vite-fixture.mjs",
+    "serve:vite-fixture": "vite preview --config packages/react-md3e/tests/vite-consumer/vite.config.ts --host 127.0.0.1 --port 3200 --strictPort --outDir dist",
+    "test:bundlers": "npm run build:fixture:webpack && npm run test:http && npm run test:browser -- apps/next-fixture/tests/css-loading.browser.spec.ts && npm run build:webpack-subpaths && npm run build:fixture",
+    "build:webpack-subpaths": "node scripts/check-webpack-subpaths.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.14.0",

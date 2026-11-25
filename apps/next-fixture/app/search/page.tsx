@@ -1,11 +1,3 @@
-import '@flaut-travel/react-md3e/autocomplete/styles.css';
-import '@flaut-travel/react-md3e/button/styles.css';
-import '@flaut-travel/react-md3e/dialog/styles.css';
-import '@flaut-travel/react-md3e/icon-button/styles.css';
-import '@flaut-travel/react-md3e/list/styles.css';
-import '@flaut-travel/react-md3e/search/styles.css';
-import '@flaut-travel/react-md3e/text-field/styles.css';
-
 import { Search, SearchBar, ThemeProvider } from '@flaut-travel/react-md3e';
 import { createTheme } from '@flaut-travel/react-md3e/theme';
 import { SearchDemo } from './search-demo/search-demo.component';

@@ -1,9 +1,5 @@
 'use client';
 
-import '@flaut-travel/react-md3e/button/styles.css';
-import '@flaut-travel/react-md3e/dialog/styles.css';
-import '@flaut-travel/react-md3e/list/styles.css';
-
 import { useState } from 'react';
 import {
   Button,

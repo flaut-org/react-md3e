@@ -14,6 +14,22 @@ A modern React component library implementing Google's [Material Design 3 (Mater
 > [!CAUTION]
 > Currently in early alpha. The API is subject to breaking changes and may undergo a complete overhaul. Please wait for the public beta release.
 
+Components load their precompiled CSS automatically, from root or subpath imports:
+
+```tsx
+import { Button, Checkbox, ThemeProvider } from '@flaut-travel/react-md3e';
+
+<ThemeProvider>
+  <Button>Continue</Button>
+  <Checkbox aria-label="Accept terms" />
+</ThemeProvider>;
+```
+
+Production bundlers retain used component styles and their dependencies. Next Webpack root imports
+require `experimental.optimizePackageImports`; component subpaths (including `/theme-provider`),
+Turbopack and Vite need no such setting. See [CSS loading](docs/css-loading.md)
+for tree-shaking, native Node compatibility and migration from explicit stylesheet imports.
+
 ## Component support
 
 Coverage follows Google's [Material 3 component catalog](https://m3.material.io/components), including

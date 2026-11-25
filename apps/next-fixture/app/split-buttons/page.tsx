@@ -1,6 +1,3 @@
-import '@flaut-travel/react-md3e/split-button/styles.css';
-import '@flaut-travel/react-md3e/dialog/styles.css';
-
 import { MenuGroup, MenuItem, MenuSubmenu, SplitButton, ThemeProvider } from '@flaut-travel/react-md3e';
 import { createTheme } from '@flaut-travel/react-md3e/theme';
 import { SplitButtonDemo } from './split-button-demo/split-button-demo.component';
