@@ -1,9 +1,8 @@
-import '@flaut-travel/react-md3e/button/styles.css';
-
 import Link from 'next/link';
 import { Button, ThemeProvider } from '@flaut-travel/react-md3e';
 import { createTheme } from '@flaut-travel/react-md3e/theme';
 import { ButtonDemo } from './button-demo/button-demo.component';
+import './forest.generated.css';
 
 const forest = createTheme({
   sourceColor: '#386a20',

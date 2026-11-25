@@ -1,7 +1,3 @@
-import '@flaut-travel/react-md3e/badge/styles.css';
-import '@flaut-travel/react-md3e/icon-button/styles.css';
-import '@flaut-travel/react-md3e/button/styles.css';
-
 import Link from 'next/link';
 import { Badge, IconButton, ThemeProvider } from '@flaut-travel/react-md3e';
 import { BadgeDemo } from './badge-demo/badge-demo.component';

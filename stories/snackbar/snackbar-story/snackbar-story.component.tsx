@@ -1,6 +1,3 @@
-import '@flaut-travel/react-md3e/button/styles.css';
-import '@flaut-travel/react-md3e/snackbar/styles.css';
-
 import { useState } from 'react';
 import { Button, Snackbar } from '@flaut-travel/react-md3e';
 import type { SnackbarProps } from '@flaut-travel/react-md3e';

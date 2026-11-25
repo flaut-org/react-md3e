@@ -7,8 +7,6 @@ server-rendered HTML. ThemeProvider remains server-compatible.
 
 ```tsx
 import { Calendar, RangeCalendar } from '@flaut-travel/react-md3e';
-import '@flaut-travel/react-md3e/calendar/styles.css';
-import '@flaut-travel/react-md3e/range-calendar/styles.css';
 
 <Calendar defaultValue="2026-11-18" locale="uk-UA" />;
 <RangeCalendar defaultValue={['2026-11-18', '2026-12-04']} calendars={2} />;

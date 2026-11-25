@@ -1,7 +1,3 @@
-import '@flaut-travel/react-md3e/menu/styles.css';
-import '@flaut-travel/react-md3e/button/styles.css';
-import '@flaut-travel/react-md3e/dialog/styles.css';
-
 import {
   Button,
   Menu,

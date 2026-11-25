@@ -1,6 +1,3 @@
-import '@flaut-travel/react-md3e/menu/styles.css';
-import '@flaut-travel/react-md3e/button/styles.css';
-
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import {
   Button,
@@ -51,7 +48,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Material 3 Expressive vertical menus with command/link items, checkbox and radio selection, groups and cascading submenus. Base UI owns focus, typeahead, keyboard/pointer navigation and dismissal. Load /menu/styles.css at the composition boundary.',
+          'Material 3 Expressive vertical menus with command/link items, checkbox and radio selection, groups and cascading submenus. Base UI owns focus, typeahead, keyboard/pointer navigation and dismissal. Component and dependency styles load automatically.',
       },
     },
   },

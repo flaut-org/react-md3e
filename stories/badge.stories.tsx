@@ -1,6 +1,3 @@
-import '@flaut-travel/react-md3e/badge/styles.css';
-import '@flaut-travel/react-md3e/icon-button/styles.css';
-
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Badge, IconButton } from '@flaut-travel/react-md3e';
 

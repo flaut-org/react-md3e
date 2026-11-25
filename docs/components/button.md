@@ -7,15 +7,13 @@ compiled styles and ThemeProvider do not introduce a client boundary.
 
 ```tsx
 import { Button } from '@flaut-travel/react-md3e';
-import '@flaut-travel/react-md3e/styles.css';
 
 <Button variant="filled" size="medium" shape="round">
   Continue
 </Button>;
 ```
 
-Alternatively import Button from `@flaut-travel/react-md3e/button`. The stylesheet is required once at
-the application root. CSS-variable fallbacks provide the default appearance even without a
+Alternatively import Button from `@flaut-travel/react-md3e/button`. Its precompiled styles and dependencies load automatically. CSS-variable fallbacks provide the default appearance even without a
 ThemeProvider; use a provider for scoped or system-mode themes.
 
 ## API

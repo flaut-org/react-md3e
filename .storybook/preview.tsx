@@ -1,7 +1,6 @@
 import type { Preview } from '@storybook/react-vite';
 import { ThemeProvider } from '@flaut-travel/react-md3e';
 import type { ColorSchemePreference, Theme } from '@flaut-travel/react-md3e';
-import '@flaut-travel/react-md3e/theme/styles.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/600.css';

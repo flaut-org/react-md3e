@@ -50,8 +50,7 @@ export function DestinationSearch() {
 }
 ```
 
-Import both components/types from the root or `/search`. Import `/search/styles.css` at the owning
-composition boundary and `/theme/styles.css` once at the app root. For a search app bar, pass Search
+Import both components/types from the root or `/search`. Component and ThemeProvider styles load automatically. For a search app bar, pass Search
 as the direct child of `AppBar variant="search"`; `/app-bar/styles.css` includes the Search family.
 See [AppBar](app-bar.md) for its spacing, alignment and scrolled colors.
 `SearchBar` belongs to Search's ownership directory but is an intentional public composition part.

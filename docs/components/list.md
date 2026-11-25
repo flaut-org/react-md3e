@@ -7,7 +7,6 @@ typography, shapes, states, and motion are precompiled CSS.
 
 ```tsx
 import { List, ListItem } from '@flaut-travel/react-md3e';
-import '@flaut-travel/react-md3e/styles.css';
 
 <List>
   <ListItem primary="Lisbon" secondary="Portugal" leading="L" leadingKind="avatar" />

@@ -21,7 +21,7 @@ export function TripSummary() {
 }
 ```
 
-Import `/styles.css` once at the application root. The root and `/surface` entry export Surface and its
+Precompiled styles load automatically from the component import. The root and `/surface` entry export Surface and its
 own types. The example is usable from RSC and streamed content. Supply layout/padding through a
 compiled className; Surface does not prescribe padding or a content hierarchy.
 

@@ -1,5 +1,3 @@
-import '@flaut-travel/react-md3e/button-group/styles.css';
-
 import type { Decorator, Meta, StoryObj } from '@storybook/react-vite';
 import { ButtonGroup, ButtonGroupButton } from '@flaut-travel/react-md3e';
 

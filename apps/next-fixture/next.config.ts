@@ -9,6 +9,10 @@ const config: NextConfig = {
   // The fixture follows the repository's hand-written AGENTS.md.
   agentRules: false,
   reactStrictMode: true,
+  // Webpack's RSC traversal otherwise collects every barrel export's CSS before pruning.
+  experimental: {
+    optimizePackageImports: process.env.MD3E_DISABLE_IMPORT_OPTIMIZATION === '1' ? [] : ['@flaut-travel/react-md3e'],
+  },
   turbopack: { root: workspaceRoot },
 };
 

@@ -1,6 +1,3 @@
-import '@flaut-travel/react-md3e/button/styles.css';
-import '@flaut-travel/react-md3e/card/styles.css';
-
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button, Card, CardContent, CardActions, CardMedia, CardActionArea } from '@flaut-travel/react-md3e';
 import { CardActionDemo } from './card-action-demo/card-action-demo.component';

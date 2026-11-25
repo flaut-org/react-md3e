@@ -7,8 +7,6 @@ algorithm. Standard is a restrained spring scheme, not the legacy duration/easin
 ```tsx
 import { Button, ThemeProvider } from '@flaut-travel/react-md3e';
 import { createTheme } from '@flaut-travel/react-md3e/theme';
-import '@flaut-travel/react-md3e/theme/styles.css';
-import '@flaut-travel/react-md3e/button/styles.css';
 
 const theme = createTheme({ sourceColor: '#9a91e0', motionScheme: 'standard' });
 

@@ -1,6 +1,3 @@
-import '@flaut-travel/react-md3e/radio/styles.css';
-import '@flaut-travel/react-md3e/radio-group/styles.css';
-
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { Radio, RadioGroup } from '@flaut-travel/react-md3e';

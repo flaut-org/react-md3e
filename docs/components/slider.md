@@ -1,12 +1,10 @@
 # Slider
 
 Slider provides Material 3 standard, centered and range selection with five Expressive sizes.
-Import Slider and its public types from the root or `/slider`, and load `/slider/styles.css` at the
-owning route/composition. Import `/theme/styles.css` once in the application.
+Import Slider and its public types from the root or `/slider`, with automatic CSS loading. ThemeProvider loads theme defaults.
 
 ```tsx
 import { Slider } from '@flaut-travel/react-md3e/slider';
-import '@flaut-travel/react-md3e/slider/styles.css';
 
 <Slider label="Volume" defaultValue={40} step={5} marks valueLabelDisplay="auto" />;
 ```

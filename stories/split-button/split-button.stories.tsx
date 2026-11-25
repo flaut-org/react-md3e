@@ -1,5 +1,3 @@
-import '@flaut-travel/react-md3e/split-button/styles.css';
-
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { MenuCheckboxItem, MenuGroup, MenuItem, MenuSubmenu, SplitButton } from '@flaut-travel/react-md3e';
 import { ControlledSplitButton } from './controlled-split-button/controlled-split-button.component';

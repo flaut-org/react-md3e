@@ -1,5 +1,3 @@
-import '@flaut-travel/react-md3e/range-calendar/styles.css';
-import '@flaut-travel/react-md3e/surface/styles.css';
 import { useState } from 'react';
 import { RangeCalendar, Surface } from '@flaut-travel/react-md3e';
 import type { RangeCalendarValue } from '@flaut-travel/react-md3e';
@@ -18,7 +16,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Range selection composed from Calendar, with contiguous range bands, previews and mouse/pen endpoint dragging. range-calendar/styles.css includes Calendar and its dependency styles.',
+          'Range selection composed from Calendar, with contiguous range bands, previews and mouse/pen endpoint dragging. Calendar and its dependency styles load automatically.',
       },
     },
   },

@@ -1,5 +1,3 @@
-import '@flaut-travel/react-md3e/typography/styles.css';
-
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Typography } from '@flaut-travel/react-md3e';
 

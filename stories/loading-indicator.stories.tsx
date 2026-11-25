@@ -1,4 +1,3 @@
-import '@flaut-travel/react-md3e/loading-indicator/styles.css';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { LoadingIndicator } from '@flaut-travel/react-md3e';
 

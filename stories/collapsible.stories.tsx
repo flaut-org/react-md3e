@@ -1,7 +1,3 @@
-import '@flaut-travel/react-md3e/button/styles.css';
-import '@flaut-travel/react-md3e/collapsible/styles.css';
-import '@flaut-travel/react-md3e/text-field/styles.css';
-
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button, Collapsible, TextField } from '@flaut-travel/react-md3e';
 

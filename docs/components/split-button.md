@@ -1,8 +1,7 @@
 # SplitButton
 
 SplitButton pairs a primary Button with a trailing Button opening the existing Menu. Import it
-from the package root or `/split-button`, and load `/split-button/styles.css` at the composition
-boundary. Its CSS closure includes Button, Menu, shared menu presentation and ripple; no separate
+from the package root or `/split-button`, with automatic CSS loading. Its CSS closure includes Button, Menu, shared menu presentation and ripple; no separate
 Button or Menu stylesheet import is required.
 
 ```tsx

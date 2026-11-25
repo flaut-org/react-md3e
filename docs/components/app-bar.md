@@ -7,8 +7,6 @@ Interactive actions can be independent client components such as IconButton.
 
 ```tsx
 import { AppBar, IconButton } from '@flaut-travel/react-md3e';
-import '@flaut-travel/react-md3e/app-bar/styles.css';
-import '@flaut-travel/react-md3e/icon-button/styles.css';
 
 <AppBar
   title="Your collection"
@@ -136,7 +134,6 @@ at the block start. Fixed/sticky bars use z-index 1100; applications own their o
 
 ```tsx
 import { AppBar, IconButton, Search } from '@flaut-travel/react-md3e';
-import '@flaut-travel/react-md3e/app-bar/styles.css';
 
 <AppBar
   variant="search"
@@ -183,8 +180,8 @@ The resting header uses surface and the persistent search uses surfaceContainer.
 the header to surfaceContainer and the search to surfaceContainerHighest without a shadow.
 Leading and trailing icons use onSurfaceVariant. The expanded Search view keeps its own typography,
 colors, geometry and theme inheritance. Reduced-motion and forced-colors handling remain in the
-shared Search implementation. `/app-bar/styles.css` includes Search, SearchBar, IconButton and ripple
-styles; additional result components need their own family CSS. JavaScript exports remain CSS-free.
+shared Search implementation. AppBar automatically loads Search, SearchBar, IconButton and ripple styles. Additional result
+components load their own CSS from their imports. The legacy `/app-bar/styles.css` export remains available.
 
 All four current Material variants and automatic scroll behaviors are available; AppBar is marked
 implemented in the README. Platform adaptations and visual verification limits are listed below.

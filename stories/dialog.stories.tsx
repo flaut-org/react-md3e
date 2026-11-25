@@ -1,7 +1,3 @@
-import '@flaut-travel/react-md3e/button/styles.css';
-import '@flaut-travel/react-md3e/dialog/styles.css';
-import '@flaut-travel/react-md3e/icon-button/styles.css';
-
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useArgs } from 'storybook/preview-api';
 import { useId, useRef, useState } from 'react';

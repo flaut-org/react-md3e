@@ -6,7 +6,6 @@ precompiled and follows ThemeProvider without React context.
 
 ```tsx
 import { IconButton } from '@flaut-travel/react-md3e';
-import '@flaut-travel/react-md3e/styles.css';
 
 <IconButton aria-label="Save" variant="tonal">
   <svg viewBox="0 0 24 24" focusable="false">

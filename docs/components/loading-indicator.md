@@ -6,14 +6,13 @@ cookie4Sided and oval. A numeric value selects the determinate circle-to-soft-bu
 
 ```tsx
 import { LoadingIndicator } from '@flaut-travel/react-md3e';
-import '@flaut-travel/react-md3e/loading-indicator/styles.css';
 
 <LoadingIndicator aria-label="Loading flights" />;
 <LoadingIndicator variant="contained" aria-label="Updating results" />;
 <LoadingIndicator value={45} aria-label="Preparing preview" />;
 ```
 
-Import `/theme/styles.css` once for ThemeProvider defaults, or let component token fallbacks apply.
+ThemeProvider loads its defaults automatically, or component token fallbacks apply without a provider.
 The direct JS import is `/loading-indicator`; it never imports the color generator or an animation
 engine. All geometry and keyframes are extracted at library build time. This component has no
 hooks or client directive and works in RSC and streamed Suspense fallbacks before hydration.
@@ -91,7 +90,7 @@ A Button can opt into this indicator through its existing loadingIndicator prop:
 </Button>
 ```
 
-Import both CSS families at that composition boundary. Button retains its lightweight default
+Both CSS families load automatically from their component imports. Button retains its lightweight default
 spinner, so ordinary Button pages do not pay for the seven-shape choreography.
 
 ## Sources and checks

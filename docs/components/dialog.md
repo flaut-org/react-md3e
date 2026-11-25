@@ -9,7 +9,6 @@ compiled at build time and inherits ThemeProvider tokens without client theme co
 
 import { useState } from 'react';
 import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@flaut-travel/react-md3e';
-import '@flaut-travel/react-md3e/styles.css';
 
 export function SaveCollection() {
   const [open, setOpen] = useState(false);

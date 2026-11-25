@@ -7,7 +7,6 @@ React rendering; it is ordinary value/ARIA handling, not runtime CSS rule genera
 
 ```tsx
 import { ProgressIndicator } from '@flaut-travel/react-md3e';
-import '@flaut-travel/react-md3e/progress-indicator/styles.css';
 
 <ProgressIndicator value={40} aria-label="Uploading files" />;
 <ProgressIndicator type="circular" appearance="wavy" value={40} aria-label="Uploading files" />;
@@ -26,7 +25,7 @@ instead of flat bars. No value is needed:
 <ProgressIndicator type="linear" appearance="wavy" variant="indeterminate" aria-label="Searching for flights" />
 ```
 
-Import `@flaut-travel/react-md3e/progress-indicator/styles.css` at this composition boundary.
+Precompiled styles load automatically from the component import.
 Storybook's **Components / ProgressIndicator / Wavy Linear Indeterminate** demonstrates this exact
 configuration with its default 4px stroke and 10px container. `thickness={8}` selects the thicker
 14px container. The two segments travel forward while their wave phase moves independently;
@@ -91,7 +90,10 @@ continuous two-pass cycle. Both appearances use the same whole-track coordinates
 never changes the movement's coordinate system.
 
 The SVG container animates four typed CSS percentage variables declared with static `@property`
-rules. Both active rectangles inherit their edge positions. Two intersected gradient masks remove
+rules. Their `<length-percentage>` syntax and zero-length initial value keep registration valid
+when Webpack/cssnano reduces `0px` to `0`; all animated edge values still use percentages. A
+percentage-only registration with a minified unitless zero is invalid and would animate discretely.
+Both active rectangles inherit their edge positions. Two intersected gradient masks remove
 these intervals plus 4px from the remaining track, preserving transparent gaps even when the
 passes overlap. This uses native browser CSS interpolation and masking; there is no JavaScript
 property registration, frame loop or rule insertion. Determinate x/width transitions are disabled

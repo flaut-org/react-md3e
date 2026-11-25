@@ -1,92 +1,165 @@
-# Route-level component CSS
+# Automatic component CSS
 
-Import the theme scope once, then import styles only for the component families used by a route or
-composition. CSS is compiled by the library; consumers need no Linaria/WyW plugin or source scanning.
-
-```tsx
-// app/layout.tsx
-import '@flaut-travel/react-md3e/theme/styles.css';
-```
+Import components from the package root or their subpaths. Their implementation modules load
+precompiled CSS automatically; consumers need no stylesheet imports, compiler plugin or source scanning.
 
 ```tsx
-// app/page.tsx — an RSC, without a client directive
-import { Button, ThemeProvider } from '@flaut-travel/react-md3e';
-import '@flaut-travel/react-md3e/button/styles.css';
+// app/page.tsx — a React Server Component
+import { Button, Checkbox, ThemeProvider } from '@flaut-travel/react-md3e';
 
 export default function Page() {
   return (
-    <ThemeProvider>
+    <ThemeProvider colorScheme="light">
       <Button>Continue</Button>
+      <Checkbox aria-label="Accept terms" />
     </ThemeProvider>
   );
 }
 ```
 
-Every UI subpath has a CSS export: `/button/styles.css`, `/fab/styles.css`, `/extended-fab/styles.css`, `/fab-menu/styles.css`, `/icon-button/styles.css`,
-`/navigation-bar/styles.css`, `/navigation-rail/styles.css`, `/navigation-drawer/styles.css`,
-`/tabs/styles.css`, `/calendar/styles.css`, `/range-calendar/styles.css`, `/slider/styles.css`,
-`/app-bar/styles.css`, `/dialog/styles.css`, `/list/styles.css`, `/checkbox/styles.css`,
-`/radio/styles.css`, `/radio-group/styles.css`, `/avatar/styles.css`, `/text-field/styles.css`,
-`/autocomplete/styles.css`, `/popover/styles.css`, `/menu/styles.css`, `/surface/styles.css`, `/card/styles.css`,
-`/shape/styles.css`, `/search/styles.css`, `/typography/styles.css`, `/skeleton/styles.css`,
-`/divider/styles.css`, `/tooltip/styles.css`, `/collapsible/styles.css`, `/button-group/styles.css`, `/split-button/styles.css`, `/segmented-button/styles.css`,
-`/bottom-sheet/styles.css`, `/side-sheet/styles.css`, and `/snackbar/styles.css`.
+`import { Button } from '@flaut-travel/react-md3e/button'` loads the same styles. A production
+bundler with tree-shaking includes the used implementations and their CSS dependencies. The root
+barrel has no stylesheet imports. `sideEffects: ['**/*.css']` preserves the CSS of retained modules
+while allowing unrelated JavaScript and its CSS imports to be removed.
 
-A family includes its public composition parts and transitive presentation dependencies. For example,
-Button includes loading and ripple;
-Fab/ExtendedFab include their shared FabButton and Button presentation; FabMenu additionally includes
-Menu and MenuItem dependencies; Card includes Surface and its action/content/media parts;
-AppBar includes Search/SearchBar, IconButton and ripple for its search composition.
-SplitButton includes the existing Button/Menu families and their shared menu presentation.
-Autocomplete includes TextField, shared MenuSurface/MenuItemContent presentation, ripple, selection
-indicators and chips. It does not require importing `/menu/styles.css` or load Menu's interaction
-adapters, trigger/group/submenu styles. Importing the
-family does not require manually discovering these internal files. Dependencies shared by several
-families reference the same private CSS assets. Framework bundlers resolve the ordinary CSS imports;
-internal hashed filenames are not a public API.
+ThemeProvider automatically loads its default scope, color-scheme declarations and theme variables.
+It remains a server-compatible CSS scope without hooks or React context. Components without a
+provider still have their existing token fallbacks. Color generation stays in the separate `/theme`
+server/build utility, which imports no CSS.
 
-The theme stylesheet contains the default ThemeProvider scope and light/dark/system declarations.
-It does not include component families. Custom `createTheme`/`themeToCss` output can override its
-variables as before; load custom theme CSS after the default scope. Component styles have no copy
-of the default theme variables. Use a ThemeProvider scope for portal inheritance.
+## Dependencies and ordering
 
-JavaScript exports remain CSS-free. Named imports from the package root are supported without pulling
-all styles through barrel side effects. Raw Node/server theme utilities still work without a CSS
-loader; server-compatible presentation does not gain hydration. Importing CSS is an explicit consumer
-choice, supported in Next server route files and normal Vite/Storybook modules.
+Vite 7 and Linaria/WyW continue to extract private per-module assets with `cssCodeSplit: true` and
+`preserveModules: true`. The existing `componentCss()` build plugin reads the final
+`viteMetadata.importedCss` after Vite removes pure CSS chunks. It generates ordinary static imports
+in the modules that own those assets, with relative paths to their canonical extracted files.
+It does not attach a component's entire dependency closure to a public JavaScript barrel.
 
-## Migrating the full stylesheet
+Ordinary JavaScript dependencies bring their own styles: Button includes its loading spinner and
+ripple; Checkbox includes shared selection-control and SelectionIndicator presentation;
+Autocomplete includes TextField, chips, MenuSurface/MenuItemContent and selection presentation.
+Shared assets keep the same URLs and are deduplicated by the consumer bundler.
 
-Remove `import '@flaut-travel/react-md3e/styles.css'` from the application root. Add the theme stylesheet
-there and the used family styles at each route or reusable consumer composition. Styling a deferred
-component still requires its CSS: import the family at its owner or in the server shell if it must
-be styled before streamed content appears. Exercise client navigation as well as direct loads.
+Public composition parts passed through ReactNode can be absent from an owner's import graph.
+The build-time `compositionCssDependencies` table attaches Search's CSS closure to AppBar's
+implementation, and the complete Menu closure to SplitButton's implementation. This preserves the
+existing family contracts without importing another interaction implementation just for its CSS.
+New composition-only dependencies must be recorded in this table.
 
-The legacy `/styles.css` export remains an explicit all-components compatibility aggregate. It is
-not imported automatically and is not used by the Next fixture or Storybook preview. Avoid mixing
-it with granular imports, since doing so defeats route-level isolation. Individual Storybook stories
-import their own families; only theme CSS is global to the preview.
+Traversal uses stable import and metadata order, with declared composition dependencies before the
+owner. Existing `use client` directives stay first, ahead of every import. Whole unmapped lines are
+inserted after the directive prologue; existing source-map columns and source deltas remain intact.
+The emitted maps and their Node equivalents are checked against each other at original source
+locations. Repeated Vite consumer builds check deterministic assets and CSS order.
 
-Next may prefetch styles for linked routes and retain CSS after client navigation. Those framework
-behaviors do not make the library a runtime CSS engine or imply that every route needs every family.
-Use an appropriate routing/prefetch policy when measuring initial requests.
+Custom `themeToCss` output should follow the default scope in the cascade. Prefer a distinct custom
+class such as `.brand-theme` on ThemeProvider (or a more specific selector) instead of depending on
+framework chunk order for equal-specificity overrides. Application-authored component overrides
+likewise need deliberate specificity/layer ordering. No runtime rules, registry, style insertion,
+DOM styling engine or extra hydration is introduced.
 
-## Build and verification
+## Next.js Webpack root imports
 
-Vite 7 `cssCodeSplit: true` extracts private per-module assets. A build-only plugin reads the emitted
-chunk import graph and Vite CSS metadata to produce family entrypoints. It includes synchronous and
-asynchronous composition dependencies, deduplicates asset paths, and preserves dependency-before-owner
-order. It then removes generated CSS imports from UI JS, leaving loading to the explicit CSS exports.
-Compositions accepting public parts through ReactNode declare their family dependency at build time:
-SplitButton includes the complete Menu entry, whose item/group/submenu exports are not visible in
-SplitButton's own JavaScript imports. These dependencies are emitted before the owner's styles.
-This does not parse styles, generate rules in the browser, or infer usage from HTML.
+Next.js 16.4.6 Webpack traverses all exports of an RSC barrel before pruning unused CSS. A plain
+root import consequently collects unrelated component CSS even with `sideEffects` set correctly;
+rewriting the emitted barrel as direct re-exports does not change that behavior. Enable Next's
+package-import optimization for root named imports:
 
-`sideEffects: ['**/*.css']` keeps CSS imports alive. No component, state, variant, theme rule, media
-query or keyframe is pruned based on an initial render. Shape geometry stays exclusively behind the
-Shape CSS entry unless the compatibility aggregate is explicitly imported.
+```ts
+// next.config.ts
+export default {
+  experimental: {
+    optimizePackageImports: ['@flaut-travel/react-md3e'],
+  },
+};
+```
 
-Package checks traverse the actual packed CSS imports, verify their paths and dependencies, and
-reject Shape from Button/Autocomplete. Production HTTP and no-JavaScript browser tests verify styled
-Button markup and absence of Shape rules on a Button page, while `/surfaces` still receives Shape.
-The interaction/streaming/Storybook suites verify dependent states and route transitions.
+This is a Next experimental setting and is required for the verified Webpack root-import CSS
+isolation. The fixture and CI exercise that configuration. Turbopack and Vite prune root imports
+without this setting. See [Next's package-import documentation](https://nextjs.org/docs/app/api-reference/config/next-config-js/optimizePackageImports)
+and [its documented RSC barrel limitation](https://nextjs.org/blog/next-14-2).
+
+Alternatively, use only component subpaths, including the new `/theme-provider` entry. This works
+in Webpack without `optimizePackageImports` and without importing any CSS manually:
+
+```tsx
+import { Button } from '@flaut-travel/react-md3e/button';
+import { Checkbox } from '@flaut-travel/react-md3e/checkbox';
+import { ThemeProvider } from '@flaut-travel/react-md3e/theme-provider';
+```
+
+`npm run build:webpack-subpaths` verifies this independent production configuration. Avoid mixing
+a root UI import into that composition when using Webpack without the optimization.
+
+## Native Node and SSR compatibility
+
+Native Node rejects `.css` imports with `ERR_UNKNOWN_FILE_EXTENSION`. To preserve ordinary Node
+imports and the existing native `--conditions=react-server` checks without a loader, the same build
+also emits a CSS-free ESM graph under `dist/node`. Its implementation, relative imports and client
+directives are identical; only automatic CSS imports are absent. Source maps point to the same
+original files. This duplicates the UI JavaScript in the package archive, not the application bundle.
+
+UI export conditions are ordered `types`, `module`, `browser`, `node`, `import`, `default`:
+
+- Vite, Next Webpack and Next Turbopack select the styled `module`/`browser` graph. Both the server
+  and browser builds can collect static CSS without changing React's server/client boundaries.
+- Native Node, including `react-server`, selects the CSS-free `node` graph. The existing limitation
+  remains: raw Node does not interpret React client references, so its `react-server` checks import
+  server-only implementations; Next verifies mixed compositions and the package root.
+- Other CSS-aware bundlers use the styled `import`/`default` graph. A bundler that includes `node`
+  but neither `module` nor `browser` must enable `module` during dependency resolution to collect
+  automatic CSS. Do not enable `module` in native Node without a CSS loader.
+
+The `/theme` generator is unchanged and always directly importable in Node. An externalized SSR
+Node dependency intentionally selects the CSS-free graph; its paired client build must process the
+styled graph to emit CSS. An HTML-only Node renderer without any CSS-aware bundling step must use
+explicit CSS exports or its own asset pipeline. Native Node cannot deliver styles by itself.
+
+References: [Node conditional exports](https://nodejs.org/api/packages.html#conditional-exports),
+[Vite SSR conditions and externalization](https://vite.dev/config/ssr-options).
+
+## Migrating explicit styles
+
+Remove manual library CSS imports from routes, layouts and reusable compositions. ThemeProvider
+loads `/theme/styles.css`'s assets automatically; each used component brings its own styles.
+Storybook stories and the Next/Vite fixtures demonstrate this usage.
+
+All existing `/<component>/styles.css` and `/theme/styles.css` exports remain available, including
+their transitive/composition closures. `/styles.css` remains an optional aggregate for the full
+catalog. These entries preserve older consumers and support non-bundled HTML asset pipelines.
+Avoid mixing the aggregate or legacy family wrappers with automatic imports: consumer bundlers
+can deduplicate canonical assets, but wrappers can change ordering, and the aggregate intentionally
+defeats component CSS tree-shaking.
+
+Next can prefetch linked routes and retain CSS after navigation. Initial requests, route changes,
+streaming and lazy imports are tested separately. Framework chunk merging and retention are outside
+the library's ordering contract; no claim is made that navigation unloads unused CSS.
+
+## Verification
+
+`npm run check` includes packed-asset/import/source-map checks, native Node and react-server imports,
+strict public types, Next App Router production builds with Turbopack and Webpack, independent Vite
+root/subpath/composition/lazy production builds, Storybook, HTTP and Chromium checks.
+
+The acceptance fixtures render Button, Checkbox and ThemeProvider without manual imports, including
+with browser JavaScript disabled. Tests reject unrelated Shape, Calendar, Slider, Menu and AppBar
+styles from the Button/Checkbox routes, count shared ripple/theme output, check CSSOM duplication,
+and enforce CSS byte budgets. Other routes verify transitive/shared and composition-only styles,
+portals, client navigation and styled streamed content. Vite root and subpath builds must have equal
+CSS byte counts. Browser checks preserve the existing Chromium-only support claim.
+
+The 2026-11-25 Vite reference measurement uses identical markup for automatic root imports and a
+compatibility case selecting the CSS-free Node graph plus explicit theme/Button/Checkbox CSS entries:
+
+| Consumption                   | CSS bytes | CSS gzip bytes | Application JS bytes |
+| ----------------------------- | --------: | -------------: | -------------------: |
+| Automatic root imports        |    37,642 |          5,874 |              244,169 |
+| Automatic subpath imports     |    37,642 |          5,828 |              244,169 |
+| Legacy explicit CSS reference |    37,642 |          5,794 |              244,169 |
+
+The JavaScript measurement includes React and fixture hydration. Automatic imports add no application
+JavaScript or raw CSS; differing CSS order costs 80 gzip bytes against the explicit reference. Isolated
+root imports without ThemeProvider emit 13,582 CSS bytes for Button and 10,002 for Checkbox;
+ThemeProvider alone emits 15,516. The existing extracted CSS catalog is unchanged; the new ThemeProvider subpath adds only a
+compatibility CSS wrapper. The native Node graph adds approximately 325 kB of uncompressed JavaScript
+to the package archive, plus its source maps; consumer bundlers select only one graph.

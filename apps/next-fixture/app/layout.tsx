@@ -1,9 +1,7 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 
-import '@flaut-travel/react-md3e/theme/styles.css';
 import './globals.css';
-import './forest.generated.css';
 
 export const metadata: Metadata = {
   title: 'react-md3e development fixture',

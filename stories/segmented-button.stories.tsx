@@ -1,5 +1,3 @@
-import '@flaut-travel/react-md3e/segmented-button/styles.css';
-
 import type { Decorator, Meta, StoryObj } from '@storybook/react-vite';
 import { ButtonSegment, SegmentedButton } from '@flaut-travel/react-md3e';
 

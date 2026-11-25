@@ -5,52 +5,47 @@ Material 3 Expressive React components with precompiled CSS and a token-based th
 AppBar supports search, small, mediumFlexible and largeFlexible variants. Compose the existing
 Search as the direct child of `AppBar variant="search"` for docked/full-screen results, with inside
 and outside actions, centered hints and scrolled colors. `/app-bar/styles.css` includes Search's
-styles. Opt-in `scrollBehavior` supports pinned surfaces, flexible collapse/expansion and quick
+styles automatically. Opt-in `scrollBehavior` supports pinned surfaces, flexible collapse/expansion and quick
 return, with automatic nested-container detection or an explicit `scrollTarget`. Static AppBar
 remains server-compatible. See the
 [AppBar API](https://github.com/flaut-org/react-md3e/blob/main/docs/components/app-bar.md).
 
 Tabs, TabList, Tab and TabPanel provide primary/secondary Material 3 tabs, fixed/scrollable rows,
 icons and badges, controlled/uncontrolled selection, keyboard navigation, RTL and standard/Expressive
-indicator springs. Import from the root or `/tabs` and load `/tabs/styles.css` at the composition
-boundary. See the [Tabs API](https://github.com/flaut-org/react-md3e/blob/main/docs/components/tabs.md).
+indicator springs. Import from the root or `/tabs` for automatic CSS loading. See the [Tabs API](https://github.com/flaut-org/react-md3e/blob/main/docs/components/tabs.md).
 
 Slider provides standard, centered and two-handle range selection, five Expressive sizes,
 horizontal/vertical orientation, marks, value indicators and optional inset icons. Base UI owns
-keyboard/pointer behavior and native form inputs. Import from the root or `/slider`, with explicit
-`/slider/styles.css` loading. See the [Slider API](https://github.com/flaut-org/react-md3e/blob/main/docs/components/slider.md).
+keyboard/pointer behavior and native form inputs. Import from the root or `/slider`, with automatic CSS loading. See the [Slider API](https://github.com/flaut-org/react-md3e/blob/main/docs/components/slider.md).
 
 SegmentedButton and ButtonSegment provide baseline Material 3 outlined single/multiple selection,
 radio/checkbox semantics, keyboard navigation, selection indicators, native form values/reset and
-RTL. Import from the root or `/segmented-button`, with `/segmented-button/styles.css` at the owning
-composition. See the [SegmentedButton API](https://github.com/flaut-org/react-md3e/blob/main/docs/components/segmented-button.md).
+RTL. Import from the root or `/segmented-button`, with automatic CSS loading. See the [SegmentedButton API](https://github.com/flaut-org/react-md3e/blob/main/docs/components/segmented-button.md).
 The separate ButtonGroup supplies the Expressive connected/standard design.
 
 SplitButton pairs a primary Button with the existing Menu. It supports filled, tonal, outlined
 and elevated colors, all five Button sizes, connected shape morphs and an inward menu chevron.
-Import `/split-button/styles.css` at the composition boundary; it includes Button/Menu dependencies.
+Its styles and Button/Menu dependencies load automatically.
 See [SplitButton](https://github.com/flaut-org/react-md3e/blob/main/docs/components/split-button.md).
 
 Fab and ExtendedFab supply current Expressive sizes, explicit tone/container colors, lowered
 elevation, native buttons/links and extended-label motion. FabMenu/FabMenuItem reuse Menu for 2–6
-related floating actions. Load `/fab/styles.css`, `/extended-fab/styles.css` or `/fab-menu/styles.css`
-at the composition boundary. See [FAB family](https://github.com/flaut-org/react-md3e/blob/main/docs/components/fab.md).
+related floating actions. Each family loads its styles and dependencies automatically. See [FAB family](https://github.com/flaut-org/react-md3e/blob/main/docs/components/fab.md).
 
 Switch provides immediate on/off settings using Base UI, with native forms, optional handle icons,
 keyboard activation, RTL-aware pointer dragging and standard/Expressive CSS springs. Import from the
-root or `/switch`, and load `/switch/styles.css`. See the
+root or `/switch` for automatic styles. See the
 [Switch API](https://github.com/flaut-org/react-md3e/blob/main/docs/components/switch.md).
 
 Badge provides small notification dots and large counts/status labels, with RTL icon placement,
 error/onError colors and CSS visibility springs. It remains server-compatible. Import Badge from
-the package root or `/badge` and load `/badge/styles.css` at the composition boundary. Include the
+the package root or `/badge`; styles load automatically. Include the
 visible count/status in the destination's accessible name; describe the full count when abbreviated. See the
 [Badge API](https://github.com/flaut-org/react-md3e/blob/main/docs/components/badge.md).
 
 Calendar and RangeCalendar provide inline date selection using native Temporal.PlainDate and Intl.
 Use ISO strings or Temporal values, with `valueFormat="iso"` for string callbacks. Month navigation
-uses a full-width MUI-style slide and respects reduced motion. Import `/calendar/styles.css`
-or `/range-calendar/styles.css` (which includes Calendar) at the composition boundary. Both are
+uses a full-width MUI-style slide and respects reduced motion. CSS loads automatically, including Calendar dependencies for RangeCalendar. Both are
 available from the package root and their kebab-case subpaths. Native Temporal and Temporal-aware
 Intl are required; older runtimes need an application-installed compatible global polyfill.
 See [Calendar documentation](https://github.com/flaut-org/react-md3e/blob/main/docs/components/calendar.md).
@@ -59,8 +54,6 @@ Implemented: Calendar, RangeCalendar, Button, Fab, ExtendedFab, FabMenu/FabMenuI
 ```tsx
 import { Button, ThemeProvider } from '@flaut-travel/react-md3e';
 import { createTheme } from '@flaut-travel/react-md3e/theme';
-import '@flaut-travel/react-md3e/theme/styles.css';
-import '@flaut-travel/react-md3e/button/styles.css';
 
 const theme = createTheme({ sourceColor: '#386a20' });
 
@@ -72,6 +65,14 @@ export default function Page() {
   );
 }
 ```
+
+Component and ThemeProvider CSS loads automatically with root or subpath imports. Production bundlers
+tree-shake unrelated styles. Next Webpack requires
+`experimental.optimizePackageImports: ['@flaut-travel/react-md3e']` for root named imports;
+alternatively use only component subpaths, including `/theme-provider`. Existing explicit CSS exports remain available for compatibility. Native
+Node selects an equivalent CSS-free ESM graph; CSS-aware bundlers select `module`/`browser` exports.
+See [CSS loading](https://github.com/flaut-org/react-md3e/blob/main/docs/css-loading.md) for SSR conditions
+and non-bundled Node rendering.
 
 Call createTheme in server/build code. Its separate entry keeps color generation out of component
 imports. ThemeProvider is a CSS scope without hooks or context. Button composes Base UI, is
@@ -152,14 +153,13 @@ supports selectOnFocus and clearOnEscape. See the repository's component documen
 contracts, portal hydration boundaries and examples.
 
 LoadingIndicator and ProgressIndicator are exported from the root and `/loading-indicator` /
-`/progress-indicator`. They remain RSC-compatible and use precompiled CSS: import the corresponding
-`/<component>/styles.css` entries. LoadingIndicator morphs seven MD3 shapes (contained/uncontained)
+`/progress-indicator`. They remain RSC-compatible and automatically load their precompiled CSS. LoadingIndicator morphs seven MD3 shapes (contained/uncontained)
 and accepts controlled progress; ProgressIndicator provides linear/circular flat/wavy displays,
 known/unknown progress, 4/8 thicknesses and accessible finite ranges. Both support themes,
 reduced motion and forced colors. See the repository's docs/components/loading-indicator.md and
 docs/components/progress-indicator.md; the fixture `/indicators` and Storybook have working examples.
 
 Menu and its item, selection, grouping and submenu parts are available from `/menu` or the root.
-Import `/menu/styles.css` at the composition boundary. Expressive standard/vibrant menus use
+Styles load automatically. Expressive standard/vibrant menus use
 Base UI focus/typeahead/dismissal and support keyboard-accessible nested menus and grouped surfaces with gaps. See
 [Menu documentation](https://github.com/flaut-org/react-md3e/blob/main/docs/components/menu.md).

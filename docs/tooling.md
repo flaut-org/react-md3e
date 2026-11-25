@@ -95,7 +95,7 @@ These exceptions do not disable rules for other components.
 For client navigation, scope actions to DOM belonging to the destination route. A click on a Next
 Link does not guarantee that a streamed destination has replaced the old page; identical trigger
 names can otherwise match the departing page. The Dialog integration test waits for /streaming and
-uses its streaming-ready region. Each route must also import the CSS families used by its streamed
+uses its streaming-ready region. Component imports automatically load CSS for streamed
 content; a prior page's stylesheet must not be required for correct presentation.
 
 When a Playwright test runs AxeBuilder against a Storybook iframe, use the Storybook global
@@ -104,6 +104,13 @@ concurrent automatic/manual scans can throw "Axe is already running". This setti
 explicitly scanned iframe; the awaited AxeBuilder scan and its violation assertions still run, and
 automatic Storybook accessibility checks remain enabled elsewhere. `!true` is Storybook's boolean
 URL encoding, not the string "true".
+
+Motion frame tests arm a MutationObserver before changing a component state. It pauses CSS motion
+in the browser microtask that starts the transition, so a delayed Playwright command cannot miss a
+short animation on a busy runner. Sampled search tests advance paused native animations through
+real requestAnimationFrame/ResizeObserver frames, then resume their remaining duration for Base UI's
+native animation-end unmount and focus handoff. Existing curve, geometry and opacity tolerances stay
+unchanged. The local `test:bundlers` command runs the full browser suite against Webpack, matching CI.
 
 ## CI job graph
 
@@ -122,16 +129,17 @@ The local `npm run check` command remains the sequential full validation entry p
    is disabled so each check can report its own result.
 4. **Unit tests** runs `test:unit` and `test:release` only after all four checks pass. `test:http` is
    separate because it starts a production Next.js server; `npm test` still runs both unit and HTTP tests.
-5. **Build fixture** and **Build storybook** run in parallel after unit tests. They consume the package
-   artifact and upload their production output. The fixture archive includes hidden `.next` files,
-   preserves permissions/links and excludes the compiler cache.
-6. **HTTP integration tests** and four **Playwright** shards run in parallel against those production artifacts.
-   Playwright needs both app builds because its servers use `next start` and the static Storybook
-   preview. Running it alongside those builds would require building the apps a second time in the
-   browser jobs. Each shard restores dependencies and both app artifacts, then installs Chromium/system
-   dependencies and runs `test:browser -- --shard=<index>/4`. The existing `fullyParallel: true` config
-   distributes individual tests across shards; each shard keeps two workers, for up to eight workers
-   across four runners. Matrix fail-fast is disabled so one failure does not cancel other shards.
+5. **Build fixture**, **Build fixture:webpack**, **Build webpack-subpaths**, **Build vite-fixture** and **Build storybook** run in
+   parallel after unit tests. They consume the package artifact and upload production output. Each
+   Next fixture archive includes hidden `.next` files, preserves permissions/links and excludes the
+   compiler cache. Webpack root imports use optimizePackageImports; the separate subpath build disables
+   it to verify configuration-free subpath CSS. Vite independently builds root, subpath, composition and lazy cases, asserts CSS
+   dependency/size contracts, then rebuilds the root to check deterministic assets and ordering.
+6. **HTTP integration tests** run for both Next bundlers. Four **Playwright** shards per bundler run
+   against the corresponding Next artifact, shared Vite cases and Storybook preview. Each job installs
+   Chromium/system dependencies and runs `test:browser -- --shard=<index>/4`. The denominator stays four
+   even though the bundler matrix has eight jobs. Tests remain fully parallel with two workers per
+   shard. Matrix fail-fast is disabled so one failure does not cancel the other jobs.
 7. **check** always runs and succeeds only when every preceding job succeeded. Failed, skipped or
    cancelled prerequisites make this aggregate check fail. It retains the existing required-check name.
 
@@ -144,7 +152,7 @@ replaced when their producer is rerun; downstream-only retries reuse the existin
 Failed Playwright shards retain browser diagnostics for seven days, with the shard index and run
 attempt in the artifact name to prevent collisions. The aggregate check waits for every shard.
 
-To reproduce one shard locally after building the package, fixture and Storybook, run
+To reproduce one shard locally after building the package, fixture, Vite fixture and Storybook, run
 `npm run test:browser -- --shard=1/4` (replace `1` with `2`, `3` or `4` for the other shards).
 Local `npm run test:browser` still runs the complete suite with two workers. See the official
 [Playwright sharding guide](https://playwright.dev/docs/test-sharding) for the distribution rules.

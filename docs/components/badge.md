@@ -1,14 +1,12 @@
 # Badge
 
 Badge displays a small notification dot or a large count/status label. It is available from the
-package root and `/badge`, with an explicit `/badge/styles.css` entry. It is a passive Server
+package root and `/badge`, with automatic precompiled CSS loading. It is a passive Server
 Component with no hooks, client directive, runtime style generation or additional dependency.
 Base UI has no applicable interaction primitive for this presentation component.
 
 ```tsx
 import { Badge, IconButton } from '@flaut-travel/react-md3e';
-import '@flaut-travel/react-md3e/badge/styles.css';
-import '@flaut-travel/react-md3e/icon-button/styles.css';
 
 export function Inbox() {
   return (

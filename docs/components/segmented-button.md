@@ -1,12 +1,10 @@
 # SegmentedButton
 
 Baseline Material 3 outlined segmented selection, exported as SegmentedButton and ButtonSegment from
-the package root or `/segmented-button`. Load `/segmented-button/styles.css` at the composition boundary;
-it includes the shared ripple. Load `/theme/styles.css` once in the application.
+the package root or `/segmented-button`. Component styles, including shared ripple, load automatically. ThemeProvider loads theme defaults.
 
 ```tsx
 import { ButtonSegment, SegmentedButton } from '@flaut-travel/react-md3e/segmented-button';
-import '@flaut-travel/react-md3e/segmented-button/styles.css';
 
 <SegmentedButton aria-label="Calendar view" defaultValue="week" name="view">
   <ButtonSegment value="day">Day</ButtonSegment>

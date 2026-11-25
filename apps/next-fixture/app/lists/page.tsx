@@ -1,12 +1,3 @@
-import '@flaut-travel/react-md3e/avatar/styles.css';
-import '@flaut-travel/react-md3e/button/styles.css';
-import '@flaut-travel/react-md3e/dialog/styles.css';
-import '@flaut-travel/react-md3e/icon-button/styles.css';
-import '@flaut-travel/react-md3e/list/styles.css';
-import '@flaut-travel/react-md3e/surface/styles.css';
-import '@flaut-travel/react-md3e/text-field/styles.css';
-import '@flaut-travel/react-md3e/typography/styles.css';
-
 import Link from 'next/link';
 import { Avatar, List, ListItem, ThemeProvider } from '@flaut-travel/react-md3e';
 import { createTheme } from '@flaut-travel/react-md3e/theme';

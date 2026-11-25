@@ -1,9 +1,3 @@
-import '@flaut-travel/react-md3e/checkbox/styles.css';
-import '@flaut-travel/react-md3e/button/styles.css';
-import '@flaut-travel/react-md3e/card/styles.css';
-import '@flaut-travel/react-md3e/shape/styles.css';
-import '@flaut-travel/react-md3e/surface/styles.css';
-
 import {
   Surface,
   Shape,

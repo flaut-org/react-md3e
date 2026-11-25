@@ -232,6 +232,8 @@ test('rapid dismissal and reopening retarget the same items and restore their in
   await trigger.press('ArrowDown');
   await expect(menu).not.toHaveAttribute('data-ending-style');
   await expect(menu.getByRole('menuitem').first()).toBeFocused();
+  // Focus can precede the opening frame; finish animations only after the starting state clears.
+  await expect(menu).not.toHaveAttribute('data-starting-style');
   await finishMotion(menu);
   await finishMotion(trigger);
 

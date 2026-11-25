@@ -3,11 +3,10 @@
 `NavigationBar`, `NavigationRail`, `NavigationDrawer` and their shared `NavigationItem` implement
 primary destination navigation. Import the roots from the package root or `/navigation-bar`,
 `/navigation-rail`, `/navigation-drawer`; each family entry also exports NavigationItem and its types.
-Load `/theme/styles.css` once and the used family CSS at the owning composition boundary.
+Each family and ThemeProvider load their precompiled CSS automatically.
 
 ```tsx
 import { NavigationBar, NavigationItem } from '@flaut-travel/react-md3e/navigation-bar';
-import '@flaut-travel/react-md3e/navigation-bar/styles.css';
 
 <NavigationBar aria-label="Main destinations" defaultValue="home">
   <NavigationItem value="home" icon={<HomeIcon />} selectedIcon={<FilledHomeIcon />}>
@@ -54,7 +53,7 @@ official guidance recommends short visible labels for all destinations. Keep slo
 The ordinary inline label supplies the accessible text; a separate aria-hidden visual copy is used
 for stacked labels so cross-fading does not announce the destination twice. Badge content can supply
 additional accessible text; the separate Badge component's indicator is decorative, so include its
-meaning in the item's name when appropriate and import `/badge/styles.css` for that composition.
+meaning in the item's name when appropriate with automatically loaded Badge CSS.
 `disableRipple` keeps focus feedback. Native attributes, className, style and element refs are supported.
 
 ## NavigationBar

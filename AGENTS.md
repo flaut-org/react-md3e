@@ -52,10 +52,11 @@ changing the package. Treat the user's current instructions as the source of tas
   JavaScript; `scripts/finalize-declarations.mjs` resolves and normalizes emitted declaration paths
   for Node ESM. Do not reintroduce source extensions to fix a distribution issue.
 - Keep CSS side effects in package metadata; `sideEffects: false` would allow CSS to be lost.
-- CSS loading is explicit: import `/theme/styles.css` once and `/<component>/styles.css` at the owning
-  route/composition boundary. Public CSS entries include the emitted dependency closure. Never attach
-  every component stylesheet to a JS barrel or the fixture root layout. `/styles.css` is an opt-in
-  compatibility aggregate, not the default. See `docs/css-loading.md`.
+- CSS loads automatically through static implementation imports generated from Vite metadata. Keep
+  the root barrel free of stylesheet imports and preserve component CSS tree-shaking. Record CSS-only
+  composition dependencies in componentCss(). ThemeProvider loads its scope automatically. Preserve
+  the CSS-free native Node export graph, directives and source maps. Explicit CSS exports remain
+  compatibility entries; `/styles.css` is an opt-in aggregate. See `docs/css-loading.md`.
 - Runtime dependencies must be intentional. React and React DOM are peer dependencies. The styling
   compiler and color/token generation tools belong in development tooling. The isolated theme
   generator bundle is the intentional public server/build utility.

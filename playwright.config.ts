@@ -27,5 +27,11 @@ export default defineConfig({
       reuseExistingServer: false,
       timeout: 30000,
     },
+    {
+      command: 'npm run serve:vite-fixture',
+      url: 'http://127.0.0.1:3200/root/',
+      reuseExistingServer: false,
+      timeout: 30000,
+    },
   ],
 });

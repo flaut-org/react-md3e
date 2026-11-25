@@ -1,15 +1,3 @@
-import '@flaut-travel/react-md3e/radio/styles.css';
-import '@flaut-travel/react-md3e/radio-group/styles.css';
-import '@flaut-travel/react-md3e/autocomplete/styles.css';
-import '@flaut-travel/react-md3e/button/styles.css';
-import '@flaut-travel/react-md3e/dialog/styles.css';
-import '@flaut-travel/react-md3e/divider/styles.css';
-import '@flaut-travel/react-md3e/icon-button/styles.css';
-import '@flaut-travel/react-md3e/list/styles.css';
-import '@flaut-travel/react-md3e/popover/styles.css';
-import '@flaut-travel/react-md3e/text-field/styles.css';
-import '@flaut-travel/react-md3e/typography/styles.css';
-
 import { Button, Popover, PopoverClose, TextField, ThemeProvider } from '@flaut-travel/react-md3e';
 import { createTheme } from '@flaut-travel/react-md3e/theme';
 import { PassengerPickerDemo } from './passenger-picker-demo/passenger-picker-demo.component';
