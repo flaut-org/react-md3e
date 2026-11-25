@@ -105,6 +105,13 @@ explicitly scanned iframe; the awaited AxeBuilder scan and its violation asserti
 automatic Storybook accessibility checks remain enabled elsewhere. `!true` is Storybook's boolean
 URL encoding, not the string "true".
 
+Motion frame tests arm a MutationObserver before changing a component state. It pauses CSS motion
+in the browser microtask that starts the transition, so a delayed Playwright command cannot miss a
+short animation on a busy runner. Sampled search tests advance paused native animations through
+real requestAnimationFrame/ResizeObserver frames, then resume their remaining duration for Base UI's
+native animation-end unmount and focus handoff. Existing curve, geometry and opacity tolerances stay
+unchanged. The local `test:bundlers` command runs the full browser suite against Webpack, matching CI.
+
 ## CI job graph
 
 [CI](../.github/workflows/ci.yml) runs on main pushes, pull requests and manual dispatches. It is also

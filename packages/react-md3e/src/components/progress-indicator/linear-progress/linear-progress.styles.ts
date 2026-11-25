@@ -47,10 +47,12 @@ const firstTail = '--md3e-progress-linear-first-tail';
 const firstHead = '--md3e-progress-linear-first-head';
 const secondTail = '--md3e-progress-linear-second-tail';
 const secondHead = '--md3e-progress-linear-second-head';
+// Webpack/cssnano can shorten zero units in initial-value. Length-percentage accepts that
+// unitless zero, keeping registrations valid while every animated edge remains a percentage.
 const registrations = Object.fromEntries(
   [firstTail, firstHead, secondTail, secondHead].map((name) => [
     `@property ${name}`,
-    { syntax: '"<percentage>"', inherits: 'true', initialValue: '0%' },
+    { syntax: '"<length-percentage>"', inherits: 'true', initialValue: '0px' },
   ]),
 ) as Record<`@property --${string}`, { syntax: string; inherits: 'true'; initialValue: string }>;
 const cutout = (tail: string, head: string) => {

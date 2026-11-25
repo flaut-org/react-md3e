@@ -16,7 +16,8 @@
     "packages/react-md3e/tests/types-consumer/**/*.ts",
     "apps/next-fixture/**/tests/**/*.ts",
     "packages/react-md3e/tests/vite-consumer/**/*.ts",
-    "packages/react-md3e/tests/vite-consumer/**/*.tsx"
+    "packages/react-md3e/tests/vite-consumer/**/*.tsx",
+    "packages/react-md3e/tests/browser/**/*.ts"
   ],
   "exclude": ["node_modules", "**/dist/**", "**/.next/**"]
 }

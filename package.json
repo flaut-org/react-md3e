@@ -45,7 +45,7 @@
     "build:fixture:webpack": "npm run build:webpack --workspace=@react-md3e/next-fixture",
     "build:vite-fixture": "node scripts/build-vite-fixture.mjs",
     "serve:vite-fixture": "vite preview --config packages/react-md3e/tests/vite-consumer/vite.config.ts --host 127.0.0.1 --port 3200 --strictPort --outDir dist",
-    "test:bundlers": "npm run build:fixture:webpack && npm run test:http && npm run test:browser -- apps/next-fixture/tests/css-loading.browser.spec.ts && npm run build:webpack-subpaths && npm run build:fixture",
+    "test:bundlers": "npm run build:fixture:webpack && npm run test:http && npm run test:browser && npm run build:webpack-subpaths && npm run build:fixture",
     "build:webpack-subpaths": "node scripts/check-webpack-subpaths.mjs"
   },
   "devDependencies": {

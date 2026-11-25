@@ -90,7 +90,10 @@ continuous two-pass cycle. Both appearances use the same whole-track coordinates
 never changes the movement's coordinate system.
 
 The SVG container animates four typed CSS percentage variables declared with static `@property`
-rules. Both active rectangles inherit their edge positions. Two intersected gradient masks remove
+rules. Their `<length-percentage>` syntax and zero-length initial value keep registration valid
+when Webpack/cssnano reduces `0px` to `0`; all animated edge values still use percentages. A
+percentage-only registration with a minified unitless zero is invalid and would animate discretely.
+Both active rectangles inherit their edge positions. Two intersected gradient masks remove
 these intervals plus 4px from the remaining track, preserving transparent gaps even when the
 passes overlap. This uses native browser CSS interpolation and masking; there is no JavaScript
 property registration, frame loop or rule insertion. Determinate x/width transitions are disabled

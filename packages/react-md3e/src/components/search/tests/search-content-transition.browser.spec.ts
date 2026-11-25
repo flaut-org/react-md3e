@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { pauseMotionOnAttributeChange } from '../../../../tests/browser/pause-motion';
 
 for (const story of ['search-app-bar', 'centered-search']) {
   test(`${story}: Escape retains the focus frame through the exit and native focus restoration`, async ({ page }) => {
@@ -151,6 +152,8 @@ for (const [story, query, closeByPointer] of [
     await view.evaluate(async (node) => {
       await Promise.all(node.getAnimations({ subtree: true }).map((animation) => animation.finished.catch(() => {})));
     });
+
+    await pauseMotionOnAttributeChange(view, 'data-ending-style');
 
     if (closeByPointer) {
       await view.getByRole('button', { name: 'Back', exact: true }).click();

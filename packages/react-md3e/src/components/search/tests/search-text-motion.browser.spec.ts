@@ -1,4 +1,44 @@
 import { expect, test } from '@playwright/test';
+import type { Locator } from '@playwright/test';
+import { pauseMotionOnAttributeChange } from '../../../../tests/browser/pause-motion';
+
+async function sampleMotionThroughFrames(element: Locator) {
+  await element.evaluate(async (root) => {
+    const animations = root
+      .getAnimations({ subtree: true })
+      .filter((animation) => Number.isFinite(Number(animation.effect?.getComputedTiming().endTime ?? Infinity)));
+
+    if (animations.length === 0) {
+      throw new Error('Expected captured CSS motion before sampling frames.');
+    }
+
+    await Promise.all(animations.map((animation) => animation.ready));
+
+    const duration = Math.max(...animations.map((animation) => Number(animation.effect!.getComputedTiming().endTime)));
+
+    for (let step = 0; step < 13; step += 1) {
+      for (const animation of animations) {
+        animation.currentTime = (duration * step) / 13;
+      }
+
+      // Deliver real layout/ResizeObserver frames at fixed native animation times.
+      await new Promise<void>((resolve) => {
+        requestAnimationFrame(() => resolve());
+      });
+    }
+
+    for (const animation of animations) {
+      if (Number(animation.currentTime) < Number(animation.effect!.getComputedTiming().endTime)) {
+        animation.play();
+      } else {
+        animation.finish();
+      }
+    }
+
+    // Resume the last part on the native clock so Base UI performs its real animation-end handoff.
+    await Promise.all(animations.map((animation) => animation.finished.catch(() => {})));
+  });
+}
 
 interface TextFrame {
   readonly time: number;
@@ -18,7 +58,7 @@ for (const [scheme, width, direction] of [
   ['expressive', 720, 'ltr'],
   ['expressive', 680, 'rtl'],
 ] as const) {
-  test(`${scheme} ${width}px ${direction}: native text stays inside the input and reaches center before natural handoff`, async ({
+  test(`${scheme} ${width}px ${direction}: native text stays inside the input and reaches center before native handoff`, async ({
     page,
   }) => {
     await page.goto(
@@ -74,8 +114,11 @@ for (const [scheme, width, direction] of [
 
         const left = contentLeft + offset + indent * (rtl ? -1 : 1) - input.scrollLeft;
 
+        const times =
+          popup?.getAnimations({ subtree: true }).map((animation) => Number(animation.currentTime ?? 0)) ?? [];
+
         state.frames.push({
-          time: performance.now(),
+          time: times.length ? Math.max(...times) : (state.frames.at(-1)?.time ?? 0),
           popup: !!popup,
           ending: !!popup?.hasAttribute('data-ending-style'),
           left,
@@ -97,6 +140,10 @@ for (const [scheme, width, direction] of [
       });
       record();
     });
+    await pauseMotionOnAttributeChange(page.locator('body'), 'data-starting-style', {
+      value: null,
+      selector: '[data-md3-search-view]',
+    });
     await page.getByRole('searchbox').click();
 
     const view = page.getByRole('dialog');
@@ -104,11 +151,10 @@ for (const [scheme, width, direction] of [
     await expect(view.getByRole('searchbox')).toBeFocused();
     await expect(view.getByRole('searchbox')).toHaveCSS('direction', direction);
     await expect(view).not.toHaveAttribute('data-starting-style');
-    // Observe the browser's natural clock, including ResizeObserver delivery and Base UI unmount.
-    await view.evaluate(async (node) => {
-      await Promise.all(node.getAnimations({ subtree: true }).map((animation) => animation.finished.catch(() => {})));
-    });
+    await sampleMotionThroughFrames(view);
+    await pauseMotionOnAttributeChange(view, 'data-ending-style');
     await page.keyboard.press('Escape');
+    await sampleMotionThroughFrames(view);
     await expect(view).toHaveCount(0);
     await expect(page.getByRole('searchbox')).toBeFocused();
 
@@ -123,7 +169,7 @@ for (const [scheme, width, direction] of [
     const closing = frames.filter((frame) => frame.ending);
     const restored = frames.find((frame, index) => index > 0 && !frame.popup && frames[index - 1]?.ending);
     const distance = Math.max(...opening.map((frame) => frame.indent), ...closing.map((frame) => frame.indent));
-    const earlyReturn = closing.filter((frame) => frame.time - closing[0]!.time <= 250).at(-1)!;
+    const earlyReturn = closing.filter((frame) => frame.time <= 250).at(-1)!;
 
     expect(opening.length).toBeGreaterThan(5);
     expect(closing.length).toBeGreaterThan(5);

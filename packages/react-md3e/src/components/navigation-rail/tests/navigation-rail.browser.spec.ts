@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { pauseMotionOnAttributeChange } from '../../../../tests/browser/pause-motion';
 import reference from './navigation-motion.reference.json' with { type: 'json' };
 
 test('rail arrows and Home/End move focus without selecting, skip disabled items and preserve Tab stops', async ({
@@ -243,13 +244,8 @@ test('Storybook rail captures synchronized expansion frames for both motion sche
     const root = page.getByRole('navigation', { name: 'Expandable destinations', exact: true });
 
     await expect(root).toHaveCSS('width', '96px');
+    await pauseMotionOnAttributeChange(root, 'data-expanded');
     await page.getByRole('button', { name: 'Toggle navigation', exact: true }).click();
-    await root.evaluate((node) => {
-      for (const animation of node.getAnimations({ subtree: true })) {
-        animation.pause();
-        animation.currentTime = 0;
-      }
-    });
 
     const frames = [];
 
