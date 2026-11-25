@@ -15,16 +15,20 @@ const barStyles = {
   'padding': 4,
   'borderRadius': 'var(--md-sys-shape-corner-full, 9999px)',
   'border': '1px solid transparent',
-  'backgroundColor': color('surfaceContainerHigh'),
+  'backgroundColor': `var(--_search-bar-container-color, ${color('surfaceContainerHigh')})`,
   'color': color('onSurface'),
   'cursor': 'text',
   'transition': `box-shadow ${motion('effects')}, background-color ${motion('effects')}`,
   '@media (hover: hover)': {
     "&:hover:not([data-disabled='true']):not(:focus-within)": {
-      backgroundColor: `color-mix(in srgb, ${color('onSurface')} 8%, ${color('surfaceContainerHigh')})`,
+      backgroundColor: `color-mix(in srgb, ${color('onSurface')} 8%, var(--_search-bar-container-color, ${color('surfaceContainerHigh')}))`,
     },
   },
   '&:focus-within': { boxShadow: `inset 0 0 0 2px ${color('secondary')}` },
+  "&[data-retain-focus='true']": {
+    boxShadow: `inset 0 0 0 2px ${color('secondary')}`,
+    transition: `background-color ${motion('effects')}`,
+  },
   "&[data-full-width='true']": { inlineSize: '100%' },
   "&[data-disabled='true']": { opacity: 0.38, cursor: 'default' },
   '@media (prefers-reduced-motion: reduce)': { transition: 'none' },
@@ -33,6 +37,7 @@ const barStyles = {
     'backgroundColor': 'Canvas',
     'color': 'CanvasText',
     '&:focus-within': { outline: '2px solid Highlight', outlineOffset: -2 },
+    "&[data-retain-focus='true']": { outline: '2px solid Highlight', outlineOffset: -2 },
   },
 } satisfies StyleObject;
 
@@ -68,7 +73,7 @@ const leadingStyles = {
   'flex': '0 0 auto',
   'minInlineSize': 48,
   'blockSize': 48,
-  'color': color('onSurface'),
+  'color': `var(--_search-bar-leading-color, ${color('onSurface')})`,
   '& > svg': { inlineSize: 24, blockSize: 24, fill: 'currentColor' },
 } satisfies StyleObject;
 

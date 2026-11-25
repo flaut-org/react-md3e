@@ -222,7 +222,8 @@ belongs to the surfaces route. Neither demo is part of the distributed library.
 
 Search follows the same ownership rule: search.component.tsx owns search-bar/, search-view/ and
 search-icons/. SearchBar is a public composition part within that feature; SearchView and icons
-remain private. Search and SearchBar keep their tests in their respective tests/ directories.
+remain private. SearchView owns search-header-transition/, its inert source-adornment picture and
+layout helpers. Search and SearchBar keep their tests in their respective tests/ directories.
 
 Homepage essentials follow the same tree. Skeleton, Divider, Tooltip, Collapsible, BottomSheet,
 SideSheet and Snackbar are top-level features with tests/ beside their implementation. Shared
@@ -237,3 +238,8 @@ import the complete Shape stylesheet. LoadingIndicator's private loading-indicat
 normalizes silhouette bounds and aligns morph vertices only during CSS extraction. ProgressIndicator owns private linear-progress and
 circular-progress child components; range normalization is shared with LoadingIndicator under
 `src/internal/indicators`, with its own tests directory.
+
+AppBar owns private app-bar-scroll/ controller, observation and geometry modules. Only the opt-in
+controller is a client boundary; layout, typography and motion stay with AppBar's extracted styles.
+AppBar's tests/ cover both static/search presentation and automatic scrolling. The app-bar-scroll
+fixture route owns its runtime demo beneath app-bar-scroll-demo/.

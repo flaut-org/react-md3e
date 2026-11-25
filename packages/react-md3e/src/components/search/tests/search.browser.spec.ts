@@ -16,7 +16,7 @@ test('focus opens a named modal, traps focus, closes on Escape and restores the 
   await expect(view).toHaveAttribute('aria-modal', 'true');
   await expect(view.getByRole('searchbox')).toBeFocused();
   await expect(bar).toHaveAttribute('aria-controls', 'destination-search-view');
-  await expect(bar).toHaveAttribute('aria-expanded', 'true');
+  await expect(bar).not.toHaveAttribute('aria-expanded');
   await page.keyboard.press('Shift+Tab');
   await expect(view.getByRole('button', { name: 'Back', exact: true })).toBeFocused();
   await page.keyboard.press('Shift+Tab');
@@ -54,7 +54,7 @@ test('freeform query, clear, controlled updates and result selection preserve on
   await view.getByRole('button', { name: 'Porto', exact: true }).click();
   await expect(view).toHaveCount(0);
   await expect(bar).toHaveValue('Porto');
-  await expect(bar).toBeFocused();
+  await expect(bar).not.toBeFocused();
   await page.getByRole('button', { name: 'Set query from code' }).click();
   await expect(bar).toHaveValue('Rome');
   await page.getByRole('button', { name: 'Open search from code' }).click();
@@ -64,6 +64,95 @@ test('freeform query, clear, controlled updates and result selection preserve on
   await expect(view.getByRole('searchbox')).toHaveAttribute('data-ref-checked', 'true');
   await expect(bar).toHaveAttribute('data-ref-checked', 'true');
   await expect(page.locator('[data-md3-search]').first()).toHaveAttribute('data-ref-checked', 'true');
+});
+
+test('typing, paste and keyboard activation reopen restored search without dropping input or submitting', async ({
+  page,
+}) => {
+  await page.goto('/search');
+
+  const bar = page.getByTestId('controlled-search').getByRole('searchbox');
+  const view = page.getByRole('dialog', { name: searchName, exact: true });
+
+  await bar.click();
+  await view.getByRole('searchbox').fill('Rome');
+  await page.keyboard.press('Escape');
+  await expect(view).toHaveCount(0);
+  await expect(bar).toBeFocused();
+  await bar.press('End');
+  await page.keyboard.type('!');
+  await expect(view.getByRole('searchbox')).toHaveValue('Rome!');
+  await expect(view.getByRole('searchbox')).toBeFocused();
+  await expect(page.getByTestId('search-query')).toHaveText('Rome!');
+  await page.keyboard.press('Escape');
+  await expect(view).toHaveCount(0);
+  await bar.press('Enter');
+  await expect(view.getByRole('searchbox')).toBeFocused();
+  await expect(page.getByTestId('search-submitted')).toHaveText('');
+  await page.keyboard.press('Escape');
+  await expect(view).toHaveCount(0);
+  await bar.evaluate((input) => {
+    Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')!.set!.call(input, 'Pasted query');
+    input.dispatchEvent(new InputEvent('input', { bubbles: true, inputType: 'insertFromPaste', data: 'Pasted query' }));
+  });
+  await expect(view.getByRole('searchbox')).toHaveValue('Pasted query');
+  await page.keyboard.press('Escape');
+  await expect(view).toHaveCount(0);
+  await bar.press('End');
+  await page.keyboard.type(' ');
+  await expect(view.getByRole('searchbox')).toHaveValue('Pasted query ');
+});
+
+test('IME composition in a restored field commits before focus moves to the expanded input', async ({ page }) => {
+  await page.goto('/search');
+
+  const bar = page.getByTestId('controlled-search').getByRole('searchbox');
+  const view = page.getByRole('dialog', { name: searchName, exact: true });
+
+  await bar.click();
+  await page.keyboard.press('Escape');
+  await expect(view).toHaveCount(0);
+  await bar.dispatchEvent('compositionstart', { data: '' });
+  await bar.evaluate((input) => {
+    Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')!.set!.call(input, '東京');
+    input.dispatchEvent(
+      new InputEvent('input', { bubbles: true, inputType: 'insertCompositionText', data: '東京', isComposing: true }),
+    );
+  });
+  await expect(view).toHaveCount(0);
+  await expect(bar).toBeFocused();
+  await bar.dispatchEvent('compositionend', { data: '東京' });
+  await expect(view.getByRole('searchbox')).toHaveValue('東京');
+  await expect(view.getByRole('searchbox')).toBeFocused();
+});
+
+test('pointer Back and click-away end editing; keyboard dismissal restores an actionable search field', async ({
+  page,
+}) => {
+  await page.goto('/components');
+
+  const bar = page.getByTestId('bar-search').getByRole('searchbox');
+  const view = page.getByRole('dialog', { name: 'Search collection', exact: true });
+
+  await bar.click();
+  await view.getByRole('searchbox').fill('Draft');
+  await view.getByRole('button', { name: 'Back', exact: true }).click();
+  await expect(view).toHaveCount(0);
+  await expect(bar).not.toBeFocused();
+  await page.keyboard.type('ignored');
+  await expect(bar).toHaveValue('Draft');
+  await expect(view).toHaveCount(0);
+  await bar.click();
+  await expect(view.getByRole('searchbox')).toHaveValue('Draft');
+  await page.mouse.click(1, 1);
+  await expect(view).toHaveCount(0);
+  await expect(bar).not.toBeFocused();
+  await bar.click();
+  await page.keyboard.press('Escape');
+  await expect(view).toHaveCount(0);
+  await expect(bar).toBeFocused();
+  await bar.press('ArrowDown');
+  await expect(view.getByRole('searchbox')).toBeFocused();
 });
 
 test('Enter submits through the form once and moves focus to results; composing Enter stays in input', async ({
@@ -185,6 +274,13 @@ test('auto layout changes from docked to fullscreen without replacing focused qu
   await expect(view.getByRole('searchbox')).toHaveValue('P');
   await page.setViewportSize({ width: 1280, height: 720 });
   await expect.poll(async () => (await view.boundingBox())?.width).toBeLessThan(721);
+  await expect
+    .poll(async () => {
+      const box = (await view.boundingBox())!;
+
+      return box.x >= 12 && box.x + box.width <= 1268 && box.y + box.height <= 709;
+    })
+    .toBe(true);
 
   const bounds = (await view.boundingBox())!;
 
@@ -294,6 +390,7 @@ test('Search is accessible in Next and Storybook, streams, and inserts no style 
 
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/search');
+  expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
 
   const before = await page.locator('style').count();
 

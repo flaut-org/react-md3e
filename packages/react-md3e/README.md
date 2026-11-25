@@ -2,6 +2,14 @@
 
 Material 3 Expressive React components with precompiled CSS and a token-based theme API.
 
+AppBar supports search, small, mediumFlexible and largeFlexible variants. Compose the existing
+Search as the direct child of `AppBar variant="search"` for docked/full-screen results, with inside
+and outside actions, centered hints and scrolled colors. `/app-bar/styles.css` includes Search's
+styles. Opt-in `scrollBehavior` supports pinned surfaces, flexible collapse/expansion and quick
+return, with automatic nested-container detection or an explicit `scrollTarget`. Static AppBar
+remains server-compatible. See the
+[AppBar API](https://github.com/flaut-org/react-md3e/blob/main/docs/components/app-bar.md).
+
 Tabs, TabList, Tab and TabPanel provide primary/secondary Material 3 tabs, fixed/scrollable rows,
 icons and badges, controlled/uncontrolled selection, keyboard navigation, RTL and standard/Expressive
 indicator springs. Import from the root or `/tabs` and load `/tabs/styles.css` at the composition

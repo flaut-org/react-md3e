@@ -50,7 +50,10 @@ export function DestinationSearch() {
 }
 ```
 
-Import both components/types from the root or `/search`. Import `/styles.css` once at the app root.
+Import both components/types from the root or `/search`. Import `/search/styles.css` at the owning
+composition boundary and `/theme/styles.css` once at the app root. For a search app bar, pass Search
+as the direct child of `AppBar variant="search"`; `/app-bar/styles.css` includes the Search family.
+See [AppBar](app-bar.md) for its spacing, alignment and scrolled colors.
 `SearchBar` belongs to Search's ownership directory but is an intentional public composition part.
 
 ## Shared input API
@@ -77,6 +80,9 @@ The clear action counts toward that space; use `disableClearable` when composing
 Read-only query text has no clear action. The internal input is text with role searchbox,
 inputMode/enterKeyHint search; this avoids native search-input Escape/clear behavior conflicting
 with modal dismissal. Applications own autocomplete attributes and localization.
+The persistent searchbox uses `aria-haspopup="dialog"` and, while open, `aria-controls` to identify
+the search view. It omits `aria-expanded`, which the searchbox role does not support in
+[WAI-ARIA 1.2](https://www.w3.org/TR/wai-aria-1.2/#searchbox).
 
 ## Search view API
 
@@ -101,8 +107,9 @@ with modal dismissal. Applications own autocomplete attributes and localization.
 Close reasons are `escapeKeyDown`, `clickAway`, `backButtonClick`, `programmatic`.
 Changing controlled open directly does not emit a request callback. Choosing a result does not
 implicitly close or overwrite the query: update both in the consumer when desired. Values survive
-closing in either state mode. A restored bar receives focus without reopening; a new click/focus
-opens it again. Leading content on the persistent bar is replaced by Back when expanded.
+closing in either state mode. Keyboard dismissal restores focus to the persistent field without immediately reopening it.
+Typing, pasting, committed IME input, Enter or ArrowDown activates search again; query text is
+preserved. Pointer Back/click-away releases editing focus instead of restoring a text caret. Leading content on the persistent bar is replaced by Back when expanded.
 
 Base UI Dialog provides modal focus containment, scroll locking, nested overlays, Escape and
 outside-press dismissal. Both layouts block the background. The bar stays in the server DOM;
@@ -114,7 +121,11 @@ the fixed-position containing block through transforms/containment.
 ## Keyboard and forms
 
 - Focus the persistent query or click the bar surface to open; initial focus moves to the expanded query.
-- Back, Escape and scrim close with focus restored to the persistent input.
+- Back and scrim close suggestions/results and end pointer editing. Keyboard dismissal (including
+  Escape or keyboard activation of Back) restores logical focus to the persistent input. A new
+  edit reopens the expanded view; Enter/ArrowDown reopens it without executing a search.
+- The exiting query remains available for immediate reactivation: clicking its header, typing,
+  Enter/ArrowDown or committing IME input reverses the exit without waiting for the closing motion.
 - Tab/Shift+Tab visit native controls within the modal.
 - ArrowDown/ArrowUp from the query enter the first/last enabled result action. Native buttons/links
   in results support Up/Down/Home/End; Up at the first returns to the query. Nested widgets handling
@@ -134,8 +145,18 @@ history, a combobox listbox, or Android predictive-back gestures.
 
 ## Motion and adaptation
 
-Docked mode expands the bar horizontally (24px outer margins become 12px), then reveals results
-through opacity and scaleY/translation from their top edge. It caps width at 720px and results height
+Docked mode morphs the opaque bar from its actual measured rectangle to the expanded rectangle
+(24px outer margins become 12px). Results reveal through opacity and scaleY/translation from
+their top edge. The input/header does not fade or scale its text. Text position and icon-slot widths
+share one bounded CSS progress value, including a centered persistent label. Its monotonic default
+effects spring takes 200ms in both schemes so native text cannot overshoot its clipping boundary.
+The registered progress belongs to the popup, keeping Base UI's lifecycle active even when the
+source and expanded rectangles are identical. Static box edges supply the input base without
+per-frame rounding noise or transition retargeting. Back and the source leading icon
+crossfade with rotation; persistent trailing adornments fade and scale into their original positions.
+On close, the header returns to
+the original rectangle and surface color before the persistent bar becomes visible again; Base UI
+transition completion coordinates the handoff, including keepMounted and controlled closes. It caps width at 720px and results height
 so the combined view uses at most two-thirds of the viewport, or available space near an edge.
 Results scroll internally. Compact/fullScreen mode morphs the measured bar rectangle to the viewport,
 with a 72px header and contained round bar/results. Opening and closing use themed MD3 spring tokens
@@ -143,11 +164,15 @@ like the other components: slow spatial for full-screen geometry, default spatia
 and effects tokens for opacity.
 CSS handles breakpoint changes without replacing the input or losing its query/focus.
 
-A private hook measures only anchor coordinates and dimensions into CSS custom properties, and
-updates them on resize/scroll. Opening waits for a layout measurement before Base UI mounts the
+A private hook captures anchor coordinates, dimensions and the originating surface color into
+CSS custom properties, and updates them on resize/scroll. Opening waits for a layout measurement before Base UI mounts the
 view, so the initial CSS state receives the actual bar rectangle. No JS animation loop, WAAPI, runtime CSS rule generation,
 style-tag insertion or positioning dependency is added. All motion rules, state selectors and theme
-roles are extracted at build time. Reduced motion disables transitions/progress animation; forced
+roles are extracted at build time. Native input text metrics are measured with canvas to resolve
+center/end alignment; a private inert, aria-hidden DOM picture carries the source adornments during
+the transition without mounting their React trees twice. The picture has no duplicate IDs, named
+form controls or focus targets. Keyboard dismissal retains the focus frame through exit and native
+focus restoration; subsequent blur clears it. Reduced motion disables transitions/progress animation; forced
 colors use system colors; Back mirrors in RTL. Geometry changes use ordinary CSS interpolation,
 without velocity-preserving retargeting.
 
@@ -174,3 +199,30 @@ Tests cover production Next RSC/streaming, Storybook, public types, native forms
 controlled/uncontrolled values, keyboard/focus/dismissal, retained state, nested combobox,
 responsive geometry/CSS interpolation, themes/containers, RTL, reduced motion and accessibility.
 Chromium is verified; other engines and pixel parity with Figma or Android are not claimed.
+
+Search handoff and dismissal reviewed again on 2026-11-25 against the official
+[guidelines](https://m3.material.io/components/search/guidelines),
+[specifications](https://m3.material.io/components/search/specs) and
+[accessibility guidance](https://m3.material.io/components/search/accessibility), rendered in Chromium.
+Contained search retains a rounded, persistent bar; activating an entry point opens focused search;
+Back releases input focus and dismisses suggestions/results. The web adaptation retains keyboard
+focus for accessible modal return, while pointer dismissal ends editing. Keyboard reactivation
+never leaves an editable query disconnected from its expanded view. Standalone SearchBar retains
+its independent native-input contract. No exact Figma/Android motion parity is claimed.
+
+Regression tests sample opaque headers and measured source/target geometry during docked and
+full-screen opening/closing, including wide bars, nested dark themes, and focus return. They also
+cover pointer deactivation, keyboard activation without submission, first-character preservation,
+paste, committed IME composition, and retained content.
+
+Header content motion was reviewed on 2026-11-25 against the same official guidance and
+[AndroidX SearchBar.kt at 89d9aa6a5b9fc6e4847002be42f3c6891b091c9e](https://github.com/androidx/androidx/blob/89d9aa6a5b9fc6e4847002be42f3c6891b091c9e/compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/SearchBar.kt).
+AndroidX provides a reference for interpolated search geometry and input offsets. The icon
+rotation/crossfade and inert adornment picture are web adaptations, not a prescribed Google
+choreography; no upstream source was copied. Regression tests inspect intermediate icon/text
+positions, final alignment before handoff, and every rendered focus frame across Escape dismissal.
+Additional tests observe natural animation frames in both motion schemes, equal-width surfaces and
+RTL without advancing or finishing animations. They check native text bounds, return timing and
+continuity at unmount, plus pointer, keyboard and IME reactivation during exit. Native text metrics
+use the input's border box with each padding/border removed once; its editing-area clientWidth is
+not treated as a second border box.

@@ -3,7 +3,7 @@ import '@flaut-travel/react-md3e/icon-button/styles.css';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { AppBar, IconButton } from '@flaut-travel/react-md3e';
+import { AppBar, IconButton, Search } from '@flaut-travel/react-md3e';
 import { menuIcon, moreIcon, starIcon } from './example-icons';
 
 const navigation = (
@@ -35,7 +35,7 @@ const meta = {
     actions,
   },
   argTypes: {
-    variant: { control: 'select', options: ['small', 'mediumFlexible', 'largeFlexible'] },
+    variant: { control: 'select', options: ['search', 'small', 'mediumFlexible', 'largeFlexible'] },
     position: { control: 'select', options: ['static', 'relative', 'sticky', 'fixed', 'absolute'] },
     titleAlign: { control: 'inline-radio', options: ['start', 'center'] },
     title: { control: 'text' },
@@ -87,6 +87,42 @@ export const Centered: Story = { args: { titleAlign: 'center', title: 'Collectio
 export const Scrolled: Story = { args: { scrolled: true } };
 export const RightToLeft: Story = { args: { dir: 'rtl', title: 'المكتبة', subtitle: 'المجموعات المحفوظة' } };
 export const CustomTitle: Story = { args: { children: <strong>Flaut · Discover a new journey</strong> } };
+export const SearchAppBar: Story = {
+  args: {
+    variant: 'search',
+    children: (
+      <Search label="Search collection">
+        <a href="#collection">Explore collection</a>
+      </Search>
+    ),
+  },
+};
+export const CenteredSearch: Story = {
+  args: {
+    variant: 'search',
+    titleAlign: 'center',
+    actions: (
+      <IconButton variant="standard" aria-label="More options">
+        {moreIcon}
+      </IconButton>
+    ),
+    children: (
+      <Search
+        label="Search collection"
+        leading={null}
+        disableClearable
+        trailing={
+          <IconButton variant="standard" aria-label="Voice search">
+            {starIcon}
+          </IconButton>
+        }
+      >
+        <a href="#collection">Explore collection</a>
+      </Search>
+    ),
+  },
+};
+export const ScrolledSearch: Story = { ...SearchAppBar, args: { ...SearchAppBar.args, scrolled: true } };
 
 function ScrollExample() {
   const [scrolled, setScrolled] = useState(false);
@@ -106,6 +142,41 @@ function ScrollExample() {
 }
 
 export const Sticky: Story = { render: () => <ScrollExample /> };
+export const Collapsing: Story = {
+  args: {
+    variant: 'largeFlexible',
+    subtitle: 'Scroll to collapse',
+    scrollBehavior: 'exitUntilCollapsed',
+    scrolled: undefined,
+    position: 'sticky',
+  },
+  render: (args) => (
+    <div className="story-scroll">
+      <AppBar {...args} />
+      <div className="story-scroll-content">
+        The flexible bar collapses to its compact layout and expands at the start of the content.
+      </div>
+    </div>
+  ),
+};
+export const QuickReturn: Story = {
+  args: { scrollBehavior: 'enterAlways', scrolled: undefined, position: 'sticky' },
+  render: (args) => (
+    <div className="story-scroll">
+      <AppBar {...args} />
+      <div className="story-scroll-content">Scroll down to hide the bar, then up to reveal it.</div>
+    </div>
+  ),
+};
+export const Pinned: Story = {
+  args: { scrollBehavior: 'pinned', scrolled: undefined, position: 'sticky' },
+  render: (args) => (
+    <div className="story-scroll">
+      <AppBar {...args} />
+      <div className="story-scroll-content">The bar keeps its size and changes its surface automatically.</div>
+    </div>
+  ),
+};
 export const Fixed: Story = {
   render: (args) => (
     <div className="story-fixed">

@@ -70,9 +70,12 @@ See [Calendar](components/calendar.md) for compatibility and runtime requirement
 behavior foundation for interactive primitives. Button composes the Base UI Button and is a client
 component for semantics and press ripple behavior. IconButton shares those primitives and the
 private ripple controller. AppBar is a native header layout and stays server-compatible; its
-actions can contain independent client controls. Scroll elevation is controlled by the consumer.
+actions can contain independent client controls. Optional scroll behavior mounts a private
+app-bar-scroll/ client marker, whose callback-ref cleanup owns browser subscriptions and measured
+geometry. The single server label moves into the compact layout through extracted CSS; a positioning
+frame preserves scroll range. Surface state is automatic unless overridden with scrolled.
 Button and IconButton render HTML on the server and hydrate for interaction; AppBar itself needs
-no hydration when used from RSC. ThemeProvider and style modules remain server-compatible without
+no hydration in its default static mode when used from RSC. ThemeProvider and style modules remain server-compatible without
 client context.
 
 MUI conventions may be reused where appropriate, but there is no runtime/type dependency or promise
@@ -280,8 +283,11 @@ See [Surface](components/surface.md), [Shape](components/shape.md) and [Card](co
 
 Search owns a public nested SearchBar (Base UI Input), private SearchView (Base UI Dialog), and
 private search icons. Its query is independent of selected-item Autocomplete behavior. The portal
-resolver preserves CSS themes; the anchor hook supplies only measured geometry variables to compiled
-CSS rectangle/scale transitions. Search/SearchBar hydrate for input/overlay behavior, while theme and
+resolver preserves CSS themes; the anchor hook supplies measured geometry and the originating
+surface color and input/adornment geometry through CSS variables. The opaque search header morphs
+between rectangles; text offsets and icon slots interpolate while results and adornments fade.
+SearchView owns a private inert source-adornment picture without mounting duplicate React children.
+Base UI completion coordinates the return to the persistent bar. Search/SearchBar hydrate for input/overlay behavior, while theme and
 styles stay server-compatible. See [Search](components/search.md).
 
 Typography is a server-compatible presentation primitive with independent HTML semantics and MD3

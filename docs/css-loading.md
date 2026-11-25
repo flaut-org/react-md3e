@@ -36,6 +36,7 @@ A family includes its public composition parts and transitive presentation depen
 Button includes loading and ripple;
 Fab/ExtendedFab include their shared FabButton and Button presentation; FabMenu additionally includes
 Menu and MenuItem dependencies; Card includes Surface and its action/content/media parts;
+AppBar includes Search/SearchBar, IconButton and ripple for its search composition.
 SplitButton includes the existing Button/Menu families and their shared menu presentation.
 Autocomplete includes TextField, shared MenuSurface/MenuItemContent presentation, ripple, selection
 indicators and chips. It does not require importing `/menu/styles.css` or load Menu's interaction

@@ -107,6 +107,7 @@ export function SearchBar({
       />
       {showClear && (
         <IconButton
+          data-md3-search-clear=""
           variant="standard"
           disabled={disabled}
           aria-label={clearText}

@@ -4,13 +4,17 @@ import {
   appBarNavigation,
   appBarActions,
   appBarLabel,
+  appBarSearch,
   appBarSmallTitle,
   appBarMediumTitle,
   appBarLargeTitle,
   appBarSmallSubtitle,
   appBarMediumSubtitle,
   appBarLargeSubtitle,
+  appBarContent,
+  appBarScrollFrame,
 } from './app-bar.styles';
+import { AppBarScroll } from './app-bar-scroll/app-bar-scroll.component';
 import type { AppBarProps } from './app-bar.types';
 
 const titles = { small: appBarSmallTitle, mediumFlexible: appBarMediumTitle, largeFlexible: appBarLargeTitle };
@@ -30,22 +34,28 @@ export function AppBar({
   variant = 'small',
   position = 'fixed',
   titleAlign = 'start',
-  scrolled = false,
+  scrolled,
+  scrollBehavior,
+  scrollTarget,
   className,
   ...props
 }: AppBarProps) {
-  const hasSubtitle = children == null && subtitle != null && subtitle !== false;
+  const isSearch = variant === 'search';
+  const behavior = scrollBehavior ?? 'none';
+  const isCompact = variant === 'small' || isSearch;
+  const titleVariant = isSearch ? 'small' : variant;
+  const hasSubtitle = !isSearch && children == null && subtitle != null && subtitle !== false;
   const label = (
     <div className={appBarLabel} data-md3-app-bar-label="">
       {children ?? (
         <>
           {title != null && (
-            <div className={titles[variant]} data-md3-app-bar-title="">
+            <div className={titles[titleVariant]} data-md3-app-bar-title="">
               {title}
             </div>
           )}
           {hasSubtitle && (
-            <div className={subtitles[variant]} data-md3-app-bar-subtitle="">
+            <div className={subtitles[titleVariant]} data-md3-app-bar-subtitle="">
               {subtitle}
             </div>
           )}
@@ -53,8 +63,9 @@ export function AppBar({
       )}
     </div>
   );
+  const titleContent = isCompact ? label : <div />;
 
-  return (
+  const header = (
     <header
       {...props}
       className={[appBarRoot, className].filter(Boolean).join(' ')}
@@ -62,15 +73,40 @@ export function AppBar({
       data-variant={variant}
       data-position={position}
       data-title-align={titleAlign}
-      data-scrolled={scrolled}
+      data-scrolled={scrolled ?? false}
+      data-scroll-behavior={behavior}
       data-has-subtitle={hasSubtitle}
     >
-      <div className={appBarRow} data-md3-app-bar-row="">
-        <div className={appBarNavigation}>{navigationIcon}</div>
-        {variant === 'small' ? label : <div />}
-        <div className={appBarActions}>{actions}</div>
+      <div className={appBarContent} data-md3-app-bar-content="">
+        <div className={appBarRow} data-md3-app-bar-row="">
+          <div className={appBarNavigation} data-md3-app-bar-navigation="">
+            {navigationIcon}
+          </div>
+          {isSearch ? (
+            <div className={appBarSearch} data-md3-app-bar-search="" data-title-align={titleAlign}>
+              {children}
+            </div>
+          ) : (
+            titleContent
+          )}
+          <div className={appBarActions} data-md3-app-bar-actions="">
+            {actions}
+          </div>
+        </div>
+        {!isCompact && label}
       </div>
-      {variant !== 'small' && label}
+      {behavior !== 'none' && <AppBarScroll behavior={behavior} target={scrollTarget} scrolled={scrolled} />}
     </header>
+  );
+
+  return (
+    <div
+      className={appBarScrollFrame}
+      data-md3-app-bar-scroll-frame=""
+      data-position={position}
+      data-scroll-behavior={behavior}
+    >
+      {header}
+    </div>
   );
 }
