@@ -75,6 +75,11 @@ selects already-computed CSS values without generating rules or solving springs 
 
 ## Component mapping
 
+- AppBar directly follows native scroll position through measured height/offset variables. Partial
+  positions settle with default spatial springs for container height, label insets and typography;
+  surface/elevation changes use fast effects. Reduced motion disables settling. A new scroll reads
+  the rendered pose before retargeting; no JavaScript frame loop or velocity-based fling is added.
+
 - NavigationRail width, row geometry and label reveal use default spatial; bar/rail selection uses
   fast spatial, with fast effects for focused inline selection. Drawer indicator surfaces fade without
   stretching. Modal navigation entry uses default spatial, baseline drawer exit fast effects, and
@@ -114,7 +119,14 @@ selects already-computed CSS values without generating rules or solving springs 
   the MUI recording, with `--md-calendar-slide-duration` / `--md-calendar-slide-easing` overrides.
   This deliberate exception to theme springs avoids overshooting a page boundary. Weekday headings
   stay fixed; the outgoing frame is inert. RangeCalendar reuses Calendar's transition.
-- Full-screen Search geometry uses slow spatial.
+- Full-screen Search geometry uses slow spatial. Search headers stay opaque during rectangle
+  morphing; results and scrims fade. Input offsets and icon slots share a bounded registered progress
+  on the popup using default effects (200ms). This deliberate monotonic adaptation prevents native
+  input clipping and avoids a separate text-transition tail. Icon transforms share that timing;
+  leading icons crossfade/rotate and source trailing adornments fade/scale during the same lifecycle.
+  The source bar returns after exit completion with text/icons already aligned, and keyboard dismissal
+  retains the focus frame through native focus restoration. Pointer/edit activation can reverse an
+  in-progress exit immediately.
 - State-layer opacity, color, elevation and most fades use fast effects. Sheet scrims and Search fades
   use default effects. Ripple follows m3e's independent choreography: 450ms linear expansion and
   350ms opacity fade with cubic-bezier(0, 0, 0.2, 0.1). These fixed timings apply in both schemes;

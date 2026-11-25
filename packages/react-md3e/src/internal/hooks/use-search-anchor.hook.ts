@@ -2,16 +2,12 @@
 
 import { useLayoutEffect, useState } from 'react';
 import type { CSSProperties, RefObject } from 'react';
+import { readSearchAnchor } from './search-anchor-geometry';
 
-export type SearchAnchorStyle = CSSProperties & {
-  readonly '--_search-anchor-left': string;
-  readonly '--_search-anchor-top': string;
-  readonly '--_search-anchor-width': string;
-  readonly '--_search-anchor-height': string;
-};
+export type SearchAnchorStyle = CSSProperties & Readonly<ReturnType<typeof readSearchAnchor>>;
 
 /** Measure before opening Base UI, which reads starting styles during its own ref attachment. */
-export function useSearchAnchor(anchorRef: RefObject<HTMLDivElement | null>, open: boolean) {
+export function useSearchAnchor(anchorRef: RefObject<HTMLDivElement | null>, open: boolean, query: string) {
   const [geometry, setGeometry] = useState<{ open: boolean; style: SearchAnchorStyle }>();
 
   useLayoutEffect(() => {
@@ -19,13 +15,7 @@ export function useSearchAnchor(anchorRef: RefObject<HTMLDivElement | null>, ope
 
     if (anchor) {
       const update = () => {
-        const rect = anchor.getBoundingClientRect();
-        const style: SearchAnchorStyle = {
-          '--_search-anchor-left': `${rect.left}px`,
-          '--_search-anchor-top': `${rect.top}px`,
-          '--_search-anchor-width': `${rect.width}px`,
-          '--_search-anchor-height': `${rect.height}px`,
-        };
+        const style: SearchAnchorStyle = readSearchAnchor(anchor);
 
         setGeometry((previous) => {
           const same =
@@ -42,6 +32,13 @@ export function useSearchAnchor(anchorRef: RefObject<HTMLDivElement | null>, ope
         const observer = new ResizeObserver(update);
 
         observer.observe(anchor);
+
+        for (const child of anchor.querySelectorAll(
+          '[data-md3-search-input], [data-md3-search-leading], [data-md3-search-trailing]',
+        )) {
+          observer.observe(child);
+        }
+
         window.addEventListener('resize', update);
         window.addEventListener('scroll', update, true);
         window.visualViewport?.addEventListener('resize', update);
@@ -56,7 +53,7 @@ export function useSearchAnchor(anchorRef: RefObject<HTMLDivElement | null>, ope
     }
 
     return undefined;
-  }, [anchorRef, open]);
+  }, [anchorRef, open, query]);
 
   return { anchorStyle: geometry?.style, ready: geometry?.open === open };
 }

@@ -25,7 +25,11 @@ export interface SearchViewInternalProps extends Pick<
 > {
   readonly query: string;
   readonly anchorStyle: SearchAnchorStyle;
-  readonly restoreFocus: () => HTMLInputElement | null;
+  readonly sourceBarRef: RefObject<HTMLDivElement | null>;
+  readonly keyboardReturn: boolean;
+  readonly onInteractionChange: (keyboard: boolean) => void;
+  readonly onReactivate: (event: Event) => boolean;
+  readonly restoreFocus: (interaction: string) => HTMLInputElement | null | false;
   readonly inputRef: RefObject<HTMLInputElement | null>;
   readonly resultsRef: RefObject<HTMLDivElement | null>;
   readonly onChange: NonNullable<SearchProps['onChange']>;

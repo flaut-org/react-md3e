@@ -148,6 +148,13 @@ assert.match(iconButton, /^['"]use client['"]/m, 'Interactive IconButton must pr
 assert.match(iconButton, /@base-ui\/react\/button/, 'IconButton must compose the Base UI primitive.');
 assert.doesNotMatch(appBar, /use client|useEffect|useState|@base-ui/, 'AppBar must remain a server component.');
 
+const appBarScroll = await readFile(
+  path.join(packageRoot, 'dist/components/app-bar/app-bar-scroll/app-bar-scroll.component.js'),
+  'utf8',
+);
+
+assert.match(appBarScroll, /^['"]use client['"]/m, 'Opt-in scroll subscriptions must preserve their client boundary.');
+
 for (const name of [
   'badge',
   'surface',
@@ -349,6 +356,21 @@ async function readCssTree(relative, seenCss = new Set()) {
 }
 
 const buttonStyles = new Set();
+const appBarStyles = new Set();
+const appBarCss = await readCssTree(manifest.exports['./app-bar/styles.css'], appBarStyles);
+const searchStyles = new Set();
+
+await readCssTree(manifest.exports['./search/styles.css'], searchStyles);
+
+for (const file of searchStyles) {
+  if (file.includes('/styles/')) {
+    assert.ok(appBarStyles.has(file), 'AppBar must reuse the Search stylesheet assets for its search composition.');
+  }
+}
+
+assert.match(appBarCss, /data-md3-app-bar-search/);
+assert.ok(![...appBarStyles].some((file) => /\/(autocomplete|shape|menu)\//.test(file)));
+
 const buttonCss = await readCssTree(manifest.exports['./button/styles.css'], buttonStyles);
 const autocompleteStyles = new Set();
 

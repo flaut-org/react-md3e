@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 const source = fileURLToPath(new URL('./packages/react-md3e/src/', import.meta.url));
 // Public composition parts passed through ReactNode are absent from the owner's JS import graph.
 const compositionCssDependencies: Readonly<Record<string, readonly string[]>> = {
+  'app-bar.js': ['search.js'],
   'split-button.js': ['menu.js'],
 };
 

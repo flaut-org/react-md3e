@@ -3,7 +3,7 @@ import '@flaut-travel/react-md3e/button/styles.css';
 import '@flaut-travel/react-md3e/icon-button/styles.css';
 
 import Link from 'next/link';
-import { AppBar, IconButton, ThemeProvider } from '@flaut-travel/react-md3e';
+import { AppBar, IconButton, Search, ThemeProvider } from '@flaut-travel/react-md3e';
 import { createTheme } from '@flaut-travel/react-md3e/theme';
 import { IconButtonDemo } from './icon-button-demo/icon-button-demo.component';
 
@@ -46,6 +46,58 @@ export default function ComponentsPage() {
       <main>
         <section className="fixture-bars">
           <h2>App bar variants</h2>
+          <AppBar
+            variant="search"
+            position="static"
+            navigationIcon={navigation}
+            actions={
+              <IconButton aria-label="Save" variant="standard">
+                {icon}
+              </IconButton>
+            }
+            data-testid="bar-search"
+          >
+            <Search label="Search collection" defaultValue="Saved query">
+              <a href="#search-app-bar-result">Search app bar result</a>
+            </Search>
+          </AppBar>
+          <AppBar
+            variant="search"
+            titleAlign="center"
+            position="static"
+            navigationIcon={navigation}
+            actions={actions}
+            data-testid="bar-search-centered"
+          >
+            <Search
+              label="Centered search"
+              leading={null}
+              disableClearable
+              trailing={
+                <IconButton aria-label="Voice search" variant="standard">
+                  {icon}
+                </IconButton>
+              }
+            >
+              <p>Centered search results</p>
+            </Search>
+          </AppBar>
+          <AppBar variant="search" position="static" scrolled data-testid="bar-search-scrolled">
+            <Search label="Scrolled search" />
+          </AppBar>
+          <AppBar
+            variant="search"
+            position="static"
+            dir="rtl"
+            navigationIcon={navigation}
+            actions={actions}
+            data-testid="bar-search-rtl"
+          >
+            <Search label="RTL collection search">
+              <p>RTL search results</p>
+            </Search>
+          </AppBar>
+          <p id="search-app-bar-result">Selected collection result</p>
           {(['small', 'mediumFlexible', 'largeFlexible'] as const).map((variant) => (
             <div key={variant}>
               <AppBar
@@ -125,6 +177,11 @@ export default function ComponentsPage() {
         </section>
         <ThemeProvider theme={forest} colorScheme="dark" data-testid="icons-dark">
           <AppBar title="Dark collection" position="static" />
+          <AppBar variant="search" position="static" data-testid="bar-search-dark">
+            <Search label="Dark collection search">
+              <p>Dark collection results</p>
+            </Search>
+          </AppBar>
           <IconButton aria-label="Dark icon">{icon}</IconButton>
         </ThemeProvider>
         <IconButtonDemo />

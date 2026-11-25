@@ -67,9 +67,16 @@ export function Search({
   const resultsRef = useRef<HTMLDivElement>(null);
   const suppressFocusOpen = useRef(false);
   const forwardedInput = useMergedRefs(barInputRef, inputRef);
-  const { anchorStyle, ready } = useSearchAnchor(barRef, isOpen);
-  const expanded = isOpen && ready;
   const { query, changeValue } = useSearchValue(value, defaultValue, valueRef, onChange);
+  const { anchorStyle, ready } = useSearchAnchor(barRef, isOpen, query);
+  const expanded = isOpen && ready;
+  const [viewPresent, setViewPresent] = useState(false);
+  const [retainedFocus, setRetainedFocus] = useState(false);
+
+  // Retain the handoff through Base UI's exit phase, including externally controlled closes.
+  if (expanded && !viewPresent) {
+    setViewPresent(true);
+  }
 
   const requestOpen = (next: boolean, event: Event, closeReason = 'programmatic') => {
     const wasPrevented = event.defaultPrevented;
@@ -84,6 +91,11 @@ export function Search({
 
         if (!changeCancelled && (wasPrevented || !event.defaultPrevented)) {
           suppressFocusOpen.current = !next;
+          setRetainedFocus(
+            !next &&
+              (event instanceof KeyboardEvent ||
+                (event instanceof MouseEvent && event.type === 'click' && event.detail === 0)),
+          );
 
           if (open === undefined) {
             setLocalOpen(next);
@@ -113,6 +125,25 @@ export function Search({
     return !cancelled;
   };
 
+  const reactivate = (event: Event) => {
+    suppressFocusOpen.current = false;
+
+    return requestOpen(true, event);
+  };
+
+  const handleChange: NonNullable<SearchProps['onChange']> = (event, next, reason) => {
+    changeValue(event, next, reason);
+
+    if (
+      reason === 'input' &&
+      !isOpen &&
+      !event.defaultPrevented &&
+      !(event instanceof InputEvent && event.isComposing)
+    ) {
+      reactivate(event);
+    }
+  };
+
   return (
     <div
       {...props}
@@ -124,6 +155,11 @@ export function Search({
     >
       <BaseDialog.Root
         open={expanded}
+        onOpenChangeComplete={(next) => {
+          if (!next) {
+            setViewPresent(false);
+          }
+        }}
         onOpenChange={(next, details) => {
           if (!requestOpen(next, details.event, details.reason)) {
             details.cancel();
@@ -132,8 +168,9 @@ export function Search({
       >
         <span hidden ref={portalAnchor} />
         <input ref={valueRef} type="hidden" name={name} form={form} value={query} disabled={disabled} />
-        <div className={searchAnchor} data-expanded={expanded}>
+        <div className={searchAnchor} data-md3-search-anchor="" data-expanded={expanded || viewPresent}>
           <SearchBar
+            data-retain-focus={retainedFocus}
             ref={barRef}
             onPointerDown={(event) => {
               if (
@@ -149,7 +186,7 @@ export function Search({
             label={label}
             placeholder={placeholder}
             value={query}
-            onChange={changeValue}
+            onChange={handleChange}
             onSearch={submit}
             fullWidth
             disabled={disabled}
@@ -162,8 +199,32 @@ export function Search({
             inputProps={{
               ...inputProps,
               'aria-haspopup': 'dialog',
-              'aria-expanded': expanded,
               'aria-controls': expanded ? popupId : undefined,
+              'onKeyDown': (event) => {
+                inputProps.onKeyDown?.(event);
+
+                if (
+                  !event.defaultPrevented &&
+                  !isOpen &&
+                  !readOnly &&
+                  !disabled &&
+                  !event.nativeEvent.isComposing &&
+                  event.nativeEvent.keyCode !== 229 &&
+                  ['Enter', 'ArrowDown'].includes(event.key)
+                ) {
+                  suppressFocusOpen.current = false;
+                  requestOpen(true, event.nativeEvent);
+                  event.preventDefault();
+                }
+              },
+              'onCompositionEnd': (event) => {
+                inputProps.onCompositionEnd?.(event);
+
+                if (!event.defaultPrevented && !isOpen) {
+                  suppressFocusOpen.current = false;
+                  requestOpen(true, event.nativeEvent);
+                }
+              },
               'onFocus': (event) => {
                 inputProps.onFocus?.(event);
 
@@ -182,6 +243,7 @@ export function Search({
               'onBlur': (event) => {
                 inputProps.onBlur?.(event);
                 suppressFocusOpen.current = false;
+                setRetainedFocus(false);
               },
             }}
           />
@@ -209,14 +271,19 @@ export function Search({
               form={form}
               dir={resolvedDirection}
               anchorStyle={anchorStyle}
-              restoreFocus={() => {
+              sourceBarRef={barRef}
+              keyboardReturn={retainedFocus}
+              onInteractionChange={setRetainedFocus}
+              onReactivate={reactivate}
+              restoreFocus={(interaction) => {
                 suppressFocusOpen.current = true;
+                setRetainedFocus(interaction === 'keyboard');
 
-                return barInputRef.current;
+                return interaction === 'keyboard' ? barInputRef.current : false;
               }}
               inputRef={viewFieldRef}
               resultsRef={resultsRef}
-              onChange={changeValue}
+              onChange={handleChange}
               onSearch={submit}
               popupId={popupId}
             >

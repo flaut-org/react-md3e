@@ -72,7 +72,14 @@ export type {
   IconButtonWidth,
 } from './components/icon-button';
 export { AppBar } from './components/app-bar';
-export type { AppBarProps, AppBarVariant, AppBarPosition, AppBarTitleAlign } from './components/app-bar';
+export type {
+  AppBarProps,
+  AppBarVariant,
+  AppBarPosition,
+  AppBarTitleAlign,
+  AppBarScrollBehavior,
+  AppBarScrollTarget,
+} from './components/app-bar';
 export { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from './components/dialog';
 export type {
   DialogProps,

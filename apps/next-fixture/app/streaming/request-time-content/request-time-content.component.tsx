@@ -108,6 +108,18 @@ export async function RequestTimeContent() {
       <Search label="Streamed search">
         <p>Streamed search results</p>
       </Search>
+      <AppBar variant="search" position="static" data-testid="streamed-search-app-bar">
+        <Search label="Streamed app bar search">
+          <p>Streamed app bar results</p>
+        </Search>
+      </AppBar>
+      <AppBar
+        variant="mediumFlexible"
+        title="Streamed automatic app bar"
+        position="static"
+        scrollBehavior="pinned"
+        data-testid="streamed-auto-app-bar"
+      />
       <AppBar
         title="Streamed collection"
         position="static"
