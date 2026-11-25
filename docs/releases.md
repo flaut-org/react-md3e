@@ -186,12 +186,14 @@ References: [Changesets prereleases](https://changesets.dev/guide/prereleases),
 
 ## Failing checks block releases
 
-A failed test in CI is a release blocker. release.yml runs the same npm run check in its verify
-job, and its release job has needs: verify. A failed verify skips version PR creation/publication
-for that run; do not bypass it with continue-on-error. Fix the cause, merge the fix, and run Release
-on the corrected main commit. Rerunning an old failed commit does not include a local fix.
+A failed test in CI is a release blocker. release.yml reuses ci.yml in its verify job, including
+parallel validation, builds and production tests, and its release job has needs: verify. A failed verify
+skips version PR creation/publication for that run; do not bypass it with continue-on-error.
+Fix the cause, merge the fix, and run Release on the corrected main commit.
+Rerunning an old failed commit does not include a local fix.
 
-In GitHub UI, open the failed CI or Release run, then its check/verify job and the npm run check
-step. Failed browser runs upload test-results/ (including retained Playwright traces) and any
-playwright-report/ as a playwright-check-<attempt> or playwright-verify-<attempt> artifact on the run's summary page.
+In GitHub UI, open the failed CI or Release run, then the failing named job (under verify for Release).
+The aggregate check job lists all prerequisite results. Failed browser runs upload test-results/
+(including retained Playwright traces) and any playwright-report/ as a playwright-shard-<index>-<attempt>
+artifact on the run's summary page.
 Download the artifact for diagnostics; run-attempt suffixes distinguish it.

@@ -78,8 +78,8 @@ formatting. ESLint validates the result again in `npm run check`.
 
 Run `asdf exec npm run lint` or `asdf exec npm run lint:fix` after an initial `npm run build`.
 Import resolution checks the same built package that consumers use. `npm run check` builds before
-linting so a fresh clone needs no pre-existing generated files or dist output. CI runs this command;
-Node is still read from `.tool-versions`.
+linting so a fresh clone needs no pre-existing generated files or dist output. CI runs the same
+checks as separate jobs, as described below. Node is still read from `.tool-versions`.
 
 The accessibility label rule recognizes Checkbox and Radio as custom control components, because
 they contain Base UI's native label-associated inputs. This preserves checks for missing labels in
@@ -104,3 +104,50 @@ concurrent automatic/manual scans can throw "Axe is already running". This setti
 explicitly scanned iframe; the awaited AxeBuilder scan and its violation assertions still run, and
 automatic Storybook accessibility checks remain enabled elsewhere. `!true` is Storybook's boolean
 URL encoding, not the string "true".
+
+## CI job graph
+
+[CI](../.github/workflows/ci.yml) runs on main pushes, pull requests and manual dispatches. It is also
+reused by Release's `verify` job, so release verification follows the same dependencies and checks.
+The local `npm run check` command remains the sequential full validation entry point.
+
+1. **Install dependencies** restores an exact `node_modules` cache or runs `npm ci` on a miss, then
+   saves the result before downstream jobs start. The key includes the runner OS/architecture, pinned
+   Node version, `.npmrc`, lockfile and workspace manifests. Root and workspace-local `node_modules` directories
+   are cached together, including workspace links. There are no partial-key fallbacks.
+2. **Build package** runs once and uploads `dist` plus generated theme JSON/CSS for this workflow run.
+   Lint, public TypeScript consumers, package validation and unit tests require those built exports.
+   Moving this build after unit tests would break a clean checkout.
+3. **TypeScript**, **Lint**, **Prettier** and **Package validation** run in parallel. Matrix fail-fast
+   is disabled so each check can report its own result.
+4. **Unit tests** runs `test:unit` and `test:release` only after all four checks pass. `test:http` is
+   separate because it starts a production Next.js server; `npm test` still runs both unit and HTTP tests.
+5. **Build fixture** and **Build storybook** run in parallel after unit tests. They consume the package
+   artifact and upload their production output. The fixture archive includes hidden `.next` files,
+   preserves permissions/links and excludes the compiler cache.
+6. **HTTP integration tests** and four **Playwright** shards run in parallel against those production artifacts.
+   Playwright needs both app builds because its servers use `next start` and the static Storybook
+   preview. Running it alongside those builds would require building the apps a second time in the
+   browser jobs. Each shard restores dependencies and both app artifacts, then installs Chromium/system
+   dependencies and runs `test:browser -- --shard=<index>/4`. The existing `fullyParallel: true` config
+   distributes individual tests across shards; each shard keeps two workers, for up to eight workers
+   across four runners. Matrix fail-fast is disabled so one failure does not cancel other shards.
+7. **check** always runs and succeeds only when every preceding job succeeded. Failed, skipped or
+   cancelled prerequisites make this aggregate check fail. It retains the existing required-check name.
+
+Every downstream npm job uses the local
+[restore-dependencies action](../.github/actions/restore-dependencies/action.yml), which configures
+Node and restores the install job's exact cache key. A missing cache fails explicitly instead of
+silently running a second install. Release's publication job uses the same dependency cache after
+verification. Build artifacts are scoped to the current workflow run, retained for one day and
+replaced when their producer is rerun; downstream-only retries reuse the existing artifacts.
+Failed Playwright shards retain browser diagnostics for seven days, with the shard index and run
+attempt in the artifact name to prevent collisions. The aggregate check waits for every shard.
+
+To reproduce one shard locally after building the package, fixture and Storybook, run
+`npm run test:browser -- --shard=1/4` (replace `1` with `2`, `3` or `4` for the other shards).
+Local `npm run test:browser` still runs the complete suite with two workers. See the official
+[Playwright sharding guide](https://playwright.dev/docs/test-sharding) for the distribution rules.
+
+Cache restore/save behavior follows the official
+[actions/cache guidance](https://github.com/actions/cache/blob/main/caching-strategies.md).

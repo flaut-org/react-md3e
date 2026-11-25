@@ -1,0 +1,23 @@
+name: Restore dependencies
+description: Set up the pinned Node.js runtime and restore the exact node_modules cache prepared by CI
+
+inputs:
+  cache-key:
+    description: Exact cache key from the install job
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v7
+      with:
+        node-version-file: .tool-versions
+        package-manager-cache: false
+    - uses: actions/cache/restore@v6
+      with:
+        path: |
+          node_modules
+          apps/*/node_modules
+          packages/*/node_modules
+        key: ${{ inputs.cache-key }}
+        fail-on-cache-miss: true

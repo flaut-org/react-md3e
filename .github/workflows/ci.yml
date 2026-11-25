@@ -5,6 +5,11 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
+  workflow_call:
+    outputs:
+      dependency-cache-key:
+        description: Exact node_modules cache key for downstream jobs
+        value: ${{ jobs.install.outputs.cache-key }}
 
 permissions:
   contents: read
@@ -13,12 +18,16 @@ concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  NEXT_TELEMETRY_DISABLED: '1'
+
 jobs:
-  check:
+  install:
+    name: Install dependencies
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-    env:
-      NEXT_TELEMETRY_DISABLED: '1'
+    timeout-minutes: 10
+    outputs:
+      cache-key: ${{ steps.dependencies.outputs.cache-primary-key }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -26,17 +35,214 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version-file: .tool-versions
-          cache: npm
-      - run: npm ci
-      - run: npm exec -- playwright install --with-deps chromium
-      - run: npm run check
+          package-manager-cache: false
+      - name: Restore node_modules
+        id: dependencies
+        uses: actions/cache/restore@v6
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: node-modules-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('.tool-versions', '.npmrc', 'package-lock.json', 'package.json', 'apps/*/package.json', 'packages/*/package.json') }}
+      - name: Install dependencies
+        if: steps.dependencies.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: Save node_modules
+        if: steps.dependencies.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v6
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: ${{ steps.dependencies.outputs.cache-primary-key }}
+
+  build:
+    name: Build package
+    needs: install
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/restore-dependencies
+        with:
+          cache-key: ${{ needs.install.outputs.cache-key }}
+      # Public imports, declarations and generated themes are required by the checks below.
+      - run: npm run build
+      - uses: actions/upload-artifact@v7
+        with:
+          name: package-build
+          path: |
+            packages/react-md3e/dist/
+            packages/react-md3e/src/theme/default-theme.generated.json
+            stories/*.generated.json
+            apps/next-fixture/app/**/*.generated.css
+          if-no-files-found: error
+          overwrite: true
+          retention-days: 1
+
+  validate:
+    name: ${{ matrix.name }}
+    needs: [install, build]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: TypeScript
+            command: npm run typecheck
+          - name: Lint
+            command: npm run lint
+          - name: Prettier
+            command: npm run format:check
+          - name: Package validation
+            command: npm run check:package
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/restore-dependencies
+        with:
+          cache-key: ${{ needs.install.outputs.cache-key }}
+      - uses: actions/download-artifact@v7
+        with:
+          name: package-build
+      - run: ${{ matrix.command }}
+
+  unit:
+    name: Unit tests
+    needs: [install, validate]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/restore-dependencies
+        with:
+          cache-key: ${{ needs.install.outputs.cache-key }}
+      - uses: actions/download-artifact@v7
+        with:
+          name: package-build
+      - run: npm run test:unit
+      - run: npm run test:release
+
+  build-apps:
+    name: Build ${{ matrix.target }}
+    needs: [install, unit]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [fixture, storybook]
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/restore-dependencies
+        with:
+          cache-key: ${{ needs.install.outputs.cache-key }}
+      - uses: actions/download-artifact@v7
+        with:
+          name: package-build
+      - run: npm run build:${{ matrix.target }}
+      # Tar preserves hidden .next files, links and permissions without transporting its build cache.
+      - name: Archive production fixture
+        if: matrix.target == 'fixture'
+        run: tar --exclude='.next/cache' -cf fixture-build.tar -C apps/next-fixture .next
+      - uses: actions/upload-artifact@v7
+        if: matrix.target == 'fixture'
+        with:
+          name: fixture-build
+          path: fixture-build.tar
+          if-no-files-found: error
+          overwrite: true
+          retention-days: 1
+      - uses: actions/upload-artifact@v7
+        if: matrix.target == 'storybook'
+        with:
+          name: storybook-build
+          path: storybook-static/
+          if-no-files-found: error
+          overwrite: true
+          retention-days: 1
+
+  integration:
+    name: HTTP integration tests
+    needs: [install, build-apps]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/restore-dependencies
+        with:
+          cache-key: ${{ needs.install.outputs.cache-key }}
+      - uses: actions/download-artifact@v7
+        with:
+          name: package-build
+      - uses: actions/download-artifact@v7
+        with:
+          name: fixture-build
+      - run: tar -xf fixture-build.tar -C apps/next-fixture
+      - run: npm run test:http
+
+  playwright:
+    name: Playwright ${{ matrix.shard }}/${{ strategy.job-total }}
+    needs: [install, build-apps]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/restore-dependencies
+        with:
+          cache-key: ${{ needs.install.outputs.cache-key }}
+      - uses: actions/download-artifact@v7
+        with:
+          name: package-build
+      - uses: actions/download-artifact@v7
+        with:
+          name: fixture-build
+      - run: tar -xf fixture-build.tar -C apps/next-fixture
+      - uses: actions/download-artifact@v7
+        with:
+          name: storybook-build
+          path: storybook-static
+      - name: Install Chromium and system dependencies
+        run: npm exec -- playwright install --with-deps chromium
+      - run: npm run test:browser -- --shard=${{ matrix.shard }}/${{ strategy.job-total }}
       - name: Upload failed browser diagnostics
         if: failure()
         uses: actions/upload-artifact@v7
         with:
-          name: playwright-${{ github.job }}-${{ github.run_attempt }}
+          name: playwright-shard-${{ matrix.shard }}-${{ github.run_attempt }}
           path: |
             test-results/
             playwright-report/
           if-no-files-found: ignore
           retention-days: 7
+
+  check:
+    needs: [install, build, validate, unit, build-apps, integration, playwright]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - name: Require every job to succeed
+        env:
+          JOB_RESULTS: ${{ toJSON(needs) }}
+        run: |
+          echo "$JOB_RESULTS" | jq -r 'to_entries[] | "\(.key): \(.value.result)"'
+          echo "$JOB_RESULTS" | jq -e 'all(.[]; .result == "success")'
