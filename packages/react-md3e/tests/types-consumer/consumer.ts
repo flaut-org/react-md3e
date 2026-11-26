@@ -102,6 +102,8 @@ import { Tabs, TabList, Tab, TabPanel } from '@flaut-travel/react-md3e/tabs';
 import { NavigationBar, NavigationItem } from '@flaut-travel/react-md3e/navigation-bar';
 import { NavigationRail } from '@flaut-travel/react-md3e/navigation-rail';
 import { NavigationDrawer } from '@flaut-travel/react-md3e/navigation-drawer';
+import { Toolbar, ToolbarOverflow } from '@flaut-travel/react-md3e/toolbar';
+import type { ToolbarProps, ToolbarOverflowAction } from '@flaut-travel/react-md3e/toolbar';
 
 const theme: Theme = createTheme({ sourceColor: '#386a20' });
 const buttonProps: ButtonProps = { variant: 'tonal', endIcon: '→', selected: true };
@@ -304,3 +306,13 @@ export const navigationItemProps: NavigationItemProps = { value: 'home', label: 
 export const navigationLinkProps: NavigationItemLinkProps = { href: '/', selected: true, label: 'Home' };
 export const navigationValue: NavigationValue = 0;
 export const navigationParts = [NavigationBar, NavigationRail, NavigationDrawer, NavigationItem];
+
+export const toolbarProps: ToolbarProps = {
+  'aria-label': 'Document commands',
+  'variant': 'floating',
+  'color': 'vibrant',
+  'orientation': 'vertical',
+  'elevation': 0,
+};
+export const overflowActions: readonly ToolbarOverflowAction[] = [];
+export const toolbarParts = [Toolbar, ToolbarOverflow];

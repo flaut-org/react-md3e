@@ -1,5 +1,12 @@
 # Third-party notices
 
+Toolbar's measurements and color-role mappings reference Google's Material 3 specifications,
+Android Material Components token sets v34.0.0 (revision ca5b9e4ca22b23adc8f50e178f267793ac741ca4)
+and AndroidX FloatingToolbar defaults (revision 1b7fa70578d3045e52d699228a6c9e4d6490cb87),
+Copyright 2024–2026 The Android Open Source Project, Apache License 2.0. The React controllers
+and CSS layout are independent implementations; no Android runtime source was copied. Exact source
+links, differing reference defaults and web adaptations are recorded in docs/components/toolbar.md.
+
 List's expansion indicator adapts Google's Material Icons keyboard_arrow_down SVG, licensed
 under Apache License 2.0. The license is included in licenses/material-icons.txt.
 Source revision: d3d4aca5a7cf50bc68bbd401cefa708e364194e8.

@@ -14,9 +14,9 @@ const styles = {
     '--_outline-width': '0px',
     '--_radius': 'var(--md-sys-shape-corner-large, 16px)',
     '--_pressed': 'var(--_radius)',
-    '--_bg': color('primaryContainer'),
-    '--_fg': color('onPrimaryContainer'),
-    '--_elevation': elevationShadow(3),
+    '--_bg': `var(--md-comp-fab-container-color, ${color('primaryContainer')})`,
+    '--_fg': `var(--md-comp-fab-color, ${color('onPrimaryContainer')})`,
+    '--_elevation': `var(--md-comp-fab-elevation, ${elevationShadow(3)})`,
     'minInlineSize': 0,
     'inlineSize': 'max-content',
     'interpolateSize': 'allow-keywords',
@@ -43,17 +43,33 @@ const styles = {
       '--_radius': 'var(--md-sys-shape-corner-extra-large, 28px)',
     },
     '&[data-fab-color="secondaryContainer"]': {
-      '--_bg': color('secondaryContainer'),
-      '--_fg': color('onSecondaryContainer'),
+      '--_bg': `var(--md-comp-fab-container-color, ${color('secondaryContainer')})`,
+      '--_fg': `var(--md-comp-fab-color, ${color('onSecondaryContainer')})`,
     },
     '&[data-fab-color="tertiaryContainer"]': {
-      '--_bg': color('tertiaryContainer'),
-      '--_fg': color('onTertiaryContainer'),
+      '--_bg': `var(--md-comp-fab-container-color, ${color('tertiaryContainer')})`,
+      '--_fg': `var(--md-comp-fab-color, ${color('onTertiaryContainer')})`,
     },
-    '&[data-fab-color="primary"]': { '--_bg': color('primary'), '--_fg': color('onPrimary') },
-    '&[data-fab-color="secondary"]': { '--_bg': color('secondary'), '--_fg': color('onSecondary') },
-    '&[data-fab-color="tertiary"]': { '--_bg': color('tertiary'), '--_fg': color('onTertiary') },
-    '&[data-fab-color="surface"]': { '--_bg': color('surfaceContainerHigh'), '--_fg': color('primary') },
+    '&[data-fab-color="primary"]': {
+      '--_bg': `var(--md-comp-fab-container-color, ${color('primary')})`,
+      '--_fg': `var(--md-comp-fab-color, ${color('onPrimary')})`,
+    },
+    '&[data-fab-color="secondary"]': {
+      '--_bg': `var(--md-comp-fab-container-color, ${color('secondary')})`,
+      '--_fg': `var(--md-comp-fab-color, ${color('onSecondary')})`,
+    },
+    '&[data-fab-color="tertiary"]': {
+      '--_bg': `var(--md-comp-fab-container-color, ${color('tertiary')})`,
+      '--_fg': `var(--md-comp-fab-color, ${color('onTertiary')})`,
+    },
+    '&[data-fab-color="surface"]': {
+      '--_bg': `var(--md-comp-fab-container-color, ${color('surfaceContainerHigh')})`,
+      '--_fg': `var(--md-comp-fab-color, ${color('primary')})`,
+    },
+    '&[data-md3-fab][data-fab-size="regular"]': {
+      '--_height': 'var(--md-comp-fab-container-size, 56px)',
+      '--_radius': 'var(--md-comp-fab-container-shape, var(--md-sys-shape-corner-large, 16px))',
+    },
     '&[data-lowered="true"]': { '--_elevation': elevationShadow(1) },
     '&[data-icon-only="true"]': { inlineSize: 'var(--_height)', paddingInline: 0, gap: 0 },
     '&:disabled, &[aria-disabled="true"]': {
@@ -71,7 +87,9 @@ const styles = {
     },
     '& [data-md3-fab-icon] > svg': { inlineSize: '100%', blockSize: '100%', fill: 'currentColor' },
     '@media (hover: hover)': {
-      '&:hover:not(:disabled):not([aria-disabled="true"])': { '--_elevation': elevationShadow(4) },
+      '&:hover:not(:disabled):not([aria-disabled="true"])': {
+        '--_elevation': `var(--md-comp-fab-hover-elevation, ${elevationShadow(4)})`,
+      },
       '&[data-lowered="true"]:hover:not(:disabled):not([aria-disabled="true"])': {
         '--_elevation': elevationShadow(2),
       },

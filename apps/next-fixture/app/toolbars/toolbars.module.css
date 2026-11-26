@@ -1,0 +1,29 @@
+.resizable {
+  max-width: 100%;
+  border: 1px dashed currentColor;
+}
+
+.scrollFrame {
+  position: relative;
+  height: 240px;
+  margin-block: 24px;
+  border: 1px solid currentColor;
+  overflow: clip;
+}
+
+.scroller {
+  height: 100%;
+  overflow: auto;
+}
+
+.scrollContent {
+  height: 1400px;
+  padding: 16px;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 24px;
+}

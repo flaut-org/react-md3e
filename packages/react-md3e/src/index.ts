@@ -280,3 +280,17 @@ export type { NavigationItemProps, NavigationItemLinkProps } from './components/
 export type { NavigationValue } from './components/navigation/navigation.types';
 export { Chip, ChipSet } from './components/chip';
 export type { ChipProps, ChipKind, ChipVariant, ChipShape, ChipSetProps, InputChipProps } from './components/chip';
+export { Toolbar, ToolbarOverflow } from './components/toolbar';
+export type {
+  ToolbarProps,
+  DockedToolbarProps,
+  FloatingToolbarProps,
+  ToolbarColor,
+  ToolbarOrientation,
+  ToolbarPosition,
+  ToolbarPlacement,
+  ToolbarScrollBehavior,
+  ToolbarScrollTarget,
+  ToolbarOverflowProps,
+  ToolbarOverflowAction,
+} from './components/toolbar';

@@ -210,7 +210,13 @@ test('root and subpath imports load only Button/Checkbox dependencies without ma
 });
 
 test('automatic styles preserve actual Next RSC client references', async () => {
-  for (const route of ['automatic-css', 'automatic-css/subpath', 'automatic-css/server', 'chips/server']) {
+  for (const route of [
+    'automatic-css',
+    'automatic-css/subpath',
+    'automatic-css/server',
+    'chips/server',
+    'toolbars/server',
+  ]) {
     const code = await readFile(
       path.join(workspaceRoot, `apps/next-fixture/.next/server/app/${route}/page_client-reference-manifest.js`),
       'utf8',
@@ -348,4 +354,25 @@ test('floating actions render server markup with their Button/Menu CSS dependenc
   assert.match(styles, /--_fab-menu-open-delay/);
   assert.match(styles, /ripple-enter/);
   assert.doesNotMatch(styles, /data-morph|md3-calendar-enter|md3-slider-active/);
+});
+
+test('Toolbar sends named server composition, scoped tokens and inert-free passive RSC markup', async () => {
+  const response = await fetch(`${baseUrl}/toolbars`, { signal: AbortSignal.timeout(10_000) });
+  const html = await response.text();
+  const styles = await routeCss('/toolbars');
+
+  assert.equal(response.status, 200);
+  assert.match(html, /role="toolbar"/);
+  assert.match(html, /aria-orientation="vertical"/);
+  assert.match(html, /Server docked tools/);
+  assert.match(styles, /--md-comp-toolbar-floating-fab-between-space/);
+  assert.match(styles, /--md-comp-icon-button-tonal-selected-container-color/);
+  assert.match(styles, /--md-sys-motion-spring-fast-spatial/);
+
+  const passive = await fetch(`${baseUrl}/toolbars/server`, { signal: AbortSignal.timeout(10_000) });
+  const passiveHtml = await passive.text();
+
+  assert.equal(passive.status, 200);
+  assert.match(passiveHtml, /role="group"/);
+  assert.doesNotMatch(passiveHtml, /role="toolbar"|data-hidden=/);
 });

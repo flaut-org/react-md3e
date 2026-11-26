@@ -81,8 +81,8 @@ const buttonRootStyles = {
     '--_radius': 'min(var(--md-sys-shape-corner-full, 9999px), calc(var(--_height) / 2))',
   },
   "&[data-variant='tonal']": {
-    '--_bg': color('secondaryContainer'),
-    '--_fg': color('onSecondaryContainer'),
+    '--_bg': `var(--md-comp-button-tonal-container-color, ${color('secondaryContainer')})`,
+    '--_fg': `var(--md-comp-button-tonal-color, ${color('onSecondaryContainer')})`,
   },
   "&[data-variant='outlined']": {
     '--_bg': 'transparent',
@@ -91,7 +91,7 @@ const buttonRootStyles = {
   },
   "&[data-variant='text']": {
     '--_bg': 'transparent',
-    '--_fg': color('primary'),
+    '--_fg': `var(--md-comp-button-text-color, ${color('primary')})`,
   },
   "&[data-variant='elevated']": {
     '--_bg': color('surfaceContainerLow'),
@@ -99,12 +99,12 @@ const buttonRootStyles = {
     '--_elevation': `0 1px 2px color-mix(in srgb, ${color('shadow')} 30%, transparent), 0 1px 3px color-mix(in srgb, ${color('shadow')} 15%, transparent)`,
   },
   "&[data-variant='filled'][aria-pressed='false']": {
-    '--_bg': color('surfaceContainer'),
-    '--_fg': color('onSurfaceVariant'),
+    '--_bg': `var(--md-comp-button-filled-unselected-container-color, ${color('surfaceContainer')})`,
+    '--_fg': `var(--md-comp-button-filled-unselected-color, ${color('onSurfaceVariant')})`,
   },
   "&[data-variant='tonal'][aria-pressed='true']": {
-    '--_bg': color('secondary'),
-    '--_fg': color('onSecondary'),
+    '--_bg': `var(--md-comp-button-tonal-selected-container-color, ${color('secondary')})`,
+    '--_fg': `var(--md-comp-button-tonal-selected-color, ${color('onSecondary')})`,
   },
   "&[data-variant='elevated'][aria-pressed='true']": {
     '--_bg': color('primary'),

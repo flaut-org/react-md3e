@@ -6,7 +6,7 @@ const styles = {
   'margin': 0,
   'border': 0,
   'boxSizing': 'border-box',
-  'backgroundColor': color('outlineVariant'),
+  'backgroundColor': `var(--md-comp-divider-color, ${color('outlineVariant')})`,
   'flexShrink': 0,
   "&[data-orientation='horizontal']": { blockSize: 1, inlineSize: 'auto', alignSelf: 'stretch' },
   "&[data-orientation='vertical']": { inlineSize: 1, blockSize: '100%', minBlockSize: '1em', alignSelf: 'stretch' },

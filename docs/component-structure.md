@@ -256,3 +256,7 @@ AppBar owns private app-bar-scroll/ controller, observation and geometry modules
 controller is a client boundary; layout, typography and motion stay with AppBar's extracted styles.
 AppBar's tests/ cover both static/search presentation and automatic scrolling. The app-bar-scroll
 fixture route owns its runtime demo beneath app-bar-scroll-demo/.
+
+Toolbar owns toolbar-behavior/ (private root, DOM focus and scroll adapters), contexts/toolbar.context.ts,
+and toolbar-overflow/ (public composition, measurement helper and styles). Its type/unit/browser tests
+share toolbar/tests. Toolbar examples belong to stories/toolbar/ and the toolbars fixture route.

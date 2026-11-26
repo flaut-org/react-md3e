@@ -69,7 +69,7 @@ for (const example of [
     assert.match(css, /data-md3-app-bar-search/, 'AppBar must carry its declared Search composition.');
     assert.match(css, /--_search-/);
   } else if (example !== 'chip-autocomplete') {
-    assert.doesNotMatch(css, /--md3e-menu-scale|data-md3-app-bar|data-md3-field|--_search-/);
+    assert.doesNotMatch(css, /--md3e-menu-scale|data-md3-app-bar|data-md3-field|--_search-|--_toolbar-container/);
     assert.ok(bytes < 45_000, `Button/Checkbox CSS exceeded the 45 kB regression budget: ${bytes}`);
   }
 
