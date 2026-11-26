@@ -96,6 +96,10 @@ export { List, ListItem } from './components/list';
 export type {
   ListProps,
   ListItemProps,
+  ActionListItemProps,
+  ExpandableListItemProps,
+  ListItemActionProps,
+  ListItemExpansionProps,
   ListVariant,
   ListSelectionMode,
   ListControlPosition,

@@ -108,10 +108,12 @@ DialogActions. It supports basic/full-screen layouts, focus containment/restorat
 dismissal, scrolling, and keepMounted. Its portal inherits the enclosing CSS theme by default and
 mounts after hydration. A `/dialog` entry is available.
 
-List/ListItem provide static server presentation and selectable listboxes with single or multiple
-values, radio/checkbox/checkmark indicators, roving focus, typeahead, ripple, and Expressive
-standard/segmented layouts. Use `/list` for direct imports. Selection uses Base UI ToggleGroup/Toggle
-with web listbox semantics; the theme remains CSS inheritance.
+List/ListItem provide static server presentation, primary button/link actions, independent leading/trailing
+controls, nested controlled/uncontrolled expansion, and selectable listboxes with single or multiple
+selection. Standard/segmented layouts share compiled themes, state layers and ripple. Use `/list`
+for direct imports. Base UI owns button, disclosure and selection primitives; the theme remains CSS
+inheritance. Expansion is an inline web adaptation; full-screen container-transform/Figma parity is
+not claimed. See [List API and references](https://github.com/flaut-org/react-md3e/blob/main/docs/components/list.md).
 
 See the [repository documentation](https://github.com/flaut-org/react-md3e) for the API, static
 theme export, Storybook, verification, and design references.

@@ -102,6 +102,22 @@ test('the production fixture consumes the built package from a server page', asy
   assert.match(html, /The built package is imported from a React Server Component/);
 });
 
+test('List action and disclosure composition is present in production server HTML', async () => {
+  const response = await fetch(`${baseUrl}/lists`, { signal: AbortSignal.timeout(10_000) });
+  const html = await response.text();
+  const trigger = /<button[^>]*id="saved-folder-trigger"[^>]*>/.exec(html)?.[0] ?? '';
+  const panel = /<div[^>]*id="saved-folder-panel"[^>]*>/.exec(html)?.[0] ?? '';
+
+  assert.equal(response.status, 200);
+  assert.match(html, /data-testid="single-action-list"/);
+  assert.match(html, /<a[^>]*href="#list-destination"/);
+  assert.match(trigger, /aria-controls="saved-folder-panel"/);
+  assert.match(panel, /hidden=""/);
+  assert.match(panel, /inert=""/);
+  assert.match(html, /Recently visited destinations/);
+  assert.doesNotMatch(html, /<button[^>]*>[^<]*<button/);
+});
+
 test('the response sends a shell and fallback before request-time content', async () => {
   const response = await fetch(`${baseUrl}/streaming`, {
     signal: AbortSignal.timeout(10_000),

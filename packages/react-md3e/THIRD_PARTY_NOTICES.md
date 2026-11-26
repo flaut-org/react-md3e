@@ -1,5 +1,12 @@
 # Third-party notices
 
+List's expansion indicator adapts Google's Material Icons keyboard_arrow_down SVG, licensed
+under Apache License 2.0. The license is included in licenses/material-icons.txt.
+Source revision: d3d4aca5a7cf50bc68bbd401cefa708e364194e8.
+https://github.com/google/material-design-icons/blob/d3d4aca5a7cf50bc68bbd401cefa708e364194e8/src/hardware/keyboard_arrow_down/materialicons/24px.svg
+The path is normalized to relative coordinates, its empty viewport path is omitted, and the
+20px List glyph size, color, round backdrop and rotation come from our extracted List styles.
+
 The separate `dist/theme.js` build includes Material Color Utilities 0.4.0 by Google LLC, licensed
 under Apache License 2.0. The original license is included in
 `licenses/material-color-utilities.txt`; source license comments are retained in the bundle. Source:

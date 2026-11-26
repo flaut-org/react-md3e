@@ -1,4 +1,5 @@
 import { css } from '@linaria/core';
+import { color } from '../../styles/theme-tokens';
 import type { StyleObject } from '../../styles/style-object.types';
 
 const rootStyles = {
@@ -16,6 +17,9 @@ const rootStyles = {
   'boxSizing': 'border-box',
   "&[data-variant='standard']": { '--_list-inner': '0px', '--_list-outer': '0px', 'gap': 0 },
   "&[data-disable-padding='true']": { padding: 0 },
+  "&[data-variant='segmented'] > [data-expandable='true'][data-open]": {
+    backgroundColor: `var(--md-comp-list-expand-expanded-list-item-segmented-container-color, ${color('surface')})`,
+  },
   '& > [data-md3-list-item]:first-child': { '--_list-top': 'var(--_list-outer)' },
   '& > [data-md3-list-item]:last-child': { '--_list-bottom': 'var(--_list-outer)' },
 } satisfies StyleObject;

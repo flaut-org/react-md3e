@@ -3,6 +3,7 @@ import { Avatar, List, ListItem, ThemeProvider } from '@flaut-travel/react-md3e'
 import { createTheme } from '@flaut-travel/react-md3e/theme';
 import { SelectionDemo } from './selection-demo/selection-demo.component';
 import { LanguageCurrencyDemo } from './language-currency-demo/language-currency-demo.component';
+import { ActionDemo } from './action-demo/action-demo.component';
 
 const forest = createTheme({
   sourceColor: '#386a20',
@@ -41,6 +42,7 @@ export default function ListsPage() {
           </List>
         </section>
         <SelectionDemo />
+        <ActionDemo />
         <ThemeProvider theme={forest} colorScheme="dark" data-testid="list-dark-theme">
           <List selectionMode="single" aria-label="Dark list" defaultValue="selected">
             <ListItem value="selected" primary="Dark selected row" />
