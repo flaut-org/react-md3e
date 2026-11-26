@@ -258,6 +258,24 @@ assert.match(selectableList, /^['"]use client['"]/m);
 assert.match(selectableList, /@base-ui\/react\/toggle-group/);
 assert.doesNotMatch(staticList, /use client|useContext|@base-ui/);
 
+const actionListItem = await readFile(
+  path.join(packageRoot, 'dist/components/list/list-item/action-list-item/action-list-item.component.js'),
+  'utf8',
+);
+const listActionControl = await readFile(
+  path.join(
+    packageRoot,
+    'dist/components/list/list-item/action-list-item/action-list-control/action-list-control.component.js',
+  ),
+  'utf8',
+);
+
+assert.match(actionListItem, /^['"]use client['"]/m);
+assert.match(actionListItem, /@base-ui\/react\/collapsible/);
+assert.match(listActionControl, /^['"]use client['"]/m);
+assert.match(listActionControl, /@base-ui\/react\/button/);
+assert.ok(files.has('licenses/material-icons.txt'), 'The List expand icon must retain its Apache 2.0 license.');
+
 for (const name of [
   'checkbox',
   'switch',

@@ -87,6 +87,11 @@ src/components/
       selectable-list-item/
         selectable-list-item.component.tsx
         selectable-list-item.styles.ts
+      action-list-item/
+        action-list-item.component.tsx
+        action-list-item.styles.ts
+        action-list-control/
+          action-list-control.component.tsx
       tests/
         list-item.browser.spec.ts
         list-item.types.tsx
@@ -132,6 +137,10 @@ in `src/theme`. Internal hooks retain the agreed `src/internal/hooks/*.hook.ts` 
 Contexts live in `contexts/*.context.ts` next to their owner. A context shared by sibling branches
 belongs to their nearest common component owner. Styling modules remain ordinary server-importable
 modules; directory placement does not justify a client directive.
+
+ActionListItem owns its private primary control, including disclosure-trigger composition. The
+same branch hosts action and expandable rows because their header, independent slots and ripple
+are shared. The DOM registration hook stays in internal/hooks/use-list-action-navigation.hook.ts.
 
 ## Tests and verification
 

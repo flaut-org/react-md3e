@@ -13,4 +13,12 @@ export type {
   ListLeadingKind,
   ListItemContentProps,
 } from '../list-item-content/list-item-content.types';
-export type { ListItemProps, StaticListItemProps, SelectableListItemProps } from './list-item/list-item.types';
+export type {
+  ListItemProps,
+  StaticListItemProps,
+  SelectableListItemProps,
+  ActionListItemProps,
+  ExpandableListItemProps,
+  ListItemActionProps,
+  ListItemExpansionProps,
+} from './list-item/list-item.types';

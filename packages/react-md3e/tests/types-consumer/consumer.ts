@@ -81,7 +81,14 @@ import { RadioGroup } from '@flaut-travel/react-md3e/radio-group';
 import { Avatar } from '@flaut-travel/react-md3e/avatar';
 import { Badge } from '@flaut-travel/react-md3e/badge';
 import { List, ListItem } from '@flaut-travel/react-md3e/list';
-import type { ListProps, ListItemProps } from '@flaut-travel/react-md3e/list';
+import type {
+  ListProps,
+  ListItemProps,
+  ListItemActionProps,
+  ListItemExpansionProps,
+  ActionListItemProps,
+  ExpandableListItemProps,
+} from '@flaut-travel/react-md3e/list';
 import { Dialog, DialogContent, DialogActions } from '@flaut-travel/react-md3e/dialog';
 import type { DialogProps } from '@flaut-travel/react-md3e/dialog';
 import { AppBar, Button, IconButton } from '@flaut-travel/react-md3e';
@@ -203,6 +210,10 @@ export const consumer = {
   ListItem,
   listProps: { 'selectionMode': 'single', 'aria-label': 'Language', 'defaultValue': 'en' } satisfies ListProps,
   listItemProps: { value: 'en', primary: 'English', leadingKind: 'icon' } satisfies ListItemProps,
+  listAction: { href: '/journey', target: '_blank' } satisfies ListItemActionProps,
+  listExpansion: { content: 'Nested content', defaultOpen: true } satisfies ListItemExpansionProps,
+  actionListItem: { primary: 'Open', action: {} } satisfies ActionListItemProps,
+  expandableListItem: { primary: 'Folder', expansion: { content: 'Details' } } satisfies ExpandableListItemProps,
   Dialog,
   DialogContent,
   DialogActions,

@@ -34,6 +34,11 @@ const itemStyles = {
   "&[data-lines='2']": { minBlockSize: 72 },
   "&[data-lines='3']": { minBlockSize: 88, alignItems: 'flex-start' },
   "&[data-selectable='true']": { display: 'block', padding: 0 },
+  "&[data-actionable='true']": { display: 'block', padding: 0 },
+  "&[data-expandable='true'][data-open]": {
+    borderRadius: 'var(--md-comp-list-expand-container-shape, var(--md-sys-shape-corner-large, 16px))',
+    backgroundColor: `var(--md-comp-list-expand-expanded-list-item-container-color, ${color('surface')})`,
+  },
   "&:has(> [aria-selected='true'])": {
     '--_list-label': color('onSecondaryContainer'),
     '--_list-supporting': color('onSecondaryContainer'),

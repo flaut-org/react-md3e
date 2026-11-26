@@ -134,6 +134,13 @@ export async function RequestTimeContent() {
       <List data-testid="streamed-list">
         <ListItem primary="Streamed list row" secondary="Server-created content" />
       </List>
+      <List aria-label="Streamed list actions" data-testid="streamed-list-actions">
+        <ListItem primary="Streamed list link" action={{ href: '#streamed-destination' }} />
+        <ListItem
+          primary="Streamed list folder"
+          expansion={{ defaultOpen: true, content: <p id="streamed-destination">Streamed folder content</p> }}
+        />
+      </List>
       <Avatar alt="Streamed avatar" data-testid="streamed-avatar">
         SA
       </Avatar>

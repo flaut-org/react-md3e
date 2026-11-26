@@ -18,6 +18,10 @@ the separate ButtonGroup owns the Expressive design. See docs/components/segment
 Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Switch, Slider, Radio/RadioGroup, Avatar, TextField, Autocomplete, Search/SearchBar, Popover, Menu, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, SplitButton, SegmentedButton/ButtonSegment, Tabs/TabList/Tab/TabPanel, BottomSheet, SideSheet, Snackbar and the shared private ListItemContent are
 implemented. API and provenance documents live in `docs/components`.
 
+List action/expandable rows own a private ActionListControl; Base UI Button and Collapsible supply
+interaction primitives. Independent action slots remain siblings of the main control. Static ul/li
+rendering stays on the server; the action-navigation hook registers only through interactive rows.
+
 Component files form an ownership tree. A component used only by one parent lives in a named child
 directory; a component shared by several implementations lives at this top component level. Keep
 its `*.component.tsx`, `*.styles.ts`, and `*.types.ts` files together. Keep family-wide definitions at
@@ -27,7 +31,7 @@ Contexts go in the owner's `contexts` directory; shared contexts use the nearest
 Behavior and type tests go in the owner's `tests` directory. Private children do not need export
 barrels. See `docs/component-structure.md` for the current tree and discovery configuration.
 
-ListItemContent is shared presentation for the static/selectable row implementations and Menu/Autocomplete adapters. Those adapters retain their own Base UI semantics. Static styles and
+ListItemContent is shared presentation for static/selectable/action rows and Menu/Autocomplete adapters. Those adapters retain their own Base UI semantics. Static styles and
 file nesting never add a client boundary.
 
 Shape's sampler runs only during CSS extraction. Variant changes use native CSS transitions;

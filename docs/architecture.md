@@ -4,6 +4,14 @@ Status: Button, Fab, ExtendedFab, FabMenu/FabMenuItem, IconButton, AppBar, Dialo
 
 ## Ownership and boundaries
 
+List/ListItem retain passive server wrappers and static rows. ActionListItem owns primary
+button/link actions and Base UI Collapsible expansion; its private ActionListControl shares ripple
+and compiled interaction styles. Independent action slots are siblings of the primary control.
+The action-navigation hook registers DOM keyboard behavior through client rows, preserving a
+CSS-only static List root and supporting nested/streamed lists. Selection retains its separate
+ToggleGroup/Toggle listbox adapter. See [List](components/list.md) for API, exact expand-token
+provenance and the inline-disclosure adaptation.
+
 NavigationBar, NavigationRail and NavigationDrawer are passive server layout wrappers around shared
 Navigation. Its native nav/items/header/footer composition is passed through NavigationSelection,
 an interaction-only client boundary; selection survives modal portal unmounting. Navigation owns
@@ -130,8 +138,8 @@ exports without aliases to source.
   types.
 
 Component implementations form an ownership tree: a private child is nested under its parent;
-shared components live at the top component level. List owns ListItem and its static/selectable
-variants. ListItemContent is shared by both row implementations and lives in its own top-level
+shared components live at the top component level. List owns ListItem and its static/selectable/action
+variants. ListItemContent is shared by the row implementations and lives in its own top-level
 component directory. Dialog owns its title/content/actions parts, and DialogContent owns its text
 part. Popover owns its PopoverClose composition action. ThemeProvider has its own directory under the theme feature.
 

@@ -3,6 +3,11 @@ import { useState } from 'react';
 import { Avatar, List, ListItem, Button } from '@flaut-travel/react-md3e';
 import type { ReadOnlyListProps } from '@flaut-travel/react-md3e';
 import { starIcon } from './example-icons';
+import {
+  ExpandableExample,
+  MultiActionExample,
+  SingleActionExample,
+} from './list/action-examples/action-examples.component';
 
 type ListStoryArgs = Pick<ReadOnlyListProps, 'variant' | 'disablePadding'>;
 
@@ -25,7 +30,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'MD3 Expressive list. Static ul/li is server-compatible. Selectable lists adapt Base UI ToggleGroup/Toggle to listbox/option semantics, with radio or checkbox visuals, roving focus, typeahead and compiled ripple. No theme context is used.',
+          'MD3 Expressive list with static rows, primary button/link actions, independent controls, nested controlled/uncontrolled expansion and selectable listboxes. Base UI owns button/disclosure/selection primitives; styles and ripple use compiled CSS and inherited themes. Expansion is an inline web adaptation; full-screen container-transform/Figma parity is not claimed.',
       },
     },
   },
@@ -161,3 +166,17 @@ function ControlledExample() {
 }
 
 export const Controlled: Story = { render: () => <ControlledExample /> };
+
+export const SingleAction: Story = { render: (args) => <SingleActionExample variant={args.variant} /> };
+export const SingleActionNavigation: Story = {
+  render: (args) => (
+    <List {...args}>
+      <ListItem primary="Explore Lisbon" action={{ href: '#lisbon' }} />
+      <ListItem primary="Explore Porto" action={{ href: '#porto' }} />
+    </List>
+  ),
+};
+export const MultiAction: Story = { render: (args) => <MultiActionExample variant={args.variant} /> };
+export const Expandable: Story = { render: (args) => <ExpandableExample variant={args.variant} /> };
+export const NestedExpandable: Story = { render: (args) => <ExpandableExample variant={args.variant} nested /> };
+export const ControlledExpansion: Story = { render: (args) => <ExpandableExample variant={args.variant} controlled /> };
