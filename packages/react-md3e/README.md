@@ -54,7 +54,7 @@ uses a full-width MUI-style slide and respects reduced motion. CSS loads automat
 available from the package root and their kebab-case subpaths. Native Temporal and Temporal-aware
 Intl are required; older runtimes need an application-installed compatible global polyfill.
 See [Calendar documentation](https://github.com/flaut-org/react-md3e/blob/main/docs/components/calendar.md).
-Implemented: Calendar, RangeCalendar, Button, Fab, ExtendedFab, FabMenu/FabMenuItem, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Switch, Slider, Radio/RadioGroup, Avatar, Badge, TextField, Autocomplete, Chip/ChipSet, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, SplitButton, SegmentedButton/ButtonSegment, Tabs/TabList/Tab/TabPanel, BottomSheet, SideSheet, Snackbar, ThemeProvider, createTheme, and themeToCss. React 19 is required.
+Implemented: Calendar, RangeCalendar, Button, Fab, ExtendedFab, FabMenu/FabMenuItem, IconButton, AppBar, Toolbar/ToolbarOverflow, Dialog, List/ListItem, Checkbox, Switch, Slider, Radio/RadioGroup, Avatar, Badge, TextField, Autocomplete, Chip/ChipSet, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, SplitButton, SegmentedButton/ButtonSegment, Tabs/TabList/Tab/TabPanel, BottomSheet, SideSheet, Snackbar, ThemeProvider, createTheme, and themeToCss. React 19 is required.
 
 ```tsx
 import { Button, ThemeProvider } from '@flaut-travel/react-md3e';
@@ -170,3 +170,9 @@ Menu and its item, selection, grouping and submenu parts are available from `/me
 Styles load automatically. Expressive standard/vibrant menus use
 Base UI focus/typeahead/dismissal and support keyboard-accessible nested menus and grouped surfaces with gaps. See
 [Menu documentation](https://github.com/flaut-org/react-md3e/blob/main/docs/components/menu.md).
+
+Toolbar supports docked and horizontal/vertical floating panels with scoped Standard/Vibrant colors,
+FAB composition, declarative responsive overflow, expansion and web scroll/keyboard behavior.
+Its layout stays server-compatible; optional behavior and ToolbarOverflow own client boundaries.
+Import from `/toolbar`; CSS loads automatically. See the
+[Toolbar API and verification limits](https://github.com/flaut-org/react-md3e/blob/main/docs/components/toolbar.md).

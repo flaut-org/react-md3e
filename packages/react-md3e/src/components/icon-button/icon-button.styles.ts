@@ -40,7 +40,10 @@ const rootStyles = {
   "&[data-shape='square'][aria-pressed='true']": {
     '--_radius': 'min(var(--md-sys-shape-corner-full, 9999px), calc(min(var(--_height), var(--_width)) / 2))',
   },
-  "&[data-variant='tonal']": { '--_bg': color('secondaryContainer'), '--_fg': color('onSecondaryContainer') },
+  "&[data-variant='tonal']": {
+    '--_bg': `var(--md-comp-icon-button-tonal-container-color, ${color('secondaryContainer')})`,
+    '--_fg': `var(--md-comp-icon-button-tonal-color, ${color('onSecondaryContainer')})`,
+  },
   "&[data-variant='outlined']": {
     '--_bg': 'transparent',
     '--_fg': color('onSurfaceVariant'),
@@ -51,16 +54,21 @@ const rootStyles = {
     '--_fg': `var(--md-comp-icon-button-standard-color, ${color('onSurfaceVariant')})`,
   },
   "&[data-variant='filled'][aria-pressed='false']": {
-    '--_bg': color('surfaceContainer'),
-    '--_fg': color('onSurfaceVariant'),
+    '--_bg': `var(--md-comp-icon-button-filled-unselected-container-color, ${color('surfaceContainer')})`,
+    '--_fg': `var(--md-comp-icon-button-filled-unselected-color, ${color('onSurfaceVariant')})`,
   },
-  "&[data-variant='tonal'][aria-pressed='true']": { '--_bg': color('secondary'), '--_fg': color('onSecondary') },
+  "&[data-variant='tonal'][aria-pressed='true']": {
+    '--_bg': `var(--md-comp-icon-button-tonal-selected-container-color, ${color('secondary')})`,
+    '--_fg': `var(--md-comp-icon-button-tonal-selected-color, ${color('onSecondary')})`,
+  },
   "&[data-variant='outlined'][aria-pressed='true']": {
     '--_bg': color('inverseSurface'),
     '--_fg': color('inverseOnSurface'),
     '--_border': 'transparent',
   },
-  "&[data-variant='standard'][aria-pressed='true']": { '--_fg': color('primary') },
+  "&[data-variant='standard'][aria-pressed='true']": {
+    '--_fg': `var(--md-comp-icon-button-standard-selected-color, ${color('primary')})`,
+  },
   '&:active:not(:disabled)': { '--_radius': 'var(--_pressed)' },
   '&:focus-visible': { outline: 'none' },
   '&:focus-visible > span': { outline: `3px solid ${color('secondary')}`, outlineOffset: 3 },

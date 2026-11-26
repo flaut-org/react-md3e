@@ -41,6 +41,7 @@ import {
   ListItem,
   Button,
   IconButton,
+  Toolbar,
   Calendar,
   RangeCalendar,
 } from '@flaut-travel/react-md3e';
@@ -54,6 +55,11 @@ export async function RequestTimeContent() {
 
   return (
     <div data-fixture="streaming-ready">
+      <Toolbar variant="floating" aria-label="Streamed tools" data-testid="streamed-toolbar">
+        <Button variant="text">Streamed edit</Button>
+        <Button variant="text">Streamed share</Button>
+        <Button variant="text">Streamed export</Button>
+      </Toolbar>
       <SplitButton menuButtonLabel="More streamed options" menu={<MenuItem>Streamed split action</MenuItem>}>
         Streamed split button
       </SplitButton>

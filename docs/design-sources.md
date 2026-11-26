@@ -116,3 +116,12 @@ Button loading uses a circular web progress visual; the separate Expressive Load
 is not included. See each component document for exact adaptations and intentionally bounded APIs.
 No Google Figma access or pixel-perfect conformance is claimed. Motion uses the library's existing
 precomputed CSS spring curve; native gesture geometry comes from Base UI.
+
+## Toolbar
+
+[Toolbar](components/toolbar.md) records official MD3 diagrams, Android Material Components v34.0.0
+tokens at ca5b9e4ca22b23adc8f50e178f267793ac741ca4, and AndroidX defaults at
+1b7fa70578d3045e52d699228a6c9e4d6490cb87. Chromium rendered the official specs on 2026-11-26.
+Figma listed Toolbars page 58295:22726, then the account quota rejected the detailed read.
+Color-reference differences, density/placement/overflow/focus adaptations and unverified Figma parity
+are explicit in the component document.

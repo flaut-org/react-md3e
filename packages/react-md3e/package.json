@@ -437,7 +437,16 @@
       "import": "./dist/theme-provider.js",
       "default": "./dist/theme-provider.js"
     },
-    "./theme-provider/styles.css": "./dist/theme-provider.css"
+    "./theme-provider/styles.css": "./dist/theme-provider.css",
+    "./toolbar": {
+      "types": "./dist/components/toolbar/index.d.ts",
+      "module": "./dist/toolbar.js",
+      "browser": "./dist/toolbar.js",
+      "node": "./dist/node/toolbar.js",
+      "import": "./dist/toolbar.js",
+      "default": "./dist/toolbar.js"
+    },
+    "./toolbar/styles.css": "./dist/toolbar.css"
   },
   "scripts": {
     "clean": "node ../../scripts/clean-package.mjs",

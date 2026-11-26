@@ -10,6 +10,7 @@ const source = fileURLToPath(new URL('./packages/react-md3e/src/', import.meta.u
 const compositionCssDependencies: Readonly<Record<string, readonly string[]>> = {
   'components/app-bar/app-bar.component.js': ['search.js'],
   'components/split-button/split-button.component.js': ['menu.js'],
+  'components/toolbar/toolbar.component.js': ['fab.js', 'divider.js'],
 };
 
 function importedCss(chunk: Rollup.OutputChunk): ReadonlySet<string> {
@@ -221,6 +222,7 @@ export default defineConfig({
         'button': `${source}components/button/index.ts`,
         'icon-button': `${source}components/icon-button/index.ts`,
         'app-bar': `${source}components/app-bar/index.ts`,
+        'toolbar': `${source}components/toolbar/index.ts`,
         'dialog': `${source}components/dialog/index.ts`,
         'list': `${source}components/list/index.ts`,
         'checkbox': `${source}components/checkbox/index.ts`,

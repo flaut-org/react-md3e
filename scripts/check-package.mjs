@@ -42,6 +42,16 @@ const entry = await readFile(path.join(packageRoot, manifest.exports['.'].import
 assert.ok(!/^\s*['"]use client['"]/m.test(entry), 'The package root must remain server-safe.');
 assert.doesNotMatch(entry, /import\s+['"][^'"]+\.css['"]/, 'The root must not eagerly import CSS.');
 
+const toolbarCode = await readFile(path.join(packageRoot, 'dist/components/toolbar/toolbar.component.js'), 'utf8');
+const toolbarBehaviorCode = await readFile(
+  path.join(packageRoot, 'dist/components/toolbar/toolbar-behavior/toolbar-behavior.component.js'),
+  'utf8',
+);
+
+assert.doesNotMatch(toolbarCode, /use client|useContext|useState|useEffect|@base-ui/);
+assert.match(toolbarBehaviorCode, /^['"]use client['"]/m);
+assert.match(toolbarBehaviorCode, /@base-ui\/react\/toolbar/);
+
 for (const [name, target] of Object.entries(manifest.exports)) {
   if (typeof target === 'object' && name !== './theme') {
     assert.equal(target.module, target.import);
