@@ -274,3 +274,5 @@ export type { NavigationDrawerProps, NavigationDrawerCloseReason } from './compo
 export { NavigationItem } from './components/navigation-item/navigation-item.component';
 export type { NavigationItemProps, NavigationItemLinkProps } from './components/navigation-item/navigation-item.types';
 export type { NavigationValue } from './components/navigation/navigation.types';
+export { Chip, ChipSet } from './components/chip';
+export type { ChipProps, ChipKind, ChipVariant, ChipShape, ChipSetProps, InputChipProps } from './components/chip';

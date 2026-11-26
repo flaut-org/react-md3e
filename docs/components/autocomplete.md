@@ -44,7 +44,7 @@ recreated objects identify the same option.
 | Prop                                                 | Contract                                                                                               |
 | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | options                                              | Available strings/objects; caller owns fetching, grouping policy and ordering                          |
-| multiple                                             | Enable array selection and private removable input chips                                               |
+| multiple                                             | Enable array selection and removable input chips using the public Chip                                 |
 | value / defaultValue                                 | Single: option or null; multiple: option array. Omitted value is uncontrolled                          |
 | onChange(event, value, reason)                       | Native Event, typed selected value, selectOption/removeOption/clear                                    |
 | inputValue / defaultInputValue                       | Independent controlled / initial uncontrolled search text                                              |

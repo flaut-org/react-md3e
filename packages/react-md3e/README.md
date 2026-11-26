@@ -2,6 +2,11 @@
 
 Material 3 Expressive React components with precompiled CSS and a token-based theme API.
 
+Chip and ChipSet provide assist, filter, input and suggestion chips, optional Expressive selection
+shapes, outlined/elevated variants, keyboard navigation and independent remove actions. Autocomplete
+uses the same input Chip. Import from the root or `/chip`; CSS loads automatically. Passive input
+chips remain server components. See the [Chip API](https://github.com/flaut-org/react-md3e/blob/main/docs/components/chip.md).
+
 AppBar supports search, small, mediumFlexible and largeFlexible variants. Compose the existing
 Search as the direct child of `AppBar variant="search"` for docked/full-screen results, with inside
 and outside actions, centered hints and scrolled colors. `/app-bar/styles.css` includes Search's
@@ -49,7 +54,7 @@ uses a full-width MUI-style slide and respects reduced motion. CSS loads automat
 available from the package root and their kebab-case subpaths. Native Temporal and Temporal-aware
 Intl are required; older runtimes need an application-installed compatible global polyfill.
 See [Calendar documentation](https://github.com/flaut-org/react-md3e/blob/main/docs/components/calendar.md).
-Implemented: Calendar, RangeCalendar, Button, Fab, ExtendedFab, FabMenu/FabMenuItem, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Switch, Slider, Radio/RadioGroup, Avatar, Badge, TextField, Autocomplete, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, SplitButton, SegmentedButton/ButtonSegment, Tabs/TabList/Tab/TabPanel, BottomSheet, SideSheet, Snackbar, ThemeProvider, createTheme, and themeToCss. React 19 is required.
+Implemented: Calendar, RangeCalendar, Button, Fab, ExtendedFab, FabMenu/FabMenuItem, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Switch, Slider, Radio/RadioGroup, Avatar, Badge, TextField, Autocomplete, Chip/ChipSet, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, SplitButton, SegmentedButton/ButtonSegment, Tabs/TabList/Tab/TabPanel, BottomSheet, SideSheet, Snackbar, ThemeProvider, createTheme, and themeToCss. React 19 is required.
 
 ```tsx
 import { Button, ThemeProvider } from '@flaut-travel/react-md3e';

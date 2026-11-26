@@ -37,7 +37,9 @@ It does not attach a component's entire dependency closure to a public JavaScrip
 
 Ordinary JavaScript dependencies bring their own styles: Button includes its loading spinner and
 ripple; Checkbox includes shared selection-control and SelectionIndicator presentation;
-Autocomplete includes TextField, chips, MenuSurface/MenuItemContent and selection presentation.
+Autocomplete includes TextField, public Chip, MenuSurface/MenuItemContent and selection presentation.
+Chip and Autocomplete reuse the same extracted Chip stylesheet; Chip is independently available
+from the root or `/chip`, with `/chip/styles.css` for explicit CSS consumers.
 Shared assets keep the same URLs and are deduplicated by the consumer bundler.
 
 Public composition parts passed through ReactNode can be absent from an owner's import graph.

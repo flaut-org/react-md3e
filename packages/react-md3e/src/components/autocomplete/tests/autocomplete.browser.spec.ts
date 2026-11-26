@@ -271,6 +271,48 @@ test('multiple choice hides selected options, retains the popup and removes chip
   await expect(page.getByTestId('selection-reason')).toHaveText('removeOption');
 });
 
+test('Autocomplete uses public input Chips while retaining Combobox navigation and removal focus', async ({ page }) => {
+  await page.goto('/fields');
+
+  const field = page.getByTestId('multiple-autocomplete');
+  const input = field.getByRole('combobox', { name: 'Visited cities' });
+  const chips = field.locator('[data-md3-chip][data-kind="input"]');
+
+  await expect(chips).toHaveCount(1);
+  await expect(chips.first()).toHaveCSS('height', '32px');
+  await expect(chips.first()).toHaveCSS('border-radius', '8px');
+  await expect(chips.first()).toHaveCSS('border-top-width', '1px');
+  await expect(chips.first().locator('[data-md3-chip-delete] svg')).toHaveCSS('width', '18px');
+  await input.click();
+  await page.getByRole('option', { name: 'Rome', exact: true }).click();
+  await input.press('Escape');
+  await expect(chips).toHaveCount(2);
+  await input.press('ArrowLeft');
+  await expect(chips.nth(1)).toBeFocused();
+  await page.keyboard.press('ArrowLeft');
+  await expect(chips.nth(0)).toBeFocused();
+  await page.keyboard.press('ArrowRight');
+  await expect(chips.nth(1)).toBeFocused();
+  await page.keyboard.press('Delete');
+  await expect(page.getByTestId('selected-cities')).toHaveText('Paris');
+  await field.getByRole('button', { name: 'Clear Paris', exact: true }).press('Enter');
+  await expect(chips).toHaveCount(0);
+  await expect(input).toBeFocused();
+
+  const locked = page.getByRole('combobox', { name: 'Locked choices' }).locator('..').locator('[data-md3-chip]');
+
+  await expect(locked).toHaveAttribute('data-read-only', 'true');
+  await expect(locked.getByRole('button')).toHaveCount(0);
+
+  const disabled = page.getByRole('combobox', { name: 'Disabled choices' }).locator('..').locator('[data-md3-chip]');
+  const remove = disabled.getByRole('button');
+
+  await expect(disabled).toHaveAttribute('data-disabled', 'true');
+  await remove.hover();
+  await expect(remove).toHaveCSS('cursor', 'default');
+  await expect.poll(() => remove.evaluate((button) => getComputedStyle(button, '::before').opacity)).toBe('0');
+});
+
 test('disabled/readOnly/clearability and openOnFocus restrictions are honored', async ({ page }) => {
   await page.goto('/fields');
 

@@ -2,6 +2,8 @@ import { Calendar, CalendarDay } from '@flaut-travel/react-md3e/calendar';
 import { RangeCalendar } from '@flaut-travel/react-md3e/range-calendar';
 import type {
   SwitchProps,
+  ChipProps,
+  ChipSetProps,
   SliderProps,
   SliderRange,
   BadgeProps,
@@ -72,6 +74,7 @@ import { TextField } from '@flaut-travel/react-md3e/text-field';
 import { Autocomplete } from '@flaut-travel/react-md3e/autocomplete';
 import { Checkbox } from '@flaut-travel/react-md3e/checkbox';
 import { Switch } from '@flaut-travel/react-md3e/switch';
+import { Chip, ChipSet } from '@flaut-travel/react-md3e/chip';
 import { Slider } from '@flaut-travel/react-md3e/slider';
 import { Radio } from '@flaut-travel/react-md3e/radio';
 import { RadioGroup } from '@flaut-travel/react-md3e/radio-group';
@@ -98,6 +101,10 @@ const buttonProps: ButtonProps = { variant: 'tonal', endIcon: '→', selected: t
 const providerProps: ThemeProviderProps = { theme, colorScheme: 'dark' };
 
 export const consumer = {
+  Chip,
+  ChipSet,
+  chipProps: { kind: 'filter', label: 'Nonstop', shape: 'expressive', defaultSelected: true } satisfies ChipProps,
+  chipSetProps: { 'aria-label': 'Fare filters', 'orientation': 'horizontal' } satisfies ChipSetProps,
   Switch,
   Slider,
   sliderProps: { label: 'Volume', value: 40, size: 'small', marks: true } satisfies SliderProps,
