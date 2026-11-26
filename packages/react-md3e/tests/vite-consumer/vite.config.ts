@@ -8,16 +8,22 @@ import { App as Composition } from './composition';
 import { App as Button } from './button';
 import { App as Checkbox } from './checkbox';
 import { App as Theme } from './theme';
+import { App as Chip } from './chip';
+import { App as ChipSubpath } from './chip-subpath';
+import { App as ChipAutocomplete } from './chip-autocomplete';
 
 const example = process.env.MD3E_CSS_CASE ?? 'root';
 const cases = {
-  root: Root,
-  subpath: Subpath,
-  composition: Composition,
-  button: Button,
-  checkbox: Checkbox,
-  theme: Theme,
-  legacy: Root,
+  'root': Root,
+  'subpath': Subpath,
+  'composition': Composition,
+  'button': Button,
+  'checkbox': Checkbox,
+  'theme': Theme,
+  'legacy': Root,
+  'chip': Chip,
+  'chip-subpath': ChipSubpath,
+  'chip-autocomplete': ChipAutocomplete,
 };
 
 export default defineConfig({

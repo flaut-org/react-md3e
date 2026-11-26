@@ -60,6 +60,9 @@ export default function Page() {
         <Link href="/segmented-buttons">Segmented button examples</Link>
       </p>
       <p>
+        <Link href="/chips">Chip examples</Link>
+      </p>
+      <p>
         <Link href="/sliders">Slider examples</Link>
         <Link href="/tabs">Tabs examples</Link>
       </p>

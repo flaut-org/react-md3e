@@ -204,6 +204,10 @@ image loading and is its only client boundary. Shared form-control styles live u
 TextField and Autocomplete are separate top-level components because the input is used independently
 and by Autocomplete. Autocomplete's `autocomplete-input`, `autocomplete-option` and `autocomplete-chip`
 children live inside its subtree; their tests are part of the parent's integration scenarios.
+The chip adapter delegates presentation to public Chip. Chip is shared by application consumers
+and Autocomplete, so it owns a top-level directory with private content/control/delete/interactive
+children, its public ChipSet part, context and tests. ChipSet owns roving focus; Autocomplete retains
+its Combobox chip focus and removal behavior.
 `use-merged-refs.hook.ts` lives in `src/internal/hooks`, preserves React 19 callback cleanup and is
 shared by TextField/Autocomplete. No theme context or flat sibling component files are introduced.
 

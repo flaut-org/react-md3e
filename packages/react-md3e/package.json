@@ -420,6 +420,15 @@
     "./navigation-bar/styles.css": "./dist/navigation-bar.css",
     "./navigation-rail/styles.css": "./dist/navigation-rail.css",
     "./navigation-drawer/styles.css": "./dist/navigation-drawer.css",
+    "./chip": {
+      "types": "./dist/components/chip/index.d.ts",
+      "module": "./dist/chip.js",
+      "browser": "./dist/chip.js",
+      "node": "./dist/node/chip.js",
+      "import": "./dist/chip.js",
+      "default": "./dist/chip.js"
+    },
+    "./chip/styles.css": "./dist/chip.css",
     "./theme-provider": {
       "types": "./dist/theme/theme-provider/index.d.ts",
       "module": "./dist/theme-provider.js",

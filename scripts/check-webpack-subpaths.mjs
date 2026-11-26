@@ -27,3 +27,21 @@ assert.equal([...css.matchAll(/@keyframes ripple-enter[\w-]*\s*\{/g)].length, 1)
 assert.ok(Buffer.byteLength(css) < 55_000, 'The subpath route must not receive catalog CSS.');
 
 process.stdout.write(`Webpack subpaths without import optimization: ${Buffer.byteLength(css)} CSS bytes; passed.\n`);
+
+const chipHtml = await readFile(new URL('.next/server/app/chips/server.html', fixture), 'utf8');
+const chipFiles = [...new Set([...chipHtml.matchAll(/href="([^"?]+\.css(?:\?[^"]*)?)"/g)].map((match) => match[1]))];
+const chipCss = (
+  await Promise.all(chipFiles.map((file) => readFile(new URL(`.next${file.replace('/_next', '')}`, fixture), 'utf8')))
+).join('\n');
+
+assert.match(chipCss, /--_chip-radius/);
+assert.equal([...chipCss.matchAll(/--_chip-start:12px/g)].length, 1);
+assert.doesNotMatch(
+  chipCss,
+  /md3-button-loading|data-morph|md3-calendar-enter|--md3e-menu-scale|md3-slider-active|data-md3-field/,
+);
+assert.ok(Buffer.byteLength(chipCss) < 45_000, 'Chip subpaths must not receive catalog CSS.');
+
+process.stdout.write(
+  `Webpack Chip subpath without import optimization: ${Buffer.byteLength(chipCss)} CSS bytes; passed.\n`,
+);

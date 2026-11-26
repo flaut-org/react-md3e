@@ -139,6 +139,18 @@ const providerUrl = new URL(
   '../packages/react-md3e/dist/node/theme/theme-provider/theme-provider.component.js',
   import.meta.url,
 ).href;
+const chipContentUrl = new URL(
+  '../packages/react-md3e/dist/node/components/chip/chip-content/chip-content.component.js',
+  import.meta.url,
+).href;
+
+// The Chip dispatcher composes client leaves, like Avatar. Its passive Flight output is checked
+// in Next; pure ChipContent can also be imported by native react-server Node.
+execFileSync(
+  process.execPath,
+  ['--conditions=react-server', '--input-type=module', '--eval', `await import(${JSON.stringify(chipContentUrl)});`],
+  { cwd: workspaceRoot, stdio: 'pipe' },
+);
 
 execFileSync(
   process.execPath,
@@ -152,6 +164,19 @@ execFileSync(
 );
 
 const button = await readFile(path.join(packageRoot, 'dist/components/button/button.component.js'), 'utf8');
+const chip = await readFile(path.join(packageRoot, 'dist/components/chip/chip.component.js'), 'utf8');
+
+assert.doesNotMatch(
+  chip,
+  /use client|useState|useEffect|useContext|@base-ui/,
+  'Passive Chip must remain a server component.',
+);
+
+for (const name of ['chip-interactive', 'chip-delete', 'chip-control', 'chip-set']) {
+  const code = await readFile(path.join(packageRoot, `dist/components/chip/${name}/${name}.component.js`), 'utf8');
+
+  assert.match(code, /^['"]use client['"]/m, `${name} must preserve its interaction boundary.`);
+}
 
 for (const name of ['calendar', 'range-calendar']) {
   const calendar = await readFile(path.join(packageRoot, `dist/components/${name}/${name}.component.js`), 'utf8');
@@ -498,6 +523,24 @@ const buttonCss = await readCssTree(manifest.exports['./button/styles.css'], but
 const autocompleteStyles = new Set();
 
 const autocompleteCss = await readCssTree(manifest.exports['./autocomplete/styles.css'], autocompleteStyles);
+const chipStyles = new Set();
+const chipCss = await readCssTree(manifest.exports['./chip/styles.css'], chipStyles);
+
+assert.match(chipCss, /--_chip-radius/);
+assert.ok([...chipStyles].some((file) => file.includes('/internal/ripple/')));
+assert.ok(![...chipStyles].some((file) => /\/(button|text-field|autocomplete|menu)\//.test(file)));
+assert.ok(![...buttonStyles].some((file) => file.includes('/chip/')));
+
+for (const file of chipStyles) {
+  if (file.includes('/styles/')) {
+    assert.ok(autocompleteStyles.has(file), 'Autocomplete must load the same Chip and ripple CSS assets.');
+  }
+}
+
+assert.ok(
+  ![...autocompleteStyles].some((file) => file.includes('/autocomplete-chip/')),
+  'The bespoke Autocomplete chip stylesheet must be removed.',
+);
 
 assert.ok(
   [...buttonStyles].some((file) => file.includes('/internal/ripple/')),

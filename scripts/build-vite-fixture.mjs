@@ -8,8 +8,22 @@ const workspace = fileURLToPath(new URL('../', import.meta.url));
 let rootOutput;
 let rootSize;
 let rootJsSize;
+let chipSize;
 
-for (const example of ['root', 'subpath', 'legacy', 'button', 'checkbox', 'theme', 'composition', 'lazy', 'root']) {
+for (const example of [
+  'root',
+  'subpath',
+  'legacy',
+  'button',
+  'checkbox',
+  'theme',
+  'composition',
+  'lazy',
+  'chip',
+  'chip-subpath',
+  'chip-autocomplete',
+  'root',
+]) {
   execFileSync(
     process.execPath,
     ['node_modules/vite/bin/vite.js', 'build', '--config', 'packages/react-md3e/tests/vite-consumer/vite.config.ts'],
@@ -54,9 +68,30 @@ for (const example of ['root', 'subpath', 'legacy', 'button', 'checkbox', 'theme
     assert.match(css, /--_split-expanded-angle/);
     assert.match(css, /data-md3-app-bar-search/, 'AppBar must carry its declared Search composition.');
     assert.match(css, /--_search-/);
-  } else {
+  } else if (example !== 'chip-autocomplete') {
     assert.doesNotMatch(css, /--md3e-menu-scale|data-md3-app-bar|data-md3-field|--_search-/);
     assert.ok(bytes < 45_000, `Button/Checkbox CSS exceeded the 45 kB regression budget: ${bytes}`);
+  }
+
+  if (example.startsWith('chip')) {
+    assert.match(css, /--_chip-radius/);
+    assert.equal(
+      [...css.matchAll(/--_chip-start:12px/g)].length,
+      1,
+      'Chip and Autocomplete must share one Chip stylesheet.',
+    );
+    assert.doesNotMatch(css, /md3-button-loading|data-md3-button-loading|data-morph|md3-calendar-enter/);
+
+    if (example === 'chip') {
+      chipSize = bytes;
+    } else if (example === 'chip-subpath') {
+      assert.equal(bytes, chipSize, 'Chip root and subpath imports must have identical CSS payloads.');
+    } else {
+      assert.match(css, /data-md3-field/);
+      assert.ok(bytes < 85_000, `Autocomplete with Chip exceeded its CSS budget: ${bytes}`);
+    }
+  } else if (example !== 'composition') {
+    assert.doesNotMatch(css, /--_chip-radius/, 'Unused Chip CSS must tree-shake from root named imports.');
   }
 
   if (example === 'root') {

@@ -232,6 +232,7 @@ export default defineConfig({
         'badge': `${source}components/badge/index.ts`,
         'text-field': `${source}components/text-field/index.ts`,
         'autocomplete': `${source}components/autocomplete/index.ts`,
+        'chip': `${source}components/chip/index.ts`,
         'shape': `${source}components/shape/index.ts`,
         'search': `${source}components/search/index.ts`,
         'surface': `${source}components/surface/index.ts`,

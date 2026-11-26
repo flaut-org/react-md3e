@@ -17,7 +17,7 @@ changing the package. Treat the user's current instructions as the source of tas
 - Styling must never force `'use client'`. Only actual state, event handling, browser APIs, or
   interactive primitives justify a client entry point. A styled client component remains a client
   component; a server component must stay importable from RSC.
-- The foundation milestone is complete. Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Radio/RadioGroup, Avatar, TextField, Autocomplete, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, BottomSheet, SideSheet, Snackbar, LoadingIndicator, ProgressIndicator, and ThemeProvider are implemented. Keep changes
+- The foundation milestone is complete. Button, IconButton, AppBar, Dialog, List/ListItem, Checkbox, Radio/RadioGroup, Avatar, TextField, Autocomplete, Chip/ChipSet, Search/SearchBar, Popover, Surface, Shape, Card, Typography, Skeleton, Divider, Tooltip, Collapsible, ButtonGroup, BottomSheet, SideSheet, Snackbar, LoadingIndicator, ProgressIndicator, and ThemeProvider are implemented. Keep changes
   scoped to the user's requested components; do not expand the full MUI catalog.
 
 ## Structure and public API

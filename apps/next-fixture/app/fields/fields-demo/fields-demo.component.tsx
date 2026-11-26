@@ -170,6 +170,13 @@ export function FieldsDemo() {
           <Autocomplete label="Disabled destination" options={['Paris', 'Rome']} defaultValue="Paris" disabled />
           <Autocomplete label="Locked destination" options={['Paris', 'Rome']} defaultValue="Paris" readOnly />
           <Autocomplete multiple label="Locked choices" options={['Paris', 'Rome']} defaultValue={['Paris']} readOnly />
+          <Autocomplete
+            multiple
+            label="Disabled choices"
+            options={['Paris', 'Rome']}
+            defaultValue={['Paris']}
+            disabled
+          />
           <Autocomplete label="Fixed destination" options={['Paris', 'Rome']} defaultValue="Paris" disableClearable />
           <Autocomplete label="Focus destination" options={['Paris', 'Rome']} openOnFocus autoHighlight />
           <Autocomplete label="RTL destination" options={['القاهرة', 'عمان']} dir="rtl" />

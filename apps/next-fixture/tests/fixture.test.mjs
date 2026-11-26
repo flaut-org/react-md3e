@@ -194,7 +194,7 @@ test('root and subpath imports load only Button/Checkbox dependencies without ma
 });
 
 test('automatic styles preserve actual Next RSC client references', async () => {
-  for (const route of ['automatic-css', 'automatic-css/subpath', 'automatic-css/server']) {
+  for (const route of ['automatic-css', 'automatic-css/subpath', 'automatic-css/server', 'chips/server']) {
     const code = await readFile(
       path.join(workspaceRoot, `apps/next-fixture/.next/server/app/${route}/page_client-reference-manifest.js`),
       'utf8',
@@ -228,6 +228,24 @@ test('automatic styles preserve actual Next RSC client references', async () => 
       'Server presentation must not become a client reference.',
     );
     assert.ok(!modules.some((name) => name.includes('/dist/node/')), 'Next must select styled bundler exports.');
+  }
+});
+
+test('Chip loads automatic shared CSS in the server shell without unrelated component styles', async () => {
+  const origin = baseUrl;
+
+  for (const route of ['chips', 'chips/server']) {
+    const response = await fetch(`${baseUrl}/${route}`, { signal: AbortSignal.timeout(10_000) });
+    const html = await response.text();
+    const files = [...new Set([...html.matchAll(/href="([^"?]+\.css(?:\?[^"]*)?)"/g)].map((match) => match[1]))];
+    const css = (await Promise.all(files.map(async (file) => (await fetch(`${origin}${file}`)).text()))).join('\n');
+
+    assert.equal(response.status, 200);
+    assert.match(html, /data-md3-chip=""/);
+    assert.match(css, /--_chip-radius/);
+    assert.equal([...css.matchAll(/--_chip-start:12px/g)].length, 1, 'Shared Chip CSS must load once.');
+    assert.doesNotMatch(css, /md3-button-loading|data-morph|md3-calendar-enter|--md3e-menu-scale|data-md3-field/);
+    assert.ok(Buffer.byteLength(css) < 45_000, 'Chip must keep its component CSS closure.');
   }
 });
 
