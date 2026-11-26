@@ -202,7 +202,7 @@ export { Divider } from './components/divider';
 export type { DividerProps, DividerVariant } from './components/divider';
 
 export { Tooltip } from './components/tooltip';
-export type { TooltipProps, TooltipPlacement } from './components/tooltip';
+export type { TooltipProps, TooltipPlacement, TooltipVariant } from './components/tooltip';
 
 export { Collapsible } from './components/collapsible';
 export type { CollapsibleProps } from './components/collapsible';

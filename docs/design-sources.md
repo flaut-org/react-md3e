@@ -97,6 +97,11 @@ the independent HTML/CSS adaptation. Numerical token data is transcribed without
 
 ## Homepage primitives (2026-11-16)
 
+Tooltip's 2026-11-26 plain/rich audit adds the supplied Material mirror, pinned AndroidX Tooltip.kt /
+PlainTooltipTokens / RichTooltipTokens at `009564af4f3f92df06e213711cb5327ceabc4e47`, WAI-ARIA and
+MUI API references. [Tooltip](components/tooltip.md) records exact sources, browser adaptations and
+the outstanding Figma/manual assistive-technology verification.
+
 Official rendered specifications consulted for [Divider](https://m3.material.io/components/divider/specs),
 [Tooltip](https://m3.material.io/components/tooltips/specs),
 [Button groups](https://m3.material.io/components/button-groups/specs),

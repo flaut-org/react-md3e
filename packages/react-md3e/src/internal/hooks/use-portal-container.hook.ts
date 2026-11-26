@@ -2,8 +2,11 @@
 
 import { useLayoutEffect, useRef, useState } from 'react';
 
-/** Resolve after all DOM refs attach; CSS continues to inherit without style computation. */
-export function usePortalContainer(container: HTMLElement | null | (() => HTMLElement | null) | undefined) {
+/** Resolve after hydration; reopening can refresh a custom host whose sibling ref attached later. */
+export function usePortalContainer(
+  container: HTMLElement | null | (() => HTMLElement | null) | undefined,
+  open?: boolean,
+) {
   const anchorRef = useRef<HTMLSpanElement>(null);
   const [host, setHost] = useState<HTMLElement | null>(null);
   const [direction, setDirection] = useState<string | undefined>();
@@ -19,7 +22,7 @@ export function usePortalContainer(container: HTMLElement | null | (() => HTMLEl
       setHost(supplied ?? scope ?? node.ownerDocument.body);
       setDirection(inheritedDirection);
     }
-  }, [container]);
+  }, [container, open]);
 
   return { anchorRef, host, direction };
 }
