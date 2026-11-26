@@ -24,7 +24,7 @@
     "typecheck": "npm run typecheck --workspaces --if-present && tsc --project tsconfig.tooling.json && tsc --project packages/react-md3e/tests/types-consumer/tsconfig.nodenext.json && tsc --project packages/react-md3e/tests/types-consumer/tsconfig.bundler.json",
     "check:package": "node scripts/check-package.mjs",
     "test": "npm run test:unit && npm run test:http",
-    "test:unit": "node --test packages/react-md3e/src/theme/tests/*.test.mjs packages/react-md3e/src/internal/indicators/tests/*.test.mjs packages/react-md3e/src/components/badge/tests/*.test.mjs packages/react-md3e/src/components/calendar/tests/*.test.mjs packages/react-md3e/src/components/range-calendar/tests/*.test.mjs packages/react-md3e/src/components/slider/tests/*.test.mjs packages/react-md3e/src/components/list/list-item/tests/*.test.mjs",
+    "test:unit": "node --test packages/react-md3e/src/theme/tests/*.test.mjs packages/react-md3e/src/internal/indicators/tests/*.test.mjs packages/react-md3e/src/components/badge/tests/*.test.mjs packages/react-md3e/src/components/tooltip/tests/*.test.mjs packages/react-md3e/src/components/calendar/tests/*.test.mjs packages/react-md3e/src/components/range-calendar/tests/*.test.mjs packages/react-md3e/src/components/slider/tests/*.test.mjs packages/react-md3e/src/components/list/list-item/tests/*.test.mjs",
     "test:http": "node --test apps/next-fixture/tests/fixture.test.mjs",
     "check": "npm run format:check && npm run build && npm run lint && npm run typecheck && npm run check:package && npm run build:fixture && npm run build:vite-fixture && npm run build:storybook && npm test && npm run test:release && npm run test:browser && npm run test:bundlers",
     "pack": "npm pack --workspace=@flaut-travel/react-md3e",
