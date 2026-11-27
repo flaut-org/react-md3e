@@ -1,7 +1,5 @@
+import { defaultBreakpoints } from '../internal/breakpoints';
 import type { Breakpoint, BreakpointValues } from './theme.types';
-
-/** Application layout conventions, not Material component design tokens. Values are CSS px. */
-export const defaultBreakpoints: BreakpointValues = Object.freeze({ xs: 0, sm: 600, md: 900, lg: 1200, xl: 1536 });
 
 export function createBreakpoints(options: Partial<BreakpointValues> = {}): BreakpointValues {
   if (!options || typeof options !== 'object' || Array.isArray(options)) {

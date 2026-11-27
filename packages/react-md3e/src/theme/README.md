@@ -12,7 +12,9 @@ Typography includes 15 baseline and 15 emphasized styles with separate canonical
 createTypography resolves/validates shared font stacks and per-role overrides only in server/build
 code; TypeScaleRole stays the 15-role catalog and TypographyTokenRole covers all 30 theme keys.
 
-The application breakpoint scale lives in create-breakpoints.ts. createTheme serializes it into
+The shared default application breakpoint scale lives in internal/breakpoints.ts, independent of
+the generator, and is also used by picker capability queries. create-breakpoints.ts validates custom
+scales. createTheme serializes the selected scale into
 --md-breakpoint-xs/sm/md/lg/xl tokens. createBreakpointQueries exports native up/down conditions
 only from /theme for build-time CSS authoring. Never put var() in media query conditions or install
 client-side style observers to imitate them. See docs/breakpoints.md.

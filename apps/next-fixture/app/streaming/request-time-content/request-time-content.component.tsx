@@ -44,6 +44,8 @@ import {
   Toolbar,
   Calendar,
   RangeCalendar,
+  DatePicker,
+  DateRangePicker,
 } from '@flaut-travel/react-md3e';
 import { ScopedDialogDemo } from '../../../components/scoped-dialog-demo/scoped-dialog-demo.component';
 
@@ -77,6 +79,8 @@ export async function RequestTimeContent() {
       </p>
       <Slider label="Streamed volume" defaultValue={35} data-testid="streamed-slider" />
       <Calendar aria-label="Streamed calendar" defaultValue="2024-02-29" today="2024-02-29" />
+      <DatePicker label="Streamed date picker" defaultValue="2024-02-29" today="2024-02-29" />
+      <DateRangePicker label="Streamed date range picker" today="2024-02-29" />
       <RangeCalendar
         aria-label="Streamed range calendar"
         defaultValue={['2024-02-27', '2024-03-04']}

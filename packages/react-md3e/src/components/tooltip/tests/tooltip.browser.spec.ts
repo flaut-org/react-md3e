@@ -282,10 +282,13 @@ test.describe('Tooltip content and Material variants', () => {
     await expect(page.getByTestId('dynamic-tooltip')).toBeVisible();
     await page.setViewportSize({ width: 360, height: 640 });
 
-    const box = (await page.getByTestId('dynamic-tooltip').boundingBox())!;
+    await expect
+      .poll(async () => {
+        const box = (await page.getByTestId('dynamic-tooltip').boundingBox())!;
 
-    expect(box.x).toBeGreaterThanOrEqual(7);
-    expect(box.x + box.width).toBeLessThanOrEqual(353);
+        return box.x >= 7 && box.x + box.width <= 353;
+      })
+      .toBe(true);
   });
 
   test('scroll containers do not clip the portal and the popup follows its anchor', async ({ page }) => {

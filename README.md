@@ -42,45 +42,45 @@ Statuses describe the available public APIs and Material variants. Partial suppo
 variants or interactions and functionality available only inside another component. Visual verification
 and platform-specific adaptations are documented in the linked component notes.
 
-| Material component                                                                           | Support | Implementation / missing support                                                                         |
-| -------------------------------------------------------------------------------------------- | :-----: | -------------------------------------------------------------------------------------------------------- |
-| [App bars](https://m3.material.io/components/app-bars/overview)                              |   ✅    | Supported                                                                                                |
-| [Badges](https://m3.material.io/components/badges/overview)                                  |   ✅    | Supported                                                                                                |
-| [Bottom sheets](https://m3.material.io/components/bottom-sheets/overview)                    |   ⚠️    | Partially supported. Snap points and swipe-to-open are absent.                                           |
-| [Button groups](https://m3.material.io/components/button-groups/overview)                    |   ✅    | Supported                                                                                                |
-| [Buttons](https://m3.material.io/components/buttons/overview)                                |   ✅    | Supported                                                                                                |
-| [Cards](https://m3.material.io/components/cards/overview)                                    |   ✅    | Supported                                                                                                |
-| [Carousel](https://m3.material.io/components/carousel/overview)                              |   ❌    | Not supported                                                                                            |
-| [Checkbox](https://m3.material.io/components/checkbox/overview)                              |   ✅    | Supported                                                                                                |
-| [Chips](https://m3.material.io/components/chips/overview)                                    |   ✅    | [Supported                                                                                               |
-| [Date pickers](https://m3.material.io/components/date-pickers/overview)                      |   ⚠️    | Partially supported. No DatePicker/DateRangePicker field, docked popup, modal picker or date-entry mode. |
-| [Dialogs](https://m3.material.io/components/dialogs/overview)                                |   ✅    | Supported                                                                                                |
-| [Divider](https://m3.material.io/components/divider/overview)                                |   ✅    | Supported                                                                                                |
-| [Extended FABs](https://m3.material.io/components/extended-fab/overview)                     |   ✅    | Supported                                                                                                |
-| [FAB menu](https://m3.material.io/components/fab-menu/overview)                              |   ✅    | Supported                                                                                                |
-| [Floating action buttons](https://m3.material.io/components/floating-action-button/overview) |   ✅    | Supported                                                                                                |
-| [Icon buttons](https://m3.material.io/components/icon-buttons/overview)                      |   ✅    | Supported                                                                                                |
-| [Lists](https://m3.material.io/components/lists/overview)                                    |   ✅    | Supported                                                                                                |
-| [Loading indicator](https://m3.material.io/components/loading-indicator/overview)            |   ✅    | Supported                                                                                                |
-| [Menus](https://m3.material.io/components/menus/overview)                                    |   ⚠️    | Partially supported. No context gestures, horizontal or baseline variant.                                |
-| [Navigation bar](https://m3.material.io/components/navigation-bar/overview)                  |   ✅    | Supported                                                                                                |
-| [Navigation drawer](https://m3.material.io/components/navigation-drawer/overview)            |   ✅    | Supported                                                                                                |
-| [Navigation rail](https://m3.material.io/components/navigation-rail/overview)                |   ✅    | Supported                                                                                                |
-| [Progress indicators](https://m3.material.io/components/progress-indicators/overview)        |   ✅    | Supported                                                                                                |
-| [Radio button](https://m3.material.io/components/radio-button/overview)                      |   ✅    | Supported                                                                                                |
-| [Scroll fields](https://m3.material.io/components/scroll-fields)                             |   ❌    | Not supported                                                                                            |
-| [Search](https://m3.material.io/components/search/overview)                                  |   ⚠️    | Partially supported. The divided search style is absent.                                                 |
-| [Segmented buttons](https://m3.material.io/components/segmented-buttons/overview)            |   ✅    | Supported                                                                                                |
-| [Side sheets](https://m3.material.io/components/side-sheets/overview)                        |   ✅    | Supported                                                                                                |
-| [Sliders](https://m3.material.io/components/sliders/overview)                                |   ✅    | Supported                                                                                                |
-| [Snackbar](https://m3.material.io/components/snackbar/overview)                              |   ⚠️    | Partially supported. Swipe dismissal is absent.                                                          |
-| [Split buttons](https://m3.material.io/components/split-button/overview)                     |   ✅    | Supported                                                                                                |
-| [Switch](https://m3.material.io/components/switch/overview)                                  |   ✅    | Supported                                                                                                |
-| [Tabs](https://m3.material.io/components/tabs/overview)                                      |   ✅    | Supported                                                                                                |
-| [Text fields](https://m3.material.io/components/text-fields/overview)                        |   ⚠️    | Partially supported. A built-in character counter and select mode are absent.                            |
-| [Time pickers](https://m3.material.io/components/time-pickers/overview)                      |   ❌    | Not supported                                                                                            |
-| [Toolbars](https://m3.material.io/components/toolbars/overview)                              |   ✅    | Supported                                                                                                |
-| [Tooltips](https://m3.material.io/components/tooltips/overview)                              |   ✅    | Supported                                                                                                |
+| Material component                                                                           | Support | Implementation / missing support                                              |
+| -------------------------------------------------------------------------------------------- | :-----: | ----------------------------------------------------------------------------- |
+| [App bars](https://m3.material.io/components/app-bars/overview)                              |   ✅    | Supported                                                                     |
+| [Badges](https://m3.material.io/components/badges/overview)                                  |   ✅    | Supported                                                                     |
+| [Bottom sheets](https://m3.material.io/components/bottom-sheets/overview)                    |   ⚠️    | Partially supported. Snap points and swipe-to-open are absent.                |
+| [Button groups](https://m3.material.io/components/button-groups/overview)                    |   ✅    | Supported                                                                     |
+| [Buttons](https://m3.material.io/components/buttons/overview)                                |   ✅    | Supported                                                                     |
+| [Cards](https://m3.material.io/components/cards/overview)                                    |   ✅    | Supported                                                                     |
+| [Carousel](https://m3.material.io/components/carousel/overview)                              |   ❌    | Not supported                                                                 |
+| [Checkbox](https://m3.material.io/components/checkbox/overview)                              |   ✅    | Supported                                                                     |
+| [Chips](https://m3.material.io/components/chips/overview)                                    |   ✅    | Supported                                                                     |
+| [Date pickers](https://m3.material.io/components/date-pickers/overview)                      |   ✅    | Supported                                                                     |
+| [Dialogs](https://m3.material.io/components/dialogs/overview)                                |   ✅    | Supported                                                                     |
+| [Divider](https://m3.material.io/components/divider/overview)                                |   ✅    | Supported                                                                     |
+| [Extended FABs](https://m3.material.io/components/extended-fab/overview)                     |   ✅    | Supported                                                                     |
+| [FAB menu](https://m3.material.io/components/fab-menu/overview)                              |   ✅    | Supported                                                                     |
+| [Floating action buttons](https://m3.material.io/components/floating-action-button/overview) |   ✅    | Supported                                                                     |
+| [Icon buttons](https://m3.material.io/components/icon-buttons/overview)                      |   ✅    | Supported                                                                     |
+| [Lists](https://m3.material.io/components/lists/overview)                                    |   ✅    | Supported                                                                     |
+| [Loading indicator](https://m3.material.io/components/loading-indicator/overview)            |   ✅    | Supported                                                                     |
+| [Menus](https://m3.material.io/components/menus/overview)                                    |   ⚠️    | Partially supported. No context gestures, horizontal or baseline variant.     |
+| [Navigation bar](https://m3.material.io/components/navigation-bar/overview)                  |   ✅    | Supported                                                                     |
+| [Navigation drawer](https://m3.material.io/components/navigation-drawer/overview)            |   ✅    | Supported                                                                     |
+| [Navigation rail](https://m3.material.io/components/navigation-rail/overview)                |   ✅    | Supported                                                                     |
+| [Progress indicators](https://m3.material.io/components/progress-indicators/overview)        |   ✅    | Supported                                                                     |
+| [Radio button](https://m3.material.io/components/radio-button/overview)                      |   ✅    | Supported                                                                     |
+| [Scroll fields](https://m3.material.io/components/scroll-fields)                             |   ❌    | Not supported                                                                 |
+| [Search](https://m3.material.io/components/search/overview)                                  |   ⚠️    | Partially supported. The divided search style is absent.                      |
+| [Segmented buttons](https://m3.material.io/components/segmented-buttons/overview)            |   ✅    | Supported                                                                     |
+| [Side sheets](https://m3.material.io/components/side-sheets/overview)                        |   ✅    | Supported                                                                     |
+| [Sliders](https://m3.material.io/components/sliders/overview)                                |   ✅    | Supported                                                                     |
+| [Snackbar](https://m3.material.io/components/snackbar/overview)                              |   ⚠️    | Partially supported. Swipe dismissal is absent.                               |
+| [Split buttons](https://m3.material.io/components/split-button/overview)                     |   ✅    | Supported                                                                     |
+| [Switch](https://m3.material.io/components/switch/overview)                                  |   ✅    | Supported                                                                     |
+| [Tabs](https://m3.material.io/components/tabs/overview)                                      |   ✅    | Supported                                                                     |
+| [Text fields](https://m3.material.io/components/text-fields/overview)                        |   ⚠️    | Partially supported. A built-in character counter and select mode are absent. |
+| [Time pickers](https://m3.material.io/components/time-pickers/overview)                      |   ❌    | Not supported                                                                 |
+| [Toolbars](https://m3.material.io/components/toolbars/overview)                              |   ✅    | Supported                                                                     |
+| [Tooltips](https://m3.material.io/components/tooltips/overview)                              |   ✅    | Supported                                                                     |
 
 ## Motivation
 

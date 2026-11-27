@@ -5,6 +5,91 @@ function day(calendar: Locator, value: string) {
   return calendar.locator(`[data-calendar-current] button[data-date="${value}"][data-outside="false"]`);
 }
 
+test('preview dash lengths stay uniform across cell boundaries and fractional cell widths', async ({
+  page,
+}, testInfo) => {
+  await page.goto('/calendars');
+
+  const calendar = page.getByRole('group', { name: 'One month range', exact: true });
+
+  await calendar.scrollIntoViewIfNeeded();
+  await day(calendar, '2024-02-02').click();
+
+  for (const width of [360, 335, 320]) {
+    await calendar
+      .locator('[data-md3-calendar]')
+      .evaluate((node, size) => node.style.setProperty('inline-size', `${size}px`), width);
+
+    const target = day(calendar, '2024-02-18');
+    const geometry = () =>
+      target.evaluate((node) => {
+        const box = node.getBoundingClientRect();
+        const table = node.closest('table')!.getBoundingClientRect();
+
+        return { x: box.x - table.x, y: box.y - table.y, width: box.width, height: box.height };
+      });
+    const before = await geometry();
+
+    await target.hover();
+    expect(await geometry()).toEqual(before);
+
+    const row = calendar.locator('[data-calendar-current] tr:has(button[data-date="2024-02-11"])');
+    const color = await row.evaluate((node) =>
+      getComputedStyle(node, '::after').borderTopColor.match(/\d+/g)!.map(Number),
+    );
+    const screenshot = await row.screenshot({
+      path: testInfo.outputPath(`preview-${width}.png`),
+      animations: 'disabled',
+    });
+    const lengths = await page.evaluate(
+      async ({ png, stroke }) => {
+        const image = new Image();
+
+        image.src = `data:image/png;base64,${png}`;
+        await image.decode();
+
+        const canvas = document.createElement('canvas');
+
+        canvas.width = image.width;
+        canvas.height = image.height;
+
+        const context = canvas.getContext('2d')!;
+
+        context.drawImage(image, 0, 0);
+
+        const samples = [3, 4, 5, 6].map((y) => {
+          const pixels = context.getImageData(0, y, image.width, 1).data;
+          const runs: number[] = [];
+          let length = 0;
+
+          for (let x = 0; x < image.width; x += 1) {
+            const matches = stroke
+              .slice(0, 3)
+              .every((channel, index) => Math.abs(pixels[x * 4 + index]! - channel) < 40);
+
+            if (matches) {
+              length += 1;
+            } else if (length) {
+              runs.push(length);
+              length = 0;
+            }
+          }
+
+          return runs;
+        });
+
+        return samples.sort((a, b) => b.length - a.length)[0]!;
+      },
+      { png: screenshot.toString('base64'), stroke: color },
+    );
+
+    expect(lengths.length).toBeGreaterThan(20);
+    expect(Math.max(...lengths.slice(1, -1))).toBeLessThanOrEqual(4);
+  }
+
+  await calendar.screenshot({ path: testInfo.outputPath('preview-calendar.png'), animations: 'disabled' });
+});
+
 test('range selection, hover previews, same-day ranges and reversed end clicks preserve ordered values', async ({
   page,
 }) => {

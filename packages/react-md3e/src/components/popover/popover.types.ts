@@ -26,6 +26,8 @@ export type PopoverProps = NativeProps &
     readonly placement?: PopoverPlacement;
     readonly offset?: number;
     readonly collisionPadding?: number;
+    /** Flip to the opposite side (default), or shift the full panel within the viewport. */
+    readonly collisionStrategy?: 'flip' | 'shift';
     readonly positionMethod?: 'absolute' | 'fixed';
     readonly anchorEl?: PopoverAnchor | undefined;
     readonly container?: PopoverContainer | undefined;

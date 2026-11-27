@@ -294,3 +294,22 @@ export type {
   ToolbarOverflowProps,
   ToolbarOverflowAction,
 } from './components/toolbar';
+
+export { DateField } from './components/date-field';
+export type {
+  DateFieldProps,
+  DateChangeContext,
+  DateValidationError,
+  DatePickerLocaleText,
+} from './components/date-field';
+export { DateRangeField } from './components/date-range-field';
+export type { DateRangeFieldProps } from './components/date-range-field';
+export { DatePicker } from './components/date-picker';
+export type {
+  DatePickerProps,
+  DatePickerVariant,
+  DatePickerCloseReason,
+  DatePickerPresentationProps,
+} from './components/date-picker';
+export { DateRangePicker } from './components/date-range-picker';
+export type { DateRangePickerProps } from './components/date-range-picker';

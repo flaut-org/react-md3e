@@ -35,33 +35,39 @@ trigger stays disabled even when the Popover disabled prop is false.
 
 ## Public API
 
-| Prop                                                           | Behavior                                                                                         |
-| -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| `trigger`                                                      | Required button React element, owning the interaction and default positioning anchor             |
-| `aria-label` / `aria-labelledby`                               | At least one nonempty accessible name is required for the popup dialog                           |
-| `open`, `defaultOpen`                                          | Controlled or initially open uncontrolled state; closed by default                               |
-| `onOpenChange(open, event)`                                    | Opening/closing request with its native Event; controlled consumers update open themselves       |
-| `onClose(event, reason)`                                       | Called before onOpenChange for closing requests                                                  |
-| `placement`                                                    | top/bottom/left/right, optionally suffixed -start/-end; default bottom-start                     |
-| `offset`                                                       | Gap between anchor and surface, default 8px                                                      |
-| `collisionPadding`                                             | Viewport collision inset, default 8px                                                            |
-| `positionMethod`                                               | fixed by default; absolute is available for an appropriate containing block                      |
-| `anchorEl`                                                     | Optional Element, ref, or callback for a separate positioning anchor; trigger is still required  |
-| `container`                                                    | Optional portal HTMLElement or callback returning one; null uses the default scope               |
-| `matchAnchorWidth`                                             | Match positioning anchor width, constrained to available space; default false                    |
-| `disablePadding`                                               | Remove the default 16px surface inset; default false                                             |
-| `initialFocus`, `finalFocus`                                   | Boolean or HTMLElement ref; otherwise Base UI chooses initial focus and returns it appropriately |
-| `disabled`                                                     | Disable trigger activation; default false                                                        |
-| `modal`                                                        | Contain focus and lock page scrolling; default false                                             |
-| `keepMounted`                                                  | Preserve hidden browser DOM/state after closing; default false                                   |
-| `disableEscapeKeyDown`                                         | Suppress Escape closing requests; default false                                                  |
-| `closeText`                                                    | Accessible modal fallback-close label, default Close popover; localize when modal is true        |
-| `children`, `ref`, `className`, `style`, native div/ARIA props | Apply to the popup surface; role is always dialog                                                |
+| Prop                                                           | Behavior                                                                                                     |
+| -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `trigger`                                                      | Required button React element, owning the interaction and default positioning anchor                         |
+| `aria-label` / `aria-labelledby`                               | At least one nonempty accessible name is required for the popup dialog                                       |
+| `open`, `defaultOpen`                                          | Controlled or initially open uncontrolled state; closed by default                                           |
+| `onOpenChange(open, event)`                                    | Opening/closing request with its native Event; controlled consumers update open themselves                   |
+| `onClose(event, reason)`                                       | Called before onOpenChange for closing requests                                                              |
+| `placement`                                                    | top/bottom/left/right, optionally suffixed -start/-end; default bottom-start                                 |
+| `offset`                                                       | Gap between anchor and surface, default 8px                                                                  |
+| `collisionPadding`                                             | Viewport collision inset, default 8px                                                                        |
+| `collisionStrategy`                                            | flip (default) chooses the opposite side; shift moves the panel within the viewport, allowing anchor overlap |
+| `positionMethod`                                               | fixed by default; absolute is available for an appropriate containing block                                  |
+| `anchorEl`                                                     | Optional Element, ref, or callback for a separate positioning anchor; trigger is still required              |
+| `container`                                                    | Optional portal HTMLElement or callback returning one; null uses the default scope                           |
+| `matchAnchorWidth`                                             | Match positioning anchor width, constrained to available space; default false                                |
+| `disablePadding`                                               | Remove the default 16px surface inset; default false                                                         |
+| `initialFocus`, `finalFocus`                                   | Boolean or HTMLElement ref; otherwise Base UI chooses initial focus and returns it appropriately             |
+| `disabled`                                                     | Disable trigger activation; default false                                                                    |
+| `modal`                                                        | Contain focus and lock page scrolling; default false                                                         |
+| `keepMounted`                                                  | Preserve hidden browser DOM/state after closing; default false                                               |
+| `disableEscapeKeyDown`                                         | Suppress Escape closing requests; default false                                                              |
+| `closeText`                                                    | Accessible modal fallback-close label, default Close popover; localize when modal is true                    |
+| `children`, `ref`, `className`, `style`, native div/ARIA props | Apply to the popup surface; role is always dialog                                                            |
 
 Start/end alignment follows text direction. Base UI flips or shifts the actual placement when the
 requested side has insufficient room. The popup scrolls internally when content exceeds available
 height. The default surface width is 320px, capped at 560px and the available viewport width; style
 can choose a different width while preserving the available-space constraint.
+
+`collisionStrategy="shift"` lets a panel use the full viewport instead of only the free space on
+one side of the anchor. Date pickers combine it with their own non-scrolling calendar surface and
+modal/input fallback when the viewport cannot fit the full grid. The default flip strategy and
+scrollable general-purpose Popover surface remain unchanged.
 
 onClose reasons are escapeKeyDown, clickAway, triggerClick, focusOut, closeButtonClick and
 programmatic. Updating a controlled open prop directly does not synthesize a callback. Calling

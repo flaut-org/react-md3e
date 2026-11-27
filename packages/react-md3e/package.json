@@ -446,7 +446,43 @@
       "import": "./dist/toolbar.js",
       "default": "./dist/toolbar.js"
     },
-    "./toolbar/styles.css": "./dist/toolbar.css"
+    "./toolbar/styles.css": "./dist/toolbar.css",
+    "./date-field": {
+      "types": "./dist/components/date-field/index.d.ts",
+      "module": "./dist/date-field.js",
+      "browser": "./dist/date-field.js",
+      "node": "./dist/node/date-field.js",
+      "import": "./dist/date-field.js",
+      "default": "./dist/date-field.js"
+    },
+    "./date-field/styles.css": "./dist/date-field.css",
+    "./date-range-field": {
+      "types": "./dist/components/date-range-field/index.d.ts",
+      "module": "./dist/date-range-field.js",
+      "browser": "./dist/date-range-field.js",
+      "node": "./dist/node/date-range-field.js",
+      "import": "./dist/date-range-field.js",
+      "default": "./dist/date-range-field.js"
+    },
+    "./date-range-field/styles.css": "./dist/date-range-field.css",
+    "./date-picker": {
+      "types": "./dist/components/date-picker/index.d.ts",
+      "module": "./dist/date-picker.js",
+      "browser": "./dist/date-picker.js",
+      "node": "./dist/node/date-picker.js",
+      "import": "./dist/date-picker.js",
+      "default": "./dist/date-picker.js"
+    },
+    "./date-picker/styles.css": "./dist/date-picker.css",
+    "./date-range-picker": {
+      "types": "./dist/components/date-range-picker/index.d.ts",
+      "module": "./dist/date-range-picker.js",
+      "browser": "./dist/date-range-picker.js",
+      "node": "./dist/node/date-range-picker.js",
+      "import": "./dist/date-range-picker.js",
+      "default": "./dist/date-range-picker.js"
+    },
+    "./date-range-picker/styles.css": "./dist/date-range-picker.css"
   },
   "scripts": {
     "clean": "node ../../scripts/clean-package.mjs",

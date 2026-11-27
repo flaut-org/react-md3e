@@ -176,3 +176,8 @@ FAB composition, declarative responsive overflow, expansion and web scroll/keybo
 Its layout stays server-compatible; optional behavior and ToolbarOverflow own client boundaries.
 Import from `/toolbar`; CSS loads automatically. See the
 [Toolbar API and verification limits](https://github.com/flaut-org/react-md3e/blob/main/docs/components/toolbar.md).
+
+Date selection and localized numeric entry are available through DatePicker, DateRangePicker,
+DateField and DateRangeField, using native Temporal/Intl with automatically loaded static CSS.
+Pickers support docked, modal and responsive presentation without a date adapter/provider.
+See [date picker documentation](https://github.com/flaut-org/react-md3e/blob/main/docs/components/date-pickers.md).

@@ -70,7 +70,8 @@ trailing decorative icons are 24px. Input text is onSurface, ordinary label/help
 focus primary and error error. Disabled foreground is onSurface at 38%; outlines/containers follow
 the pinned tokens. Colors, font families and shape inherit the nearest CSS theme.
 
-CSS focus/placeholder/autofill selectors drive floating labels. Placeholder visibility inherits a
+CSS input-focus/placeholder/autofill selectors drive floating labels. Focus on a leading/trailing
+button does not float an empty label or apply the input's focused outline. Placeholder visibility inherits a
 CSS variable from that state; combining placeholder-shown selectors directly with ::placeholder
 would trigger an incorrect prefixed selector in the current CSS compiler. The outline notch uses a fieldset and
 legend with the same label typography; browser layout supplies its width. There is no JS text/style

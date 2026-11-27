@@ -188,7 +188,14 @@ for (const name of ['chip-interactive', 'chip-delete', 'chip-control', 'chip-set
   assert.match(code, /^['"]use client['"]/m, `${name} must preserve its interaction boundary.`);
 }
 
-for (const name of ['calendar', 'range-calendar']) {
+for (const name of [
+  'calendar',
+  'range-calendar',
+  'date-field',
+  'date-range-field',
+  'date-picker',
+  'date-range-picker',
+]) {
   const calendar = await readFile(path.join(packageRoot, `dist/components/${name}/${name}.component.js`), 'utf8');
 
   assert.match(calendar, /^['"]use client['"]/m, `${name} must preserve its interactive client boundary.`);
@@ -784,6 +791,20 @@ assert.ok([...calendarStyles].some((file) => file.includes('/internal/ripple/'))
 assert.ok(![...calendarStyles].some((file) => file.includes('/shape/')));
 assert.ok(![...calendarStyles].some((file) => file.includes('/surface/')));
 assert.ok(calendarCss.includes('md3-calendar-enter') && calendarCss.includes('prefers-reduced-motion'));
+
+const dateFieldStyles = new Set();
+
+await readCssTree(manifest.exports['./date-field/styles.css'], dateFieldStyles);
+assert.ok([...dateFieldStyles].some((file) => file.includes('/text-field/')));
+assert.ok(![...dateFieldStyles].some((file) => /\/(?:calendar|dialog|popover|date-picker-panel)\//.test(file)));
+
+const pickerStyles = new Set();
+
+await readCssTree(manifest.exports['./date-range-picker/styles.css'], pickerStyles);
+
+for (const dependency of ['date-picker-panel', 'text-field', 'calendar', 'range-calendar', 'popover', 'dialog']) {
+  assert.ok([...pickerStyles].some((file) => file.includes(`/${dependency}/`)));
+}
 
 const css = await readCssTree(manifest.exports['./styles.css']);
 
