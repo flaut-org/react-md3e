@@ -21,6 +21,7 @@ import {
   weekNumber,
 } from './calendar-date';
 import { keyboardDate } from './calendar-keyboard';
+import { validateDate } from '../date-entry/date-entry-validation';
 import { calendarHeader, calendarLoading, calendarRoot, calendarTable, calendarWeekdays } from './calendar.styles';
 import type { CalendarDayState, CalendarProps, CalendarValueFormat, CalendarView } from './calendar.types';
 
@@ -148,11 +149,15 @@ export function Calendar<Format extends CalendarValueFormat = 'temporal'>({
   const monthKey = month.toString();
   const isDisabled = (day: Temporal.PlainDate) =>
     disabled ||
-    Temporal.PlainDate.compare(day, min) < 0 ||
-    Temporal.PlainDate.compare(day, max) > 0 ||
-    Boolean(shouldDisableYear?.(day.with({ month: 1, day: 1 }))) ||
-    Boolean(shouldDisableMonth?.(monthStart(day))) ||
-    Boolean(shouldDisableDate?.(day));
+    validateDate(
+      day,
+      {
+        ...(shouldDisableYear ? { shouldDisableYear } : {}),
+        ...(shouldDisableMonth ? { shouldDisableMonth } : {}),
+        ...(shouldDisableDate ? { shouldDisableDate } : {}),
+      },
+      { today, min, max },
+    ) !== null;
   let candidate: Temporal.PlainDate | null = focused;
 
   if (focusedDateProp !== undefined) {
@@ -256,97 +261,121 @@ export function Calendar<Format extends CalendarValueFormat = 'temporal'>({
     </div>
   );
   const dayContent = (
-    <table role="presentation" className={calendarTable}>
+    <table role="presentation" className={calendarTable} data-week-numbers={displayWeekNumber}>
       <tbody>
-        {weeks.map((week) => (
-          <tr key={week[0]!.toString()} role="row">
-            {displayWeekNumber && (
-              <th scope="row" role="rowheader" data-week-number="">
-                {formats.number.format(weekNumber(week[0]!))}
-              </th>
-            )}
-            {week.map((day) => {
-              const outside = !sameMonth(day, month);
-              const state: CalendarDayState = {
-                day,
-                selected: selected?.equals(day) ?? false,
-                today: !disableHighlightToday && day.equals(today),
-                outsideCurrentMonth: outside,
-                disabled: isDisabled(day),
-              };
-              const extra = typeof slotProps?.day === 'function' ? slotProps.day(state) : slotProps?.day;
-              const dayState = { ...state, ...extra };
+        {weeks.map((week) => {
+          const cells = week.map((day) => {
+            const outside = !sameMonth(day, month);
+            const state: CalendarDayState = {
+              day,
+              selected: selected?.equals(day) ?? false,
+              today: !disableHighlightToday && day.equals(today),
+              outsideCurrentMonth: outside,
+              disabled: isDisabled(day),
+            };
+            const extra = typeof slotProps?.day === 'function' ? slotProps.day(state) : slotProps?.day;
 
-              if (outside && !showDaysOutsideCurrentMonth) {
-                return <td key={day.toString()} role="gridcell" aria-hidden="true" />;
-              }
+            return { day, outside, state, extra, dayState: { ...state, ...extra } };
+          });
+          const previewIndices = cells
+            .map((cell, index) =>
+              cell.dayState.isPreviewing && (!cell.outside || showDaysOutsideCurrentMonth) ? index : -1,
+            )
+            .filter((index) => index >= 0);
+          const firstPreview = previewIndices[0] ?? -1;
+          const lastPreview = previewIndices.at(-1) ?? -1;
+          const previewStart = cells[firstPreview]?.dayState;
+          const previewEnd = cells[lastPreview]?.dayState;
+          const columnOffset = displayWeekNumber ? 1 : 0;
 
-              return (
-                <td
-                  key={day.toString()}
-                  aria-selected={dayState.selected || dayState.isHighlighting || false}
-                  role="gridcell"
-                  data-in-range={dayState.isHighlighting}
-                  data-range-start={dayState.isStartOfHighlighting}
-                  data-range-end={dayState.isEndOfHighlighting}
-                  data-preview={dayState.isPreviewing}
-                  data-preview-start={dayState.isStartOfPreviewing}
-                  data-preview-end={dayState.isEndOfPreviewing}
-                >
-                  <Day
-                    {...state}
-                    {...extra}
-                    disabled={state.disabled || Boolean(extra?.disabled)}
-                    data-date={day.toString()}
-                    data-outside={outside}
-                    className={[classes?.day, extra?.className].filter(Boolean).join(' ')}
-                    tabIndex={!outside && day.equals(activeDay ?? month) && activeDay ? 0 : -1}
-                    aria-label={extra?.['aria-label'] ?? formats.day.format(day)}
-                    aria-current={day.equals(today) ? 'date' : undefined}
-                    onFocus={(event) => {
-                      extra?.onFocus?.(event);
+          return (
+            <tr
+              key={week[0]!.toString()}
+              role="row"
+              data-preview-first={firstPreview < 0 ? undefined : firstPreview + columnOffset}
+              data-preview-last={lastPreview < 0 ? undefined : lastPreview + columnOffset}
+              data-preview-start={previewStart?.isStartOfPreviewing}
+              data-preview-end={previewEnd?.isEndOfPreviewing}
+              data-preview-start-selected={previewStart?.selected}
+              data-preview-end-selected={previewEnd?.selected}
+            >
+              {displayWeekNumber && (
+                <th scope="row" role="rowheader" data-week-number="">
+                  {formats.number.format(weekNumber(week[0]!))}
+                </th>
+              )}
+              {cells.map(({ day, outside, state, extra, dayState }) => {
+                if (outside && !showDaysOutsideCurrentMonth) {
+                  return <td key={day.toString()} role="gridcell" aria-hidden="true" />;
+                }
 
-                      if (!event.defaultPrevented) {
-                        setFocused(day);
-                        onFocusedDateChange?.(day);
-                      }
-                    }}
-                    onClick={(event) => {
-                      extra?.onClick?.(event);
-
-                      if (!event.defaultPrevented) {
-                        selectDate(day);
-                      }
-                    }}
-                    onKeyDown={(event) => {
-                      extra?.onKeyDown?.(event);
-
-                      if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey) {
-                        return;
-                      }
-
-                      const rtl = getComputedStyle(event.currentTarget).direction === 'rtl';
-                      const target = keyboardDate(day, event.key, event.shiftKey, rtl, firstDay);
-
-                      if (target) {
-                        event.preventDefault();
-
-                        const direction = Temporal.PlainDate.compare(target, day) < 0 ? -1 : 1;
-                        const enabled = findEnabledDate(target, direction, min, max, isDisabled);
-
-                        if (enabled) {
-                          focusDay(enabled);
-                        }
-                      }
-                    }}
+                return (
+                  <td
+                    key={day.toString()}
+                    aria-selected={dayState.selected || dayState.isHighlighting || false}
+                    role="gridcell"
+                    data-in-range={dayState.isHighlighting}
+                    data-range-start={dayState.isStartOfHighlighting}
+                    data-range-end={dayState.isEndOfHighlighting}
+                    data-preview={dayState.isPreviewing}
+                    data-preview-start={dayState.isStartOfPreviewing}
+                    data-preview-end={dayState.isEndOfPreviewing}
                   >
-                    {extra?.children ?? formats.number.format(day.day)}
-                  </Day>
-                </td>
-              );
-            })}
-          </tr>
-        ))}
+                    <Day
+                      {...state}
+                      {...extra}
+                      disabled={state.disabled || Boolean(extra?.disabled)}
+                      data-date={day.toString()}
+                      data-outside={outside}
+                      className={[classes?.day, extra?.className].filter(Boolean).join(' ')}
+                      tabIndex={!outside && day.equals(activeDay ?? month) && activeDay ? 0 : -1}
+                      aria-label={extra?.['aria-label'] ?? formats.day.format(day)}
+                      aria-current={day.equals(today) ? 'date' : undefined}
+                      onFocus={(event) => {
+                        extra?.onFocus?.(event);
+
+                        if (!event.defaultPrevented) {
+                          setFocused(day);
+                          onFocusedDateChange?.(day);
+                        }
+                      }}
+                      onClick={(event) => {
+                        extra?.onClick?.(event);
+
+                        if (!event.defaultPrevented) {
+                          selectDate(day);
+                        }
+                      }}
+                      onKeyDown={(event) => {
+                        extra?.onKeyDown?.(event);
+
+                        if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey) {
+                          return;
+                        }
+
+                        const rtl = getComputedStyle(event.currentTarget).direction === 'rtl';
+                        const target = keyboardDate(day, event.key, event.shiftKey, rtl, firstDay);
+
+                        if (target) {
+                          event.preventDefault();
+
+                          const direction = Temporal.PlainDate.compare(target, day) < 0 ? -1 : 1;
+                          const enabled = findEnabledDate(target, direction, min, max, isDisabled);
+
+                          if (enabled) {
+                            focusDay(enabled);
+                          }
+                        }
+                      }}
+                    >
+                      {extra?.children ?? formats.number.format(day.day)}
+                    </Day>
+                  </td>
+                );
+              })}
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );

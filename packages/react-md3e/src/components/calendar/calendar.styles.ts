@@ -59,11 +59,17 @@ const weekdaysStyles = {
   '& [data-week-number]': { ...typography('labelSmall'), color: color('onSurfaceVariant') },
 } satisfies StyleObject;
 
+const previewIndexStyles = Object.fromEntries(
+  Array.from({ length: 8 }, (_, index) => [
+    [`& tr[data-preview-first='${index}']`, { '--_calendar-preview-first': String(index) } satisfies StyleObject],
+    [`& tr[data-preview-last='${index}']`, { '--_calendar-preview-last': String(index) } satisfies StyleObject],
+  ]).flat(),
+) as Record<`&${string}`, StyleObject>;
+
 const tableStyles = {
+  'display': 'block',
   'inlineSize': '100%',
-  'tableLayout': 'fixed',
-  'borderSpacing': 0,
-  'borderCollapse': 'collapse',
+  '& tbody': { display: 'block' },
   '& th': {
     ...typography('bodyLarge'),
     blockSize: '48px',
@@ -86,31 +92,55 @@ const tableStyles = {
   "& td[data-range-start='true']::before": { insetInlineStart: '50%' },
   "& td[data-range-end='true']::before": { insetInlineEnd: '50%' },
   "& td[data-range-start='true'][data-range-end='true']::before": { display: 'none' },
-  "& td[data-preview='true']::after": {
+  '--_calendar-columns': '7',
+  "&[data-week-numbers='true']": { '--_calendar-columns': '8' },
+  ...previewIndexStyles,
+  '& tr': {
+    position: 'relative',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(var(--_calendar-columns), minmax(0, 1fr))',
+  },
+  '& tr[data-preview-first]::after': {
     content: '""',
     position: 'absolute',
     insetBlockStart: '4px',
-    insetInline: 0,
     blockSize: '40px',
+    insetInlineStart: 'calc(100% * var(--_calendar-preview-first) / var(--_calendar-columns))',
+    insetInlineEnd:
+      'calc(100% * (var(--_calendar-columns) - var(--_calendar-preview-last) - 1) / var(--_calendar-columns))',
     borderBlock: `1px dashed ${color('outline')}`,
     pointerEvents: 'none',
-    zIndex: -1,
+    zIndex: 1,
   },
-  "& td[data-preview-start='true']::after": {
-    insetInlineStart: 'calc(50% - 20px)',
+  "& tr[data-preview-start='true']::after": {
+    insetInlineStart: 'calc(100% * (var(--_calendar-preview-first) + 0.5) / var(--_calendar-columns) - 20px)',
     borderInlineStart: `1px dashed ${color('outline')}`,
     borderStartStartRadius: '20px',
     borderEndStartRadius: '20px',
   },
-  "& td[data-preview-end='true']::after": {
-    insetInlineEnd: 'calc(50% - 20px)',
+  "& tr[data-preview-end='true']::after": {
+    insetInlineEnd:
+      'calc(100% * (var(--_calendar-columns) - var(--_calendar-preview-last) - 0.5) / var(--_calendar-columns) - 20px)',
     borderInlineEnd: `1px dashed ${color('outline')}`,
     borderStartEndRadius: '20px',
     borderEndEndRadius: '20px',
   },
+  "& tr[data-preview-start='true'][data-preview-start-selected='true']::after": {
+    insetInlineStart: 'calc(100% * (var(--_calendar-preview-first) + 0.5) / var(--_calendar-columns))',
+    borderInlineStart: 0,
+    borderStartStartRadius: 0,
+    borderEndStartRadius: 0,
+  },
+  "& tr[data-preview-end='true'][data-preview-end-selected='true']::after": {
+    insetInlineEnd:
+      'calc(100% * (var(--_calendar-columns) - var(--_calendar-preview-last) - 0.5) / var(--_calendar-columns))',
+    borderInlineEnd: 0,
+    borderStartEndRadius: 0,
+    borderEndEndRadius: 0,
+  },
   '@media (forced-colors: active)': {
     "& td[data-in-range='true']::before": { backgroundColor: 'Highlight', opacity: 0.25, forcedColorAdjust: 'none' },
-    "& td[data-preview='true']::after": { borderColor: 'CanvasText' },
+    '& tr[data-preview-first]::after': { borderColor: 'CanvasText' },
   },
 } satisfies StyleObject;
 
@@ -176,7 +206,7 @@ const choicesStyles = {
   'gridTemplateColumns': 'repeat(3, minmax(0, 1fr))',
   'gap': '4px 8px',
   'maxBlockSize': '336px',
-  'minBlockSize': '240px',
+  'blockSize': '336px',
   'overflowY': 'auto',
   'scrollPaddingBlock': '12px',
   'padding': '8px',
@@ -234,6 +264,10 @@ const transitionStyles = {
       'md3-calendar-enter var(--md-calendar-slide-duration, 375ms) var(--md-calendar-slide-easing, cubic-bezier(0.35, 0.8, 0.4, 1)) both',
   },
   '& > [data-calendar-previous]': {
+    position: 'absolute',
+    insetBlockStart: 0,
+    insetInlineStart: 0,
+    inlineSize: '100%',
     pointerEvents: 'none',
     animation:
       'md3-calendar-exit var(--md-calendar-slide-duration, 375ms) var(--md-calendar-slide-easing, cubic-bezier(0.35, 0.8, 0.4, 1)) both',

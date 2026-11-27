@@ -20,6 +20,7 @@ export default function CalendarsPage() {
             readOnly
           />
         </section>
+        <Link href="/date-pickers">Date fields and docked/modal pickers</Link>
         <CalendarDemo />
         <section>
           <h2>Locale, direction and date boundaries</h2>

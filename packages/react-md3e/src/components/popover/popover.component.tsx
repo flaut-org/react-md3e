@@ -17,6 +17,7 @@ export function Popover({
   placement = 'bottom-start',
   offset = 8,
   collisionPadding = 8,
+  collisionStrategy = 'flip',
   positionMethod = 'fixed',
   anchorEl,
   container,
@@ -95,6 +96,15 @@ export function Popover({
             align={align}
             sideOffset={offset}
             collisionPadding={collisionPadding}
+            {...(collisionStrategy === 'shift'
+              ? {
+                  collisionAvoidance: {
+                    side: 'shift' as const,
+                    align: 'shift' as const,
+                    fallbackAxisSide: 'none' as const,
+                  },
+                }
+              : {})}
             positionMethod={positionMethod}
             className={popoverPositioner}
           >

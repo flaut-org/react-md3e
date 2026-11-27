@@ -1,6 +1,12 @@
-import { Calendar, CalendarDay } from '@flaut-travel/react-md3e/calendar';
-import { RangeCalendar } from '@flaut-travel/react-md3e/range-calendar';
+import { DateField } from '@flaut-travel/react-md3e/date-field';
+import { DateRangeField } from '@flaut-travel/react-md3e/date-range-field';
+import { DatePicker } from '@flaut-travel/react-md3e/date-picker';
+import { DateRangePicker } from '@flaut-travel/react-md3e/date-range-picker';
 import type {
+  DatePickerProps,
+  DateRangePickerProps,
+  DateFieldProps,
+  DateRangeFieldProps,
   SwitchProps,
   ChipProps,
   ChipSetProps,
@@ -30,6 +36,7 @@ import type {
   ShapeProps,
   CardProps,
   PopoverPlacement,
+  PopoverProps,
   PopoverCloseReason,
   TextFieldProps,
   AutocompleteProps,
@@ -54,6 +61,8 @@ import type {
   NavigationItemLinkProps,
   NavigationValue,
 } from '@flaut-travel/react-md3e';
+import { Calendar, CalendarDay } from '@flaut-travel/react-md3e/calendar';
+import { RangeCalendar } from '@flaut-travel/react-md3e/range-calendar';
 import { Skeleton } from '@flaut-travel/react-md3e/skeleton';
 import { Divider } from '@flaut-travel/react-md3e/divider';
 import { Tooltip } from '@flaut-travel/react-md3e/tooltip';
@@ -185,6 +194,7 @@ export const consumer = {
   Popover,
   PopoverClose,
   popoverPlacement: 'bottom-start' satisfies PopoverPlacement,
+  popoverCollisionStrategy: 'shift' satisfies NonNullable<PopoverProps['collisionStrategy']>,
   popoverCloseReason: 'clickAway' satisfies PopoverCloseReason,
   TextField,
   Autocomplete,
@@ -316,3 +326,9 @@ export const toolbarProps: ToolbarProps = {
 };
 export const overflowActions: readonly ToolbarOverflowAction[] = [];
 export const toolbarParts = [Toolbar, ToolbarOverflow];
+
+export const dateFieldProps: DateFieldProps<'iso'> = { valueFormat: 'iso', format: 'yyyy-MM-dd' };
+export const dateRangeFieldProps: DateRangeFieldProps = { fieldType: 'multi-input' };
+export const datePickerProps: DatePickerProps = { variant: 'modal', defaultMode: 'input' };
+export const dateRangePickerProps: DateRangePickerProps = { calendars: 3, variant: 'docked' };
+export const datePickerParts = [DateField, DateRangeField, DatePicker, DateRangePicker];

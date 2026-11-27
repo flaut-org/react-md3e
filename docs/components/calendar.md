@@ -1,7 +1,8 @@
 # Calendar and RangeCalendar
 
 Inline Material calendars with native Temporal date arithmetic, Intl localization and extracted CSS.
-They render directly in the page, without fields, dialogs, popovers, confirmation actions or an
+They render directly in the page. [DatePicker and DateRangePicker](date-pickers.md) compose these
+same grids with fields, docked popups, modal input modes and confirmation actions, without an
 adapter/provider. Both are client components for selection, keyboard focus and navigation, with
 server-rendered HTML. ThemeProvider remains server-compatible.
 
@@ -119,7 +120,9 @@ validation. Put date availability in shouldDisableDate so keyboard searches can 
 
 RangeCalendar renders Calendar instances and supplies their shared controlled display, focus,
 selection and day-slot decoration. It does not maintain a second calendar grid implementation.
-It shares Calendar's date bounds, localization, loading, motion and day customization props.
+It shares Calendar's date bounds, localization, loading, motion and day customization props,
+including shouldDisableMonth/shouldDisableYear. Calendar and date-entry fields use the same validation
+functions; grid focus and field errors agree about date availability.
 
 | Props                                                      | Contract/default                                                                       |
 | ---------------------------------------------------------- | -------------------------------------------------------------------------------------- |
@@ -143,15 +146,16 @@ are rejected. shouldDisableDate validates selectable endpoints; disabled interio
 or invalidate an otherwise valid range, matching MUI's endpoint-validation convention.
 
 The interior uses secondaryContainer/onSecondaryContainer and endpoints use primary/onPrimary.
-Hover previews use a dashed outline. Dragging commits on pointerup and cancels on pointercancel;
+Hover previews use one continuous dashed outline per week, with rounded endpoint caps. The pattern
+does not restart at each day or change column widths at fractional calendar sizes. Dragging commits on pointerup and cancels on pointercancel;
 dragging across the other endpoint follows the same ordered-range rules as a click. Range edits and
 previews respect readOnly/disabled. Multi-panel calendars hide duplicate outside days and expose one
 roving day tab stop across the group. Arrow keys move between already-visible panels before shifting
 the displayed window. Header navigation leaves a day available for subsequent keyboard entry.
 
 This is a deliberately bounded MUI-style API. It does not include sx, MUI theme overrides/classes,
-adapter/LocalizationProvider APIs, arbitrary header/navigation/year/month slots, focusedView control,
-pickers or text fields. Callback values are normalized dates, rather than adapter-specific objects.
+adapter/LocalizationProvider APIs, arbitrary header/navigation/year/month slots, focusedView control.
+The separate DatePicker/DateRangePicker and DateField/DateRangeField APIs compose these grids. Callback values are normalized dates, rather than adapter-specific objects.
 
 ## Material appearance, motion and accessibility
 
@@ -162,6 +166,7 @@ that composition; the default examples have no wrapper surface. The controls use
 48px day targets, 40px circular dates, bodyLarge labels, primary selected dates and
 a 1px primary today outline. Month/year choices use 72×36px visual capsules inside at least 48px
 targets. The day view reserves six weeks of space so month transitions do not resize the surface;
+month/year choices reserve the same 336px as the day grid and weekday header combined.
 fixedWeekNumber controls the actual rendered rows. It omits the modal-only title, headline, elevation and action areas.
 Range bands are 40px high and join through each week; month columns are a web adaptation of the
 native range calendar's layout. Month selection is an additional MUI-style web view.
@@ -179,7 +184,8 @@ This explicitly requested paging behavior is an exception to the generic theme s
 Override `--md-calendar-slide-duration` and `--md-calendar-slide-easing` together for custom timing.
 CSS logical positioning preserves inherited RTL even when consumer tooling lowers direction selectors
 to language selectors. No animation engine or rule generation runs in the browser.
-One outgoing frame is inert, aria-hidden and removed after the slide; rapid navigation replaces it. The incoming
+One outgoing frame is absolutely positioned, inert, aria-hidden and removed after the slide;
+it does not contribute height when switching year/month/day views. Rapid navigation replaces it. The incoming
 frame alone accepts focus and interaction. Reduced motion and reduceAnimations hide the outgoing
 frame and remove transitions. Hover/press state layers use compiled CSS. Interrupted motion does
 not preserve physical velocity, consistent with the existing motion contract.

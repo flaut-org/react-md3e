@@ -11,7 +11,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Inline Material calendar using native Temporal.PlainDate and Intl. No field, popup, adapter or localization provider is required. Component styles load automatically.',
+          'Inline Material calendar using native Temporal.PlainDate and Intl. Use standalone, or choose DatePicker for the integrated field/popup/modal workflow. No adapter or localization provider is required. Component styles load automatically.',
       },
     },
   },

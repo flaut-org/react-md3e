@@ -260,3 +260,11 @@ fixture route owns its runtime demo beneath app-bar-scroll-demo/.
 Toolbar owns toolbar-behavior/ (private root, DOM focus and scroll adapters), contexts/toolbar.context.ts,
 and toolbar-overflow/ (public composition, measurement helper and styles). Its type/unit/browser tests
 share toolbar/tests. Toolbar examples belong to stories/toolbar/ and the toolbars fixture route.
+
+DateField and DateRangeField share the private top-level date-entry/ owner for numeric formatting,
+localization, validation and TextField presentation. Calendar also uses its pure validation helper.
+DateEntry owns date-entry-input/ for its masked native TextField composition and date-entry-mask.ts
+for pure section calculations. Its selection/input hook lives in internal/hooks/use-date-input-mask.hook.ts.
+DatePicker and DateRangePicker share private date-picker-panel/ for Dialog/Popover/calendar composition.
+The date-picker state and behavioral-media hooks live in internal/hooks; no second calendar grid is
+introduced. Each public component owns tests/, stories and a public subpath.

@@ -98,3 +98,13 @@ themes can have different width caps; they do not create different global media-
 The Next fixture `/breakpoints` verifies server HTML with JavaScript disabled, every Dialog width,
 nested defaults, stylesheet overrides, live CSS-variable changes, full-screen precedence, and
 viewport bounds. Behavior is currently verified in Chromium.
+
+DatePicker and DateRangePicker use matchMedia only to choose interaction presentation: fine hover
+pointers plus the build-time sm width and 480px height select a docked panel. The threshold strings
+are generated from the default theme during package builds in internal/picker-media.generated.json.
+This is a behavioral capability subscription, independent of runtime CSS scopes; changing a theme's
+CSS breakpoint variables does not rewrite these native queries. Explicit picker variant overrides
+the capability-based choice. Additional queries check whether the viewport can fit every docked
+month at its full width/height plus actions and gutters. A panel that cannot fit falls back to modal,
+then full-screen or input mode as needed; an individual month grid is never compressed into a scroll
+area. See [date picker behavior](components/date-pickers.md).

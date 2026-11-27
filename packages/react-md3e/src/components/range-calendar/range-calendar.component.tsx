@@ -40,6 +40,8 @@ export function RangeCalendar<Format extends CalendarValueFormat = 'temporal'>({
   availableRangePositions = defaultPositions,
   onRangePositionChange,
   shouldDisableDate,
+  shouldDisableMonth,
+  shouldDisableYear,
   disableAutoMonthSwitching = false,
   disableDragEditing = false,
   view = 'day',
@@ -79,6 +81,8 @@ export function RangeCalendar<Format extends CalendarValueFormat = 'temporal'>({
   ...rootProps
 }: RangeCalendarProps<Format>) {
   const calendarProps = {
+    ...(shouldDisableMonth ? { shouldDisableMonth } : {}),
+    ...(shouldDisableYear ? { shouldDisableYear } : {}),
     ...(minDate !== undefined ? { minDate } : {}),
     ...(maxDate !== undefined ? { maxDate } : {}),
     ...(disablePast !== undefined ? { disablePast } : {}),

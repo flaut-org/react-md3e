@@ -16,7 +16,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Range selection composed from Calendar, with contiguous range bands, previews and mouse/pen endpoint dragging. Calendar and its dependency styles load automatically.',
+          'Range selection composed from Calendar, with contiguous range bands, previews and mouse/pen endpoint dragging. Use DateRangePicker for integrated fields, modal confirmation and date entry. Calendar and its dependency styles load automatically.',
       },
     },
   },

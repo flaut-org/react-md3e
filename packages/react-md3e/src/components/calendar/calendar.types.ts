@@ -64,6 +64,8 @@ export interface CalendarCommonProps {
   readonly maxDate?: CalendarDateInput;
   readonly disablePast?: boolean;
   readonly disableFuture?: boolean;
+  readonly shouldDisableMonth?: (month: Temporal.PlainDate) => boolean;
+  readonly shouldDisableYear?: (year: Temporal.PlainDate) => boolean;
   readonly disableHighlightToday?: boolean;
   readonly disabled?: boolean;
   readonly readOnly?: boolean;
@@ -104,8 +106,6 @@ export type CalendarProps<Format extends CalendarValueFormat = 'temporal'> = Omi
     readonly onViewChange?: (view: CalendarView) => void;
     readonly onYearChange?: (year: Temporal.PlainDate) => void;
     readonly shouldDisableDate?: (day: Temporal.PlainDate) => boolean;
-    readonly shouldDisableMonth?: (month: Temporal.PlainDate) => boolean;
-    readonly shouldDisableYear?: (year: Temporal.PlainDate) => boolean;
     readonly monthsPerRow?: 3 | 4;
     readonly yearsPerRow?: 3 | 4;
     readonly yearsOrder?: 'asc' | 'desc';

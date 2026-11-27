@@ -125,3 +125,8 @@ tokens at ca5b9e4ca22b23adc8f50e178f267793ac741ca4, and AndroidX defaults at
 Figma listed Toolbars page 58295:22726, then the account quota rejected the detailed read.
 Color-reference differences, density/placement/overflow/focus adaptations and unverified Figma parity
 are explicit in the component document.
+
+Date fields and docked/modal/responsive date pickers extend those calendars with existing
+TextField/Popover/Dialog primitives. The [date picker audit](components/date-pickers.md#references-and-evidence)
+records available official Google/Android sources, API references and the bounded web adaptations.
+No Figma inspection or pixel parity is claimed.

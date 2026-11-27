@@ -3,7 +3,7 @@ import { motion, color, typography } from '../../styles/theme-tokens';
 import type { StyleObject } from '../../styles/style-object.types';
 
 const floating =
-  "&:not([data-shrink='false']):is(:focus-within, :has([data-md3-field-input]:not(:placeholder-shown)), :has([data-md3-field-input]:autofill), [data-shrink='true'])";
+  "&:not([data-shrink='false']):is(:has([data-md3-field-input]:focus), :has([data-md3-field-input]:not(:placeholder-shown)), :has([data-md3-field-input]:autofill), [data-shrink='true'])";
 const rootStyles = {
   '--_field-outline': color('outline'),
   '--_field-label': color('onSurfaceVariant'),
@@ -20,7 +20,7 @@ const rootStyles = {
   'maxInlineSize': '100%',
   'minInlineSize': 0,
   "&[data-full-width='true']": { inlineSize: '100%' },
-  '&:focus-within': {
+  '&:has([data-md3-field-input]:focus)': {
     '--_field-outline': color('primary'),
     '--_field-label': color('primary'),
     '--_field-width': '2px',
@@ -38,7 +38,7 @@ const rootStyles = {
     '& legend': { maxInlineSize: '100%', paddingInline: 4 },
   },
   "&[data-has-start='true'] [data-md3-field-label]": { insetInlineStart: 52 },
-  "&[data-has-start='true']:not([data-shrink='false']):is(:focus-within, :has([data-md3-field-input]:not(:placeholder-shown)), [data-shrink='true']) [data-md3-field-label]":
+  "&[data-has-start='true']:not([data-shrink='false']):is(:has([data-md3-field-input]:focus), :has([data-md3-field-input]:not(:placeholder-shown)), [data-shrink='true']) [data-md3-field-label]":
     { insetInlineStart: 16 },
   "&[data-variant='filled']": {
     '--_field-outline': color('onSurfaceVariant'),
@@ -58,7 +58,7 @@ const rootStyles = {
     "&[data-has-label='true'] [data-md3-field-input]": { paddingBlock: '24px 8px' },
     [floating]: { '& [data-md3-field-label]': { insetBlockStart: 8, transform: 'none' } },
     "&[data-has-start='true'] [data-md3-field-label]": { insetInlineStart: 52 },
-    '&:focus-within': { '--_field-outline': color('primary') },
+    '&:has([data-md3-field-input]:focus)': { '--_field-outline': color('primary') },
     "&[data-error='true']": { '--_field-outline': color('error') },
   },
   "&[data-has-label='false'] fieldset": { insetBlockStart: 0 },
@@ -66,13 +66,15 @@ const rootStyles = {
   "&[data-has-label='false']": { '--_field-placeholder-opacity': 1 },
   "&[data-multiline='true'] [data-md3-field-container]": { alignItems: 'flex-start' },
   "&[data-multiline='true'] [data-md3-field-label]": { insetBlockStart: 28 },
-  "&[data-multiline='true']:not([data-shrink='false']):is(:focus-within, :has([data-md3-field-input]:not(:placeholder-shown)), [data-shrink='true']) [data-md3-field-label]":
+  "&[data-multiline='true']:not([data-shrink='false']):is(:has([data-md3-field-input]:focus), :has([data-md3-field-input]:not(:placeholder-shown)), [data-shrink='true']) [data-md3-field-label]":
     { insetBlockStart: 0 },
-  "&[data-multiline='true'][data-variant='filled']:not([data-shrink='false']):is(:focus-within, :has([data-md3-field-input]:not(:placeholder-shown)), [data-shrink='true']) [data-md3-field-label]":
+  "&[data-multiline='true'][data-variant='filled']:not([data-shrink='false']):is(:has([data-md3-field-input]:focus), :has([data-md3-field-input]:not(:placeholder-shown)), [data-shrink='true']) [data-md3-field-label]":
     { insetBlockStart: 8 },
   '@media (hover: hover)': {
-    "&:hover:not([data-disabled='true']):not(:focus-within)": { '--_field-outline': color('onSurface') },
-    "&[data-error='true']:hover:not([data-disabled='true']):not(:focus-within)": {
+    "&:hover:not([data-disabled='true']):not(:has([data-md3-field-input]:focus))": {
+      '--_field-outline': color('onSurface'),
+    },
+    "&[data-error='true']:hover:not([data-disabled='true']):not(:has([data-md3-field-input]:focus))": {
       '--_field-outline': color('onErrorContainer'),
       '--_field-label': color('onErrorContainer'),
     },
@@ -99,7 +101,7 @@ const rootStyles = {
     '--_field-support': 'CanvasText',
     '--_field-caret': 'CanvasText',
     '--_field-placeholder-color': 'CanvasText',
-    '&:focus-within': { '--_field-outline': 'Highlight', '--_field-label': 'Highlight' },
+    '&:has([data-md3-field-input]:focus)': { '--_field-outline': 'Highlight', '--_field-label': 'Highlight' },
     "&[data-error='true']": {
       '--_field-outline': 'CanvasText',
       '--_field-label': 'CanvasText',
