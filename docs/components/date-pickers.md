@@ -141,9 +141,9 @@ by the caller. No synthetic change/accept callback is fired by reset.
 ## Presentation and accessibility
 
 Responsive selection uses pointer/hover capability and available viewport size, never User-Agent.
-Docked behavior needs a fine hover-capable pointer, at least the build-time sm breakpoint (600px)
+Docked behavior needs a fine hover-capable pointer, at least the default sm breakpoint (600px)
 and 480px height; other environments use modal. SSR uses a stable modal snapshot, then subscribes
-to matchMedia after hydration. The width condition is generated from the shared default breakpoint
+to matchMedia after hydration. The width condition uses the shared default breakpoint
 scale; runtime theme CSS overrides do not rewrite behavioral media conditions. Explicit variant
 overrides the pointer-based choice. A docked panel additionally needs room for every requested
 360px-wide month and the full 416px calendar height, actions when present, and viewport gutters.

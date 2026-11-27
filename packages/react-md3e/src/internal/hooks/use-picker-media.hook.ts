@@ -1,11 +1,11 @@
 'use client';
 
 import { useCallback, useMemo, useSyncExternalStore } from 'react';
-import queries from '../picker-media.generated.json';
+import { defaultBreakpoints } from '../breakpoints';
 
 // Behavioral capability queries, not theme layout observers. SSR always starts with modal behavior.
-const desktopQuery = queries.desktop;
-const compactQuery = queries.compact;
+const desktopQuery = `(pointer: fine) and (hover: hover) and (min-width: ${defaultBreakpoints.sm}px) and (min-height: 480px)`;
+const compactQuery = `(width < ${defaultBreakpoints.sm}px), (height < 480px)`;
 const serverSnapshot = () => '0/0/1/1/1';
 
 export function usePickerMedia(panels = 1, actions = false) {

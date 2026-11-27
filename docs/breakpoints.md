@@ -100,8 +100,9 @@ nested defaults, stylesheet overrides, live CSS-variable changes, full-screen pr
 viewport bounds. Behavior is currently verified in Chromium.
 
 DatePicker and DateRangePicker use matchMedia only to choose interaction presentation: fine hover
-pointers plus the build-time sm width and 480px height select a docked panel. The threshold strings
-are generated from the default theme during package builds in internal/picker-media.generated.json.
+pointers plus the default sm width and 480px height select a docked panel. The threshold strings
+use the same `internal/breakpoints.ts` default scale as the theme generator, without generated files
+or a client import of the generator.
 This is a behavioral capability subscription, independent of runtime CSS scopes; changing a theme's
 CSS breakpoint variables does not rewrite these native queries. Explicit picker variant overrides
 the capability-based choice. Additional queries check whether the viewport can fit every docked
