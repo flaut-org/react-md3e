@@ -1,6 +1,6 @@
 {
   "name": "@flaut-travel/react-md3e",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "Independent Material 3 Expressive React components with build-time CSS.",
   "type": "module",
   "license": "MIT",
