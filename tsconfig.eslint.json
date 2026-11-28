@@ -10,7 +10,7 @@
     ".storybook/**/*.tsx",
     "stories/**/*.tsx",
     "vite.*.config.ts",
-    "playwright.config.ts",
+    "playwright*.config.ts",
     "packages/react-md3e/src/**/tests/**/*.ts",
     "packages/react-md3e/src/**/tests/**/*.tsx",
     "packages/react-md3e/tests/types-consumer/**/*.ts",

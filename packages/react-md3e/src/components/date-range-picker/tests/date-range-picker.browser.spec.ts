@@ -33,8 +33,12 @@ test('modal range input validates reversed/incomplete dates and preserves the la
 
   const modal = page.getByRole('dialog');
 
+  // The mode switch deliberately hands focus to the first field on the next animation frame.
+  await expect(modal.getByLabel('Start date', { exact: true })).toBeFocused();
   await modal.getByLabel('Start date', { exact: true }).fill('12/31/2024');
   await modal.getByLabel('End date', { exact: true }).fill('12/30/2024');
+  await expect(modal.getByLabel('Start date', { exact: true })).toHaveValue('12/31/2024');
+  await expect(modal.getByLabel('End date', { exact: true })).toHaveValue('12/30/2024');
   await expect(modal.getByRole('button', { name: 'OK', exact: true })).toBeDisabled();
   await modal.getByLabel('End date', { exact: true }).fill('01/01/2025');
   await expect(modal.getByRole('button', { name: 'OK', exact: true })).toBeEnabled();
@@ -42,8 +46,12 @@ test('modal range input validates reversed/incomplete dates and preserves the la
   await expect(input).toHaveValue('02/27/2024 – 03/04/2024');
   await opener.click();
   await page.getByRole('dialog').getByRole('button', { name: 'Switch to text input', exact: true }).click();
+  await expect(modal.getByLabel('Start date', { exact: true })).toBeFocused();
   await page.getByRole('dialog').getByLabel('Start date', { exact: true }).fill('12/31/2024');
   await page.getByRole('dialog').getByLabel('End date', { exact: true }).fill('01/01/2025');
+  await expect(modal.getByLabel('Start date', { exact: true })).toHaveValue('12/31/2024');
+  await expect(modal.getByLabel('End date', { exact: true })).toHaveValue('01/01/2025');
+  await expect(modal.getByRole('button', { name: 'OK', exact: true })).toBeEnabled();
   await page.getByRole('dialog').getByRole('button', { name: 'OK', exact: true }).click();
   await expect(input).toHaveValue('12/31/2024 – 01/01/2025');
   await expect(page.getByTestId('range-accepted')).toHaveText('2024-12-31/2025-01-01');

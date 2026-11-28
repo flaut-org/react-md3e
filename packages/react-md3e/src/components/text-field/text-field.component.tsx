@@ -72,6 +72,7 @@ export function TextField({
       data-has-label={hasLabel}
       data-shrink={InputLabelProps?.shrink}
       data-has-start={startAdornment != null}
+      data-has-end={endAdornment != null}
       data-multiline={multiline}
     >
       <Container

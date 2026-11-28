@@ -8,10 +8,15 @@ import '@fontsource/roboto/700.css';
 
 import themes from '../stories/themes.generated.json';
 import motionSchemes from '../stories/motion-schemes.generated.json';
+import { withUiStress } from './ui-stress.decorator';
 import './preview.css';
 
 const preview: Preview = {
   globalTypes: {
+    qaLayout: { description: 'QA parent constraints: normal, narrow, short, scroll, hidden' },
+    qaDirection: { description: 'QA direction: ltr or rtl' },
+    qaEdge: { description: 'QA viewport anchor: top-left, top-right, bottom-left, bottom-right' },
+    qaFontScale: { description: 'QA inherited font scale' },
     colorScheme: {
       description: 'CSS color scheme',
       toolbar: { icon: 'circlehollow', items: ['light', 'dark', 'system'], dynamicTitle: true },
@@ -36,6 +41,7 @@ const preview: Preview = {
     a11y: { test: 'error' },
   },
   decorators: [
+    withUiStress,
     (Story, context) => {
       const brand = context.globals.brand as keyof typeof themes;
       const selectedMotion = context.globals.motionScheme as keyof typeof motionSchemes;

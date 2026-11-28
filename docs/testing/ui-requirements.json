@@ -1,0 +1,380 @@
+[
+  {
+    "id": "DP-001",
+    "component": "DatePicker",
+    "description": "Date entry selects sections and advances after numeric entry without manually typed separators; deleting a section preserves other sections.",
+    "source": "docs/components/date-pickers.md#dates-formats-and-localization",
+    "category": "functional",
+    "method": "Keyboard input with selection and intermediate-value assertions",
+    "status": "UNVERIFIED",
+    "tests": [
+      {
+        "file": "packages/react-md3e/src/components/date-picker/tests/date-picker.quality.spec.ts",
+        "title": "[DP-001] section entry selects and advances each section without separators"
+      }
+    ]
+  },
+  {
+    "id": "DP-002",
+    "component": "DatePicker",
+    "description": "Clicking the calendar icon must never transiently focus the empty input or move its label.",
+    "source": "docs/testing/ui-quality.md#web-specific-design-contracts",
+    "category": "behavioral",
+    "method": "Focusin/out recording armed before pointer action and real rAF label geometry",
+    "status": "UNVERIFIED",
+    "tests": [
+      {
+        "file": "packages/react-md3e/src/components/date-picker/tests/date-picker.quality.spec.ts",
+        "title": "[DP-002] icon does not transiently focus input or move its label"
+      }
+    ]
+  },
+  {
+    "id": "DP-003",
+    "component": "DatePicker",
+    "description": "Year to day transition keeps the calendar height stable throughout native animation, including its outgoing frame.",
+    "source": "docs/components/calendar.md#material-appearance-motion-and-accessibility",
+    "category": "motion",
+    "method": "rAF geometry, ResizeObserver, animation-presence assertion and screenshot sequence in normal/reduced motion",
+    "status": "UNVERIFIED",
+    "tests": [
+      {
+        "file": "packages/react-md3e/src/components/date-picker/tests/date-picker.quality.spec.ts",
+        "title": "[DP-003] year/day height is stable on intermediate native animation frames"
+      }
+    ]
+  },
+  {
+    "id": "DP-004",
+    "component": "DatePicker",
+    "description": "A docked calendar in a parent Dialog exposes the complete grid without clipping or a grid scrollbar, and the last date remains clickable.",
+    "source": "docs/components/date-pickers.md#presentation-and-accessibility",
+    "category": "integration",
+    "method": "Viewport/ancestor clipping, frame geometry, hit testing and actual date selection",
+    "status": "UNVERIFIED",
+    "tests": [
+      {
+        "file": "packages/react-md3e/src/components/date-picker/tests/date-picker.quality.spec.ts",
+        "title": "[DP-004] nested dialog calendar stays visible and clickable without grid scrollbars"
+      }
+    ]
+  },
+  {
+    "id": "DP-005",
+    "component": "DateRangePicker",
+    "description": "Hover-preview dashed borders have uniform dash/gap lengths across intermediate-day joins, including fractional cell widths.",
+    "source": "docs/testing/ui-quality.md#web-specific-design-contracts",
+    "category": "visual",
+    "method": "Strict popup screenshots at 360/335/320px; existing per-pixel dash-run regression remains in browser suite",
+    "status": "UNVERIFIED",
+    "tests": [
+      {
+        "file": "packages/react-md3e/src/components/date-range-picker/tests/date-range-picker.visual.spec.ts",
+        "title": "[DP-005] range preview dashes across adjacent days and fractional cell widths"
+      }
+    ]
+  },
+  {
+    "id": "DP-006",
+    "component": "DatePicker",
+    "description": "Each viewport edge and overflow-hidden parent permits a usable overlay; resizing to a short viewport exposes input mode instead of a clipped calendar.",
+    "source": "docs/components/date-pickers.md#presentation-and-accessibility",
+    "category": "responsive",
+    "method": "All four edge fixtures, control hit testing and open-overlay resize",
+    "status": "UNVERIFIED",
+    "tests": [
+      {
+        "file": "packages/react-md3e/src/components/date-picker/tests/date-picker.quality.spec.ts",
+        "title": "[DP-006] overlay near top-left survives constraints and viewport resize"
+      },
+      {
+        "file": "packages/react-md3e/src/components/date-picker/tests/date-picker.quality.spec.ts",
+        "title": "[DP-006] overlay near top-right survives constraints and viewport resize"
+      },
+      {
+        "file": "packages/react-md3e/src/components/date-picker/tests/date-picker.quality.spec.ts",
+        "title": "[DP-006] overlay near bottom-left survives constraints and viewport resize"
+      },
+      {
+        "file": "packages/react-md3e/src/components/date-picker/tests/date-picker.quality.spec.ts",
+        "title": "[DP-006] overlay near bottom-right survives constraints and viewport resize"
+      }
+    ]
+  },
+  {
+    "id": "DP-007",
+    "component": "DatePicker",
+    "description": "Keyboard opening, arrow navigation, Escape and rapid reopening preserve focus and modal interaction.",
+    "source": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/datepicker-dialog/",
+    "category": "behavioral",
+    "method": "Real keyboard events, focus assertions and repeated opening; automated axe is independently verified by DP-017.",
+    "status": "UNVERIFIED",
+    "tests": [
+      {
+        "file": "packages/react-md3e/src/components/date-picker/tests/date-picker.quality.spec.ts",
+        "title": "[DP-007] keyboard, rapid reopen and accessible modal content"
+      }
+    ]
+  },
+  {
+    "id": "DP-008",
+    "component": "DatePicker",
+    "description": "Empty, focused and open date-entry surfaces preserve their reviewed light/dark and compact/desktop presentation.",
+    "source": "https://developer.android.com/develop/ui/compose/components/datepickers",
+    "category": "theme",
+    "method": "Storybook snapshots; only equality with the baseline is automated",
+    "status": "UNVERIFIED",
+    "tests": [
+      {
+        "file": "packages/react-md3e/src/components/date-picker/tests/date-picker.visual.spec.ts",
+        "title": "[DP-008] date entry, focus and calendar themes"
+      }
+    ]
+  },
+  {
+    "id": "DP-009",
+    "component": "DatePicker",
+    "description": "Long Ukrainian labels, constrained parents, RTL and larger typography retain operable date controls.",
+    "source": "docs/testing/ui-quality.md#web-specific-design-contracts",
+    "category": "rtl",
+    "method": "Stress decorator, localized story and actual overlay hit testing",
+    "status": "UNVERIFIED",
+    "tests": [
+      {
+        "file": "packages/react-md3e/src/components/date-picker/tests/date-picker.quality.spec.ts",
+        "title": "[DP-009] RTL, localized long label and enlarged font remain operable"
+      }
+    ]
+  },
+  {
+    "id": "DP-010",
+    "component": "DatePicker",
+    "description": "Scrollable parents, a parent Dialog and nested Popovers support dynamic content and ordered Escape dismissal.",
+    "source": "docs/components/popover.md",
+    "category": "integration",
+    "method": "Scroll fixture, nested interactive controls, text change and dismissal assertions",
+    "status": "UNVERIFIED",
+    "tests": [
+      {
+        "file": "packages/react-md3e/src/components/date-picker/tests/date-picker.quality.spec.ts",
+        "title": "[DP-010] scroll parent and nested popovers support dynamic content and dismissal"
+      }
+    ]
+  },
+  {
+    "id": "DP-011",
+    "component": "DatePicker",
+    "description": "Touch input can open responsive modal presentation, select a day and confirm the value.",
+    "source": "docs/components/date-pickers.md#presentation-and-accessibility",
+    "category": "touch",
+    "method": "Chromium mobile context with actual touchscreen taps; physical device keyboard remains unverified",
+    "status": "UNVERIFIED",
+    "tests": [
+      {
+        "file": "packages/react-md3e/src/components/date-picker/tests/date-picker.touch.quality.spec.ts",
+        "title": "[DP-011] touch opens, selects, accepts and restores the picker"
+      }
+    ]
+  },
+  {
+    "id": "DP-012",
+    "component": "DatePicker",
+    "description": "Independent reviewer inspects shapes, spacing, focus indicators, state layers and intermediate motion against accessible official Material references.",
+    "source": "https://developer.android.com/develop/ui/compose/components/datepickers",
+    "category": "visual",
+    "method": "Independent interactive browser review and actual image viewing with evidence report; never inferred from screenshot equality",
+    "status": "UNVERIFIED",
+    "tests": []
+  },
+  {
+    "id": "DP-013",
+    "component": "DatePicker",
+    "description": "Server-rendered fields hydrate without warnings and support modal accessibility and reduced motion in the production Next fixture.",
+    "source": "docs/components/date-pickers.md",
+    "category": "ssr-hydration",
+    "method": "Existing production-fixture browser integration, outside Storybook-only runs",
+    "status": "UNVERIFIED",
+    "tests": [
+      {
+        "file": "packages/react-md3e/src/components/date-picker/tests/date-picker.browser.spec.ts",
+        "title": "modal accessibility, reduced motion, dark inheritance and server rendering remain intact"
+      }
+    ]
+  },
+  {
+    "id": "DP-014",
+    "component": "DatePicker",
+    "description": "Arabic RTL calendar supports the forest palette and independent standard motion scheme.",
+    "source": "docs/components/date-pickers.md",
+    "category": "theme",
+    "method": "Strict snapshots across light/dark compact and desktop projects",
+    "status": "UNVERIFIED",
+    "tests": [
+      {
+        "file": "packages/react-md3e/src/components/date-picker/tests/date-picker.visual.spec.ts",
+        "title": "[DP-014] RTL localized calendar in forest theme"
+      }
+    ]
+  },
+  {
+    "id": "DP-015",
+    "component": "DatePicker",
+    "description": "Controlled modal draft, cancellation and confirmation remain independent from the saved value.",
+    "source": "docs/components/date-pickers.md#drafts-confirmation-and-forms",
+    "category": "functional",
+    "method": "Existing production Next fixture browser test",
+    "status": "UNVERIFIED",
+    "tests": [
+      {
+        "file": "packages/react-md3e/src/components/date-picker/tests/date-picker.browser.spec.ts",
+        "title": "modal draft cancels, accepts and clears independently of its saved value"
+      }
+    ]
+  },
+  {
+    "id": "LIB-001",
+    "component": "Package",
+    "description": "Native Node exports, CSS extraction, RSC boundaries and streaming remain intact.",
+    "source": "docs/architecture.md",
+    "category": "rsc",
+    "method": "npm run check:package and npm run test:http in the existing required CI; record their evidence in the QA report",
+    "status": "UNVERIFIED",
+    "tests": [],
+    "externalChecks": [
+      {
+        "command": "npm run check:package",
+        "file": "scripts/check-package.mjs"
+      },
+      {
+        "command": "npm run test:http",
+        "file": "apps/next-fixture/tests/fixture.test.mjs",
+        "title": "automatic styles preserve actual Next RSC client references"
+      },
+      {
+        "command": "npm run test:http",
+        "file": "apps/next-fixture/tests/fixture.test.mjs",
+        "title": "the response sends a shell and fallback before request-time content"
+      }
+    ]
+  },
+  {
+    "id": "BTN-001",
+    "component": "Button",
+    "description": "Filled, tonal, disabled, hover and keyboard-focus presentation is stable in the expressive palette.",
+    "source": "docs/components/button.md",
+    "category": "visual",
+    "method": "Storybook screenshots in two viewport/color-scheme projects",
+    "status": "UNVERIFIED",
+    "tests": [
+      {
+        "file": "packages/react-md3e/src/components/button/tests/button.visual.spec.ts",
+        "title": "[BTN-001] default, disabled, hover and keyboard focus states"
+      }
+    ]
+  },
+  {
+    "id": "DP-016",
+    "component": "DatePicker",
+    "description": "Rapid open/close/reopen input interrupts a docked popup entry without stale state, focus or value loss. Instant dismissal is permitted by Base UI.",
+    "source": "docs/testing/ui-quality.md#web-specific-design-contracts",
+    "category": "behavioral",
+    "method": "Raw real mouse input; assert running native entry before interruption, repeat toggles and verify final value; reduced motion checked separately.",
+    "status": "UNVERIFIED",
+    "tests": [
+      {
+        "file": "packages/react-md3e/src/components/date-picker/tests/date-picker.quality.spec.ts",
+        "title": "[DP-016] rapid toggles interrupt entry motion without stale state"
+      }
+    ]
+  },
+  {
+    "id": "TF-001",
+    "component": "TextField",
+    "description": "A long resting label reserves the actual trailing adornment width in narrow LTR/RTL fields with enlarged typography.",
+    "source": "docs/components/text-field.md",
+    "category": "layout",
+    "method": "Label/adornment rectangle separation and actually viewed diagnostic screenshots.",
+    "status": "UNVERIFIED",
+    "tests": [
+      {
+        "file": "packages/react-md3e/src/components/text-field/tests/text-field.quality.spec.ts",
+        "title": "[TF-001] long resting label reserves trailing icon space in LTR and RTL"
+      }
+    ]
+  },
+  {
+    "id": "AC-001",
+    "component": "Autocomplete",
+    "description": "Multiple selection preserves wrapping tags and floated label geometry when composed with TextField.",
+    "source": "docs/components/autocomplete.md",
+    "category": "integration",
+    "method": "Actual option selection plus flex wrapping and label geometry assertions.",
+    "status": "UNVERIFIED",
+    "tests": [
+      {
+        "file": "packages/react-md3e/src/components/autocomplete/tests/autocomplete.quality.spec.ts",
+        "title": "[AC-001] multiple autocomplete keeps wrapping tags and its floating label"
+      }
+    ]
+  },
+  {
+    "id": "DP-017",
+    "component": "DatePicker",
+    "description": "A fully opaque settled modal exposes accessible content without automated axe violations.",
+    "source": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/datepicker-dialog/",
+    "category": "accessibility",
+    "method": "Full axe scan of a preopened modal after native entry settles, separate from keyboard/focus interaction. Matching Playwright 1.64.1 avoids the documented 1.65.x Firefox crash; no scan rules disabled.",
+    "status": "UNVERIFIED",
+    "tests": [
+      {
+        "file": "packages/react-md3e/src/components/date-picker/tests/date-picker.quality.spec.ts",
+        "title": "[DP-017] settled modal content passes the automated accessibility scan"
+      }
+    ]
+  },
+  {
+    "id": "ND-001",
+    "component": "NavigationDrawer",
+    "description": "Modal navigation drawer actual entry/exit rectangles stay inside their per-edge trajectory envelope without revealing a gap at the anchoring viewport edge.",
+    "source": "docs/components/navigation.md#motion-architecture-and-verification",
+    "category": "motion",
+    "method": "Real rAF bounding rectangles with declared spatial contracts, native frames and keyboard/focus checks; no animation rewind.",
+    "status": "UNVERIFIED",
+    "tests": [
+      {
+        "file": "packages/react-md3e/src/components/navigation-drawer/tests/navigation-drawer.quality.spec.ts",
+        "title": "[ND-001] drawer entry and exit remain attached to the viewport edge"
+      }
+    ]
+  },
+  {
+    "id": "ND-002",
+    "component": "NavigationDrawer",
+    "description": "Rapid and interrupted modal drawer transitions preserve anchoring constraints and focus across both directions, motion schemes and reduced motion.",
+    "source": "docs/components/navigation.md#motion-architecture-and-verification",
+    "category": "behavioral",
+    "method": "Real rAF bounding rectangles with declared spatial contracts, native frames and keyboard/focus checks; no animation rewind.",
+    "status": "UNVERIFIED",
+    "tests": [
+      {
+        "file": "packages/react-md3e/src/components/navigation-drawer/tests/navigation-drawer.quality.spec.ts",
+        "title": "[ND-002] interrupted drawer motion preserves edge constraints and focus"
+      }
+    ]
+  },
+  {
+    "id": "NR-001",
+    "component": "NavigationRail",
+    "description": "Canceled modal rail swipes preserve the anchoring viewport edge while retaining the rail width spring, both directions and motion schemes.",
+    "source": "docs/components/navigation.md#motion-architecture-and-verification",
+    "category": "motion",
+    "method": "Actual displaced touch drag and cancellation; native bounding rectangles with edge attachment, nontruncation and sample cadence checks.",
+    "status": "UNVERIFIED",
+    "tests": [
+      {
+        "file": "packages/react-md3e/src/components/navigation-rail/tests/navigation-rail.touch.quality.spec.ts",
+        "title": "[NR-001] canceled rail swipes keep the outer edge attached"
+      }
+    ]
+  }
+]

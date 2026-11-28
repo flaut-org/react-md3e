@@ -13,6 +13,8 @@ const rootStyles = {
   '--_field-width': '1px',
   '--_field-placeholder-opacity': 0,
   '--_field-placeholder-color': color('onSurfaceVariant'),
+  '--_field-column': '1',
+  '--_field-leading': '0px',
   'display': 'inline-flex',
   'flexDirection': 'column',
   'verticalAlign': 'top',
@@ -34,12 +36,23 @@ const rootStyles = {
   '& [data-md3-field-label]': { color: 'var(--_field-label)' },
   [floating]: {
     '--_field-placeholder-opacity': 1,
-    '& [data-md3-field-label]': { insetBlockStart: 0, insetInlineStart: 16, ...typography('bodySmall') },
+    '& [data-md3-field-label]': {
+      insetBlockStart: 0,
+      insetInlineStart: 0,
+      maxInlineSize: '100%',
+      ...typography('bodySmall'),
+    },
     '& legend': { maxInlineSize: '100%', paddingInline: 4 },
   },
-  "&[data-has-start='true'] [data-md3-field-label]": { insetInlineStart: 52 },
-  "&[data-has-start='true']:not([data-shrink='false']):is(:has([data-md3-field-input]:focus), :has([data-md3-field-input]:not(:placeholder-shown)), [data-shrink='true']) [data-md3-field-label]":
-    { insetInlineStart: 16 },
+  "&[data-has-start='true']": {
+    '--_field-column': '2',
+    '--_field-leading': '36px',
+    '& [data-md3-field-container]': { gridTemplateColumns: 'auto minmax(0, 1fr)' },
+  },
+  "&[data-has-end='true'] [data-md3-field-container]": { gridTemplateColumns: 'minmax(0, 1fr) auto' },
+  "&[data-has-start='true'][data-has-end='true'] [data-md3-field-container]": {
+    gridTemplateColumns: 'auto minmax(0, 1fr) auto',
+  },
   "&[data-variant='filled']": {
     '--_field-outline': color('onSurfaceVariant'),
     '& [data-md3-field-container]': {
@@ -56,8 +69,14 @@ const rootStyles = {
       pointerEvents: 'none',
     },
     "&[data-has-label='true'] [data-md3-field-input]": { paddingBlock: '24px 8px' },
-    [floating]: { '& [data-md3-field-label]': { insetBlockStart: 8, transform: 'none' } },
-    "&[data-has-start='true'] [data-md3-field-label]": { insetInlineStart: 52 },
+    [floating]: {
+      '& [data-md3-field-label]': {
+        insetBlockStart: 8,
+        insetInlineStart: 'var(--_field-leading)',
+        maxInlineSize: 'calc(100% - var(--_field-leading))',
+        transform: 'none',
+      },
+    },
     '&:has([data-md3-field-input]:focus)': { '--_field-outline': color('primary') },
     "&[data-error='true']": { '--_field-outline': color('error') },
   },
@@ -124,7 +143,8 @@ export const textFieldRoot = css`
 
 const containerStyles = {
   position: 'relative',
-  display: 'flex',
+  display: 'grid',
+  gridTemplateColumns: 'minmax(0, 1fr)',
   alignItems: 'center',
   gap: 12,
   minBlockSize: 56,
@@ -143,6 +163,8 @@ export const textFieldContainer = css`
 const inputStyles = {
   ...typography('bodyLarge'),
   'display': 'block',
+  'gridColumn': 'var(--_field-column)',
+  'gridRow': 1,
   'flex': '1 1 0%',
   'inlineSize': '100%',
   'minInlineSize': 0,
@@ -172,10 +194,12 @@ export const textFieldInput = css`
 const labelStyles = {
   ...typography('bodyLarge'),
   position: 'absolute',
-  insetInlineStart: 16,
+  gridColumn: '1 / span var(--_field-column)',
+  gridRow: 1,
+  insetInlineStart: 'var(--_field-leading)',
   insetBlockStart: '50%',
   transform: 'translateY(-50%)',
-  maxInlineSize: 'calc(100% - 32px)',
+  maxInlineSize: 'calc(100% - var(--_field-leading))',
   overflow: 'hidden',
   whiteSpace: 'nowrap',
   textOverflow: 'ellipsis',
@@ -219,6 +243,9 @@ const adornmentStyles = {
   'alignItems': 'center',
   'gap': 4,
   'flexShrink': 0,
+  'gridRow': 1,
+  '&[data-md3-field-leading]': { gridColumn: 1 },
+  '&[data-md3-field-trailing]': { gridColumn: '-2 / -1' },
   'color': color('onSurfaceVariant'),
   '& > svg': { inlineSize: 24, blockSize: 24, fill: 'currentColor' },
 } satisfies StyleObject;

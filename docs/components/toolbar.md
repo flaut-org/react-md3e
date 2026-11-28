@@ -261,8 +261,9 @@ Google's kit is file `069YnUCbHFX6TEmu4G6aLS`, Toolbars page `58295:22726`. MCP 
 2026-11-26, then rejected the subtree read because the Starter account quota was exhausted.
 Figma dimensions and pixel parity are **unverified**. Browser measurements, computed role/state
 colors, source diagrams and locally rendered light/vibrant/vertical/collapsed-FAB captures provide
-the visual evidence. There is no repository-wide screenshot-baseline infrastructure; captures are
-review artifacts, while numerical geometry and interaction assertions are regression tests.
+the visual evidence. Toolbar captures are review artifacts, while numerical geometry and interaction
+assertions are regression tests. The [shared UI quality workflow](../testing/ui-quality.md) now provides
+screenshot comparisons and baseline review; its initial baseline inventory covers other components.
 Screen-reader user testing, Safari/Firefox and pixel comparison of every official Figma state
 remain unverified. The component is not labeled fully visually verified.
 

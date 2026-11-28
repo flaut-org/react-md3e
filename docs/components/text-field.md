@@ -49,6 +49,11 @@ cleanup. id identifies the input, not the outer root. Container/control slot com
 refs and the supplied native input props. Reserve controlled value, id, disabled, required and
 readOnly for the field's own props.
 
+Resting labels use a CSS grid area that truncates before trailing adornments, including
+multiple icon buttons, narrow RTL layouts and larger typography. This uses native layout without
+measuring text or inserting styles at runtime. The existing 36px floating-label shift for a 24px
+leading icon plus its 12px gap remains animated.
+
 The label has an explicit htmlFor/input id link and aria-labelledby reference; helper text IDs are
 also connected in server HTML. Explicit input aria-label/aria-labelledby is respected. The label
 reference continues to work when a popup's focus manager temporarily hides neighboring label nodes.

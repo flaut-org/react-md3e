@@ -101,6 +101,8 @@ jobs:
             command: npm run format:check
           - name: Package validation
             command: npm run check:package
+          - name: UI contract
+            command: npm run check:ui-contract
     steps:
       - uses: actions/checkout@v7
         with:
@@ -240,8 +242,8 @@ jobs:
       - name: Install Chromium and system dependencies
         run: npm exec -- playwright install --with-deps chromium
       - run: npm run test:browser -- --shard=${{ matrix.shard }}/4
-      - name: Upload failed browser diagnostics
-        if: failure()
+      - name: Upload browser diagnostics and specification coverage
+        if: always()
         uses: actions/upload-artifact@v7
         with:
           name: playwright-${{ matrix.bundler }}-shard-${{ matrix.shard }}-${{ github.run_attempt }}
@@ -251,8 +253,57 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
 
+  ui-quality:
+    name: UI visual and interaction checks
+    needs: [install, build-apps]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    container:
+      image: mcr.microsoft.com/playwright:v1.64.1-noble@sha256:2f05f8a734509a7b3f26a912639488ee08f58a7b292d14d62271bcff9038768f
+      options: --ipc=host
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      # Install in the canonical Noble image; do not reuse host-OS native modules.
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .tool-versions
+          package-manager-cache: false
+      - run: npm ci
+      - uses: actions/download-artifact@v7
+        with:
+          name: package-build
+      - uses: actions/download-artifact@v7
+        with:
+          name: storybook-build
+          path: storybook-static
+      - run: npm run test:ui
+      - name: Upload UI evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: ui-quality-${{ github.run_attempt }}
+          path: |
+            test-results/ui/
+            playwright-report/ui/
+          if-no-files-found: warn
+          retention-days: 14
+
+  ui-quality-gate:
+    name: UI Quality Gate
+    needs: ui-quality
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    steps:
+      - name: Require UI evidence checks to succeed
+        env:
+          UI_RESULT: ${{ needs.ui-quality.result }}
+        run: test "$UI_RESULT" = success
+
   check:
-    needs: [install, build, validate, unit, build-apps, integration, playwright]
+    needs: [install, build, validate, unit, build-apps, integration, playwright, ui-quality-gate]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 1

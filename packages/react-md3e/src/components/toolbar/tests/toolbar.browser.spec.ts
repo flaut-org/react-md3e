@@ -409,9 +409,15 @@ test('hide on scroll preserves layout and never hides a focused toolbar', async 
   const before = await root.boundingBox();
 
   await root.getByRole('button', { name: 'Save scroll' }).focus();
-  await scroll.evaluate((element) => {
-    element.scrollTo({ top: 100 });
-  });
+  // Consume the focused scroll before moving focus; an unchanged attribute cannot synchronize it.
+  await scroll.evaluate(
+    (element) =>
+      new Promise<void>((resolve) => {
+        element.addEventListener('scroll', () => resolve(), { once: true });
+        element.scrollTo({ top: 100 });
+      }),
+  );
+  await expect(root.getByRole('button', { name: 'Save scroll' })).toBeFocused();
   await expect(controls(root)).toHaveAttribute('data-hidden', 'false');
   await page.getByTestId('resize-toolbar').focus();
   await scroll.evaluate((element) => {

@@ -168,6 +168,11 @@ Start Storybook at `http://localhost:6006`:
 npm run storybook
 ```
 
+Run `npm run test:ui:container` for reproducible Storybook visual/behavior checks, or
+`npm run test:ui:extended:container` for cross-browser motion and touch checks. Baseline candidates are
+generated explicitly with `npm run test:ui:update` and require independent human review. See the
+[UI quality workflow](docs/testing/ui-quality.md) for component filters, image inspection and QA reports.
+
 Use the toolbar to switch between precomputed Material, forest, and expressive themes and
 light/dark/system modes, plus independent standard/expressive motion.
 

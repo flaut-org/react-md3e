@@ -125,9 +125,9 @@ The local `npm run check` command remains the sequential full validation entry p
 2. **Build package** runs once and uploads `dist` plus generated theme JSON/CSS for this workflow run.
    Lint, public TypeScript consumers, package validation and unit tests require those built exports.
    Moving this build after unit tests would break a clean checkout.
-3. **TypeScript**, **Lint**, **Prettier** and **Package validation** run in parallel. Matrix fail-fast
+3. **TypeScript**, **Lint**, **Prettier**, **Package validation** and **UI contract** run in parallel. Matrix fail-fast
    is disabled so each check can report its own result.
-4. **Unit tests** runs `test:unit` and `test:release` only after all four checks pass. `test:http` is
+4. **Unit tests** runs `test:unit` and `test:release` only after all validation checks pass. `test:http` is
    separate because it starts a production Next.js server; `npm test` still runs both unit and HTTP tests.
 5. **Build fixture**, **Build fixture:webpack**, **Build webpack-subpaths**, **Build vite-fixture** and **Build storybook** run in
    parallel after unit tests. They consume the package artifact and upload production output. Each
@@ -139,8 +139,14 @@ The local `npm run check` command remains the sequential full validation entry p
    against the corresponding Next artifact, shared Vite cases and Storybook preview. Each job installs
    Chromium/system dependencies and runs `test:browser -- --shard=<index>/4`. The denominator stays four
    even though the bundler matrix has eight jobs. Tests remain fully parallel with two workers per
-   shard. Matrix fail-fast is disabled so one failure does not cancel the other jobs.
-7. **check** always runs and succeeds only when every preceding job succeeded. Failed, skipped or
+   shard. Matrix fail-fast is disabled so one failure does not cancel the other jobs. Browser suites
+   reject focused tests and use zero retries locally and in CI; failures must be diagnosed directly.
+7. **UI visual and interaction checks** reuses the package and Storybook builds inside the digest-pinned
+   Playwright Noble Linux x64 container, with the pinned Node and a separate npm ci for its native tooling.
+   It compares checked-in baseline candidates without update flags and runs the fast motion/integration
+   checks. **UI Quality Gate** always runs and requires that job to succeed. The baseline-approval
+   workflow separately requires current independent human approval of changed baseline images.
+8. **check** always runs and succeeds only when every preceding job succeeded. Failed, skipped or
    cancelled prerequisites make this aggregate check fail. It retains the existing required-check name.
 
 Every downstream npm job uses the local
@@ -149,8 +155,13 @@ Node and restores the install job's exact cache key. A missing cache fails expli
 silently running a second install. Release's publication job uses the same dependency cache after
 verification. Build artifacts are scoped to the current workflow run, retained for one day and
 replaced when their producer is rerun; downstream-only retries reuse the existing artifacts.
-Failed Playwright shards retain browser diagnostics for seven days, with the shard index and run
+Playwright shards always retain browser diagnostics and specification reports for seven days, with the shard index and run
 attempt in the artifact name to prevent collisions. The aggregate check waits for every shard.
+
+The manual/weekly/`ui-extended` PR-label workflow exercises Chromium, Firefox and WebKit with normal
+and reduced motion plus Chromium touch input, then verifies isolated known-defect mutations. UI
+artifacts are retained for fourteen days. These expanded checks do not multiply `npm run check` or
+the existing bundler shards. See [UI quality](testing/ui-quality.md) for commands and evidence limits.
 
 To reproduce one shard locally after building the package, fixture, Vite fixture and Storybook, run
 `npm run test:browser -- --shard=1/4` (replace `1` with `2`, `3` or `4` for the other shards).
