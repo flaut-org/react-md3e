@@ -572,7 +572,10 @@ test('Chip fixture and interactive Storybook examples have accessible semantics'
     'right-to-left',
     'disabled',
   ]) {
-    await page.goto(`http://127.0.0.1:6106/iframe.html?id=components-chip--${story}&viewMode=story`);
+    // AxeBuilder owns this scan; the Storybook addon must not start another one in the same iframe.
+    await page.goto(
+      `http://127.0.0.1:6106/iframe.html?id=components-chip--${story}&viewMode=story&globals=a11y.manual:!true`,
+    );
     await expect(page.getByRole('heading', { name: 'Chip', exact: true })).toBeVisible();
     expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
   }
