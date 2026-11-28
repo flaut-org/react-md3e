@@ -212,17 +212,42 @@ animations running and capture with `animations: 'allow'`. Their evidence is sep
 2. Make the implementation correct and rerun functional/motion/integration checks.
 3. Run the explicit update command for the smallest affected component. Inspect every candidate.
 4. Submit new/changed/deleted images with the reason, original requirements and supporting evidence.
-5. An independent human collaborator reviews the images/diffs and approves the current PR head.
-   Neither the implementation agent nor the QA agent may approve their own candidates.
+5. A human reviews the images/diffs and signs off on the current PR head through one of the routes
+   below. Neither the implementation agent nor the QA agent may submit baseline signoff.
 6. Rerun comparisons without update flags. The equality result establishes regression stability;
-   independent review establishes whether the candidate should become an accepted reference.
+   human image/diff review establishes whether the candidate should become an accepted reference.
 
-The `UI baseline approval` workflow checks for a non-author human collaborator's approval of the
-current head when PNGs under `tests/baselines` change (including deletion/rename). Configure it and
-`UI Quality Gate` as required checks and dismiss stale approvals in branch protection. An approval
-event reruns the approval check; it does not rerun the full browser matrix. GitHub cannot determine
-whether a reviewer actually looked at the images; that remains an explicit review obligation.
+The `UI baseline approval` workflow requires human signoff for PNG changes under `tests/baselines`
+(including deletion/rename). It accepts either:
+
+- **Independent review:** a non-author human collaborator's Approve of the current PR head. A later
+  dismissal or request for changes by that reviewer invalidates their approval.
+- **Maintainer confirmation on their own PR:** the human PR author with repository write/admin access
+  opens **Files changed → Review changes**, enters only `/approve-ui-baselines` in the summary,
+  selects **Comment** and clicks **Submit review**, after actually inspecting all changed images/diffs.
+  Maintain/custom roles are accepted when GitHub reports their base permission as write. The latest
+  submitted author review must contain that exact command and reference the current head commit.
+
+The second route supports a sole maintainer: GitHub prevents authors from approving their own PRs,
+but allows Comment reviews. The review's `commit_id` binds either route to the reviewed head, so
+every new push requires fresh signoff. No manually copied hash, persistent label or separate repository
+setting is needed. To withdraw maintainer confirmation, edit its summary to remove the command or
+submit a later author review without it. Pending drafts do not count. Ordinary conversation comments,
+bot accounts, outdated reviews and read-only authors cannot provide maintainer confirmation.
+The gate's log distinguishes independent review from maintainer confirmation; report the actual route.
+Agents must not post the command or an Approve on a human's behalf to make the check pass.
+
+Configure this check and `UI Quality Gate` as required checks. Review submission, editing and dismissal
+rerun the signoff check; they do not rerun the browser matrix. The workflow uses only read permissions
+and does not change reviews, PRs or baseline files. GitHub can check account/commit/permission data;
+it cannot prove that a person actually viewed the images or distinguish an agent using that person's
+credentials. Human inspection and the prohibition on agent signoff remain explicit obligations.
 The initial baseline set delivered by this work is **pending human approval**, not agent-approved.
+
+Sources: [GitHub review restrictions](https://docs.github.com/en/pull-requests/how-tos/review-pull-requests/approving-a-pull-request-with-required-reviews),
+[review actions and commit binding](https://docs.github.com/en/rest/pulls/reviews#create-a-review-for-a-pull-request),
+[repository permissions](https://docs.github.com/en/rest/collaborators/collaborators#get-repository-permissions-for-a-user)
+and [review workflow events](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#pull_request_review).
 
 ## Interactive agent workflow
 
@@ -436,7 +461,8 @@ The existing CI builds package/Storybook once and shares them with the fast UI j
 is a stable required-check candidate; existing architecture, RSC, publishing and bundler jobs remain.
 Extended cross-browser/reduced-motion/touch checks run on their own manual/scheduled workflow.
 Reports, traces, videos, screenshots, visual diffs, motion JSON and specification coverage are uploaded
-even after failures. Baseline images live in git; initial candidates require independent human review.
+even after failures. Baseline images live in git; initial candidates require human image/diff review
+and current-head signoff through one of the documented routes.
 
 `npm run check` retains its existing browser/bundler scope and adds only the inexpensive contract
 validation. Use the separate UI commands for snapshot/extended work. CI execution, physical touch

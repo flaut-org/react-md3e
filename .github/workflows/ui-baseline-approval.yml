@@ -3,11 +3,15 @@ name: UI baseline approval
 on:
   pull_request:
   pull_request_review:
-    types: [submitted, dismissed]
+    types: [submitted, edited, dismissed]
 
 permissions:
   contents: read
   pull-requests: read
+
+concurrency:
+  group: ui-baseline-approval-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 
 jobs:
   baseline-approval:
@@ -24,7 +28,7 @@ jobs:
         with:
           node-version-file: .tool-versions
           package-manager-cache: false
-      - name: Require independent review for baseline changes
+      - name: Require human review for baseline changes
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: node scripts/ui-quality/baseline-approval.mjs

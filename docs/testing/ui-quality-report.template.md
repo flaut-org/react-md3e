@@ -136,5 +136,7 @@ expected behavior, actual behavior, user impact, artifact paths, fix identity an
 re-verification outcome against the retained contract. Keep unconfirmed anomalies separately labeled.
 
 Oracle/discovery gaps found in existing tests and follow-up regression requirements:
-Baseline candidates and independent human approval: UNVERIFIED.
+Baseline candidates and human image/diff review: UNVERIFIED.
+Signoff route (independent Approve or PR-author maintainer confirmation), human identity, review URL
+and matching head commit; maintainer confirmation must be labeled as such:
 Remaining unverified requirements, unresolved anomalies and release/merge implications:

@@ -152,8 +152,12 @@ changing the package. Treat the user's current instructions as the source of tas
   [the specification inventory](docs/testing/ui-requirements.json). Never weaken assertions/thresholds,
   hide failures through skip/only/expected-failure markers, or add unjustified retries to pass CI.
 - Never automatically approve new/changed visual baselines. Generate candidates only with the explicit
-  update command, then obtain independent human review. Report every unexecuted check as UNVERIFIED
-  in the final report; a screenshot's existence is not evidence that it was visually inspected.
+  update command, then obtain human image/diff review. Accept either an independent collaborator's
+  Approve or the PR author's explicit maintainer confirmation through a Comment review containing
+  only `/approve-ui-baselines`, with write access and the current head commit. Author confirmation
+  must be reported as maintainer signoff. Agents must not submit either form of baseline signoff.
+  Report every unexecuted check as UNVERIFIED in the final report; a screenshot's existence is not
+  evidence that it was visually inspected.
 
 - `.tool-versions` is the source of truth for the exact Node.js 26 LTS release. Install with
   `asdf install` locally and use `asdf exec` when the shell does not resolve the pinned runtime. CI

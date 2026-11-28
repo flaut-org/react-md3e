@@ -145,7 +145,9 @@ The local `npm run check` command remains the sequential full validation entry p
    Playwright Noble Linux x64 container, with the pinned Node and a separate npm ci for its native tooling.
    It compares checked-in baseline candidates without update flags and runs the fast motion/integration
    checks. **UI Quality Gate** always runs and requires that job to succeed. The baseline-approval
-   workflow separately requires current independent human approval of changed baseline images.
+   workflow separately requires human signoff for changed baseline images at the current head:
+   independent Approve or explicit maintainer confirmation on the author's own PR. See the
+   [baseline review instructions](testing/ui-quality.md#baseline-review).
 8. **check** always runs and succeeds only when every preceding job succeeded. Failed, skipped or
    cancelled prerequisites make this aggregate check fail. It retains the existing required-check name.
 

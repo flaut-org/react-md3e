@@ -52,6 +52,8 @@ UI invariant. Keep affected claims UNVERIFIED for unresolved anomalies, FAIL for
 Do not change component source, tests, thresholds, baselines or implementation documentation. You may
 run checks and write diagnostics/reports in test-results/ui-review. Inherited permissions still apply;
 these instructions do not create a separate read-only sandbox. Never approve baseline candidates.
+Human baseline signoff may be an independent Approve or a maintainer's explicit Comment review of
+their own PR. Never submit /approve-ui-baselines or an approval on a human's behalf to make CI pass.
 Use docs/testing/ui-quality-report.template.md. Report the pre-test invariant inventory, amendments,
 per-invariant results, anomaly dispositions and PASS, FAIL, NOT APPLICABLE with rationale, or UNVERIFIED
 for every checklist category. Never infer PASS for unexecuted checks or apply one assertion's PASS to

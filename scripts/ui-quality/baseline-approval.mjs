@@ -12,17 +12,21 @@ if (!pull) {
 const repository = process.env.GITHUB_REPOSITORY;
 const endpoint = `${process.env.GITHUB_API_URL}/repos/${repository}`;
 
+async function github(resource) {
+  const response = await fetch(`${endpoint}/${resource}`, {
+    headers: { Authorization: `Bearer ${process.env.GITHUB_TOKEN}`, Accept: 'application/vnd.github+json' },
+  });
+
+  assert.ok(response.ok, `GitHub API ${response.status} reading ${resource}`);
+
+  return response.json();
+}
+
 async function pages(resource) {
   const collected = [];
 
   for (let page = 1; ; page += 1) {
-    const response = await fetch(`${endpoint}/${resource}?per_page=100&page=${page}`, {
-      headers: { Authorization: `Bearer ${process.env.GITHUB_TOKEN}`, Accept: 'application/vnd.github+json' },
-    });
-
-    assert.ok(response.ok, `GitHub API ${response.status} reading ${resource}`);
-
-    const rows = await response.json();
+    const rows = await github(`${resource}?per_page=100&page=${page}`);
 
     collected.push(...rows);
 
@@ -59,10 +63,31 @@ const approval = [...latest.values()].find(
     ['OWNER', 'MEMBER', 'COLLABORATOR'].includes(review.author_association),
 );
 
-assert.ok(
-  approval,
-  `${changed.length} changed baseline images need an independent human collaborator's approval of current head ${pull.head.sha}. Approval must include image/diff inspection; agents must not self-approve.`,
-);
-process.stdout.write(
-  `Independent baseline approval: ${approval.user.login}; ${changed.length} images at ${pull.head.sha}.\n`,
+if (approval) {
+  process.stdout.write(
+    `Independent baseline approval: ${approval.user.login}; ${changed.length} images at ${pull.head.sha}.\n`,
+  );
+  process.exit(0);
+}
+
+const authorReview = reviews.findLast((review) => review.user.login === pull.user.login && review.state !== 'PENDING');
+const authorConfirmed =
+  authorReview?.state === 'COMMENTED' &&
+  authorReview.commit_id === pull.head.sha &&
+  authorReview.user.type === 'User' &&
+  authorReview.body?.trim() === '/approve-ui-baselines';
+
+if (authorConfirmed) {
+  const access = await github(`collaborators/${encodeURIComponent(pull.user.login)}/permission`);
+
+  if (['admin', 'write'].includes(access.permission)) {
+    process.stdout.write(
+      `Maintainer baseline confirmation by PR author: ${pull.user.login}; ${changed.length} images at ${pull.head.sha}.\n`,
+    );
+    process.exit(0);
+  }
+}
+
+assert.fail(
+  `${changed.length} changed baseline images need human signoff for current head ${pull.head.sha}. Obtain an independent collaborator's Approve, or inspect the images/diffs and submit a Comment review containing only /approve-ui-baselines as the PR author with write access. Agents must not submit baseline signoff.`,
 );

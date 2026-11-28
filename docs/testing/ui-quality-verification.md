@@ -1,5 +1,9 @@
 # UI QA infrastructure verification — 2026-11-27
 
+The independent-only baseline gate described in this dated report was subsequently extended to
+support explicit PR-author maintainer confirmation. See the current [baseline review policy](ui-quality.md#baseline-review).
+Historical verification results below remain unchanged.
+
 ## Audit and delivered scope
 
 The audit covered AGENTS.md, architecture/design/tooling documents, package scripts, Playwright,
