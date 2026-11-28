@@ -208,8 +208,30 @@ for (const interaction of ['pointer', 'typing', 'Enter', 'composition'] as const
     await view.evaluate(async (node) => {
       await Promise.all(node.getAnimations({ subtree: true }).map((animation) => animation.finished.catch(() => {})));
     });
+    // Capture exit before Escape: a delayed protocol command must not let Base UI unmount the field.
+    // Text geometry and the native completion handoff are checked separately above.
+    await pauseMotionOnAttributeChange(view, 'data-ending-style');
     await page.keyboard.press('Escape');
     await expect(view).toHaveAttribute('data-ending-style');
+
+    const heldAnimations = await view.evaluate((node) => {
+      const animations = node.getAnimations();
+
+      for (const animation of animations) {
+        animation.currentTime = Number(animation.effect!.getComputedTiming().endTime) / 2;
+      }
+
+      // Let results fade naturally while the popup's own transitions hold the exit lifecycle open.
+      for (const animation of node.getAnimations({ subtree: true })) {
+        if (!animations.includes(animation)) {
+          animation.play();
+        }
+      }
+
+      return animations.filter((animation) => animation.playState === 'paused').length;
+    });
+
+    expect(heldAnimations).toBeGreaterThan(0);
 
     if (interaction === 'pointer') {
       await expect(view.locator('[data-md3-search-results]')).toHaveCSS('opacity', '0');
@@ -234,6 +256,11 @@ for (const interaction of ['pointer', 'typing', 'Enter', 'composition'] as const
 
     await expect(view).not.toHaveAttribute('data-ending-style');
     await expect(field).toBeFocused();
+    await view.evaluate((node) => {
+      for (const animation of node.getAnimations({ subtree: true })) {
+        animation.play();
+      }
+    });
 
     let expectedValue = '';
 
