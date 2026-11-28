@@ -11,7 +11,7 @@
     "build:webpack": "next build --webpack"
   },
   "dependencies": {
-    "@flaut-travel/react-md3e": "1.0.0-alpha.3",
+    "@flaut-travel/react-md3e": "1.0.0-alpha.4",
     "next": "16.4.6",
     "react": "19.3.1",
     "react-dom": "19.3.1"
