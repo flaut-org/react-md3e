@@ -211,7 +211,31 @@ and rail grow from scaleX(0) to 1 with fast spatial; focused inline indicators u
 matching M3E's non-bouncing keyboard selection. Glyphs never scale. Drawer indicators fade without
 stretching, as a baseline surface. State layers use 8% hover/10% focus/press. Other color/opacity transitions use fast
 effects, scrims default effects. Modal entry uses default spatial; baseline drawer exit uses fast
-effects, following AndroidX. The focus frame uses the reference’s 3→6→3px, 500ms ease emphasis:
+effects, following AndroidX. Drawer reveal and swipe settling retain these inherited springs, but
+registered private CSS progress/length properties project the rendered translation onto the legal
+offscreen-to-open interval. This is a **web-specific spatial invariant**: an edge-attached drawer may
+move outside its anchoring edge while entering/leaving, but must never move inward past its resting
+edge and expose a temporary gap. For LTR the left edge stays at or left of viewport x=0; for RTL the
+right edge stays at or right of the viewport right edge. The translation is additionally bounded by
+the closed position. This projection does not disable expressive motion or change spring tokens on
+other components. Reduced motion removes both private-property transitions; swipe tracking stays
+direct while dragging and settles with the selected spring on release.
+
+The shared masking viewport uses `overflow: clip` rather than `hidden`: clipping must not create a
+programmatically scrollable ancestor that autofocus can shift to reveal offscreen RTL content.
+The inner navigation body retains its own vertical scrolling. Modal rail width reveal remains
+edge-anchored and keeps its existing spring overshoot on its **free inward edge**; that width growth
+does not detach the fixed anchoring edge and is not prohibited by the drawer's translation contract.
+Drawer and modal rail share the registered private swipe-length proxy. Rail swipe translation is
+projected onto its directional offscreen-to-rest interval **after** spring interpolation, including
+the starting/ending width-reveal states. This prevents the same attachment defect on a canceled
+short swipe without clamping expressive rail width growth. `[NR-001]` records a physically displaced
+rail immediately before touch release and checks the complete sampled spring return in both
+directions/schemes and normal/reduced motion. Its independently declared 0.05px anchor tolerance
+detects the observed 0.24px rail gap; it does not change other components' tolerances or imply a wide
+visible strip at that subpixel magnitude.
+
+The focus frame uses the reference’s 3→6→3px, 500ms ease emphasis:
 inward with 12px corners for stacked items and outward around inline pills with a 2px resting gap. This explicit focus
 choreography is independent of theme springs. Reduced motion disables transitions/ripple/pulse;
 forced colors preserve current, disabled and focused states.
@@ -249,6 +273,13 @@ Modal drawers slide; hidden modal rails reveal their width while their icons sta
 following the official Guidelines 32 recording. Native intrinsic-size interpolation and wrapping
 labels replace AndroidX's layout measurement code; modern `interpolate-size` support is required
 for the intrinsic width transition. Rail label wrapping also requires native custom-property style queries.
+
+The spatial regression `[ND-001]` records actual native bounding rectangles before entry and exit;
+`[ND-002]` records interrupted and repeated transitions. Both assert component-specific attachment
+and travel envelopes with the shared spatial utilities, paired geometry coverage and frame-gap
+checks, across LTR/RTL, both motion schemes and desktop/compact sizes. The extended suite repeats
+the same contracts with reduced motion. These recordings test the complete sampled trajectory,
+not only computed transform or a final screenshot; they do not claim sub-frame sampling or Figma parity.
 
 ## Sources
 
@@ -291,3 +322,9 @@ Inspected 2026-11-23–24:
 - [Google’s Material 3 Figma kit](https://www.figma.com/community/file/1035203688168086460/material-3-design-kit):
   access attempted and denied (403). No component implementation or icon source was copied;
   numerical measurements are independently adapted to static CSS and the existing motion tokens.
+
+Spatial-constraint correction inspected 2026-11-28: the pinned AndroidX `NavigationDrawer.kt` above
+uses `MotionSchemeKeyTokens.DefaultSpatial` for open and anchored drag settling and `FastEffects`
+for close (lines 351–355 in that revision). Those mappings are preserved. The browser-specific
+edge-attachment envelope and registered-property projection are explicitly our web adaptation;
+no claim is made that Material prescribes this CSS mechanism or forbids all spring overshoot.

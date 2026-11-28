@@ -10,7 +10,10 @@ const rootStyles = {
   'minInlineSize': 0,
   "&[data-full-width='true']": { inlineSize: '100%' },
   '& [data-md3-text-field]': { inlineSize: '100%' },
-  "&[data-multiple='true'] [data-md3-field-container]": { flexWrap: 'wrap', paddingBlock: 8, gap: 8 },
+  "&[data-multiple='true'] [data-md3-field-container]": { display: 'flex', flexWrap: 'wrap', paddingBlock: 8, gap: 8 },
+  // This wrapping composition owns a floating label outside TextField's single-row grid tracks.
+  "&&&[data-multiple='true'] [data-md3-field-label]": { insetInlineStart: 16, maxInlineSize: 'calc(100% - 32px)' },
+  "&&&[data-multiple='true'] [data-variant='filled'] [data-md3-field-label]": { insetInlineStart: 52 },
   "&[data-multiple='true'] [data-md3-field-leading]": { display: 'contents' },
   "&[data-multiple='true'] [data-md3-field-input]": { flexBasis: 64, inlineSize: 64, paddingBlock: 8 },
   "&[data-multiple='true'] [data-md3-field-trailing]": { marginInlineStart: 'auto' },

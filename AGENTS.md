@@ -126,6 +126,39 @@ changing the package. Treat the user's current instructions as the source of tas
 
 ## Verification
 
+- Follow [UI quality workflows](docs/testing/ui-quality.md) and its checklist for user-facing UI changes.
+  Verify in a real browser and actually view the resulting images with available vision tooling;
+  typecheck, lint and unit-test success alone cannot establish UI quality.
+- Before testing any UI component or reading implementation results, complete **UI Invariant Discovery**
+  in that workflow. Independently derive testable geometry, layout, motion, visual, state, interaction
+  and integration invariants from accessible official sources, purpose, public contract, spatial
+  relationships, user interactions and general UI quality requirements. Record constraints, justified
+  exceptions, requirement sources/rationale and verification methods before observing behavior.
+  Preserve the dated initial inventory and append justified revisions; existing code, snapshots and
+  passing assertions cannot define correctness. Record gaps or conflicting sources explicitly.
+- Investigate observed anomalies even when assertions pass. Distinguish source-supported intended
+  behavior, confirmed defects and unconfirmed anomalies; unexplained behavior is neither automatically
+  acceptable nor automatically a bug. Retain evidence, competing explanations and follow-up checks;
+  unresolved anomalies leave affected claims UNVERIFIED, while confirmed violations remain FAIL.
+- Inspect intermediate normal/reduced-motion states and integration with other components. Substantial
+  component changes require independent QA via [ui-qa](.codex/agents/ui-qa.toml) or a separate session,
+  followed by fixes and independent re-verification. Supply the original requirements to the reviewer.
+- Before testing motion, define the permitted trajectory and spatial relationships from the component's
+  contract: allowed overshoot/undershoot, viewport or parent anchoring, gaps, overlaps, clipping and coupled
+  movement. Assert actual intermediate bounding rectangles with the shared spatial constraints utility;
+  a correct transform or endpoint is insufficient. Overshoot is not globally forbidden. Check recording
+  completeness/cadence and inspect native frames; missing samples mean UNVERIFIED, never motion PASS.
+- Add a regression test for each discovered user-facing defect when feasible, with requirement IDs in
+  [the specification inventory](docs/testing/ui-requirements.json). Never weaken assertions/thresholds,
+  hide failures through skip/only/expected-failure markers, or add unjustified retries to pass CI.
+- Never automatically approve new/changed visual baselines. Generate candidates only with the explicit
+  update command, then obtain human image/diff review. Accept either an independent collaborator's
+  Approve or the PR author's explicit maintainer confirmation through a Comment review containing
+  only `/approve-ui-baselines`, with write access and the current head commit. Author confirmation
+  must be reported as maintainer signoff. Agents must not submit either form of baseline signoff.
+  Report every unexecuted check as UNVERIFIED in the final report; a screenshot's existence is not
+  evidence that it was visually inspected.
+
 - `.tool-versions` is the source of truth for the exact Node.js 26 LTS release. Install with
   `asdf install` locally and use `asdf exec` when the shell does not resolve the pinned runtime. CI
   uses `actions/setup-node` with `node-version-file: .tool-versions`. Keep npm metadata, runtime

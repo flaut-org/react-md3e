@@ -82,6 +82,12 @@ selects already-computed CSS values without generating rules or solving springs 
   fast spatial, with fast effects for focused inline selection. Drawer indicator surfaces fade without
   stretching. Modal navigation entry uses default spatial, baseline drawer exit fast effects, and
   scrims default effects. The shared 500ms focus emphasis matches the inspected M3E focus primitive.
+  Drawer entry animates a registered reveal progress with that spatial spring; its rendered translation
+  clamps progress to 0–1 so an edge-bound sheet never detaches from its viewport edge. Swipe displacement
+  follows the primitive directly while dragging and settles with the selected spring on release.
+  This spatial constraint is a web adaptation, not a
+  replacement for expressive springs or a prohibition on overshoot in other components. Modal rail
+  width retains its spring overshoot while its start edge stays anchored.
   Native intrinsic-size interpolation keeps glyphs unscaled. See [Navigation](components/navigation.md)
   for synchronized frames and the official recording’s measured width trajectory and timing limits.
 
@@ -148,6 +154,14 @@ Skeleton pulse/wave cycles, tooltip opening delays and snackbar reading time ret
 of the selected scheme. Standard is not a substitute for reduced-motion support.
 
 ## Web adaptation and limits
+
+Spring tokens define timing, not permission to violate geometry. Each transition needs a spatial
+contract: allowed trajectory envelope, edge attachment, containment and relationships with neighboring
+elements. A drawer may travel offscreen toward its anchoring edge during entry/exit; it must not pass
+the settled position into the viewport and expose a gap behind that edge. Validate actual bounding
+rectangles throughout normal/reduced motion and interrupted transitions. Computed transforms, correct
+endpoints and a generic clipping report alone cannot establish this contract. See the
+[spatial constraints workflow](testing/ui-quality.md) for reusable recording/assertion utilities.
 
 The numerical spring parameters are official MD3/AndroidX values. The CSS conversion adapts
 matraic/m3e `SpringEasing.ts` at revision `7520f333699ceeaaf9eb7704a54fe28e14cf08af` (MIT).

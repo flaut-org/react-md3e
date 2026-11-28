@@ -5,14 +5,21 @@ export default defineConfig({
   testMatch: '**/tests/**/*.browser.spec.ts',
   testIgnore: ['**/node_modules/**', '**/dist/**', '**/.next/**', '**/storybook-static/**'],
   fullyParallel: true,
-  forbidOnly: Boolean(process.env.CI),
-  retries: process.env.CI ? 1 : 0,
+  outputDir: 'test-results/browser',
+  forbidOnly: true,
+  retries: 0,
   workers: 2,
-  reporter: 'list',
+  reporter: [
+    ['list'],
+    ['html', { outputFolder: 'playwright-report/browser', open: 'never' }],
+    ['./packages/react-md3e/tests/browser/ui-quality/spec-reporter.ts'],
+  ],
   use: {
     ...devices['Desktop Chrome'],
     baseURL: 'http://127.0.0.1:3100',
     trace: 'retain-on-failure',
+    video: 'retain-on-failure',
+    screenshot: 'only-on-failure',
   },
   webServer: [
     {

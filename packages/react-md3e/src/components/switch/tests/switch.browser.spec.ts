@@ -6,6 +6,29 @@ import { createTheme } from '@flaut-travel/react-md3e/theme';
 const handle = (root: Locator) => root.locator('[data-md3-switch-handle]');
 const position = (root: Locator) => root.locator('[data-md3-switch-position]');
 
+async function expectSettledHandleOffset(root: Locator, expected: number) {
+  // Computed inset/width can round to their targets while the native spring is still settling.
+  await expect
+    .poll(() =>
+      root.evaluate(
+        (node) =>
+          node
+            .getAnimations({ subtree: true })
+            .filter(
+              (animation) => animation.playState === 'running' && animation.effect?.getTiming().iterations !== Infinity,
+            ).length,
+      ),
+    )
+    .toBe(0);
+
+  const offset = await root.evaluate(
+    (node) =>
+      node.querySelector('[data-md3-switch-handle]')!.getBoundingClientRect().x - node.getBoundingClientRect().x,
+  );
+
+  expect(offset).toBeCloseTo(expected);
+}
+
 async function drag(page: Page, root: Locator, dx: number) {
   await root.scrollIntoViewIfNeeded();
 
@@ -103,12 +126,12 @@ test('dragging commits once at release, settles without toggling twice and mirro
   await expect(rtl).toBeChecked();
   await expect(position(rtl)).toHaveCSS('inset-inline-start', '16px');
   await expect(handle(rtl)).toHaveCSS('width', '24px');
-  expect((await handle(rtl).boundingBox())!.x - (await rtl.boundingBox())!.x).toBeCloseTo(4);
+  await expectSettledHandleOffset(rtl, 4);
   await drag(page, rtl, 20);
   await expect(rtl).not.toBeChecked();
   await expect(position(rtl)).toHaveCSS('inset-inline-start', '-4px');
   await expect(handle(rtl)).toHaveCSS('width', '16px');
-  expect((await handle(rtl).boundingBox())!.x - (await rtl.boundingBox())!.x).toBeCloseTo(28);
+  await expectSettledHandleOffset(rtl, 28);
   expect(await page.locator('style').count()).toBe(styleCount);
 });
 
