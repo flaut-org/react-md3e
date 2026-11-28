@@ -1,5 +1,17 @@
 # @flaut-travel/react-md3e
 
+## 1.0.0-alpha.4
+
+### Patch Changes
+
+- 2f13c3d: Keep modal navigation drawers attached to their viewport edge throughout spring entry, exit and swipe settling, including RTL focus handoff, while preserving the selected motion scheme and reduced motion.
+
+  Bound modal navigation rail swipe settling to the same anchoring edge while preserving expressive intrinsic-width animation.
+
+- 2f13c3d: Keep long resting TextField labels within the field's text area so they cannot overlap trailing adornments,
+  including DatePicker calendar icons in narrow RTL fields with enlarged typography.
+  Preserve the wrapping multiple Autocomplete composition when using the shared field layout.
+
 ## 1.0.0-alpha.3
 
 ### Minor Changes
